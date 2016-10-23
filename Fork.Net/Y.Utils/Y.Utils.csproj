@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseUtils\Class1.cs" />
     <Compile Include="ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="ComputerUtils\IPHelper.cs" />
     <Compile Include="FileUtils\FileCodeHelper.cs" />
