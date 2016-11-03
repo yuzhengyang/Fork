@@ -61,7 +61,7 @@ namespace Y.Utils.NetworkUtils
             }
         }
 
-        private string GetSmtp(string fromMail)
+        private static string GetSmtp(string fromMail)
         {
             string result = "";
             if (!string.IsNullOrWhiteSpace(fromMail) && fromMail.IndexOf('@') > 0)
@@ -69,10 +69,18 @@ namespace Y.Utils.NetworkUtils
                 string ext = fromMail.Substring(fromMail.IndexOf('@') + 1);
                 switch (ext)
                 {
-                    case "163.com": { result = "smtp.163.com"; break; }
-                    case "gmail.com": { result = "smtp.gmail.com"; break; }
-                    case "qq.com": { result = "smtp.qq.com"; break; }
-                    case "sina.com": { result = "smtp.sina.com"; break; }
+                    case "163.com":
+                        result = "smtp.163.com";
+                        break;
+                    case "gmail.com":
+                        result = "smtp.gmail.com";
+                        break;
+                    case "qq.com":
+                        result = "smtp.qq.com";
+                        break;
+                    case "sina.com":
+                        result = "smtp.sina.com";
+                        break;
                 }
             }
             return result;

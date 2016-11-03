@@ -54,5 +54,30 @@ namespace Y.Utils.FileUtils
                 return result;
             return null;
         }
+        public static bool Delete(string file)
+        {
+            try
+            {
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                    return true;
+                }
+            }
+            catch { }
+            return false;
+        }
+        public static bool Delete(string[] files)
+        {
+            bool result = true;
+            if (!ListTool.IsNullOrEmpty(files))
+            {
+                foreach (var file in files)
+                {
+                    result = result || Delete(file);
+                }
+            }
+            return result;
+        }
     }
 }

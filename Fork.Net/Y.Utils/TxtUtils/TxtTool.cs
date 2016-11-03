@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Y.Utils.BaseUtils;
+using Y.Utils.FileUtils;
 
 namespace Y.Utils.TxtUtils
 {
@@ -12,6 +13,7 @@ namespace Y.Utils.TxtUtils
         {
             try
             {
+                DirTool.Create(Path.GetDirectoryName(file));
                 using (StreamWriter sw = new StreamWriter(file, true))
                 {
                     if (!ListTool.IsNullOrEmpty(txt))
@@ -27,6 +29,7 @@ namespace Y.Utils.TxtUtils
         {
             try
             {
+                DirTool.Create(Path.GetDirectoryName(file));
                 using (StreamWriter sw = new StreamWriter(file, true))
                 {
                     sw.WriteLine(txt);
@@ -40,6 +43,7 @@ namespace Y.Utils.TxtUtils
         {
             try
             {
+                DirTool.Create(Path.GetDirectoryName(file));
                 using (StreamWriter sw = new StreamWriter(file, false, Encoding.UTF8))
                 {
                     sw.WriteLine(txt);

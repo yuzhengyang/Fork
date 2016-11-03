@@ -91,6 +91,8 @@ namespace Y.Utils.ComputerUtils
         /// <returns></returns>
         [DllImport("user32.dll")]
         public extern static int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+        [DllImport("user32.dll")]
+        public static extern int GetWindowTextLength(IntPtr hWnd);
         #endregion
     }
 }
