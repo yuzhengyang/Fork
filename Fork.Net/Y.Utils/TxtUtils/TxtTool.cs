@@ -68,5 +68,21 @@ namespace Y.Utils.TxtUtils
             catch (Exception e) { }
             return null;
         }
+        public static List<string> ReadLine(string file)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(file, Encoding.UTF8))
+                {
+                    List<string> result = new List<string>();
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                        result.Add(line.ToString());
+                    return result;
+                }
+            }
+            catch (Exception e) { }
+            return null;
+        }
     }
 }

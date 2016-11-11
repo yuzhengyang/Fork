@@ -63,6 +63,10 @@ namespace Y.Utils.FileUtils
                     File.Delete(file);
                     return true;
                 }
+                else
+                {
+                    return true;
+                }
             }
             catch { }
             return false;

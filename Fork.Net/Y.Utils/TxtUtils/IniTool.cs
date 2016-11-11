@@ -387,7 +387,7 @@ namespace Y.Utils.TxtUtils
         public static bool GetBoolValue(string iniFile, string section, string key)
         {
             string flag = GetStringValue(iniFile, section, key, "");
-            return flag == "true" ? true : false;
+            return flag.ToLower() == "true" ? true : false;
         }
         #endregion
 

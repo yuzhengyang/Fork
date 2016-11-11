@@ -19,6 +19,15 @@ namespace Y.Utils.JsonUtils
             }
             return null;
         }
+        public static T ToObjFromStr<T>(string str)
+        {
+            string json = str;
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                try { return JsonConvert.DeserializeObject<T>(json); } catch (Exception e) { }
+            }
+            return default(T);
+        }
         public static T ToObjFromFile<T>(string file)
         {
             string json = TxtTool.Read(file);

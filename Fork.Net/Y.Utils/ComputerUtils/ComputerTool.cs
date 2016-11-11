@@ -11,19 +11,18 @@ namespace Y.Utils.ComputerUtils
     {
         public static string GetCpuId()
         {
+            ManagementClass mc = null;
+            ManagementObjectCollection moc = null;
+            string ProcessorId = "";
             try
             {
-                //获取CPU序列号代码     
-                string cpuInfo = "";//cpu序列号     
-                ManagementClass mc = new ManagementClass("Win32_Processor");
-                ManagementObjectCollection moc = mc.GetInstances();
+                mc = new ManagementClass("Win32_Processor");
+                moc = mc.GetInstances();
                 foreach (ManagementObject mo in moc)
                 {
-                    cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+                    ProcessorId = mo.Properties["ProcessorId"].Value.ToString();
                 }
-                moc = null;
-                mc = null;
-                return cpuInfo;
+                return ProcessorId;
             }
             catch
             {
@@ -31,6 +30,8 @@ namespace Y.Utils.ComputerUtils
             }
             finally
             {
+                if (moc != null) moc.Dispose();
+                if (mc != null) mc.Dispose();
             }
         }
     }
