@@ -36,7 +36,7 @@ namespace Y.Utils.FileUtils
             {
                 foreach (var p in pattern)
                 {
-                    List<string> temp = GetAllFile(path, p).ToList();
+                    List<string> temp = GetAllFile(path, p);
                     if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
                 }
             }
@@ -53,12 +53,12 @@ namespace Y.Utils.FileUtils
                     {
                         foreach (var pattern in patterns)
                         {
-                            List<string> temp = GetAllFile(path, pattern).ToList();
+                            List<string> temp = GetAllFile(path, pattern);
                             if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
                         }
                     }else
                     {
-                        List<string> temp = GetAllFile(path).ToList();
+                        List<string> temp = GetAllFile(path);
                         if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
                     }
                 }
