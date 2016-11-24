@@ -8,51 +8,62 @@ namespace Y.Utils.FileUtils
 {
     public class FileTool
     {
-        public static List<string> GetFile(string path)
-        {
-            if (Directory.Exists(path))
-                try { return Directory.EnumerateFiles(path).ToList(); } catch (Exception e) { }
-            return null;
-        }
-        public static List<string> GetFile(string path, string ext)
+        public static List<string> GetFile(string path, string pattern = "*")
         {
             if (Directory.Exists(path))
                 try
                 {
-                    List<string> result = null;
-                    List<string> temp = Directory.EnumerateFiles(path).ToList();
-                    if (!ListTool.IsNullOrEmpty(temp))
-                        foreach (var item in temp)
-                        {
-                            if (Path.GetExtension(item).ToUpper() == ext.ToUpper())
-                            {
-                                if (result == null)
-                                    result = new List<string>();
-
-                                result.Add(item);
-                            }
-                        }
+                    List<string> result = Directory.EnumerateFiles(path, pattern).ToList();
                     return result;
                 }
                 catch (Exception e) { }
             return null;
         }
-        public static List<string> GetAllFile(string path)
+        public static List<string> GetAllFile(string path, string pattern = "*")
         {
-            List<string> pathList = DirTool.GetAllPath(path);
-            List<string> result = GetFile(path);
-            if (!ListTool.IsNullOrEmpty(pathList))
+            List<string> result = null;
+            try
             {
-                foreach (var item in pathList)
+                result = Directory.EnumerateFiles(path, pattern, SearchOption.AllDirectories).ToList();
+            }
+            catch (Exception e) { }
+            return result;
+        }
+        public static List<string> GetAllFile(string path, string[] pattern)
+        {
+            List<string> result = new List<string>();
+            if (!ListTool.IsNullOrEmpty(pattern))
+            {
+                foreach (var p in pattern)
                 {
-                    List<string> temp = GetFile(item);
-                    if (!ListTool.IsNullOrEmpty(temp))
-                        result.AddRange(temp);
+                    List<string> temp = GetAllFile(path, p).ToList();
+                    if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
                 }
             }
-            if (!ListTool.IsNullOrEmpty(result))
-                return result;
-            return null;
+            return result;
+        }
+        public static List<string> GetAllFile(string[] paths, string[] patterns)
+        {
+            List<string> result = new List<string>();
+            if (!ListTool.IsNullOrEmpty(paths))
+            {
+                foreach(var path in paths)
+                {
+                    if (!ListTool.IsNullOrEmpty(patterns))
+                    {
+                        foreach (var pattern in patterns)
+                        {
+                            List<string> temp = GetAllFile(path, pattern).ToList();
+                            if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
+                        }
+                    }else
+                    {
+                        List<string> temp = GetAllFile(path).ToList();
+                        if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
+                    }
+                }
+            }
+            return result;
         }
         public static bool Delete(string file)
         {

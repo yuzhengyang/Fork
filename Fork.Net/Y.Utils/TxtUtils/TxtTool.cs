@@ -84,5 +84,30 @@ namespace Y.Utils.TxtUtils
             catch (Exception e) { }
             return null;
         }
+        public static long CountLine(string file, string[] filter)
+        {
+            long count = 0;
+            try
+            {
+                using (StreamReader sr = new StreamReader(file, Encoding.UTF8))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        bool access = true;
+                        if (!ListTool.IsNullOrEmpty(filter))
+                        {
+                            foreach (var f in filter)
+                            {
+                                if (line.Trim() == f) access = false;
+                            }
+                        }
+                        if (access) count++;
+                    }
+                }
+            }
+            catch (Exception e) { }
+            return count;
+        }
     }
 }

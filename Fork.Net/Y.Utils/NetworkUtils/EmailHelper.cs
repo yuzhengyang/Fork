@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Y.Utils.NetworkUtils
 {
@@ -143,6 +140,27 @@ namespace Y.Utils.NetworkUtils
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 发送邮件 [hiwaka@163.com]
+        /// </summary>
+        /// <param name="title">邮件标题</param>
+        /// <param name="report">邮件内容（html格式）</param>
+        /// <param name="address">目标地址</param>
+        /// <returns></returns>
+        public static bool SendEmail(string title, string report, string address = "yuzhyn@163.com")
+        {
+            try
+            {
+                EmailHelper email = new EmailHelper("hiwaka@163.com", address,
+                title, report,
+                "hiwaka", "hiwaka11");
+                if (email.Send())
+                    return true;
+            }
+            catch { }
+            return false;
         }
     }
 }
