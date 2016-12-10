@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\UniqueTool.cs" />
-    <Compile Include="BaseUtils\Class1.cs" />
+    <Compile Include="LogUtils\Log.cs" />
     <Compile Include="ComputerUtils\ComputerTool.cs" />
     <Compile Include="ComputerUtils\ComputerPermissionTool.cs" />
     <Compile Include="ComputerUtils\RegisterTool.cs" />

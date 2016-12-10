@@ -23,5 +23,9 @@ namespace Y.Utils.BaseUtils
                 return false;
             return true;
         }
+        public static bool HasElements<T>(IEnumerable<T> list)
+        {
+            return !IsNullOrEmpty(list);
+        }
     }
 }
