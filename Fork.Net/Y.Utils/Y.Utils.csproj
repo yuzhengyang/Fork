@@ -80,6 +80,7 @@
     <Compile Include="FileUtils\FileTool.cs" />
     <Compile Include="BaseUtils\ListTool.cs" />
     <Compile Include="JsonUtils\JsonTool.cs" />
+    <Compile Include="ReflectionUtils\DomainTool.cs" />
     <Compile Include="ReflectionUtils\SimpleReflection.cs" />
     <Compile Include="TxtUtils\IniTool.cs" />
     <Compile Include="TxtUtils\LogTool.cs" />
