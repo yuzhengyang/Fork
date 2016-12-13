@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="AppUtils\UniqueTool.cs" />
     <Compile Include="LogUtils\Log.cs" />
-    <Compile Include="ComputerUtils\ComputerTool.cs" />
+    <Compile Include="ComputerUtils\ComputerInfoTool.cs" />
     <Compile Include="ComputerUtils\ComputerPermissionTool.cs" />
     <Compile Include="ComputerUtils\RegisterTool.cs" />
     <Compile Include="ImageUtils\BarCodeToHTML.cs" />
@@ -80,6 +80,7 @@
     <Compile Include="FileUtils\FileTool.cs" />
     <Compile Include="BaseUtils\ListTool.cs" />
     <Compile Include="JsonUtils\JsonTool.cs" />
+    <Compile Include="ReflectionUtils\SimpleReflection.cs" />
     <Compile Include="TxtUtils\IniTool.cs" />
     <Compile Include="TxtUtils\LogTool.cs" />
     <Compile Include="TxtUtils\TxtTool.cs" />
