@@ -104,9 +104,12 @@ namespace Y.Utils.Net20.MysqlUtils
             return dataset.Tables[0];
         }
         //Test
+        //string constring = "Server=db4free.net;Database=db4free_yzy; User=yuzhengyang;Password=yzy50665;Use Procedure Bodies=false;Charset=utf8;Allow Zero Datetime=True; Pooling=false; Max Pool Size=50;";
+        //MysqlTool ms = new MysqlTool(connstr: constring);
+        //ms.ExecuteDataTable2("select * from user");
         public void ExecuteDataTable2(string sql, params MySqlParameter[] parameters)
         {
-            
+
 
             MySqlConnection sqlCon = new MySqlConnection(ConnectionString);
             //设置查询命令

@@ -34,6 +34,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dlls\MySql\v2.0\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\GitHub\Marx\Marx\packages\Newtonsoft.Json.9.0.1\lib\net20\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -47,11 +51,13 @@
     <Compile Include="FileUtils\FileCode.cs" />
     <Compile Include="FileUtils\FileTool.cs" />
     <Compile Include="HookUtils\UserActivityHook.cs" />
+    <Compile Include="HttpUtils\HttpTool.cs" />
     <Compile Include="ListUtils\ListTool.cs" />
     <Compile Include="LogUtils\Log.cs" />
     <Compile Include="MysqlUtils\MysqlTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringUtils\SimilarString.cs" />
+    <Compile Include="StringUtils\StringTool.cs" />
     <Compile Include="TimeUtils\DateTimeConvert.cs" />
     <Compile Include="TimeUtils\DateTimeTool.cs" />
     <Compile Include="TxtUtils\IniTool.cs" />
@@ -59,7 +65,9 @@
     <Compile Include="WindowsAPI\ComputerAFK.cs" />
     <Compile Include="WindowsAPI\WindowInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
