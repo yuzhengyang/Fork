@@ -54,6 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\UniqueTool.cs" />
+    <Compile Include="AttributeUtils\AttributeTool.cs" />
+    <Compile Include="AttributeUtils\CustomAttributeHelper.cs" />
+    <Compile Include="AttributeUtils\ControlAttribute.cs" />
+    <Compile Include="AttributeUtils\ControlAttributeEvent.cs" />
+    <Compile Include="HookUtils\UserActivityHook.cs" />
     <Compile Include="LogUtils\Log.cs" />
     <Compile Include="ComputerUtils\ComputerInfoTool.cs" />
     <Compile Include="ComputerUtils\ComputerPermissionTool.cs" />
@@ -82,6 +87,7 @@
     <Compile Include="JsonUtils\JsonTool.cs" />
     <Compile Include="ReflectionUtils\DomainTool.cs" />
     <Compile Include="ReflectionUtils\SimpleReflection.cs" />
+    <Compile Include="TestTest\OperatorTest.cs" />
     <Compile Include="TxtUtils\IniTool.cs" />
     <Compile Include="TxtUtils\LogTool.cs" />
     <Compile Include="TxtUtils\TxtTool.cs" />

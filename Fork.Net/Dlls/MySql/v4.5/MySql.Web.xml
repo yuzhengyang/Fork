@@ -1,0 +1,1625 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySql.Web</name>
+    </assembly>
+    <members>
+        <member name="M:MySql.Web.General.Application.EnsureId(MySql.Data.MySqlClient.MySqlConnection)">
+            <summary>
+            Creates the or fetch application id.
+            </summary>
+            <param name="applicationName">Name of the application.</param>
+            <param name="applicationId">The application id.</param>
+            <param name="applicationDesc">The application desc.</param>
+            <param name="connection">The connection.</param>
+        </member>
+        <member name="M:MySql.Web.Security.CustomInstaller.Install(System.Collections.IDictionary)">
+            <summary>
+            When overridden in a derived class, performs the installation.
+            </summary>
+            <param name="stateSaver">An <see cref="T:System.Collections.IDictionary"/> used to save information needed to perform a commit, rollback, or uninstall operation.</param>
+            <exception cref="T:System.ArgumentException">
+            The <paramref name="stateSaver"/> parameter is null.
+            </exception>
+            <exception cref="T:System.Exception">
+            An exception occurred in the <see cref="E:System.Configuration.Install.Installer.BeforeInstall"/> event handler of one of the installers in the collection.
+            -or-
+            An exception occurred in the <see cref="E:System.Configuration.Install.Installer.AfterInstall"/> event handler of one of the installers in the collection.
+            </exception>
+        </member>
+        <member name="M:MySql.Web.Security.CustomInstaller.Uninstall(System.Collections.IDictionary)">
+            <summary>
+            When overridden in a derived class, removes an installation.
+            </summary>
+            <param name="savedState">An <see cref="T:System.Collections.IDictionary"/> that contains the state of the computer after the installation was complete.</param>
+            <exception cref="T:System.ArgumentException">
+            The saved-state <see cref="T:System.Collections.IDictionary"/> might have been corrupted.
+            </exception>
+            <exception cref="T:System.Configuration.Install.InstallException">
+            An exception occurred while uninstalling. This exception is ignored and the uninstall continues. However, the application might not be fully uninstalled after the uninstallation completes.
+            </exception>
+        </member>
+        <member name="T:MySql.Web.Security.MySQLMembershipProvider">
+            <summary>
+            Manages storage of membership information for an ASP.NET application in a MySQL database. 
+            </summary>
+            <remarks>
+            <para>
+            This class is used by the <see cref="T:System.Web.Security.Membership"/> and <see cref="T:System.Web.Security.MembershipUser"/> classes
+            to provide membership services for ASP.NET applications using a MySQL database.
+            </para>
+            </remarks>
+            <example>
+            <code source="CodeExamples/MembershipCodeExample2.xml"/>
+            </example>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the MySQL membership provider with the property values specified in the 
+            ASP.NET application's configuration file. This method is not intended to be used directly 
+            from your code. 
+            </summary>
+            <param name="name">The name of the <see cref="T:MySql.Web.Security.MySQLMembershipProvider"/> instance to initialize.</param>
+            <param name="config">A collection of the name/value pairs representing the 
+            provider-specific attributes specified in the configuration for this provider.</param>
+            <exception cref="T:System.ArgumentNullException">config is a null reference.</exception>
+            <exception cref="T:System.InvalidOperationException">An attempt is made to call <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)"/> on a provider after the provider has already been initialized.</exception>
+            <exception cref="T:System.Configuration.Provider.ProviderException"></exception>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.ApplicationName">
+            <summary>
+            The name of the application using the MySQL membership provider.
+            </summary>
+            <value>The name of the application using the MySQL membership provider.  The default is the 
+            application virtual path.</value>
+            <remarks>The ApplicationName is used by the MySqlMembershipProvider to separate 
+            membership information for multiple applications.  Using different application names, 
+            applications can use the same membership database.
+            Likewise, multiple applications can make use of the same membership data by simply using
+            the same application name.
+            Caution should be taken with multiple applications as the ApplicationName property is not
+            thread safe during writes.
+            </remarks>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            The application name setting is being used.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.EnablePasswordReset">
+            <summary>
+            Indicates whether the membership provider is configured to allow users to reset their passwords.
+            </summary>
+            <value>true if the membership provider supports password reset; otherwise, false. The default is true.</value>
+            <remarks>Allows the user to replace their password with a new, randomly generated password.  
+            This can be especially handy when using hashed passwords since hashed passwords cannot be
+            retrieved.</remarks>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.EnablePasswordRetrieval">
+            <summary>
+            Indicates whether the membership provider is configured to allow users to retrieve 
+            their passwords.
+            </summary>
+            <value>true if the membership provider is configured to support password retrieval; 
+            otherwise, false. The default is false.</value>
+            <remarks>If the system is configured to use hashed passwords, then retrieval is not possible.  
+            If the user attempts to initialize the provider with hashed passwords and enable password retrieval
+            set to true then a <see cref="T:System.Configuration.Provider.ProviderException"/> is thrown.</remarks>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.RequiresQuestionAndAnswer">
+            <summary>
+            Gets a value indicating whether the membership provider is 
+            configured to require the user to answer a password question 
+            for password reset and retrieval.
+            </summary>
+            <value>true if a password answer is required for password 
+            reset and retrieval; otherwise, false. The default is false.</value>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.RequiresUniqueEmail">
+            <summary>
+            Gets a value indicating whether the membership provider is configured 
+            to require a unique e-mail address for each user name.
+            </summary>
+            <value>true if the membership provider requires a unique e-mail address; 
+            otherwise, false. The default is true.</value>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.MaxInvalidPasswordAttempts">
+            <summary>
+            Gets the number of invalid password or password-answer attempts allowed 
+            before the membership user is locked out.
+            </summary>
+            <value>The number of invalid password or password-answer attempts allowed 
+            before the membership user is locked out.</value>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.PasswordAttemptWindow">
+            <summary>
+            Gets the number of minutes in which a maximum number of invalid password or 
+            password-answer attempts are allowed before the membership user is locked out.
+            </summary>
+            <value>The number of minutes in which a maximum number of invalid password or 
+            password-answer attempts are allowed before the membership user is locked out.</value>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.PasswordFormat">
+            <summary>
+            Gets a value indicating the format for storing passwords in the membership data store.
+            </summary>
+            <value>One of the <see cref="T:System.Web.Security.MembershipPasswordFormat"/> 
+            values indicating the format for storing passwords in the data store.</value>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.MinRequiredNonAlphanumericCharacters">
+            <summary>
+            Gets the minimum number of special characters that must be present in a valid password.
+            </summary>
+            <value>The minimum number of special characters that must be present 
+            in a valid password.</value>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.MinRequiredPasswordLength">
+            <summary>
+            Gets the minimum length required for a password.
+            </summary>
+            <value>The minimum length required for a password. </value>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.PasswordStrengthRegularExpression">
+            <summary>
+            Gets the regular expression used to evaluate a password.
+            </summary>
+            <value>A regular expression used to evaluate a password.</value>
+            <example>
+            The following example shows the membership element being used in an applications web.config file.
+            In this example, the regular expression specifies that the password must meet the following
+            criteria:
+            <ul>
+            <list>Is at least seven characters.</list>
+            <list>Contains at least one digit.</list>
+            <list>Contains at least one special (non-alphanumeric) character.</list>
+            </ul>
+            <code source="CodeExamples/MembershipCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLMembershipProvider.WriteExceptionsToEventLog">
+            <summary>
+            Gets or sets a value indicating whether exceptions are written to the event log.
+            </summary>
+            <value>
+            	<c>true</c> if exceptions should be written to the log; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.ChangePassword(System.String,System.String,System.String)">
+            <summary>
+            Changes the password.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="oldPassword">The old password.</param>
+            <param name="newPassword">The new password.</param>
+            <returns>true if the password was updated successfully, false if the supplied old password
+            is invalid, the user is locked out, or the user does not exist in the database.</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)">
+            <summary>
+            Changes the password question and answer.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <param name="newPwdQuestion">The new password question.</param>
+            <param name="newPwdAnswer">The new password answer.</param>
+            <returns>true if the update was successful; otherwise, false. A value of false is 
+            also returned if the password is incorrect, the user is locked out, or the user 
+            does not exist in the database.</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
+            <summary>
+            Adds a new membership user to the data source.
+            </summary>
+            <param name="username">The user name for the new user.</param>
+            <param name="password">The password for the new user.</param>
+            <param name="email">The e-mail address for the new user.</param>
+            <param name="passwordQuestion">The password question for the new user.</param>
+            <param name="passwordAnswer">The password answer for the new user</param>
+            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
+            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
+            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"/> enumeration value indicating whether the user was created successfully.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"/> object populated with the information for the newly created user.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.DeleteUser(System.String,System.Boolean)">
+            <summary>
+            Removes a user from the membership data source.
+            </summary>
+            <param name="username">The name of the user to delete.</param>
+            <param name="deleteAllRelatedData">true to delete data related to the user from the database; false to leave data related to the user in the database.</param>
+            <returns>
+            true if the user was successfully deleted; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.GetAllUsers(System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Gets a collection of all the users in the data source in pages of data.
+            </summary>
+            <param name="pageIndex">The index of the page of results to return. <paramref name="pageIndex"/> is zero-based.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">The total number of matched users.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUserCollection"/> collection that contains a page of <paramref name="pageSize"/><see cref="T:System.Web.Security.MembershipUser"/> objects beginning at the page specified by <paramref name="pageIndex"/>.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.GetNumberOfUsersOnline">
+            <summary>
+            Gets the number of users currently accessing the application.
+            </summary>
+            <returns>
+            The number of users currently accessing the application.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.GetPassword(System.String,System.String)">
+            <summary>
+            Gets the password for the specified user name from the data source.
+            </summary>
+            <param name="username">The user to retrieve the password for.</param>
+            <param name="answer">The password answer for the user.</param>
+            <returns>
+            The password for the specified user name.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.GetUser(System.String,System.Boolean)">
+            <summary>
+            Gets information from the data source for a user. Provides an option to update the last-activity date/time stamp for the user.
+            </summary>
+            <param name="username">The name of the user to get information for.</param>
+            <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"/> object populated with the specified user's information from the data source.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.GetUser(System.Object,System.Boolean)">
+            <summary>
+            Gets user information from the data source based on the unique identifier for the membership user. Provides an option to update the last-activity date/time stamp for the user.
+            </summary>
+            <param name="providerUserKey">The unique identifier for the membership user to get information for.</param>
+            <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"/> object populated with the specified user's information from the data source.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.UnlockUser(System.String)">
+            <summary>
+            Unlocks the user.
+            </summary>
+            <param name="username">The username.</param>
+            <returns>true if the membership user was successfully unlocked; 
+            otherwise, false. A value of false is also returned if the user 
+            does not exist in the database. </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.GetUserNameByEmail(System.String)">
+            <summary>
+            Gets the user name associated with the specified e-mail address.
+            </summary>
+            <param name="email">The e-mail address to search for.</param>
+            <returns>
+            The user name associated with the specified e-mail address. If no match is found, return null.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.ResetPassword(System.String,System.String)">
+            <summary>
+            Resets a user's password to a new, automatically generated password.
+            </summary>
+            <param name="username">The user to reset the password for.</param>
+            <param name="answer">The password answer for the specified user.</param>
+            <returns>The new password for the specified user.</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.UpdateUser(System.Web.Security.MembershipUser)">
+            <summary>
+            Updates information about a user in the data source.
+            </summary>
+            <param name="user">A <see cref="T:System.Web.Security.MembershipUser"/> object 
+            that represents the user to update and the updated information for the user.</param>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.ValidateUser(System.String,System.String)">
+            <summary>
+            Verifies that the specified user name and password exist in the data source.
+            </summary>
+            <param name="username">The name of the user to validate.</param>
+            <param name="password">The password for the specified user.</param>
+            <returns>
+            true if the specified username and password are valid; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Gets a collection of membership users where the user name contains the specified user name to match.
+            </summary>
+            <param name="usernameToMatch">The user name to search for.</param>
+            <param name="pageIndex">The index of the page of results to return. <paramref name="pageIndex"/> is zero-based.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">The total number of matched users.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUserCollection"/> collection that contains a page of <paramref name="pageSize"/><see cref="T:System.Web.Security.MembershipUser"/> objects beginning at the page specified by <paramref name="pageIndex"/>.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.FindUsersByEmail(System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Gets a collection of membership users where the e-mail address contains the specified e-mail address to match.
+            </summary>
+            <param name="emailToMatch">The e-mail address to search for.</param>
+            <param name="pageIndex">The index of the page of results to return. <paramref name="pageIndex"/> is zero-based.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">The total number of matched users.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUserCollection"/> collection that contains a page of <paramref name="pageSize"/><see cref="T:System.Web.Security.MembershipUser"/> objects beginning at the page specified by <paramref name="pageIndex"/>.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLMembershipProvider.HashPasswordBytes(System.Byte[],System.Byte[])">
+            <summary>
+            this method is only necessary because early versions of Mono did not support
+            the HashAlgorithmType property
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MySql.Web.Security.MySqlDatabaseWrapper">
+            <summary>
+            Perform basic operations against a Database
+            </summary>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.#ctor(System.String)">
+            <summary>
+            Initialize a new instance of the class
+            </summary>
+            <param name="connectionString">Connection String</param>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.Close">
+            <summary>
+            Close the current instance
+            </summary>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.Dispose">
+            <summary>
+            Dispose the current instance
+            </summary>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.ExecuteQuery(System.String,System.Object[])">
+            <summary>
+            Execute given query on the database
+            </summary>
+            <param name="cmdText">Query to exeute</param>
+            <param name="parametersValues">Parameters used in the query</param>
+            <returns>Query resultset</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.ExecuteQuerySingleRecord(System.String,System.Object[])">
+            <summary>
+            Execute given query on the database
+            </summary>
+            <param name="cmdText">Query to exeute</param>
+            <param name="parametersValues">Parameters used in the query</param>
+            <returns>First record in the Query resultset</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.ExecuteNonQuery(System.String,System.Object[])">
+            <summary>
+            Execute given query on the database
+            </summary>
+            <param name="cmdText">Query to exeute</param>
+            <param name="parametersValues">Parameters used in the query</param>
+            <returns>Rows affected by the query</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.ExecuteScalar(System.String,System.Object[])">
+            <summary>
+            Execute given query on the database
+            </summary>
+            <param name="cmdText">Query to exeute</param>
+            <param name="parametersValues">Parameters used in the query</param>
+            <returns>Value of the first column in the first row in the query resulset</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.ExecuteInTransaction(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.Object[]}})">
+            <summary>
+            Execute all given queries on the database inside of a transaction
+            </summary>
+            <param name="commands">Queries to exeute</param>
+            <returns>If queries were successfully executed</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.CheckIsConnectionOpen">
+            <summary>
+            Verifies if the current connection is open, if not is opened
+            </summary>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlDatabaseWrapper.AddParameters(MySql.Data.MySqlClient.MySqlCommand,System.Object[])">
+            <summary>
+            Add parameters to a command, nomenclature name used for the parameters are 'param[n]'
+            </summary>
+            <param name="cmd">Command that will stores the parameters</param>
+            <param name="values">Parameters values</param>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.ChangePassword(System.String,System.String,System.String)">
+            <summary>
+            Change the password for the user provided
+            </summary>
+            <param name="userName">User name</param>
+            <param name="oldPassword">Current pasword</param>
+            <param name="newPassword">New Password</param>
+            <returns></returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.ConfirmAccount(System.String)">
+            <summary>
+            Confirms user by confirmation token
+            </summary>
+            <param name="confirmationToken">Confirmation token</param>
+            <returns>If user was confirmed</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.ConfirmAccount(System.String,System.String)">
+            <summary>
+            Confirms user by confirmation token and user name
+            </summary>
+            <param name="userName">User name</param>
+            <param name="confirmationToken">Confirmation token</param>
+            <returns>If user was confirmed</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.CreateAccount(System.String,System.String,System.Boolean)">
+            <summary>
+            Create user account
+            </summary>
+            <param name="userName">User Name</param>
+            <param name="password">User password</param>
+            <param name="requireConfirmationToken">Confirmation token is required?</param>
+            <returns>Confirmation token if required</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.CreateUserAndAccount(System.String,System.String,System.Object,System.Boolean)">
+            <summary>
+            Create user and account
+            </summary>
+            <param name="userName">User Name</param>
+            <param name="password">User Password</param>
+            <param name="additionalUserAttributes">Additional data for user table</param>
+            <param name="requireConfirmationToken">Confirmation token is required?</param>
+            <returns>Confirmation token if required</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.GetCreateDate(System.String)">
+            <summary>
+            Get the date when the specified user was created
+            </summary>
+            <param name="userName">User Name</param>
+            <returns>Date created or minimum date value if the user was not found</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.GetLastPasswordFailureDate(System.String)">
+            <summary>
+            Get last date when password fails
+            </summary>
+            <param name="userName">User Name</param>
+            <returns>Last failure date or minimum date value if the user was not found</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.GetPasswordChangedDate(System.String)">
+            <summary>
+            Get date when password was changed
+            </summary>
+            <param name="userName">User Name</param>
+            <returns>Last password changed date or minimum date value if the user was not found</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.GetPasswordFailuresSinceLastSuccess(System.String)">
+            <summary>
+            Password failures since last success
+            </summary>
+            <param name="userName">User Name</param>
+            <returns>Number of failures since last success</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.GeneratePasswordResetToken(System.String,System.Int32)">
+            <summary>
+            Generates password reset token for confirmed user
+            </summary>
+            <param name="userName">User Name</param>
+            <param name="tokenExpirationInMinutesFromNow">Time that the token will be valid</param>
+            <returns>Token generated or null if the user is not confirmed or does not has a token</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.GetUserId(System.String)">
+            <summary>
+            Get user id
+            </summary>
+            <param name="userName">User Name</param>
+            <returns>User Id, -1 if user doesn't exists</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.GetUserIdFromPasswordResetToken(System.String)">
+            <summary>
+            Get User Id from password reset token
+            </summary>
+            <param name="resetToken">Reset token</param>
+            <returns>User Id, 0 if user dosn't exists</returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySqlWebSecurity.InitializeDatabaseConnection(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Initialize the simple membership provider with the values given
+            </summary>
+            <param name="connectionStringName">Connection string name defined in config file</param>
+            <param name="userTableName">Table name defined to create new users</param>
+            <param name="userIdColumn">Column name defined that will store the user id</param>
+            <param name="userNameColumn">Column name defined that will store the user name</param>
+            <param name="createTables">Create tables?</param>
+        </member>
+        <member name="T:MySql.Web.Security.MySQLRoleProvider">
+            <summary>
+            Manages storage of role membership information for an ASP.NET application in a MySQL database. 
+            </summary>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider.
+            </summary>
+            <param name="name">The friendly name of the provider.</param>
+            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
+            <exception cref="T:System.ArgumentNullException">The name of the provider is null.</exception>
+            <exception cref="T:System.ArgumentException">The name of the provider has a length of zero.</exception>
+            <exception cref="T:System.InvalidOperationException">An attempt is made to call <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)"/> on a provider after the provider has already been initialized.</exception>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLRoleProvider.ApplicationName">
+            <summary>
+            Gets or sets the name of the application to store and retrieve role information for.
+            </summary>
+            <value>The name of the application to store and retrieve role information for.</value>
+            <example>
+            <code source="CodeExamples\RoleCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="P:MySql.Web.Security.MySQLRoleProvider.WriteExceptionsToEventLog">
+            <summary>
+            Gets or sets a value indicating whether [write exceptions to event log].
+            </summary>
+            <value>
+            	<c>true</c> if exceptions should be written to the event log; otherwise, <c>false</c>.
+            </value>
+            <example>
+            <code source="CodeExamples\RoleCodeExample1.xml"/>
+            </example>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.AddUsersToRoles(System.String[],System.String[])">
+            <summary>
+            Adds the users to roles.
+            </summary>
+            <param name="usernames">The usernames.</param>
+            <param name="rolenames">The rolenames.</param>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.CreateRole(System.String)">
+            <summary>
+            Creates the role.
+            </summary>
+            <param name="rolename">The rolename.</param>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.DeleteRole(System.String,System.Boolean)">
+            <summary>
+            Deletes the role.
+            </summary>
+            <param name="rolename">The rolename.</param>
+            <param name="throwOnPopulatedRole">if set to <c>true</c> [throw on populated role].</param>
+            <returns>true if the role was successfully deleted; otherwise, false. </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.GetAllRoles">
+            <summary>
+            Gets a list of all the roles for the configured applicationName.
+            </summary>
+            <returns>
+            A string array containing the names of all the roles stored in the data source for the configured applicationName.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.GetRolesForUser(System.String)">
+            <summary>
+            Gets a list of the roles that a specified user is in for the configured applicationName.
+            </summary>
+            <param name="username">The user to return a list of roles for.</param>
+            <returns>
+            A string array containing the names of all the roles that the specified user is in for the configured applicationName.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.GetUsersInRole(System.String)">
+            <summary>
+            Gets the users in role.
+            </summary>
+            <param name="rolename">The rolename.</param>
+            <returns>A string array containing the names of all the users 
+            who are members of the specified role. </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.IsUserInRole(System.String,System.String)">
+            <summary>
+            Determines whether [is user in role] [the specified username].
+            </summary>
+            <param name="username">The username.</param>
+            <param name="rolename">The rolename.</param>
+            <returns>
+            	<c>true</c> if [is user in role] [the specified username]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.RemoveUsersFromRoles(System.String[],System.String[])">
+            <summary>
+            Removes the users from roles.
+            </summary>
+            <param name="usernames">The usernames.</param>
+            <param name="rolenames">The rolenames.</param>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.RoleExists(System.String)">
+            <summary>
+            Roles the exists.
+            </summary>
+            <param name="rolename">The rolename.</param>
+            <returns>true if the role name already exists in the database; otherwise, false. </returns>
+        </member>
+        <member name="M:MySql.Web.Security.MySQLRoleProvider.FindUsersInRole(System.String,System.String)">
+            <summary>
+            Finds the users in role.
+            </summary>
+            <param name="rolename">The rolename.</param>
+            <param name="usernameToMatch">The username to match.</param>
+            <returns>A string array containing the names of all the users where the 
+            user name matches usernameToMatch and the user is a member of the specified role. </returns>
+        </member>
+        <member name="T:MySql.Web.Personalization.MySqlPersonalizationProvider">
+            <summary>
+            Implementation for Personalization Provider
+            to use web parts in ASP.NET websites
+            </summary>  
+        </member>
+        <member name="P:MySql.Web.Personalization.MySqlPersonalizationProvider.ApplicationName">
+            <summary>
+            Set or gets the Application Name 
+            </summary>
+        </member>
+        <member name="M:MySql.Web.Personalization.MySqlPersonalizationProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes settings values for Personalization Provider
+            </summary>
+            <param name="name"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:MySql.Web.Personalization.MySqlPersonalizationProvider.FindState(System.Web.UI.WebControls.WebParts.PersonalizationScope,System.Web.UI.WebControls.WebParts.PersonalizationStateQuery,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Returns a collection of PersonalizationStateInfo objects containing administrative information regarding records in the database that match the specified criteria
+            -for example, records corresponding to users named Jeff* that have been modified since January 1, 2005. Wildcard support is provider-dependent.
+            </summary>
+            <param name="scope"></param>
+            <param name="query"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="totalRecords"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MySql.Web.Personalization.MySqlPersonalizationProvider.GetCountOfState(System.Web.UI.WebControls.WebParts.PersonalizationScope,System.Web.UI.WebControls.WebParts.PersonalizationStateQuery)">
+            <summary>
+            Returns the number of records in the database that match the specified criteria-
+            for example, records corresponding to users named Jeff* that haven't been modified since January 1, 2005. Wildcard support is provider-dependent.
+            </summary>
+            <param name="scope"></param>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MySql.Web.Personalization.MySqlPersonalizationProvider.LoadPersonalizationBlobs(System.Web.UI.WebControls.WebParts.WebPartManager,System.String,System.String,System.Byte[]@,System.Byte[]@)">
+            <summary>
+            Retrieves personalization state as opaque blobs from the data source. Retrieves both shared and user personalization state corresponding to a specified user and a specified page.
+            </summary>
+            <param name="webPartManager"></param>
+            <param name="path"></param>
+            <param name="userName"></param>
+            <param name="sharedDataBlob"></param>
+            <param name="userDataBlob"></param>
+        </member>
+        <member name="M:MySql.Web.Personalization.MySqlPersonalizationProvider.ResetPersonalizationBlob(System.Web.UI.WebControls.WebParts.WebPartManager,System.String,System.String)">
+            <summary>
+            Deletes personalization state corresponding to a specified user and a specified page from the database.
+            </summary>
+            <param name="webPartManager"></param>
+            <param name="path"></param>
+            <param name="userName"></param>
+        </member>
+        <member name="M:MySql.Web.Personalization.MySqlPersonalizationProvider.ResetState(System.Web.UI.WebControls.WebParts.PersonalizationScope,System.String[],System.String[])">
+            <summary>
+            Deletes personalization state corresponding to the specified users and specified pages from the database
+            </summary>
+            <param name="scope"></param>
+            <param name="paths"></param>
+            <param name="usernames"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MySql.Web.Personalization.MySqlPersonalizationProvider.ResetUserState(System.String,System.DateTime)">
+            <summary>
+            Deletes user personalization state corresponding to the specified pages and that hasn't been updated since a specified date from the database.
+            </summary>
+            <param name="path"></param>
+            <param name="userInactiveSinceDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MySql.Web.Personalization.MySqlPersonalizationProvider.SavePersonalizationBlob(System.Web.UI.WebControls.WebParts.WebPartManager,System.String,System.String,System.Byte[])">
+            <summary>
+            Writes personalization state corresponding to a specified user and a specified page as an opaque blob to the database. 
+            If userName is null, then the personalization state is shared state and is not keyed by user name.
+            </summary>
+            <param name="webPartManager"></param>
+            <param name="path"></param>
+            <param name="userName"></param>
+            <param name="dataBlob"></param>
+        </member>
+        <member name="M:MySql.Web.Personalization.PersonalizationProviderProcedures.myaspnet_PersonalizationAdministration_FindState(System.Boolean,System.Int64,System.String,System.Int32,System.Int32,System.String,System.String,System.DateTime,MySql.Web.MySQLPersonalizationConnectionHelper,MySql.Data.MySqlClient.MySqlCommand@)">
+            <summary>
+            Retrieves profile data from my_aspnet_PersonalizationAllUsers or my_aspnet_PersonalizationPerUser meeting several input criteria.
+            </summary>
+        </member>
+        <member name="M:MySql.Web.Personalization.PersonalizationProviderProcedures.my_aspnet_PersonalizationPerUser_SetPageSettings(System.Int64,System.String,System.String,System.Byte[],System.DateTime,MySql.Web.MySQLPersonalizationConnectionHelper)">
+            <summary>
+            Saves per-user state for the specified page and the specified user in the my_aspnet_PersonalizationPerUser table.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MySql.Web.Personalization.PersonalizationProviderProcedures.my_aspnet_PersonalizationAllUsers_SetPageSettings(System.Int64,System.String,System.Byte[],System.DateTime,MySql.Web.MySQLPersonalizationConnectionHelper)">
+            <summary>
+            Saves shared state for the specified page in the aspnet_PersonalizationAllUsers table
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MySql.Web.Profile.MySQLProfileProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider.
+            </summary>
+            <param name="name">The friendly name of the provider.</param>
+            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
+            <exception cref="T:System.ArgumentNullException">The name of the provider is null.</exception>
+            <exception cref="T:System.ArgumentException">The name of the provider has a length of zero.</exception>
+            <exception cref="T:System.InvalidOperationException">An attempt is made to call <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)"/> on a provider after the provider has already been initialized.</exception>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.DeleteInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)">
+            <summary>
+            When overridden in a derived class, deletes all user-profile data 
+            for profiles in which the last activity date occurred before the 
+            specified date.
+            </summary>
+            <param name="authenticationOption">One of the 
+            <see cref="T:System.Web.Profile.ProfileAuthenticationOption"/> 
+            values, specifying whether anonymous, authenticated, or both 
+            types of profiles are deleted.</param>
+            <param name="userInactiveSinceDate">A <see cref="T:System.DateTime"/> 
+            that identifies which user profiles are considered inactive. If the 
+            <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate"/>  
+            value of a user profile occurs on or before this date and time, the 
+            profile is considered inactive.</param>
+            <returns>
+            The number of profiles deleted from the data source.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.DeleteProfiles(System.String[])">
+            <summary>
+            When overridden in a derived class, deletes profile properties 
+            and information for profiles that match the supplied list of user names.
+            </summary>
+            <param name="usernames">A string array of user names for 
+            profiles to be deleted.</param>
+            <returns>
+            The number of profiles deleted from the data source.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)">
+            <summary>
+            When overridden in a derived class, deletes profile properties 
+            and information for the supplied list of profiles.
+            </summary>
+            <param name="profiles">A 
+            <see cref="T:System.Web.Profile.ProfileInfoCollection"/>  of 
+            information about profiles that are to be deleted.</param>
+            <returns>
+            The number of profiles deleted from the data source.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            When overridden in a derived class, retrieves profile information 
+            for profiles in which the last activity date occurred on or before 
+            the specified date and the user name matches the specified user name.
+            </summary>
+            <param name="authenticationOption">One of the 
+            <see cref="T:System.Web.Profile.ProfileAuthenticationOption"/> values, 
+            specifying whether anonymous, authenticated, or both types of profiles 
+            are returned.</param>
+            <param name="usernameToMatch">The user name to search for.</param>
+            <param name="userInactiveSinceDate">A <see cref="T:System.DateTime"/> 
+            that identifies which user profiles are considered inactive. If the 
+            <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate"/> value 
+            of a user profile occurs on or before this date and time, the profile 
+            is considered inactive.</param>
+            <param name="pageIndex">The index of the page of results to return.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">When this method returns, contains the total 
+            number of profiles.</param>
+            <returns>
+            A <see cref="T:System.Web.Profile.ProfileInfoCollection"/> containing 
+            user profile information for inactive profiles where the user name 
+            matches the supplied <paramref name="usernameToMatch"/> parameter.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            When overridden in a derived class, retrieves profile information 
+            for profiles in which the user name matches the specified user names.
+            </summary>
+            <param name="authenticationOption">One of the 
+            <see cref="T:System.Web.Profile.ProfileAuthenticationOption"/> values, 
+            specifying whether anonymous, authenticated, or both types of profiles 
+            are returned.</param>
+            <param name="usernameToMatch">The user name to search for.</param>
+            <param name="pageIndex">The index of the page of results to return.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">When this method returns, contains the total 
+            number of profiles.</param>
+            <returns>
+            A <see cref="T:System.Web.Profile.ProfileInfoCollection"/> containing 
+            user-profile information for profiles where the user name matches the 
+            supplied <paramref name="usernameToMatch"/> parameter.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            When overridden in a derived class, retrieves user-profile data 
+            from the data source for profiles in which the last activity date 
+            occurred on or before the specified date.
+            </summary>
+            <param name="authenticationOption">One of the 
+            <see cref="T:System.Web.Profile.ProfileAuthenticationOption"/> values, 
+            specifying whether anonymous, authenticated, or both types of profiles 
+            are returned.</param>
+            <param name="userInactiveSinceDate">A <see cref="T:System.DateTime"/> 
+            that identifies which user profiles are considered inactive. If the 
+            <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate"/>  of 
+            a user profile occurs on or before this date and time, the profile is 
+            considered inactive.</param>
+            <param name="pageIndex">The index of the page of results to return.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">When this method returns, contains the 
+            total number of profiles.</param>
+            <returns>
+            A <see cref="T:System.Web.Profile.ProfileInfoCollection"/> containing user-profile information about the inactive profiles.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            When overridden in a derived class, retrieves user profile data for 
+            all profiles in the data source.
+            </summary>
+            <param name="authenticationOption">One of the 
+            <see cref="T:System.Web.Profile.ProfileAuthenticationOption"/> values, 
+            specifying whether anonymous, authenticated, or both types of profiles 
+            are returned.</param>
+            <param name="pageIndex">The index of the page of results to return.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">When this method returns, contains the 
+            total number of profiles.</param>
+            <returns>
+            A <see cref="T:System.Web.Profile.ProfileInfoCollection"/> containing 
+            user-profile information for all profiles in the data source.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.GetNumberOfInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)">
+            <summary>
+            When overridden in a derived class, returns the number of profiles 
+            in which the last activity date occurred on or before the specified 
+            date.
+            </summary>
+            <param name="authenticationOption">One of the 
+            <see cref="T:System.Web.Profile.ProfileAuthenticationOption"/> values, 
+            specifying whether anonymous, authenticated, or both types of profiles 
+            are returned.</param>
+            <param name="userInactiveSinceDate">A <see cref="T:System.DateTime"/> 
+            that identifies which user profiles are considered inactive. If the 
+            <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate"/>  of 
+            a user profile occurs on or before this date and time, the profile 
+            is considered inactive.</param>
+            <returns>
+            The number of profiles in which the last activity date occurred on 
+            or before the specified date.
+            </returns>
+        </member>
+        <member name="P:MySql.Web.Profile.MySQLProfileProvider.ApplicationName">
+            <summary>
+            Gets or sets the name of the currently running application.
+            </summary>
+            <value></value>
+            <returns>A <see cref="T:System.String"/> that contains the application's shortened name, which does not contain a full path or extension, for example, SimpleAppSettings.</returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)">
+            <summary>
+            Returns the collection of settings property values for the specified application instance and settings property group.
+            </summary>
+            <param name="context">A <see cref="T:System.Configuration.SettingsContext"/> describing the current application use.</param>
+            <param name="collection">A <see cref="T:System.Configuration.SettingsPropertyCollection"/> containing the settings property group whose values are to be retrieved.</param>
+            <returns>
+            A <see cref="T:System.Configuration.SettingsPropertyValueCollection"/> containing the values for the specified settings property group.
+            </returns>
+        </member>
+        <member name="M:MySql.Web.Profile.MySQLProfileProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)">
+            <summary>
+            Sets the values of the specified group of property settings.
+            </summary>
+            <param name="context">A <see cref="T:System.Configuration.SettingsContext"/> describing the current application usage.</param>
+            <param name="collection">A <see cref="T:System.Configuration.SettingsPropertyValueCollection"/> representing the group of property settings to set.</param>
+        </member>
+        <member name="T:MySql.Web.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.CannotDeleteAPopulatedRole">
+            <summary>
+              Looks up a localized string similar to Cannot delete a populated role..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.CannotRetrieveHashedPasswords">
+            <summary>
+              Looks up a localized string similar to Setting EnablePasswordRetrieval to true when PasswordFormat is Hashed is not supported..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.CannotUnencodeHashedPwd">
+            <summary>
+              Looks up a localized string similar to Cannot unencode a hashed password..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ChangePasswordCanceled">
+            <summary>
+              Looks up a localized string similar to Change password operation was canceled..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ClearPassTokenFailed">
+            <summary>
+              Looks up a localized string similar to Failed to clear the token for the userid {0} in the table {1} after password update..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.CreateRoleFailed">
+            <summary>
+              Looks up a localized string similar to An unexpected error occurred while creating the role &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.DeleteOAuthAccountFailed">
+            <summary>
+              Looks up a localized string similar to Failed to delete OAuth Account, combination of provider &apos;{0}&apos; and provider user id &apos;{1}&apos; not found..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ErrorInitOfMembershipProvider">
+            <summary>
+              Looks up a localized string similar to There was an error during membership provider initilization..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ErrorInitOfRoleProvider">
+            <summary>
+              Looks up a localized string similar to There was an error during role provider initilization..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ErrorInitProfileProvider">
+            <summary>
+              Looks up a localized string similar to There was an error during profile provider initilization..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ErrorResettingPassword">
+            <summary>
+              Looks up a localized string similar to There was an error resetting the password..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.GeneratePassVerificationTokenFailed">
+            <summary>
+              Looks up a localized string similar to Failed to generates the PasswordVerificationToken, update not performed to Database..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.IllegalRoleName">
+            <summary>
+              Looks up a localized string similar to Role names must not be null or empty..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.IllegalUserName">
+            <summary>
+              Looks up a localized string similar to User names must not be null or empty..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.IncorrectPasswordAnswer">
+            <summary>
+              Looks up a localized string similar to Incorrect password answer..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.InvalidArgument">
+            <summary>
+              Looks up a localized string similar to Please provide a valid value: value provided is null or empty..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.InvalidArrayValue">
+            <summary>
+              Looks up a localized string similar to Some of the values in the arrays received are null or empty, please verify it..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.InvalidCharactersInUserName">
+            <summary>
+              Looks up a localized string similar to Invalid characters in user name..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.InvalidUser">
+            <summary>
+              Looks up a localized string similar to User {0} not found in the table {1}..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.MissingOrWrongSchema">
+            <summary>
+              Looks up a localized string similar to Unable to initialize provider.  Missing or incorrect schema..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.MonoDoesNotSupportHash">
+            <summary>
+              Looks up a localized string similar to The mono runtime did not support hashed passwords.  Please use clear or encrypted passwords..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.NewPasswordValidationFailed">
+            <summary>
+              Looks up a localized string similar to Change password canceled due to New password validation failure..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.NoConnString">
+            <summary>
+              Looks up a localized string similar to There is no connection string configured..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.NotEnoughNonAlphaNumericInPwd">
+            <summary>
+              Looks up a localized string similar to Non alpha numeric characters in &apos;{0}&apos; needs to be greater than or equal to &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordAnswerInvalid">
+            <summary>
+              Looks up a localized string similar to Password answer supplied is invalid..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordExceedsMaxLength">
+            <summary>
+              Looks up a localized string similar to Password exceeds maximum length allowed..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordFormatNotSupported">
+            <summary>
+              Looks up a localized string similar to Password format not supported..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordNotLongEnough">
+            <summary>
+              Looks up a localized string similar to The length of parameter &apos;{0}&apos; needs to be greater or equal to &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordQuestionInvalid">
+            <summary>
+              Looks up a localized string similar to Password question supplied is invalid..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordRequiredForReset">
+            <summary>
+              Looks up a localized string similar to Password answer required for password reset..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordResetCanceledNotValid">
+            <summary>
+              Looks up a localized string similar to Reset password canceled due to password validation failure..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordResetNotEnabled">
+            <summary>
+              Looks up a localized string similar to Password Reset is not enabled..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PasswordRetrievalNotEnabled">
+            <summary>
+              Looks up a localized string similar to Password Retrieval Not Enabled..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.PreviousProviderException">
+            <summary>
+              Looks up a localized string similar to MySqlSimpleMembershipProvider is already initialized and its schema does not match the MySqlMembershipProvider schema..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ProfileUpdateFailed">
+            <summary>
+              Looks up a localized string similar to Profile update failed..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.RoleAlreadyExists">
+            <summary>
+              Looks up a localized string similar to The role &apos;{0}&apos; already exists..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.RoleInUse">
+            <summary>
+              Looks up a localized string similar to The role &apos;{0}&apos; is in use..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.RoleNameAlreadyExists">
+            <summary>
+              Looks up a localized string similar to Role name already exists..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.RoleNameNotFound">
+            <summary>
+              Looks up a localized string similar to Role name not found..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.SaveTokenFailed">
+            <summary>
+              Looks up a localized string similar to Failed to save the request token secret value &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.schema1">
+            <summary>
+              Looks up a localized string similar to CREATE TABLE  mysql_Membership(`PKID` varchar(36) NOT NULL,
+                         Username varchar(255) NOT NULL, 
+                         ApplicationName varchar(255) NOT NULL,
+                         Email varchar(128) NOT NULL, 
+                         Comment varchar(255) default NULL,
+                         Password varchar(128) NOT NULL, 
+                         PasswordQuestion varchar(255) default NULL,
+                         PasswordAnswer varchar(255) default NULL, 
+                         IsApproved tinyint(1) default NULL,
+                         LastActivityDate datetim [rest of string was truncated]&quot;;.
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.schema11">
+            <summary>
+              Looks up a localized string similar to CREATE TABLE IF NOT EXISTS webpages_membership (
+               UserId int NOT NULL primary key,
+               CreateDate datetime NULL,
+               ConfirmationToken nvarchar(128) NULL,
+               IsConfirmed bit NULL DEFAULT 0,
+               LastPasswordFailureDate datetime NULL,
+               PasswordFailuresSinceLastSuccess int NOT NULL DEFAULT 0,
+               Password nvarchar(128) NOT NULL,
+               PasswordChangedDate datetime NULL,
+               PasswordSalt nvarchar(128) NOT NULL,
+               PasswordVerificationToken nvarchar(128) NULL,
+               PasswordVerificationTokenExpirationDate dat [rest of string was truncated]&quot;;.
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.schema2">
+            <summary>
+              Looks up a localized string similar to  ALTER TABLE mysql_Membership 
+                       ADD PasswordKey char(32) AFTER Password, 
+                       ADD PasswordFormat tinyint AFTER PasswordKey, 
+                       CHANGE Email Email VARCHAR(128), COMMENT=&apos;2&apos;;
+                       
+                       
+                           .
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MySql.Web.Properties.Resources.schema3" -->
+        <member name="P:MySql.Web.Properties.Resources.schema4">
+             <summary>
+               Looks up a localized string similar to ALTER TABLE my_aspnet_membership CONVERT TO CHARACTER SET DEFAULT;
+            ALTER TABLE my_aspnet_roles CONVERT TO CHARACTER SET DEFAULT;
+            ALTER TABLE my_aspnet_usersinroles CONVERT TO CHARACTER SET DEFAULT;
+            
+            UPDATE my_aspnet_schemaversion SET version=4 WHERE version=3;
+            .
+             </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MySql.Web.Properties.Resources.schema5" -->
+        <member name="P:MySql.Web.Properties.Resources.schema6">
+             <summary>
+               Looks up a localized string similar to ALTER TABLE my_aspnet_sessions CONVERT TO CHARACTER SET DEFAULT;
+            ALTER TABLE my_aspnet_sessions MODIFY SessionItems LONGBLOB;
+            
+            UPDATE my_aspnet_schemaversion SET version=6;
+            .
+             </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.schema7">
+             <summary>
+               Looks up a localized string similar to RENAME TABLE my_aspnet_Applications TO my_aspnet_applications;
+            RENAME TABLE my_aspnet_Membership TO my_aspnet_membership;
+            RENAME TABLE my_aspnet_Profiles TO my_aspnet_profiles;
+            RENAME TABLE my_aspnet_Roles TO my_aspnet_roles;
+            RENAME TABLE my_aspnet_SchemaVersion TO my_aspnet_schemaversion;
+            RENAME TABLE my_aspnet_SessionCleanup TO my_aspnet_sessioncleanup;
+            RENAME TABLE my_aspnet_Sessions TO my_aspnet_sessions; 
+            RENAME TABLE my_aspnet_Users TO my_aspnet_users;
+            RENAME TABLE my_aspnet_UsersInRoles TO my [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.schema8">
+             <summary>
+               Looks up a localized string similar to DELETE FROM my_aspnet_sessioncleanup; 
+            
+            ALTER TABLE my_aspnet_sessioncleanup ADD ApplicationId INT NOT NULL;
+            ALTER TABLE my_aspnet_sessioncleanup ADD Primary Key (ApplicationId);
+            
+            UPDATE my_aspnet_schemaversion SET version=8;.
+             </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.schema9">
+             <summary>
+               Looks up a localized string similar to 
+            create table my_aspnet_sitemap(
+            	Id int auto_increment primary key,
+            	Title varchar( 50 ),
+            	Description varchar( 512 ),
+            	Url varchar( 512 ),
+            	Roles varchar( 1000 ),
+            	ParentId int default null
+            ) engine=Innodb;
+            
+            UPDATE my_aspnet_schemaversion SET version=9;.
+             </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.schema10">
+             <summary>
+               Looks up a localized string similar to DELETE FROM my_aspnet_sessioncleanup; 
+            
+            CREATE TABLE my_aspnet_personalizationperuser(
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            applicationId INT NOT NULL, 
+            pathId VARCHAR(36) DEFAULT NULL,
+             </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.SimpleMembershipAlreadyInitialized">
+            <summary>
+              Looks up a localized string similar to The MySqlSimpleMembershipProvider is already initialized..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.SimpleMembershipNotInitialized">
+            <summary>
+              Looks up a localized string similar to The membership provider was not initialized, it must be initialized before start using it..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.SimpleRoleAlreadyInitialized">
+            <summary>
+              Looks up a localized string similar to The MySqlSimpleRoleProvider is already initialized..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.SiteMapConnectionStringMissing">
+            <summary>
+              Looks up a localized string similar to The connection string name is missing for the MySqlSiteMapProvider.
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UnableToCreateApplication">
+            <summary>
+              Looks up a localized string similar to Unable to create application..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UnableToCreateUser">
+            <summary>
+              Looks up a localized string similar to Unable to create user..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UnableToLockOutUser">
+            <summary>
+              Looks up a localized string similar to Unable to lock out user..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UnableToRetrieveProfileData">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve profile data from database..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UnableToUpdateFailureCount">
+            <summary>
+              Looks up a localized string similar to Unable to update failure count.  Membership database may be corrupt..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UnsupportedPasswordFormat">
+            <summary>
+              Looks up a localized string similar to Unsupported password format..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UpdateTokenFailed">
+            <summary>
+              Looks up a localized string similar to Failed to update the request token secret value &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserAlreadyExists">
+            <summary>
+              Looks up a localized string similar to User {0} already exists..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserIdColumnNotInitialized">
+            <summary>
+              Looks up a localized string similar to UserIdColumn configuration was not initialized..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserIsAlreadyInRole">
+            <summary>
+              Looks up a localized string similar to User is already in role..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserIsLockedOut">
+            <summary>
+              Looks up a localized string similar to The supplied user is locked out..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserNameColumnNotInitialized">
+            <summary>
+              Looks up a localized string similar to UserNameColumn configuration was not initialized..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UsernameNotFound">
+            <summary>
+              Looks up a localized string similar to Username not found..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserNotFound">
+            <summary>
+              Looks up a localized string similar to User not found int the table {0}..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserNotInRole">
+            <summary>
+              Looks up a localized string similar to User not in role..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserTableNameNotInitilized">
+            <summary>
+              Looks up a localized string similar to UserTableName configuration was not initialized..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.UserTableNotFound">
+            <summary>
+              Looks up a localized string similar to Unable to find the table users {0}. Please create it or initialize the MySqlSimpleMembershipProvider with &apos;createTables=true&apos;..
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Properties.Resources.ValidatePasswordCanceled">
+            <summary>
+              Looks up a localized string similar to The validate password operation was canceled..
+            </summary>
+        </member>
+        <member name="T:MySql.Web.Common.SchemaManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MySql.Web.Common.SchemaManager.Version">
+            <summary>
+            Gets the most recent version of the schema.
+            </summary>
+            <value>The most recent version number of the schema.</value>
+        </member>
+        <member name="M:MySql.Web.Common.SchemaManager.CreateOrFetchUserId(MySql.Data.MySqlClient.MySqlConnection,System.String,System.Int64,System.Boolean)">
+            <summary>
+            Creates the or fetch user id.
+            </summary>
+            <param name="connection">The connection.</param>
+            <param name="username">The username.</param>
+            <param name="applicationId">The application id.</param>
+            <param name="authenticated">if set to <c>true</c> [authenticated].</param>
+            <returns></returns>
+        </member>
+        <member name="T:MySql.Web.SessionState.MySqlSessionStateStore">
+            <summary>
+            This class allows ASP.NET applications to store and manage session state information in a
+            MySQL database.
+            Expired session data is periodically deleted from the database.
+            </summary>
+        </member>
+        <member name="P:MySql.Web.SessionState.MySqlSessionStateStore.EnableExpireCallback">
+            <summary>
+            Indicates whether if expire callback is on or off
+            </summary>
+        </member>
+        <member name="P:MySql.Web.SessionState.MySqlSessionStateStore.WriteExceptionsToEventLog">
+            <summary>
+            Indicates whether to write exceptions to event log
+            </summary>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.HandleMySqlException(MySql.Data.MySqlClient.MySqlException,System.String)">
+            <summary>
+            Handles MySql exception.
+            If WriteExceptionsToEventLog is set, will write exception info
+            to event log. 
+            It throws provider exception (original exception is stored as inner exception)
+            </summary>
+            <param name="e">exception</param>
+            <param name="action"> name of the function that throwed the exception</param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider with the property values specified in the ASP.NET application configuration file
+            </summary>
+            <param name="name">The name of the provider instance to initialize.</param>
+            <param name="config">Object that contains the names and values of configuration options for the provider.
+            </param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.CreateNewStoreData(System.Web.HttpContext,System.Int32)">
+            <summary>
+            This method creates a new SessionStateStoreData object for the current request.
+            </summary>
+            <param name="context">
+            The HttpContext object for the current request.
+            </param>
+            <param name="timeout">
+            The timeout value (in minutes) for the SessionStateStoreData object that is created.
+            </param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.CreateUninitializedItem(System.Web.HttpContext,System.String,System.Int32)">
+            <summary>
+            This method adds a new session state item to the database.
+            </summary>
+            <param name="context">
+            The HttpContext object for the current request.
+            </param>
+            <param name="id">
+            The session ID for the current request.
+            </param>
+            <param name="timeout">
+            The timeout value for the current request.
+            </param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.Dispose">
+            <summary>
+            This method releases all the resources for this instance.
+            </summary>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.EndRequest(System.Web.HttpContext)">
+            <summary>
+            This method allows the MySqlSessionStateStore object to perform any cleanup that may be 
+            required for the current request.
+            </summary>
+            <param name="context">The HttpContext object for the current request</param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)">
+            <summary>
+            This method returns a read-only session item from the database.
+            </summary>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)">
+            <summary>
+            This method locks a session item and returns it from the database
+            </summary>
+            <param name="context">The HttpContext object for the current request</param>
+            <param name="id">The session ID for the current request</param>
+            <param name="locked">
+            true if the session item is locked in the database; otherwise, it is false.
+            </param>
+            <param name="lockAge">
+            TimeSpan object that indicates the amount of time the session item has been locked in the database.
+            </param>
+            <param name="lockId">
+            A lock identifier object.
+            </param>
+            <param name="actions">
+            A SessionStateActions enumeration value that indicates whether or
+            not the session is uninitialized and cookieless.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.InitializeRequest(System.Web.HttpContext)">
+            <summary>
+             This method performs any per-request initializations that the MySqlSessionStateStore provider requires.
+            </summary>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.ReleaseItemExclusive(System.Web.HttpContext,System.String,System.Object)">
+            <summary>
+            This method forcibly releases the lock on a session item in the database, if multiple attempts to 
+            retrieve the session item fail.
+            </summary>
+            <param name="context">The HttpContext object for the current request.</param>
+            <param name="id">The session ID for the current request.</param>
+            <param name="lockId">The lock identifier for the current request.</param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.RemoveItem(System.Web.HttpContext,System.String,System.Object,System.Web.SessionState.SessionStateStoreData)">
+            <summary>
+            This method removes the specified session item from the database
+            </summary>
+            <param name="context">The HttpContext object for the current request</param>
+            <param name="id">The session ID for the current request</param>
+            <param name="lockId">The lock identifier for the current request.</param>
+            <param name="item">The session item to remove from the database.</param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.ResetItemTimeout(System.Web.HttpContext,System.String)">
+            <summary>
+            This method resets the expiration date and timeout for a session item in the database.
+            </summary>
+            <param name="context">The HttpContext object for the current request</param>
+            <param name="id">The session ID for the current request</param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.SetAndReleaseItemExclusive(System.Web.HttpContext,System.String,System.Web.SessionState.SessionStateStoreData,System.Object,System.Boolean)">
+            <summary>
+            This method updates the session time information in the database with the specified session item,
+            and releases the lock.
+            </summary>
+            <param name="context">The HttpContext object for the current request</param>
+            <param name="id">The session ID for the current request</param>
+            <param name="item">The session item containing new values to update the session item in the database with.
+            </param>
+            <param name="lockId">The lock identifier for the current request.</param>
+            <param name="newItem">A Boolean value that indicates whether or not the session item is new in the database.
+            A false value indicates an existing item.
+            </param>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.GetSessionStoreItem(System.Boolean,System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)">
+            <summary>
+             GetSessionStoreItem is called by both the GetItem and  GetItemExclusive methods. GetSessionStoreItem 
+             retrieves the session data from the data source. If the lockRecord parameter is true (in the case of 
+             GetItemExclusive), then GetSessionStoreItem  locks the record and sets a New LockId and LockDate.
+            </summary>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.SetItemExpireCallback(System.Web.SessionState.SessionStateItemExpireCallback)">
+            <summary>
+            This method sets the reference for the ExpireCallback delegate if setting is enabled.
+            </summary>
+            <param name="expireCallback"></param>
+            <returns>false </returns>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.Serialize(System.Web.SessionState.SessionStateItemCollection)">
+            <summary>
+             Serialize is called by the SetAndReleaseItemExclusive method to 
+             convert the SessionStateItemCollection into a byte array to
+             be stored in the blob field.
+             </summary>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.Deserialize(System.Web.HttpContext,System.Byte[],System.Int32)">
+            <summary>
+             Deserialize is called by the GetSessionStoreItem method to 
+             convert the byte array stored in the blob field to a 
+             SessionStateItemCollection.
+             </summary>
+        </member>
+        <member name="M:MySql.Web.SessionState.MySqlSessionStateStore.CheckStorageEngine(MySql.Data.MySqlClient.MySqlConnection)">
+            <summary>
+            Check storage engine used by my_aspnet_sessions.
+            Warn if MyISAM is used - it does not handle concurrent updates well
+            which is important for session provider, as each access to session 
+            does an update to "expires" field.
+            </summary>
+            <param name="con"></param>
+        </member>
+        <member name="T:MySql.Web.SiteMap.MySqlSiteMapProvider">
+            <summary>
+            SiteMap provider backed by MySql database.
+            </summary>
+        </member>
+        <member name="M:MySql.Web.SiteMap.MySqlSiteMapProvider.HandleMySqlException(MySql.Data.MySqlClient.MySqlException,System.String)">
+            <summary>
+            Handles MySql exception.
+            If WriteExceptionsToEventLog is set, will write exception info
+            to event log. 
+            It throws provider exception (original exception is stored as inner exception)
+            </summary>
+            <param name="e">exception</param>
+            <param name="action"> name of the function that throwed the exception</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySql.Data.Entity.EF5</name>
+    </assembly>
+    <members>
+        <member name="M:MySql.Data.Entity.EFMySqlCommand.PrepareAsync">
+            <summary>
+            Async version of Prepare
+            </summary>
+            <returns>Information about the task executed.</returns>
+        </member>
+        <member name="T:MySql.Data.Entity.SqlFragmentVisitor">
+            <summary>
+            Visitor for SqlFragment and derived classes, useful for postprocessing and optimizations.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.Entity.ReplaceTableNameVisitor">
+            <summary>
+            Visitor to replace old table names with new table names. Used as part postprocessing of the code for fusing nested selects.
+            </summary>
+        </member>
+        <member name="M:MySql.Data.Entity.SelectGenerator.TryFlatteningGroupBy(MySql.Data.Entity.SqlFragment)">
+            <summary>
+            If input sqlFragment is a group by structure, is flattened to remove some nested correlation queries.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MySql.Data.Entity.SqlGenerator.TryFusingSelect(MySql.Data.Entity.InputFragment)">
+            <summary>
+            If current fragment is select and its from clause is another select, try fuse the inner select with the outer select.
+            (Thus removing a nested query, which may have bad performance in Mysql).
+            </summary>
+            <param name="f">The fragment to probe and posibly optimize</param>
+            <returns>The fragment fused, or the original one.</returns>
+        </member>
+        <member name="M:MySql.Data.Entity.SqlGenerator.TryPromoteToLike(System.Data.Common.CommandTrees.DbExpression,System.Data.Common.CommandTrees.DbExpression,System.String)">
+            <summary>
+            Examines a binary expression to see if it is an special case suitable to conversion 
+            to a more efficient and equivalent LIKE sql expression.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <param name="op"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MySql.Data.Entity.MySqlConnectionFactory">
+            <summary>
+            Used for creating connections in Code First 4.3.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.Entity.MySqlMigrationCodeGenerator">
+            <summary>
+            Class used to customized code generation
+            to avoid dbo. prefix added on table names.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.Entity.MySqlMigrationSqlGenerator">
+            <summary>
+            Implementation of a MySql's Sql generator for EF 4.3 data migrations.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.Entity.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:MySql.Data.Entity.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:MySql.Data.Entity.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:MySql.Data.Entity.Properties.Resources.ConnectionMustBeOfTypeMySqlConnection">
+            <summary>
+              Looks up a localized string similar to The connection parameter must reference an object of type MySql.Data.MySqlConnection.
+            </summary>
+        </member>
+        <member name="P:MySql.Data.Entity.Properties.Resources.NoStoreTypeForEdmType">
+            <summary>
+              Looks up a localized string similar to There is no store type corresponding to the EDM type &apos;{0}&apos; of primitive type &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:MySql.Data.Entity.Properties.Resources.TypeNotSupported">
+            <summary>
+              Looks up a localized string similar to The underlying provider does not support the type &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:MySql.Data.Entity.Properties.Resources.WrongFunctionResultType">
+            <summary>
+              Looks up a localized string similar to Result type of a function is expected to be a collection of RowType or PrimitiveType.
+            </summary>
+        </member>
+        <member name="M:MySql.Data.MySqlClient.MySqlProviderServices.SetExpectedTypes(System.Data.Common.CommandTrees.DbCommandTree,MySql.Data.Entity.EFMySqlCommand)">
+            <summary>
+            Sets the expected column types
+            </summary>
+        </member>
+        <member name="M:MySql.Data.MySqlClient.MySqlProviderServices.SetQueryExpectedTypes(System.Data.Common.CommandTrees.DbQueryCommandTree,MySql.Data.Entity.EFMySqlCommand)">
+            <summary>
+            Sets the expected column types for a given query command tree
+            </summary>
+        </member>
+        <member name="M:MySql.Data.MySqlClient.MySqlProviderServices.SetFunctionExpectedTypes(System.Data.Common.CommandTrees.DbFunctionCommandTree,MySql.Data.Entity.EFMySqlCommand)">
+            <summary>
+            Sets the expected column types for a given function command tree
+            </summary>
+        </member>
+    </members>
+</doc>

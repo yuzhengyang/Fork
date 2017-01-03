@@ -9,19 +9,18 @@ namespace Y.Utils.ReflectionUtils
 {
     public static class DomainTool
     {
-        public static AppDomain CreateDomain(string friendlyName)
+        public static AppDomain CreateDomain(string friendlyName, string appBase)
         {
             try
             {
-                //AppDomainSetup setup = new AppDomainSetup();
-                //setup.ApplicationName = "Test";
-                //setup.ApplicationBase = AppDomain.CurrentDomain.BaseDirectory;
-                //setup.PrivateBinPath = AppDomain.CurrentDomain.BaseDirectory + "Private";
+                AppDomainSetup setup = new AppDomainSetup();
+                setup.ApplicationName = friendlyName;
+                setup.ApplicationBase = appBase;
+                //setup.PrivateBinPath = appBasePath + @"\Private";
                 //setup.CachePath = setup.ApplicationBase;
                 //setup.ShadowCopyFiles = "true";
                 //setup.ShadowCopyDirectories = setup.ApplicationBase;
-                //AppDomain appDomain = AppDomain.CreateDomain("TestDomain", null, setup);
-                AppDomain appDomain = AppDomain.CreateDomain(friendlyName);
+                AppDomain appDomain = AppDomain.CreateDomain(friendlyName, null, setup);
                 return appDomain;
             }
             catch (Exception e)
