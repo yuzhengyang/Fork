@@ -72,6 +72,7 @@ namespace Y.Utils.Net20.LogUtils
         {
             Console.ForegroundColor = GetColor(type);
             Console.WriteLine(LogFormat, DateTime.Now.ToString(TimeFormat), type.ToString(), message);
+            WriteFile(type, message);
         }
 
 
