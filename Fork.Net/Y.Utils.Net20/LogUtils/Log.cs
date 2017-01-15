@@ -19,23 +19,9 @@ namespace Y.Utils.Net20.LogUtils
     {
         //输出的 Log 格式
         const string LogFormat = "{0}  {1}  {2}";
-        const string TimeFormat = "MM-dd HH:mm:ss.fff";
+        const string TimeFormat = "HH:mm:ss.fff";
 
         private static object LogFileLock = new object();
-
-        #region 输出类型
-        /// <summary>
-        /// 输出类型
-        /// </summary>
-        enum PrintType
-        {
-            v,//verbose 啰嗦的意思
-            d,//debug 调试的信息
-            i,//information 一般提示性的消息
-            w,//warning 警告
-            e,//error 错误信息
-        }
-        #endregion
 
         #region Console 开启/关闭 API
         [DllImport("kernel32.dll")]
@@ -49,15 +35,15 @@ namespace Y.Utils.Net20.LogUtils
         /// </summary>
         /// <param name="type">输出类型</param>
         /// <returns></returns>
-        private static ConsoleColor GetColor(PrintType type)
+        private static ConsoleColor GetColor(LogType type)
         {
             switch (type)
             {
-                case PrintType.v: return ConsoleColor.Gray;
-                case PrintType.d: return ConsoleColor.Blue;
-                case PrintType.i: return ConsoleColor.Green;
-                case PrintType.w: return ConsoleColor.Yellow;
-                case PrintType.e: return ConsoleColor.Red;
+                case LogType.v: return ConsoleColor.Gray;
+                case LogType.d: return ConsoleColor.Blue;
+                case LogType.i: return ConsoleColor.Green;
+                case LogType.w: return ConsoleColor.Yellow;
+                case LogType.e: return ConsoleColor.Red;
                 default: return ConsoleColor.Gray;
             }
         }
@@ -68,7 +54,7 @@ namespace Y.Utils.Net20.LogUtils
         /// <param name="type">类型</param>
         /// <param name="tag">标记</param>
         /// <param name="message">消息</param>
-        private static void Write(PrintType type, string message)
+        private static void Write(LogType type, string message)
         {
             Console.ForegroundColor = GetColor(type);
             Console.WriteLine(LogFormat, DateTime.Now.ToString(TimeFormat), type.ToString(), message);
@@ -76,7 +62,7 @@ namespace Y.Utils.Net20.LogUtils
         }
 
 
-        private static void WriteFile(PrintType type, string message)
+        private static void WriteFile(LogType type, string message)
         {
             lock (LogFileLock)
             {
@@ -98,7 +84,7 @@ namespace Y.Utils.Net20.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void v<T>(T msg)
         {
-            Write(PrintType.v, msg.ToString());
+            Write(LogType.v, msg.ToString());
         }
         /// <summary>
         /// 输出 Debug (调试信息)
@@ -107,7 +93,7 @@ namespace Y.Utils.Net20.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void d<T>(T msg)
         {
-            Write(PrintType.d, msg.ToString());
+            Write(LogType.d, msg.ToString());
         }
         /// <summary>
         /// 输出 Information (重要信息)
@@ -116,7 +102,7 @@ namespace Y.Utils.Net20.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void i<T>(T msg)
         {
-            Write(PrintType.i, msg.ToString());
+            Write(LogType.i, msg.ToString());
         }
         /// <summary>
         /// 输出 Warning (警告信息)
@@ -125,7 +111,7 @@ namespace Y.Utils.Net20.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void w<T>(T msg)
         {
-            Write(PrintType.w, msg.ToString());
+            Write(LogType.w, msg.ToString());
         }
         /// <summary>
         /// 输出 Error (错误信息)
@@ -134,7 +120,7 @@ namespace Y.Utils.Net20.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void e<T>(T msg)
         {
-            Write(PrintType.e, msg.ToString());
+            Write(LogType.e, msg.ToString());
         }
         #endregion
     }
