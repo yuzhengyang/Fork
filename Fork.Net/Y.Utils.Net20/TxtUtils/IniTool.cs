@@ -384,6 +384,14 @@ namespace Y.Utils.Net20.TxtUtils
             string flag = GetStringValue(iniFile, section, key, "");
             return flag.ToLower() == "true" ? true : false;
         }
+        public static int GetIntValue(string iniFile, string section, string key, int defaultValue = 0)
+        {
+            int rs = 0;
+            string number = GetStringValue(iniFile, section, key, "Unknown");
+            if (int.TryParse(number, out rs))
+                return rs;
+            return defaultValue;
+        }
         #endregion
     }
 }

@@ -61,7 +61,22 @@ namespace Y.Utils.Net20.TxtUtils
                 {
                     string result = "", line;
                     while ((line = sr.ReadLine()) != null)
-                        result += line.ToString();
+                        result += line.ToString() + Environment.NewLine;
+                    return result;
+                }
+            }
+            catch (Exception e) { }
+            return null;
+        }
+        public static string Read(string file, Encoding encoding)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(file, encoding))
+                {
+                    string result = "", line;
+                    while ((line = sr.ReadLine()) != null)
+                        result += line.ToString() + Environment.NewLine;
                     return result;
                 }
             }
