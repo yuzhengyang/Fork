@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=5.0.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dlls\MySql\v2.0\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\GitHub\Marx\Marx\packages\Newtonsoft.Json.9.0.1\lib\net20\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -41,23 +37,26 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="EncryptUtils\AesTool.cs" />
+    <Compile Include="EncryptUtils\DesTool.cs" />
     <Compile Include="EnumUtils\FlagsEnumTool.cs" />
     <Compile Include="FileUtils\DirTool.cs" />
     <Compile Include="FileUtils\FileCode.cs" />
     <Compile Include="FileUtils\FileTool.cs" />
     <Compile Include="HookUtils\UserActivityHook.cs" />
     <Compile Include="HttpUtils\HttpTool.cs" />
+    <Compile Include="ImageUtils\ImageTool.cs" />
     <Compile Include="JsonUtils\JsonTool.cs" />
     <Compile Include="ListUtils\ListTool.cs" />
     <Compile Include="LogUtils\Log.cs" />
     <Compile Include="LogUtils\LogType.cs" />
-    <Compile Include="MysqlUtils\MysqlTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringUtils\SimilarString.cs" />
     <Compile Include="StringUtils\StringTool.cs" />

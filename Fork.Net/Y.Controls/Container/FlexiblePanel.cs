@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -13,7 +7,8 @@ namespace Y.Controls.Container
 {
     public partial class FlexiblePanel : Panel
     {
-        Color HighlightColor = ColorTranslator.FromHtml("#78c4ec");
+        //Color HighlightColor = ColorTranslator.FromHtml("#78c4ec");
+        Color HighlightColor = Color.Transparent;
 
         /// <summary>
         /// 光标状态
