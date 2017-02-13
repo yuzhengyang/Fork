@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="ComputerUtils\RegisterTool.cs" />
     <Compile Include="EncryptUtils\AesTool.cs" />
     <Compile Include="EncryptUtils\DesTool.cs" />
     <Compile Include="EnumUtils\FlagsEnumTool.cs" />
