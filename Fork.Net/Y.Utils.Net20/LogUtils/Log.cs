@@ -21,6 +21,8 @@ namespace Y.Utils.Net20.LogUtils
         const string LogFormat = "{0}  {1}  {2}";
         const string TimeFormat = "HH:mm:ss.fff";
 
+        public static bool IsWriteFile = true;
+
         private static object LogFileLock = new object();
 
         #region Console 开启/关闭 API
@@ -58,21 +60,23 @@ namespace Y.Utils.Net20.LogUtils
         {
             Console.ForegroundColor = GetColor(type);
             Console.WriteLine(LogFormat, DateTime.Now.ToString(TimeFormat), type.ToString(), message);
-            WriteFile(type, message);
+            if (IsWriteFile) WriteFile(type, message);
         }
-
-
+        
         private static void WriteFile(LogType type, string message)
         {
-            lock (LogFileLock)
+            if (IsWriteFile)
             {
-                //设置日志目录
-                string logPath = AppDomain.CurrentDomain.BaseDirectory + "Log";
-                string file = string.Format(@"{0}\{1}.txt", logPath, DateTime.Now.ToString("yyyy-MM-dd"));
-                //创建日志目录
-                DirTool.Create(logPath);
-                //写出日志
-                TxtTool.Append(file, string.Format(LogFormat, DateTime.Now.ToString(TimeFormat), type.ToString(), message));
+                lock (LogFileLock)
+                {
+                    //设置日志目录
+                    string logPath = AppDomain.CurrentDomain.BaseDirectory + "Log";
+                    string file = string.Format(@"{0}\{1}.txt", logPath, DateTime.Now.ToString("yyyy-MM-dd"));
+                    //创建日志目录
+                    DirTool.Create(logPath);
+                    //写出日志
+                    TxtTool.Append(file, string.Format(LogFormat, DateTime.Now.ToString(TimeFormat), type.ToString(), message));
+                }
             }
         }
 
