@@ -53,6 +53,7 @@
     <Compile Include="HookUtils\UserActivityHook.cs" />
     <Compile Include="HttpUtils\HttpTool.cs" />
     <Compile Include="ImageUtils\ImageTool.cs" />
+    <Compile Include="ImageUtils\ThunbnailTool.cs" />
     <Compile Include="JsonUtils\JsonTool.cs" />
     <Compile Include="ListUtils\ListTool.cs" />
     <Compile Include="LogUtils\Log.cs" />

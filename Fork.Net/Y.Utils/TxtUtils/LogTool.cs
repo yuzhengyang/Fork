@@ -3,7 +3,7 @@ using Y.Utils.FileUtils;
 
 namespace Y.Utils.TxtUtils
 {
-    public class LogTool
+    class LogTool
     {
         public static void Normal(string tag, string info)
         {

@@ -58,7 +58,12 @@
     <Compile Include="AttributeUtils\CustomAttributeHelper.cs" />
     <Compile Include="AttributeUtils\ControlAttribute.cs" />
     <Compile Include="AttributeUtils\ControlAttributeEvent.cs" />
+    <Compile Include="EncryptUtils\AesTool.cs" />
+    <Compile Include="EncryptUtils\DesTool.cs" />
+    <Compile Include="EnumUtils\FlagsEnumTool.cs" />
     <Compile Include="HookUtils\UserActivityHook.cs" />
+    <Compile Include="ImageUtils\AffineTool.cs" />
+    <Compile Include="ImageUtils\ThunbnailTool.cs" />
     <Compile Include="LogUtils\Log.cs" />
     <Compile Include="ComputerUtils\ComputerInfoTool.cs" />
     <Compile Include="ComputerUtils\ComputerPermissionTool.cs" />
@@ -66,6 +71,7 @@
     <Compile Include="ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="ComputerUtils\IPHelper.cs" />
     <Compile Include="FileUtils\FileCodeHelper.cs" />
+    <Compile Include="LogUtils\LogType.cs" />
     <Compile Include="NetworkUtils\FTPHelper.cs" />
     <Compile Include="NetworkUtils\HttpHelper.cs" />
     <Compile Include="NetworkUtils\EmailHelper.cs" />
@@ -87,12 +93,18 @@
     <Compile Include="JsonUtils\JsonTool.cs" />
     <Compile Include="ReflectionUtils\DomainTool.cs" />
     <Compile Include="ReflectionUtils\SimpleReflection.cs" />
+    <Compile Include="StringUtils\SimilarString.cs" />
+    <Compile Include="StringUtils\StringTool.cs" />
     <Compile Include="TestTest\OperatorTest.cs" />
     <Compile Include="TimeUtils\DateTimeConvert.cs" />
+    <Compile Include="TimeUtils\DateTimeTool.cs" />
     <Compile Include="TxtUtils\IniTool.cs" />
     <Compile Include="TxtUtils\LogTool.cs" />
     <Compile Include="TxtUtils\TxtTool.cs" />
     <Compile Include="BaseUtils\UnixTimeTool.cs" />
+    <Compile Include="WindowsAPI\ComputerAFK.cs" />
+    <Compile Include="WindowsAPI\ScreenCapture.cs" />
+    <Compile Include="WindowsAPI\WindowInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
