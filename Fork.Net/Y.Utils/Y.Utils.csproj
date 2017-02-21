@@ -98,6 +98,7 @@
     <Compile Include="TestTest\OperatorTest.cs" />
     <Compile Include="TimeUtils\DateTimeConvert.cs" />
     <Compile Include="TimeUtils\DateTimeTool.cs" />
+    <Compile Include="TimeUtils\TimerTool.cs" />
     <Compile Include="TxtUtils\IniTool.cs" />
     <Compile Include="TxtUtils\LogTool.cs" />
     <Compile Include="TxtUtils\TxtTool.cs" />
