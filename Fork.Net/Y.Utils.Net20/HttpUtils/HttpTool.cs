@@ -14,11 +14,11 @@ namespace Y.Utils.Net20.HttpUtils
         public static string Get(string url, string encoding = "utf-8")
         {
             string result = "";
-            Encoding myEncoding = Encoding.GetEncoding(encoding);
-            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
-            req.Method = "GET";
             try
             {
+                Encoding myEncoding = Encoding.GetEncoding(encoding);
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                req.Method = "GET";
                 using (WebResponse wr = req.GetResponse())
                 {
                     //在这里对接收到的页面内容进行处理
@@ -30,11 +30,11 @@ namespace Y.Utils.Net20.HttpUtils
         }
         public static T Get<T>(string url, string encoding = "utf-8")
         {
-            Encoding myEncoding = Encoding.GetEncoding(encoding);
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Method = "GET";
             try
             {
+                Encoding myEncoding = Encoding.GetEncoding(encoding);
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                req.Method = "GET";
                 using (WebResponse wr = req.GetResponse())
                 {
                     //在这里对接收到的页面内容进行处理
