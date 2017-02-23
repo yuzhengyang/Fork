@@ -50,7 +50,7 @@ namespace Y.Utils.Net20.ComputerUtils
             try
             {
                 RegistryKey RKey = Registry.LocalMachine.OpenSubKey(key, true);
-                if (RKey != null)
+                if (RKey != null && RKey.GetValue(name) != null)
                     RKey.DeleteValue(name);
                 return true;
             }
