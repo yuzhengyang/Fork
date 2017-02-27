@@ -58,6 +58,7 @@
     <Compile Include="AttributeUtils\CustomAttributeHelper.cs" />
     <Compile Include="AttributeUtils\ControlAttribute.cs" />
     <Compile Include="AttributeUtils\ControlAttributeEvent.cs" />
+    <Compile Include="ClipboardUtils\ClipboardTool.cs" />
     <Compile Include="EncryptUtils\AesTool.cs" />
     <Compile Include="EncryptUtils\DesTool.cs" />
     <Compile Include="EnumUtils\FlagsEnumTool.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="ImageUtils\ExifHelper.cs" />
     <Compile Include="ImageUtils\ImageHelper.cs" />
     <Compile Include="BaseUtils\RMB.cs" />
+    <Compile Include="NetworkUtils\PingTool.cs" />
     <Compile Include="OfficeUtils\WordHelper.cs" />
     <Compile Include="OfficeUtils\WordHelperTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="JsonUtils\JsonTool.cs" />
     <Compile Include="ReflectionUtils\DomainTool.cs" />
     <Compile Include="ReflectionUtils\SimpleReflection.cs" />
+    <Compile Include="SocketUtils\SocketTool.cs" />
     <Compile Include="StringUtils\SimilarString.cs" />
     <Compile Include="StringUtils\StringTool.cs" />
     <Compile Include="TestTest\OperatorTest.cs" />
