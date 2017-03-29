@@ -55,69 +55,74 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
-    <Compile Include="AppUtils\UniqueTool.cs" />
-    <Compile Include="AttributeUtils\AttributeTool.cs" />
-    <Compile Include="AttributeUtils\CustomAttributeHelper.cs" />
-    <Compile Include="AttributeUtils\ControlAttribute.cs" />
-    <Compile Include="AttributeUtils\ControlAttributeEvent.cs" />
-    <Compile Include="ClipboardUtils\ClipboardTool.cs" />
-    <Compile Include="EncryptUtils\AesTool.cs" />
-    <Compile Include="EncryptUtils\DesTool.cs" />
-    <Compile Include="EnumUtils\FlagsEnumTool.cs" />
-    <Compile Include="HookUtils\UserActivityHook.cs" />
-    <Compile Include="HttpUtils\HttpTool.cs" />
-    <Compile Include="ImageUtils\AffineTool.cs" />
-    <Compile Include="ImageUtils\ThunbnailTool.cs" />
-    <Compile Include="LogUtils\Log.cs" />
-    <Compile Include="ComputerUtils\ComputerInfoTool.cs" />
-    <Compile Include="ComputerUtils\ComputerPermissionTool.cs" />
-    <Compile Include="ComputerUtils\RegisterTool.cs" />
-    <Compile Include="ImageUtils\BarCodeToHTML.cs" />
-    <Compile Include="ComputerUtils\IPHelper.cs" />
-    <Compile Include="FileUtils\FileCodeHelper.cs" />
-    <Compile Include="LogUtils\LogLevel.cs" />
-    <Compile Include="LogUtils\LogType.cs" />
-    <Compile Include="NetworkUtils\FTPHelper.cs" />
-    <Compile Include="NetworkUtils\HttpHelper.cs" />
-    <Compile Include="NetworkUtils\EmailHelper.cs" />
-    <Compile Include="ImageUtils\CaptchaHelper.cs" />
-    <Compile Include="JsonUtils\ConvertJson.cs" />
-    <Compile Include="ImageUtils\ExifHelper.cs" />
-    <Compile Include="ImageUtils\ImageHelper.cs" />
-    <Compile Include="BaseUtils\RMB.cs" />
-    <Compile Include="NetworkUtils\PingTool.cs" />
-    <Compile Include="OfficeUtils\WordHelper.cs" />
-    <Compile Include="OfficeUtils\WordHelperTester.cs" />
+    <Compile Include="ReflectionUtils\AttributeUtils\AttributeTool.cs" />
+    <Compile Include="ReflectionUtils\AttributeUtils\CustomAttributeHelper.cs" />
+    <Compile Include="ReflectionUtils\AttributeUtils\ControlAttribute.cs" />
+    <Compile Include="ReflectionUtils\AttributeUtils\ControlAttributeEvent.cs" />
+    <Compile Include="DataUtils\Collections\ListTool.cs" />
+    <Compile Include="IOUtils\PathUtils\DirTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FileCodeTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FileTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ClipboardTool.cs" />
+    <Compile Include="DataUtils\EncryptUtils\AesTool.cs" />
+    <Compile Include="DataUtils\EncryptUtils\DesTool.cs" />
+    <Compile Include="DataUtils\EnumUtils\FlagsEnumTool.cs" />
+    <Compile Include="WindowsUtils\HookUtils\UserActivityHook.cs" />
+    <Compile Include="NetUtils\HttpUtils\HttpTool.cs" />
+    <Compile Include="IOUtils\ImageUtils\AffineTool.cs" />
+    <Compile Include="IOUtils\ImageUtils\ThunbnailTool.cs" />
+    <Compile Include="IOUtils\LogUtils\Log.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
+    <Compile Include="AppUtils\PermissionTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\RegisterTool.cs" />
+    <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
+    <Compile Include="IOUtils\LogUtils\LogLevel.cs" />
+    <Compile Include="IOUtils\LogUtils\LogType.cs" />
+    <Compile Include="NetUtils\FTPUtils\FTPTool.cs" />
+    <Compile Include="NetUtils\EmailUtils\EmailTool.cs" />
+    <Compile Include="IOUtils\ImageUtils\CaptchaHelper.cs" />
+    <Compile Include="DataUtils\JsonUtils\ConvertJson.cs" />
+    <Compile Include="IOUtils\ImageUtils\ExifHelper.cs" />
+    <Compile Include="IOUtils\ImageUtils\ImageHelper.cs" />
+    <Compile Include="DataUtils\CurrencyUtils\RMB.cs" />
+    <Compile Include="NetUtils\NetDiagnoseUtils\PingTool.cs" />
+    <Compile Include="IOUtils\OfficeUtils\WordTool.cs" />
+    <Compile Include="Test\WordToolTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseUtils\ChineseHourTool.cs" />
-    <Compile Include="BaseUtils\WeekDayTool.cs" />
-    <Compile Include="ComputerUtils\WindowsAPI.cs" />
-    <Compile Include="BaseUtils\DateTimeTool.cs" />
-    <Compile Include="FileUtils\DirTool.cs" />
-    <Compile Include="FileUtils\FileTool.cs" />
-    <Compile Include="BaseUtils\ListTool.cs" />
-    <Compile Include="JsonUtils\JsonTool.cs" />
-    <Compile Include="ReflectionUtils\DomainTool.cs" />
-    <Compile Include="ReflectionUtils\SimpleReflection.cs" />
-    <Compile Include="SocketUtils\SocketTool.cs" />
-    <Compile Include="StringUtils\SimilarString.cs" />
-    <Compile Include="StringUtils\StringTool.cs" />
-    <Compile Include="TestTest\OperatorTest.cs" />
-    <Compile Include="TimeUtils\DateTimeConvert.cs" />
-    <Compile Include="TimeUtils\DateTimeTool.cs" />
-    <Compile Include="TimeUtils\TimerTool.cs" />
-    <Compile Include="TxtUtils\IniTool.cs" />
-    <Compile Include="TxtUtils\LogTool.cs" />
-    <Compile Include="TxtUtils\TxtTool.cs" />
-    <Compile Include="BaseUtils\UnixTimeTool.cs" />
-    <Compile Include="WindowsAPI\ComputerAFK.cs" />
-    <Compile Include="WindowsAPI\ScreenCapture.cs" />
-    <Compile Include="WindowsAPI\WindowInfo.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\ChineseHourTool.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\WeekDayTool.cs" />
+    <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
+    <Compile Include="DataUtils\JsonUtils\JsonTool.cs" />
+    <Compile Include="ReflectionUtils\ReflectionCoreUtils\DomainTool.cs" />
+    <Compile Include="ReflectionUtils\ReflectionCoreUtils\SimpleReflection.cs" />
+    <Compile Include="NetUtils\SocketUtils\SocketTool.cs" />
+    <Compile Include="AppUtils\StartupTool.cs" />
+    <Compile Include="DataUtils\StringUtils\SimilarString.cs" />
+    <Compile Include="DataUtils\StringUtils\StringTool.cs" />
+    <Compile Include="Test\OperatorTest.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\DateTimeConvert.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\DateTimeTool.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\TimerTool.cs" />
+    <Compile Include="IOUtils\TxtUtils\IniTool.cs" />
+    <Compile Include="IOUtils\TxtUtils\TxtTool.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\UnixTimeTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ScreenCapture.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ShortcutTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
