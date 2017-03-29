@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -101,6 +102,33 @@ namespace Y.Utils.WindowsAPI
             //在指定位置并且按指定大小绘制原图片的指定部分
             g.DrawImage(originalImage, new System.Drawing.Rectangle(0, 0, towidth, toheight), new System.Drawing.Rectangle(x, y, ow, oh), System.Drawing.GraphicsUnit.Pixel);
             return bitmap;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct CURSORINFO
+        {
+            public int cbSize;
+            public int flags;
+            public IntPtr hCursor;
+            public Point ptScreenPos;
+        }
+        [DllImport("user32.dll")]
+        static extern bool GetCursorInfo(out CURSORINFO pci);
+        private const int CURSOR_SHOWING = 0x00000001;
+        /// <summary>  
+        /// 将鼠标指针形状绘制到屏幕截图上  
+        /// </summary>  
+        /// <param name="g"></param>  
+        public static void DrawCursorImageToScreenImage(ref Graphics g)
+        {
+            CURSORINFO vCurosrInfo;
+            vCurosrInfo.cbSize = Marshal.SizeOf(typeof(CURSORINFO));
+            GetCursorInfo(out vCurosrInfo);
+            if ((vCurosrInfo.flags & CURSOR_SHOWING) != CURSOR_SHOWING) return;
+            Cursor vCursor = new Cursor(vCurosrInfo.hCursor);
+            Rectangle vRectangle = new Rectangle(new Point(vCurosrInfo.ptScreenPos.X - vCursor.HotSpot.X, vCurosrInfo.ptScreenPos.Y - vCursor.HotSpot.Y), vCursor.Size);
+
+            vCursor.Draw(g, vRectangle);
         }
     }
 }

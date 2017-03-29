@@ -160,5 +160,52 @@ namespace Y.Utils.FileUtils
             }
             return result;
         }
+        public static long Size(string fileName)
+        {
+            FileInfo fi = new FileInfo(fileName);
+            return fi.Length;
+        }
+
+        public static string SizeFormat(string fileName)
+        {
+            return SizeFormat(Size(fileName));
+        }
+        public static string SizeFormat(long size)
+        {
+            string rs = "";
+            if (size > 1024 * 1024 * 1024)
+            {
+                rs = Math.Round((double)size / 1024 / 1024 / 1024, 2) + " GB";
+            }
+            else if (size > 1024 * 1024)
+            {
+                rs = Math.Round((double)size / 1024 / 1024, 2) + " MB";
+            }
+            else if (size > 1024)
+            {
+                rs = Math.Round((double)size / 1024, 2) + " KB";
+            }
+            else
+            {
+                rs = size + " B";
+            }
+            return rs;
+        }
+        public static string SizeConvert(string fileName, string unit)
+        {
+            return SizeConvert(Size(fileName), unit);
+        }
+        public static string SizeConvert(long size, string unit)
+        {
+            double rs = 0;
+            switch (unit)
+            {
+                case "B": rs = (double)size; break;
+                case "KB": rs = (double)size / 1024; break;
+                case "MB": rs = (double)size / 1024 / 1024; break;
+                case "GB": rs = (double)size / 1024 / 1024 / 1024; break;
+            }
+            return Math.Round(rs, 2).ToString();
+        }
     }
 }

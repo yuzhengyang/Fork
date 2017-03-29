@@ -23,9 +23,9 @@ namespace Y.Utils.LogUtils
         const string LogFormat = "{0}  {1}  {2}";
         const string TimeFormat = "HH:mm:ss.fff";
 
-        public static bool IsWriteFile = true;
-
-        private static object LogFileLock = new object();
+        public static bool IsWriteFile = true;//是否写日志文件
+        private static object LogFileLock = new object();//写日志文件锁
+        private static LogLevel LogLevel = LogLevel.All;//日志输出等级
 
         #region Console 开启/关闭 API
         [DllImport("kernel32.dll")]
@@ -90,7 +90,8 @@ namespace Y.Utils.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void v<T>(T msg)
         {
-            Write(LogType.v, msg.ToString());
+            if ((LogLevel & LogLevel.Verbose) == LogLevel.Verbose)
+                Write(LogType.v, msg.ToString());
         }
         /// <summary>
         /// 输出 Debug (调试信息)
@@ -99,7 +100,8 @@ namespace Y.Utils.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void d<T>(T msg)
         {
-            Write(LogType.d, msg.ToString());
+            if ((LogLevel & LogLevel.Debug) == LogLevel.Debug)
+                Write(LogType.d, msg.ToString());
         }
         /// <summary>
         /// 输出 Information (重要信息)
@@ -108,7 +110,8 @@ namespace Y.Utils.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void i<T>(T msg)
         {
-            Write(LogType.i, msg.ToString());
+            if ((LogLevel & LogLevel.Information) == LogLevel.Information)
+                Write(LogType.i, msg.ToString());
         }
         /// <summary>
         /// 输出 Warning (警告信息)
@@ -117,7 +120,8 @@ namespace Y.Utils.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void w<T>(T msg)
         {
-            Write(LogType.w, msg.ToString());
+            if ((LogLevel & LogLevel.Warning) == LogLevel.Warning)
+                Write(LogType.w, msg.ToString());
         }
         /// <summary>
         /// 输出 Error (错误信息)
@@ -126,7 +130,8 @@ namespace Y.Utils.LogUtils
         /// <param name="tag">可选：标记</param>
         public static void e<T>(T msg)
         {
-            Write(LogType.e, msg.ToString());
+            if ((LogLevel & LogLevel.Error) == LogLevel.Error)
+                Write(LogType.e, msg.ToString());
         }
         #endregion
     }

@@ -44,6 +44,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="AppUtils\UniqueTool.cs" />
     <Compile Include="AttributeUtils\AttributeTool.cs" />
     <Compile Include="AttributeUtils\CustomAttributeHelper.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="EncryptUtils\DesTool.cs" />
     <Compile Include="EnumUtils\FlagsEnumTool.cs" />
     <Compile Include="HookUtils\UserActivityHook.cs" />
+    <Compile Include="HttpUtils\HttpTool.cs" />
     <Compile Include="ImageUtils\AffineTool.cs" />
     <Compile Include="ImageUtils\ThunbnailTool.cs" />
     <Compile Include="LogUtils\Log.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="ComputerUtils\IPHelper.cs" />
     <Compile Include="FileUtils\FileCodeHelper.cs" />
+    <Compile Include="LogUtils\LogLevel.cs" />
     <Compile Include="LogUtils\LogType.cs" />
     <Compile Include="NetworkUtils\FTPHelper.cs" />
     <Compile Include="NetworkUtils\HttpHelper.cs" />
