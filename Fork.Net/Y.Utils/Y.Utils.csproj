@@ -108,6 +108,7 @@
     <Compile Include="DataUtils\DateTimeUtils\UnixTimeTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ScreenCapture.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ShortcutTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\TaskSchedulerTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
