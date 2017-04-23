@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\AttributeTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\CustomAttributeHelper.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\ControlAttribute.cs" />
