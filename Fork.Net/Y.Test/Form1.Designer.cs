@@ -39,12 +39,13 @@
             // 
             // embedPanel1
             // 
-            this.embedPanel1.AppFilename = "D:\\Soft\\LogReader\\logreader.exe";
+            this.embedPanel1.AppFilename = "D:\\Soft\\DisplayX.1034260498.exe";
             this.embedPanel1.AppProcess = null;
             this.embedPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.embedPanel1.Location = new System.Drawing.Point(205, 15);
+            this.embedPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.embedPanel1.Location = new System.Drawing.Point(314, 0);
             this.embedPanel1.Name = "embedPanel1";
-            this.embedPanel1.Size = new System.Drawing.Size(222, 157);
+            this.embedPanel1.Size = new System.Drawing.Size(466, 413);
             this.embedPanel1.TabIndex = 2;
             // 
             // flexiblePanel1
@@ -92,7 +93,7 @@
             this.Controls.Add(this.embedPanel1);
             this.Controls.Add(this.flexiblePanel1);
             this.Name = "Form1";
-            this.Text = "D:\\Soft\\LogReader\\logreader.exe";
+            this.Text = "Test";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.flexiblePanel1.ResumeLayout(false);
             this.flexiblePanel1.PerformLayout();

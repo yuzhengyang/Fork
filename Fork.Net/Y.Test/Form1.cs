@@ -12,8 +12,8 @@ namespace Y.Test
         }
         void Application_Idle(object sender, EventArgs e)
         {
-            if (embedPanel1.IsStarted)
-                MessageBox.Show(string.Format("{0}", embedPanel1.AppProcess.MainWindowHandle));
+            //if (embedPanel1.IsStarted)
+            //    MessageBox.Show(string.Format("{0}", embedPanel1.AppProcess.MainWindowHandle));
         }
         private void Form1_Load(object sender, EventArgs e)
         {
