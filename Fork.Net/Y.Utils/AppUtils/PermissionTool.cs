@@ -1,4 +1,8 @@
-﻿using System.Security.Principal;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System.Security.Principal;
 
 namespace Y.Utils.AppUtils
 {

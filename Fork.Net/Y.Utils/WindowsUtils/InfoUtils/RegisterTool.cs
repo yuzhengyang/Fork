@@ -1,4 +1,8 @@
-﻿using Microsoft.Win32;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using Microsoft.Win32;
 using System;
 
 namespace Y.Utils.WindowsUtils.InfoUtils

@@ -1,4 +1,8 @@
-﻿using Y.Utils.IOUtils.PathUtils;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using Y.Utils.IOUtils.PathUtils;
 
 namespace Y.Utils.WindowsUtils.InfoUtils
 {

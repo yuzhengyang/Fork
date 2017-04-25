@@ -1,4 +1,8 @@
-﻿using System;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System;
 using Y.Utils.IOUtils.LogUtils;
 
 namespace Y.Utils.ReflectionUtils.ReflectionCoreUtils

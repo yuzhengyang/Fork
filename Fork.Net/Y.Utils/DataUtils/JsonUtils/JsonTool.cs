@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using Newtonsoft.Json;
 using System;
 using Y.Utils.IOUtils.TxtUtils;
 

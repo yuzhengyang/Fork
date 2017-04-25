@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System.Collections;
 using System.Text.RegularExpressions;
 
 namespace Y.Utils.IOUtils.ImageUtils

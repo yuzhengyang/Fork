@@ -1,4 +1,8 @@
-﻿using System.Drawing;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Y.Utils.WindowsUtils.InfoUtils

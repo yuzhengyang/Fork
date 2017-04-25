@@ -1,4 +1,8 @@
-﻿using System;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;

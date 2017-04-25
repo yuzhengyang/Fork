@@ -1,4 +1,8 @@
-﻿using System;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System;
 
 namespace Y.Utils.DataUtils.EnumUtils
 {

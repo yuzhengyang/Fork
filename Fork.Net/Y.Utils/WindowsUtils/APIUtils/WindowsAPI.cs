@@ -1,4 +1,8 @@
-﻿using System;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;

@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Y.Utils.DataUtils.Collections

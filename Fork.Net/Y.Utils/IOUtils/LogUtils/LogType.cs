@@ -1,4 +1,8 @@
-﻿namespace Y.Utils.IOUtils.LogUtils
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+namespace Y.Utils.IOUtils.LogUtils
 {
     public enum LogType
     {
