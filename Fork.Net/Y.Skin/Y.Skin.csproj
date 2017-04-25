@@ -43,6 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YoPanel\EmbedArticlePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="YoPanel\EmbedArticlePanel.Designer.cs">
+      <DependentUpon>EmbedArticlePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YoPanel\EmbedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="YoPanel\EmbedPanel.Designer.cs">
+      <DependentUpon>EmbedPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="YoPanel\FlexiblePanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -51,7 +63,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="YoCtrl\" />
     <Folder Include="YoForm\IrregularForm\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Y.Utils\Y.Utils.csproj">
+      <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>
+      <Name>Y.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="YoPanel\EmbedPanel.resx">
+      <DependentUpon>EmbedPanel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

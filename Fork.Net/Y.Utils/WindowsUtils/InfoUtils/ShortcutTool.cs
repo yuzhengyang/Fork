@@ -2,6 +2,7 @@
 //      https://github.com/yuzhengyang
 //      author:yuzhengyang
 //############################################################
+using System.IO;
 using Y.Utils.IOUtils.PathUtils;
 
 namespace Y.Utils.WindowsUtils.InfoUtils
