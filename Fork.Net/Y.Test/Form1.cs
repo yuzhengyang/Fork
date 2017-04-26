@@ -21,5 +21,10 @@ namespace Y.Test
             //embedPanel1.AppFilename = @"D:\Temp\n.exe";
             embedPanel1.Start();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            embedPanel1.ReEmbed();
+        }
     }
 }

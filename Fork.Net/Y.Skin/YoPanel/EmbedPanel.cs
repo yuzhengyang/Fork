@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
@@ -23,7 +17,6 @@ namespace Y.Skin.YoPanel
             appIdleAction = new Action<object, EventArgs>(Application_Idle);
             appIdleEvent = new EventHandler(appIdleAction);
         }
-
         public EmbedPanel(IContainer container)
         {
             container.Add(this);
@@ -31,46 +24,7 @@ namespace Y.Skin.YoPanel
             appIdleAction = new Action<object, EventArgs>(Application_Idle);
             appIdleEvent = new EventHandler(appIdleAction);
         }
-        /// <summary>
-        /// 将属性<code>AppFilename</code>指向的应用程序打开并嵌入此容器
-        /// </summary>
-        public void Start()
-        {
-            if (m_AppProcess != null)
-            {
-                Stop();
-            }
-            try
-            {
-                ProcessStartInfo info = new ProcessStartInfo(this.m_AppFilename);
-                info.UseShellExecute = true;
-                info.WindowStyle = ProcessWindowStyle.Minimized;
-                //info.WindowStyle = ProcessWindowStyle.Hidden;
-                m_AppProcess = Process.Start(info);
-                // Wait for process to be created and enter idle condition
-                m_AppProcess.WaitForInputIdle();
-                //todo:下面这两句会引发 NullReferenceException 异常，不知道怎么回事                
-                //m_AppProcess.Exited += new EventHandler(m_AppProcess_Exited);
-                //m_AppProcess.EnableRaisingEvents = true;
-                Application.Idle += appIdleEvent;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, string.Format("{1}{0}{2}{0}{3}"
-                    , Environment.NewLine
-                    , "*" + ex.ToString()
-                    , "*StackTrace:" + ex.StackTrace
-                    , "*Source:" + ex.Source
-                    ), "内嵌程序加载失败");
-                if (m_AppProcess != null)
-                {
-                    if (!m_AppProcess.HasExited)
-                        m_AppProcess.Kill();
-                    m_AppProcess = null;
-                }
-            }
 
-        }
         /// <summary>
         /// 确保应用程序嵌入此容器
         /// </summary>
@@ -78,21 +32,15 @@ namespace Y.Skin.YoPanel
         /// <param name="e"></param>
         void Application_Idle(object sender, EventArgs e)
         {
-            if (this.m_AppProcess == null || this.m_AppProcess.HasExited)
+            if (m_AppProcess == null || m_AppProcess.HasExited)
             {
-                this.m_AppProcess = null;
+                m_AppProcess = null;
                 Application.Idle -= appIdleEvent;
                 return;
             }
             if (m_AppProcess.MainWindowHandle == IntPtr.Zero) return;
             Application.Idle -= appIdleEvent;
             EmbedProcess(m_AppProcess, this);
-            //ShowWindow(m_AppProcess.MainWindowHandle, SW_SHOWNORMAL);
-            //var parent = GetParent(m_AppProcess.MainWindowHandle);//你妹，不管用，全是0
-            //if (parent == this.Handle)
-            //{
-            //    Application.Idle -= appIdleEvent;
-            //}
         }
         /// <summary>
         /// 应用程序结束运行时要清除这里的标识
@@ -103,50 +51,10 @@ namespace Y.Skin.YoPanel
         {
             m_AppProcess = null;
         }
-        //public void Start(string appFilename)
-        //{
-        //    this.AppFilename = AppFilename;
-        //    Start();
-        //}
-        /// <summary>
-        /// 将属性<code>AppFilename</code>指向的应用程序关闭
-        /// </summary>
-        public void Stop()
-        {
-            if (m_AppProcess != null)// && m_AppProcess.MainWindowHandle != IntPtr.Zero)
-            {
-                try
-                {
-                    if (!m_AppProcess.HasExited)
-                        m_AppProcess.Kill();
-                }
-                catch (Exception)
-                {
-                }
-                m_AppProcess = null;
-            }
-        }
 
-        protected override void OnHandleDestroyed(EventArgs e)
-        {
-            Stop();
-            base.OnHandleDestroyed(e);
-        }
 
-        protected override void OnResize(EventArgs eventargs)
-        {
-            if (m_AppProcess != null)
-            {
-                MoveWindow(m_AppProcess.MainWindowHandle, 0, 0, this.Width, this.Height, true);
-            }
-            base.OnResize(eventargs);
-        }
 
-        protected override void OnSizeChanged(EventArgs e)
-        {
-            this.Invalidate();
-            base.OnSizeChanged(e);
-        }
+
 
         #region 属性
         /// <summary>
@@ -200,75 +108,135 @@ namespace Y.Skin.YoPanel
         /// <summary>
         /// 标识内嵌程序是否已经启动
         /// </summary>
-        public bool IsStarted { get { return (this.m_AppProcess != null); } }
-
+        public bool IsStarted { get { return (m_AppProcess != null); } }
         #endregion 属性
 
-        #region Win32 API
-        [DllImport("user32.dll", EntryPoint = "GetWindowThreadProcessId", SetLastError = true,
-             CharSet = CharSet.Unicode, ExactSpelling = true,
-             CallingConvention = CallingConvention.StdCall)]
-        private static extern long GetWindowThreadProcessId(long hWnd, long lpdwProcessId);
 
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-
-        [DllImport("user32.dll", EntryPoint = "GetWindowLongA", SetLastError = true)]
-        private static extern long GetWindowLong(IntPtr hwnd, int nIndex);
-
-        public static IntPtr SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong)
+        /// <summary>
+        /// 启动嵌入程序并嵌入到控件
+        /// </summary>
+        /// <param name="appFilename"></param>
+        public void Start(string appFilename)
         {
-            if (IntPtr.Size == 4)
-            {
-                return SetWindowLongPtr32(hWnd, nIndex, dwNewLong);
-            }
-            return SetWindowLongPtr64(hWnd, nIndex, dwNewLong);
+            AppFilename = appFilename;
+            Start();
         }
-        [DllImport("user32.dll", EntryPoint = "SetWindowLong", CharSet = CharSet.Auto)]
-        public static extern IntPtr SetWindowLongPtr32(HandleRef hWnd, int nIndex, int dwNewLong);
-        [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr", CharSet = CharSet.Auto)]
-        public static extern IntPtr SetWindowLongPtr64(HandleRef hWnd, int nIndex, int dwNewLong);
+        public void Start()
+        {
+            //停止正在运行的进程
+            if (m_AppProcess != null) Stop();
+            try
+            {
+                ProcessStartInfo info = new ProcessStartInfo(m_AppFilename);
+                info.UseShellExecute = true;
+                info.WindowStyle = ProcessWindowStyle.Minimized;
+                //info.WindowStyle = ProcessWindowStyle.Hidden;
+                m_AppProcess = Process.Start(info);
+                //等待创建进程
+                m_AppProcess.WaitForInputIdle();
+                //todo:下面这两句会引发 NullReferenceException 异常，不知道怎么回事                
+                //m_AppProcess.Exited += new EventHandler(m_AppProcess_Exited);
+                //m_AppProcess.EnableRaisingEvents = true;
+                Application.Idle += appIdleEvent;
+                //EmbedProcess(m_AppProcess, this);
+            }
+            catch (Exception ex)
+            {
+                //嵌入失败杀死进程
+                if (m_AppProcess != null)
+                {
+                    if (!m_AppProcess.HasExited)
+                        m_AppProcess.Kill();
+                    m_AppProcess = null;
+                }
+            }
+        }
+        /// <summary>
+        /// 重新嵌入
+        /// </summary>
+        public void ReEmbed()
+        {
+            EmbedProcess(m_AppProcess, this);
+        }
+        /// <summary>
+        /// 退出嵌入的程序
+        /// </summary>
+        public void Stop()
+        {
+            if (m_AppProcess != null)// && m_AppProcess.MainWindowHandle != IntPtr.Zero)
+            {
+                try
+                {
+                    if (!m_AppProcess.HasExited)
+                        m_AppProcess.Kill();
+                }
+                catch (Exception) { }
+                m_AppProcess = null;
+            }
+        }
 
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern long SetWindowPos(IntPtr hwnd, long hWndInsertAfter, long x, long y, long cx, long cy, long wFlags);
+        /// <summary>
+        /// 将程序嵌入控件
+        /// </summary>
+        /// <param name="app">嵌入程序</param>
+        /// <param name="control">指定控件</param>
+        private void EmbedProcess(Process app, Control control)
+        {
+            //验证程序和控件非空
+            if (app == null || app.MainWindowHandle == IntPtr.Zero || control == null) return;
+            try
+            {
+                //核心代码：嵌入程序
+                SetParent(app.MainWindowHandle, control.Handle);
+            }
+            catch (Exception) { }
+            try
+            {
+                //移除嵌入的窗口的窗口标题栏
+                SetWindowLong(new HandleRef(this, app.MainWindowHandle), GWL_STYLE, WS_VISIBLE);
+            }
+            catch (Exception) { }
+            try
+            {
+                //将嵌入的窗口欧放置到合适位置，填满宽高
+                MoveWindow(app.MainWindowHandle, 0, 0, control.Width, control.Height, true);
+            }
+            catch (Exception) { }
+        }
 
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern bool MoveWindow(IntPtr hwnd, int x, int y, int cx, int cy, bool repaint);
-
-        [DllImport("user32.dll", EntryPoint = "PostMessageA", SetLastError = true)]
-        private static extern bool PostMessage(IntPtr hwnd, uint Msg, uint wParam, uint lParam);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern IntPtr GetParent(IntPtr hwnd);
-        ///// <summary>
-        ///// ShellExecute(IntPtr.Zero, "Open", "C:/Program Files/TTPlayer/TTPlayer.exe", "", "", 1);
-        ///// </summary>
-        ///// <param name="hwnd"></param>
-        ///// <param name="lpOperation"></param>
-        ///// <param name="lpFile"></param>
-        ///// <param name="lpParameters"></param>
-        ///// <param name="lpDirectory"></param>
-        ///// <param name="nShowCmd"></param>
-        ///// <returns></returns>
-        //[DllImport("shell32.dll", EntryPoint = "ShellExecute")]
-        //public static extern int ShellExecute(
-        //IntPtr hwnd,
-        //string lpOperation,
-        //string lpFile,
-        //string lpParameters,
-        //string lpDirectory,
-        //int nShowCmd
-        //);
-        //[DllImport("kernel32.dll")]
-        //public static extern int OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId); 
-        [DllImport("user32.dll", EntryPoint = "ShowWindow", SetLastError = true)]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-
-
+        #region 重写部分方法
+        /// <summary>
+        /// 窗体句柄销毁
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnHandleDestroyed(EventArgs e)
+        {
+            Stop();//将应用关闭
+            base.OnHandleDestroyed(e);
+        }
+        /// <summary>
+        /// 窗体大小修改
+        /// </summary>
+        /// <param name="eventargs"></param>
+        protected override void OnResize(EventArgs eventargs)
+        {
+            if (m_AppProcess != null)
+            {
+                MoveWindow(m_AppProcess.MainWindowHandle, 0, 0, this.Width, this.Height, true);
+            }
+            base.OnResize(eventargs);
+        }
+        /// <summary>
+        /// 窗台属性修改
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            this.Invalidate();
+            base.OnSizeChanged(e);
+        }
+        #endregion
+        #region Win32 API 常量
         private const int SWP_NOOWNERZORDER = 0x200;
         private const int SWP_NOREDRAW = 0x8;
         private const int SWP_NOZORDER = 0x4;
@@ -298,46 +266,50 @@ namespace Y.Skin.YoPanel
         private const int SW_RESTORE = 9; //{同 SW_SHOWNORMAL}
         private const int SW_SHOWDEFAULT = 10; //{同 SW_SHOWNORMAL}
         private const int SW_MAX = 10; //{同 SW_SHOWNORMAL}
+        #endregion
+        #region Win32 API 方法声明
+        [DllImport("user32.dll", EntryPoint = "GetWindowThreadProcessId", SetLastError = true,
+            CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        private static extern long GetWindowThreadProcessId(long hWnd, long lpdwProcessId);
 
-        //const int PROCESS_ALL_ACCESS = 0x1F0FFF;
-        //const int PROCESS_VM_READ = 0x0010;
-        //const int PROCESS_VM_WRITE = 0x0020;     
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLongA", SetLastError = true)]
+        private static extern long GetWindowLong(IntPtr hwnd, int nIndex);
+
+        public static IntPtr SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong)
+        {
+            if (IntPtr.Size == 4)
+            {
+                return SetWindowLongPtr32(hWnd, nIndex, dwNewLong);
+            }
+            return SetWindowLongPtr64(hWnd, nIndex, dwNewLong);
+        }
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowLong", CharSet = CharSet.Auto)]
+        public static extern IntPtr SetWindowLongPtr32(HandleRef hWnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr", CharSet = CharSet.Auto)]
+        public static extern IntPtr SetWindowLongPtr64(HandleRef hWnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern long SetWindowPos(IntPtr hwnd, long hWndInsertAfter, long x, long y, long cx, long cy, long wFlags);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool MoveWindow(IntPtr hwnd, int x, int y, int cx, int cy, bool repaint);
+
+        [DllImport("user32.dll", EntryPoint = "PostMessageA", SetLastError = true)]
+        private static extern bool PostMessage(IntPtr hwnd, uint Msg, uint wParam, uint lParam);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr GetParent(IntPtr hwnd);
+
+        [DllImport("user32.dll", EntryPoint = "ShowWindow", SetLastError = true)]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         #endregion Win32 API
-
-
-        public void EmbedAgain()
-        {
-            EmbedProcess(m_AppProcess, this);
-            MessageBox.Show("完毕");
-        }
-        /// <summary>
-        /// 将指定的程序嵌入指定的控件
-        /// </summary>
-        private void EmbedProcess(Process app, Control control)
-        {
-            // Get the main handle
-            if (app == null || app.MainWindowHandle == IntPtr.Zero || control == null) return;
-            try
-            {
-                // Put it into this form
-                SetParent(app.MainWindowHandle, control.Handle);
-            }
-            catch (Exception)
-            { }
-            try
-            {
-                // Remove border and whatnot               
-                SetWindowLong(new HandleRef(this, app.MainWindowHandle), GWL_STYLE, WS_VISIBLE);
-            }
-            catch (Exception)
-            { }
-            try
-            {
-                // Move the window to overlay it on this window
-                MoveWindow(app.MainWindowHandle, 0, 0, control.Width, control.Height, true);
-            }
-            catch (Exception)
-            { }
-        }
     }
 }

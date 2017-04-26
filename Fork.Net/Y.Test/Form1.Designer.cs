@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.button2 = new System.Windows.Forms.Button();
             this.embedPanel1 = new Y.Skin.YoPanel.EmbedPanel(this.components);
             this.flexiblePanel1 = new Y.Skin.YoPanel.FlexiblePanel();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -37,9 +38,19 @@
             this.flexiblePanel1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(220, 57);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // embedPanel1
             // 
-            this.embedPanel1.AppFilename = "D:\\Soft\\DisplayX.1034260498.exe";
+            this.embedPanel1.AppFilename = "D:\\FTP\\tools\\小工具\\显示器检测.exe";
             this.embedPanel1.AppProcess = null;
             this.embedPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.embedPanel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -90,6 +101,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 413);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.embedPanel1);
             this.Controls.Add(this.flexiblePanel1);
             this.Name = "Form1";
@@ -108,6 +120,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private Skin.YoPanel.EmbedPanel embedPanel1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
