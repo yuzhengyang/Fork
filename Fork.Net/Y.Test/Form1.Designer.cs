@@ -50,7 +50,6 @@
             // 
             // embedPanel1
             // 
-            this.embedPanel1.AppFilename = "D:\\FTP\\tools\\小工具\\显示器检测.exe";
             this.embedPanel1.AppProcess = null;
             this.embedPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.embedPanel1.Dock = System.Windows.Forms.DockStyle.Right;

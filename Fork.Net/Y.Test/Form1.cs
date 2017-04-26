@@ -8,23 +8,25 @@ namespace Y.Test
         public Form1()
         {
             InitializeComponent();
-            Application.Idle += Application_Idle;
-        }
-        void Application_Idle(object sender, EventArgs e)
-        {
-            //if (embedPanel1.IsStarted)
-            //    MessageBox.Show(string.Format("{0}", embedPanel1.AppProcess.MainWindowHandle));
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             //flexiblePanel1.InitMouseAndContolStyle();
-            //embedPanel1.AppFilename = @"D:\Temp\n.exe";
-            embedPanel1.Start();
+            //embedPanel1.Start(@"D:\Soft\DisplayX.1034260498.exe");
+            embedPanel1.Start(@"D:\CoCo\GitHub\Temp\ClipboardMonitor\ClipboardMonitor\ClipboardMonitor\bin\Debug\ClipboardMonitor.exe");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            embedPanel1.ReEmbed();
+            //1 焦点问题，焦点导致内外两个窗口标题栏颜色不一致；
+            //2 有些应用嵌入不了，会直接被单独打开；
+            //3 有些应用嵌入不正常，位置与预计的不同；
+            //4 有些应用嵌入关闭时会在后台继续运行；
+            //5 调试期间 vs 不能强行退出 否则嵌入的程序不会退出；
+
+            //embedPanel1.ReEmbed();
+            //embedPanel1.Start(@"D:\CoCo\GitHub\Temp\ClipboardMonitor\ClipboardMonitor\ClipboardMonitor\bin\Debug\ClipboardMonitor.exe");
+            embedPanel1.Start(@"D:\Soft\DisplayX.1034260498.exe");
         }
     }
 }

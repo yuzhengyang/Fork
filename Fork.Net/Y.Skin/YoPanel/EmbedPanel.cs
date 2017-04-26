@@ -24,130 +24,72 @@ namespace Y.Skin.YoPanel
             appIdleAction = new Action<object, EventArgs>(Application_Idle);
             appIdleEvent = new EventHandler(appIdleAction);
         }
-
         /// <summary>
-        /// 确保应用程序嵌入此容器
+        /// 嵌入程序（保证程序嵌入）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void Application_Idle(object sender, EventArgs e)
         {
-            if (m_AppProcess == null || m_AppProcess.HasExited)
+            if (_AppProcess == null || _AppProcess.HasExited)
             {
-                m_AppProcess = null;
+                _AppProcess = null;
                 Application.Idle -= appIdleEvent;
                 return;
             }
-            if (m_AppProcess.MainWindowHandle == IntPtr.Zero) return;
+            if (_AppProcess.MainWindowHandle == IntPtr.Zero) return;
             Application.Idle -= appIdleEvent;
-            EmbedProcess(m_AppProcess, this);
-        }
-        /// <summary>
-        /// 应用程序结束运行时要清除这里的标识
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void m_AppProcess_Exited(object sender, EventArgs e)
-        {
-            m_AppProcess = null;
+            EmbedProcess(_AppProcess, this);
         }
 
-
-
-
-
-        #region 属性
-        /// <summary>
-        /// application process
-        /// </summary>
-        Process m_AppProcess = null;
+        #region 常规属性
+        private string AppFile = "";
+        private Process _AppProcess = null;
         public Process AppProcess
         {
-            get { return this.m_AppProcess; }
-            set { this.m_AppProcess = value; }
+            get { return _AppProcess; }
+            set { _AppProcess = value; }
         }
+        public bool IsStarted { get { return (_AppProcess != null); } }
+        #endregion
+        #region 控件面板属性
+
+        #endregion
 
         /// <summary>
-        /// 要嵌入的程序文件名
-        /// </summary>
-        private string m_AppFilename = "";
-        /// <summary>
-        /// 要嵌入的程序文件名
-        /// </summary>
-        [Category("Data")]
-        [Description("要嵌入的程序文件名")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        //[Editor(typeof(AppFilenameEditor), typeof(UITypeEditor))]
-        public string AppFilename
-        {
-            get
-            {
-                return m_AppFilename;
-            }
-            set
-            {
-                if (value == null || value == m_AppFilename) return;
-                var self = Application.ExecutablePath;
-                if (value.ToLower() == self.ToLower())
-                {
-                    MessageBox.Show("不能自己嵌入自己！", "SmileWei.EmbeddedApp");
-                    return;
-                }
-                if (!value.ToLower().EndsWith(".exe"))
-                {
-                    MessageBox.Show("要嵌入的文件扩展名不是exe！", "SmileWei.EmbeddedApp");
-                }
-                if (!File.Exists(value))
-                {
-                    MessageBox.Show("要嵌入的程序不存在！", "SmileWei.EmbeddedApp");
-                    return;
-                }
-                m_AppFilename = value;
-            }
-        }
-        /// <summary>
-        /// 标识内嵌程序是否已经启动
-        /// </summary>
-        public bool IsStarted { get { return (m_AppProcess != null); } }
-        #endregion 属性
-
-
-        /// <summary>
-        /// 启动嵌入程序并嵌入到控件
+        /// 启动嵌入程序
         /// </summary>
         /// <param name="appFilename"></param>
-        public void Start(string appFilename)
+        public void Start(string appFile)
         {
-            AppFilename = appFilename;
-            Start();
-        }
-        public void Start()
-        {
-            //停止正在运行的进程
-            if (m_AppProcess != null) Stop();
+            if (appFile.ToLower() == Application.ExecutablePath.ToLower()) return;//禁止嵌入自己
+            if (!appFile.ToLower().EndsWith(".exe")) return;//禁止嵌入非exe文件
+            if (!File.Exists(appFile)) return;//禁止嵌入不存在文件
+
+            AppFile = appFile;
+            if (_AppProcess != null) Stop();//停止正在运行的进程
             try
             {
-                ProcessStartInfo info = new ProcessStartInfo(m_AppFilename);
+                ProcessStartInfo info = new ProcessStartInfo(AppFile);
                 info.UseShellExecute = true;
                 info.WindowStyle = ProcessWindowStyle.Minimized;
                 //info.WindowStyle = ProcessWindowStyle.Hidden;
-                m_AppProcess = Process.Start(info);
+                _AppProcess = Process.Start(info);
                 //等待创建进程
-                m_AppProcess.WaitForInputIdle();
+                _AppProcess.WaitForInputIdle();
                 //todo:下面这两句会引发 NullReferenceException 异常，不知道怎么回事                
                 //m_AppProcess.Exited += new EventHandler(m_AppProcess_Exited);
                 //m_AppProcess.EnableRaisingEvents = true;
                 Application.Idle += appIdleEvent;
-                //EmbedProcess(m_AppProcess, this);
             }
             catch (Exception ex)
             {
                 //嵌入失败杀死进程
-                if (m_AppProcess != null)
+                if (_AppProcess != null)
                 {
-                    if (!m_AppProcess.HasExited)
-                        m_AppProcess.Kill();
-                    m_AppProcess = null;
+                    if (!_AppProcess.HasExited)
+                        _AppProcess.Kill();
+                    _AppProcess = null;
                 }
             }
         }
@@ -156,25 +98,24 @@ namespace Y.Skin.YoPanel
         /// </summary>
         public void ReEmbed()
         {
-            EmbedProcess(m_AppProcess, this);
+            EmbedProcess(_AppProcess, this);
         }
         /// <summary>
         /// 退出嵌入的程序
         /// </summary>
         public void Stop()
         {
-            if (m_AppProcess != null)// && m_AppProcess.MainWindowHandle != IntPtr.Zero)
+            if (_AppProcess != null)// && m_AppProcess.MainWindowHandle != IntPtr.Zero)
             {
                 try
                 {
-                    if (!m_AppProcess.HasExited)
-                        m_AppProcess.Kill();
+                    if (!_AppProcess.HasExited)
+                        _AppProcess.Kill();
                 }
                 catch (Exception) { }
-                m_AppProcess = null;
+                _AppProcess = null;
             }
         }
-
         /// <summary>
         /// 将程序嵌入控件
         /// </summary>
@@ -220,9 +161,9 @@ namespace Y.Skin.YoPanel
         /// <param name="eventargs"></param>
         protected override void OnResize(EventArgs eventargs)
         {
-            if (m_AppProcess != null)
+            if (_AppProcess != null)
             {
-                MoveWindow(m_AppProcess.MainWindowHandle, 0, 0, this.Width, this.Height, true);
+                MoveWindow(_AppProcess.MainWindowHandle, 0, 0, this.Width, this.Height, true);
             }
             base.OnResize(eventargs);
         }
