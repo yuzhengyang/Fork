@@ -64,6 +64,7 @@
     <Compile Include="IOUtils\PathUtils\DirTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileCodeTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileTool.cs" />
+    <Compile Include="WindowsUtils\APIUtils\FormStyleAPI.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ClipboardTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\AesTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\DesTool.cs" />
