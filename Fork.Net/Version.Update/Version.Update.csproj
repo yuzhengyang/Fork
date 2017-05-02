@@ -54,6 +54,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\VersionModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -86,10 +87,6 @@
     <ProjectReference Include="..\..\..\..\Project\Fork\Fork.Net\Y.Utils\Y.Utils.csproj">
       <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>
       <Name>Y.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ShopSystem.Model\ShopSystem.Model.csproj">
-      <Project>{c6c61b66-6646-4f69-af3d-f69115945b5a}</Project>
-      <Name>ShopSystem.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

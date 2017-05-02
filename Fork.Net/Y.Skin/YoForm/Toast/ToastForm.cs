@@ -1,20 +1,25 @@
-﻿using System;
+﻿//############################################################
+//      https://github.com/yuzhengyang
+//      author:yuzhengyang
+//############################################################
+using System;
 using System.Windows.Forms;
-
-
-//ToastForm _ToastForm = null;
-//public void Toast(string s = "")
-//{
-//    if (_ToastForm == null || _ToastForm.IsDisposed)
-//        _ToastForm = new ToastForm(this);
-
-//    _ToastForm.Toast(s);
-//}
 
 namespace Y.Skin.YoForm.Toast
 {
     public partial class ToastForm : Form
     {
+        #region How to use?
+        //ToastForm _ToastForm = null;
+        //public void Toast(string s = "")
+        //{
+        //    if (_ToastForm == null || _ToastForm.IsDisposed)
+        //        _ToastForm = new ToastForm(this);
+
+        //    _ToastForm.Toast(s);
+        //}
+        #endregion
+
         Form BaseForm;
         DateTime HideTime = DateTime.Now;
         int Showtime = 5;

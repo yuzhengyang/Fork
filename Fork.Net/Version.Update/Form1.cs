@@ -1,12 +1,13 @@
-﻿using ShopSystem.Model.Sys;
-using System;
+﻿using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Y.Utils.FileUtils;
-using Y.Utils.JsonUtils;
-using Y.Utils.NetworkUtils;
+using Version.Update.Models;
+using Y.Utils.DataUtils.JsonUtils;
+using Y.Utils.IOUtils.FileUtils;
+using Y.Utils.IOUtils.PathUtils;
+using Y.Utils.NetUtils.FTPUtils;
 
 namespace Version.Update
 {
@@ -80,7 +81,7 @@ namespace Version.Update
         {
             if (DirTool.Create(downloadPath))
             {
-                FileCodeHelper fcode = new FileCodeHelper();
+                FileCodeTool fcode = new FileCodeTool();
                 for (int i = 0; i < version.FileList.Count; i++)
                 {
                     string fileName = Path.GetFileName(version.FileList[i].File);
@@ -126,7 +127,7 @@ namespace Version.Update
         {
             if (DirTool.Create(backupPath))
             {
-                FileCodeHelper fcode = new FileCodeHelper();
+                FileCodeTool fcode = new FileCodeTool();
                 for (int i = 0; i < version.FileList.Count; i++)
                 {
                     string fileName = Path.GetFileName(version.FileList[i].File);

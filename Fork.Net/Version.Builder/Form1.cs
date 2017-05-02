@@ -1,13 +1,14 @@
-﻿using ShopSystem.Model.Sys;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Y.Utils.BaseUtils;
-using Y.Utils.FileUtils;
-using Y.Utils.JsonUtils;
-using Y.Utils.TxtUtils;
+using Version.Builder.Models;
+using Y.Utils.DataUtils.Collections;
+using Y.Utils.DataUtils.JsonUtils;
+using Y.Utils.IOUtils.FileUtils;
+using Y.Utils.IOUtils.PathUtils;
+using Y.Utils.IOUtils.TxtUtils;
 
 namespace Version.Builder
 {
@@ -28,7 +29,7 @@ namespace Version.Builder
                 beginTime = DateTime.Now;
                 string path = TbPath.Text;
                 string parentPath = DirTool.Parent(path);
-                FileCodeHelper fcode = new FileCodeHelper();
+                FileCodeTool fcode = new FileCodeTool();
                 if (Directory.Exists(path) && Directory.Exists(parentPath))
                 {
                     List<string> fileList = FileTool.GetAllFile(path);
