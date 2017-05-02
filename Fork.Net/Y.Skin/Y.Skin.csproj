@@ -55,6 +55,12 @@
     <Compile Include="YoForm\Irregular\IrregularFormSkin.Designer.cs">
       <DependentUpon>IrregularFormSkin.cs</DependentUpon>
     </Compile>
+    <Compile Include="YoForm\Toast\ToastForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YoForm\Toast\ToastForm.Designer.cs">
+      <DependentUpon>ToastForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="YoPanel\EmbedArticlePanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="YoForm\Irregular\IrregularFormSkin.resx">
       <DependentUpon>IrregularFormSkin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YoForm\Toast\ToastForm.resx">
+      <DependentUpon>ToastForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="YoPanel\EmbedPanel.resx">
       <DependentUpon>EmbedPanel.cs</DependentUpon>
