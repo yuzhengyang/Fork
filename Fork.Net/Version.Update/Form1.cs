@@ -22,6 +22,11 @@ namespace Version.Update
         string downloadPath = "";
         string backupPath = "";
         VersionModel version;
+
+        string VersionFile = @"D:\FTP\Application\version1.2.txt";
+        string FtpIp = "192.168.3.56";
+        string FtpAccount = "Administrator";
+        string FtpPassword = "yuzhengyang";
         public Form1()
         {
             InitializeComponent();
@@ -56,7 +61,7 @@ namespace Version.Update
         /// <returns></returns>
         bool GetVersion()
         {
-            version = JsonTool.ToObjFromFile<VersionModel>(@"D:\CoCo\Temp\version.txt");
+            version = JsonTool.ToObjFromFile<VersionModel>(VersionFile);
             if (version != null)
             {
                 try
@@ -100,7 +105,7 @@ namespace Version.Update
                             else
                             {
                                 //File.Copy(sourceFile, destFile);
-                                FtpHelper ftp = new FtpHelper("192.168.31.228", "Administrator", "yuzhengyang");
+                                FtpHelper ftp = new FtpHelper(FtpIp, FtpAccount, FtpPassword);
                                 ftp.DownloadFile(sourceFile, destPath);
                                 this.BeginInvoke(new Action(() => { UIDgvFileListUpdate(i, "ColDown", FILE_SUCC); }));
                             }

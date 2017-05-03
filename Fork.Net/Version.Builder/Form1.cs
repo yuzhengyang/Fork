@@ -51,7 +51,7 @@ namespace Version.Builder
                     }
                 }
                 endTime = DateTime.Now;
-                this.Invoke(new Action(() => { LbResult.Text = string.Format("生成完成，用时：{0}秒。", (endTime - beginTime).TotalSeconds); }));
+                this.Invoke(new Action(() => { LbResult.Text = string.Format("生成完成，用时：{0:f2} 毫秒。", (endTime - beginTime).TotalMilliseconds); }));
             });
         }
     }
