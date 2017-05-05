@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Version.Update.Models;
+using Y.Utils.DataUtils.Collections;
 using Y.Utils.DataUtils.JsonUtils;
 using Y.Utils.IOUtils.FileUtils;
 using Y.Utils.IOUtils.PathUtils;
@@ -16,14 +19,14 @@ namespace Version.Update
         const string FILE_SUCC = "√";
         const string FILE_FAIL = "×";
         const string FILE_JUMP = "-";
-        const int WAIT_TIME = 100;
+        const int WAIT_TIME = 50;
         string AppDir = AppDomain.CurrentDomain.BaseDirectory;
         string folder = Guid.NewGuid().ToString();
         string downloadPath = "";
         string backupPath = "";
         VersionModel version;
 
-        string VersionFile = @"D:\FTP\Application\version1.2.txt";
+        string VersionFile = @"D:\FTP\Application\version1.0.txt";
         string FtpIp = "192.168.3.56";
         string FtpAccount = "Administrator";
         string FtpPassword = "yuzhengyang";
@@ -34,8 +37,8 @@ namespace Version.Update
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            downloadPath = AppDir + @"Download\" + folder;
-            backupPath = AppDir + @"Backup\" + folder;
+            downloadPath = AppDir + @"VersionUpdate\Download\" + folder;
+            backupPath = AppDir + @"VersionUpdate\Backup\" + folder;
 
             Task.Factory.StartNew(() =>
             {
@@ -246,6 +249,46 @@ namespace Version.Update
             }
             return false;
         }
+        /// <summary>
+        /// 清理之前版本遗留文件及空文件夹
+        /// </summary>
+        /// <returns></returns>
+        void CleanFile()
+        {
+            #region 删除非当前版本文件
+            List<string> file = FileTool.GetAllFile(AppDir);
+            if (!ListTool.IsNullOrEmpty(file))
+            {
+                foreach (var f in file)
+                {
+                    int c = version.FileList.Where(x => x.File == "\\" + f.Replace(AppDir, "")).Count();
+                    if (c == 0)
+                    {
+                        File.Delete(f);
+                    }
+                }
+                Thread.Sleep(WAIT_TIME);
+            }
+            #endregion
+            #region 删除空文件夹
+            List<string> path = DirTool.GetAllPath(AppDir);
+            if (!ListTool.IsNullOrEmpty(path))
+            {
+                path = path.OrderByDescending(x => x).ToList();
+                foreach (var p in path)
+                {
+                    if (Directory.GetFiles(p).Length == 0 && Directory.GetDirectories(p).Length == 0)
+                    {
+                        if (Directory.Exists(p))
+                        {
+                            Directory.Delete(p);
+                        }
+                    }
+                    Thread.Sleep(WAIT_TIME);
+                }
+            }
+            #endregion
+        }
         #endregion
         #region UI刷新
         /// <summary>
@@ -262,6 +305,7 @@ namespace Version.Update
         void UIDgvFileListUpdate(int row, string cell, string value)
         {
             DgvFileList.Rows[row].Cells[cell].Value = value;
+            PbStatus.Value = (int)((double)(row + 1) / version.FileList.Count * 100);
         }
         #endregion
 
@@ -283,6 +327,11 @@ namespace Version.Update
         private void BtRollback_Click(object sender, EventArgs e)
         {
             Task.Factory.StartNew(() => { RollBackFile(backupPath); });
+        }
+
+        private void BtClean_Click(object sender, EventArgs e)
+        {
+            Task.Factory.StartNew(() => { CleanFile(); });
         }
     }
 }

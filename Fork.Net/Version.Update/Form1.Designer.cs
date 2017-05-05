@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DgvFileList = new System.Windows.Forms.DataGridView();
             this.ColNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +48,8 @@
             this.BtUpdate = new System.Windows.Forms.Button();
             this.BtBackup = new System.Windows.Forms.Button();
             this.BtDownload = new System.Windows.Forms.Button();
+            this.PbStatus = new System.Windows.Forms.ProgressBar();
+            this.BtClean = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFileList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,14 +60,14 @@
             this.DgvFileList.AllowUserToResizeColumns = false;
             this.DgvFileList.AllowUserToResizeRows = false;
             this.DgvFileList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvFileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvFileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.DgvFileList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvFileList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColNum,
@@ -73,16 +76,24 @@
             this.ColBack,
             this.ColUpdate,
             this.ColRoll});
-            this.DgvFileList.Location = new System.Drawing.Point(12, 55);
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvFileList.DefaultCellStyle = dataGridViewCellStyle17;
+            this.DgvFileList.Location = new System.Drawing.Point(12, 48);
             this.DgvFileList.Name = "DgvFileList";
             this.DgvFileList.ReadOnly = true;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvFileList.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvFileList.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.DgvFileList.RowHeadersVisible = false;
             this.DgvFileList.RowTemplate.Height = 23;
             this.DgvFileList.Size = new System.Drawing.Size(699, 424);
@@ -90,8 +101,8 @@
             // 
             // ColNum
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColNum.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColNum.DefaultCellStyle = dataGridViewCellStyle11;
             this.ColNum.FillWeight = 10F;
             this.ColNum.HeaderText = "序号";
             this.ColNum.Name = "ColNum";
@@ -101,8 +112,8 @@
             // 
             // ColFile
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColFile.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColFile.DefaultCellStyle = dataGridViewCellStyle12;
             this.ColFile.FillWeight = 40F;
             this.ColFile.HeaderText = "文件";
             this.ColFile.Name = "ColFile";
@@ -112,8 +123,8 @@
             // 
             // ColDown
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColDown.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColDown.DefaultCellStyle = dataGridViewCellStyle13;
             this.ColDown.FillWeight = 10F;
             this.ColDown.HeaderText = "下载";
             this.ColDown.Name = "ColDown";
@@ -123,8 +134,8 @@
             // 
             // ColBack
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColBack.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColBack.DefaultCellStyle = dataGridViewCellStyle14;
             this.ColBack.FillWeight = 10F;
             this.ColBack.HeaderText = "备份";
             this.ColBack.Name = "ColBack";
@@ -134,8 +145,8 @@
             // 
             // ColUpdate
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColUpdate.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColUpdate.DefaultCellStyle = dataGridViewCellStyle15;
             this.ColUpdate.FillWeight = 10F;
             this.ColUpdate.HeaderText = "更新";
             this.ColUpdate.Name = "ColUpdate";
@@ -145,8 +156,8 @@
             // 
             // ColRoll
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColRoll.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColRoll.DefaultCellStyle = dataGridViewCellStyle16;
             this.ColRoll.FillWeight = 10F;
             this.ColRoll.HeaderText = "还原";
             this.ColRoll.Name = "ColRoll";
@@ -156,7 +167,7 @@
             // 
             // BtRollback
             // 
-            this.BtRollback.Location = new System.Drawing.Point(634, 22);
+            this.BtRollback.Location = new System.Drawing.Point(634, 15);
             this.BtRollback.Name = "BtRollback";
             this.BtRollback.Size = new System.Drawing.Size(75, 23);
             this.BtRollback.TabIndex = 14;
@@ -166,7 +177,7 @@
             // 
             // BtUpdate
             // 
-            this.BtUpdate.Location = new System.Drawing.Point(556, 22);
+            this.BtUpdate.Location = new System.Drawing.Point(556, 15);
             this.BtUpdate.Name = "BtUpdate";
             this.BtUpdate.Size = new System.Drawing.Size(75, 23);
             this.BtUpdate.TabIndex = 13;
@@ -176,7 +187,7 @@
             // 
             // BtBackup
             // 
-            this.BtBackup.Location = new System.Drawing.Point(478, 22);
+            this.BtBackup.Location = new System.Drawing.Point(478, 15);
             this.BtBackup.Name = "BtBackup";
             this.BtBackup.Size = new System.Drawing.Size(75, 23);
             this.BtBackup.TabIndex = 12;
@@ -186,7 +197,7 @@
             // 
             // BtDownload
             // 
-            this.BtDownload.Location = new System.Drawing.Point(401, 22);
+            this.BtDownload.Location = new System.Drawing.Point(401, 15);
             this.BtDownload.Name = "BtDownload";
             this.BtDownload.Size = new System.Drawing.Size(75, 23);
             this.BtDownload.TabIndex = 11;
@@ -194,16 +205,36 @@
             this.BtDownload.UseVisualStyleBackColor = true;
             this.BtDownload.Click += new System.EventHandler(this.BtDownload_Click);
             // 
+            // PbStatus
+            // 
+            this.PbStatus.Location = new System.Drawing.Point(-6, 484);
+            this.PbStatus.Name = "PbStatus";
+            this.PbStatus.Size = new System.Drawing.Size(738, 23);
+            this.PbStatus.TabIndex = 15;
+            // 
+            // BtClean
+            // 
+            this.BtClean.Location = new System.Drawing.Point(264, 15);
+            this.BtClean.Name = "BtClean";
+            this.BtClean.Size = new System.Drawing.Size(75, 23);
+            this.BtClean.TabIndex = 16;
+            this.BtClean.Text = "清理";
+            this.BtClean.UseVisualStyleBackColor = true;
+            this.BtClean.Click += new System.EventHandler(this.BtClean_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(727, 494);
+            this.ClientSize = new System.Drawing.Size(727, 489);
+            this.Controls.Add(this.BtClean);
+            this.Controls.Add(this.PbStatus);
             this.Controls.Add(this.DgvFileList);
             this.Controls.Add(this.BtRollback);
             this.Controls.Add(this.BtUpdate);
             this.Controls.Add(this.BtBackup);
             this.Controls.Add(this.BtDownload);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -225,6 +256,8 @@
         private System.Windows.Forms.Button BtUpdate;
         private System.Windows.Forms.Button BtBackup;
         private System.Windows.Forms.Button BtDownload;
+        private System.Windows.Forms.ProgressBar PbStatus;
+        private System.Windows.Forms.Button BtClean;
     }
 }
 
