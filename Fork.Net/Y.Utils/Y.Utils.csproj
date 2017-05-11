@@ -111,6 +111,7 @@
     <Compile Include="WindowsUtils\InfoUtils\ScreenCapture.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ShortcutTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\TaskSchedulerTool.cs" />
+    <Compile Include="WindowsUtils\ProcessUtils\ProcessTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

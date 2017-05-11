@@ -35,29 +35,34 @@ namespace Y.Utils.NetUtils.FTPUtils
         }
         public bool DownloadFile(string ftpFilePath, string saveDir)
         {
-            string filename = ftpFilePath.Substring(ftpFilePath.LastIndexOf("\\") + 1);
-            string tmpname = Guid.NewGuid().ToString();
-            string uri = Path.Combine(ftpURI, ftpFilePath);
-            if (!Directory.Exists(saveDir)) Directory.CreateDirectory(saveDir);
-            FtpWebRequest ftp = GetRequest(uri);
-            ftp.Method = WebRequestMethods.Ftp.DownloadFile;
-            using (FtpWebResponse response = (FtpWebResponse)ftp.GetResponse())
+            try
             {
-                using (Stream responseStream = response.GetResponseStream())
+                string filename = ftpFilePath.Substring(ftpFilePath.LastIndexOf("\\") + 1);
+                string tmpname = Guid.NewGuid().ToString();
+                string uri = Path.Combine(ftpURI, ftpFilePath);
+                if (!Directory.Exists(saveDir)) Directory.CreateDirectory(saveDir);
+                FtpWebRequest ftp = GetRequest(uri);
+                ftp.Method = WebRequestMethods.Ftp.DownloadFile;
+                using (FtpWebResponse response = (FtpWebResponse)ftp.GetResponse())
                 {
-                    using (FileStream fs = new FileStream(Path.Combine(saveDir, filename), FileMode.CreateNew))
+                    using (Stream responseStream = response.GetResponseStream())
                     {
-                        byte[] buffer = new byte[2048];
-                        int read = 0;
-                        do
+                        using (FileStream fs = new FileStream(Path.Combine(saveDir, filename), FileMode.CreateNew))
                         {
-                            read = responseStream.Read(buffer, 0, buffer.Length);
-                            fs.Write(buffer, 0, read);
-                        } while (!(read == 0));
-                        fs.Flush();
+                            byte[] buffer = new byte[2048];
+                            int read = 0;
+                            do
+                            {
+                                read = responseStream.Read(buffer, 0, buffer.Length);
+                                fs.Write(buffer, 0, read);
+                            } while (!(read == 0));
+                            fs.Flush();
+                        }
                     }
                 }
+                return true;
             }
+            catch { }
             return false;
         }
     }

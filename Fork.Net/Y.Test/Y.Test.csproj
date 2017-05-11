@@ -60,6 +60,12 @@
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TestInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TestInputForm.Designer.cs">
+      <DependentUpon>TestInputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TestWebForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </Compile>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TestInputForm.resx">
+      <DependentUpon>TestInputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TestWebForm.resx">
       <DependentUpon>TestWebForm.cs</DependentUpon>
