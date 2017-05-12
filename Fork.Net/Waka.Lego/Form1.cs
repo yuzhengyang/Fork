@@ -89,5 +89,10 @@ namespace Waka.Lego
             string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             ShowMsg.Text = date;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
