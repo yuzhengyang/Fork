@@ -35,9 +35,7 @@ namespace Y.Utils.ReflectionUtils.ReflectionCoreUtils
                 }
             }
             catch (Exception e)
-            {
-                Log.e(e.Message);
-            }
+            { }
             return null;
         }
 

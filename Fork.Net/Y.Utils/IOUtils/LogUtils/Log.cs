@@ -23,9 +23,10 @@ namespace Y.Utils.IOUtils.LogUtils
         const string LogFormat = "{0}  {1}  {2}";
         const string TimeFormat = "HH:mm:ss.fff";
 
-        public static bool IsWriteFile = true;//是否写日志文件
-        private static object LogFileLock = new object();//写日志文件锁
-        private static LogLevel LogLevel = LogLevel.All;//日志输出等级
+        private object LogFileLock = new object();//写日志文件锁
+
+        public bool IsWriteFile = true;//是否写日志文件
+        public LogLevel LogLevel = LogLevel.All;//日志输出等级
 
         #region Console 开启/关闭 API
         [DllImport("kernel32.dll")]
@@ -58,14 +59,14 @@ namespace Y.Utils.IOUtils.LogUtils
         /// <param name="type">类型</param>
         /// <param name="tag">标记</param>
         /// <param name="message">消息</param>
-        private static void Write(LogType type, string message)
+        private void Write(LogType type, string message)
         {
             Console.ForegroundColor = GetColor(type);
             Console.WriteLine(LogFormat, DateTime.Now.ToString(TimeFormat), type.ToString(), message);
             if (IsWriteFile) WriteFile(type, message);
         }
 
-        private static void WriteFile(LogType type, string message)
+        private void WriteFile(LogType type, string message)
         {
             if (IsWriteFile)
             {
@@ -88,7 +89,7 @@ namespace Y.Utils.IOUtils.LogUtils
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="tag">可选：标记</param>
-        public static void v<T>(T msg)
+        public void v<T>(T msg)
         {
             if ((LogLevel & LogLevel.Verbose) == LogLevel.Verbose)
                 Write(LogType.v, msg.ToString());
@@ -98,7 +99,7 @@ namespace Y.Utils.IOUtils.LogUtils
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="tag">可选：标记</param>
-        public static void d<T>(T msg)
+        public void d<T>(T msg)
         {
             if ((LogLevel & LogLevel.Debug) == LogLevel.Debug)
                 Write(LogType.d, msg.ToString());
@@ -108,7 +109,7 @@ namespace Y.Utils.IOUtils.LogUtils
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="tag">可选：标记</param>
-        public static void i<T>(T msg)
+        public void i<T>(T msg)
         {
             if ((LogLevel & LogLevel.Information) == LogLevel.Information)
                 Write(LogType.i, msg.ToString());
@@ -118,7 +119,7 @@ namespace Y.Utils.IOUtils.LogUtils
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="tag">可选：标记</param>
-        public static void w<T>(T msg)
+        public void w<T>(T msg)
         {
             if ((LogLevel & LogLevel.Warning) == LogLevel.Warning)
                 Write(LogType.w, msg.ToString());
@@ -128,7 +129,7 @@ namespace Y.Utils.IOUtils.LogUtils
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="tag">可选：标记</param>
-        public static void e<T>(T msg)
+        public void e<T>(T msg)
         {
             if ((LogLevel & LogLevel.Error) == LogLevel.Error)
                 Write(LogType.e, msg.ToString());

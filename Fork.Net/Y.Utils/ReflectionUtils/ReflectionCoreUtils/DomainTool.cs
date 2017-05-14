@@ -24,9 +24,7 @@ namespace Y.Utils.ReflectionUtils.ReflectionCoreUtils
                 return appDomain;
             }
             catch (Exception e)
-            {
-                Log.e(e.Message);
-            }
+            { }
             return null;
         }
         public static T CreateInstance<T>(AppDomain domain)

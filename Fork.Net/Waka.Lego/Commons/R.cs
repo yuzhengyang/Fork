@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using Y.Utils.ComputerUtils;
+using Y.Utils.AppUtils;
+using Y.Utils.IOUtils.LogUtils;
 
 namespace Waka.Lego.Commons
 {
@@ -15,6 +16,7 @@ namespace Waka.Lego.Commons
         public static string MarksFile;//应用记录文件文件名
         public static bool Release = false;
         public static string Name = Environment.MachineName;
-        public static bool IsAdministrator = ComputerPermissionTool.IsAdministrator();
+        public static bool IsAdministrator = PermissionTool.IsAdministrator();
+        public static Log Log = new Log();
     }
 }
