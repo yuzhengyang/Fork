@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Waka.Lego.StringApp")]
+[assembly: AssemblyTitle("Waka.Lego.Icon")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Waka.Lego.StringApp")]
+[assembly: AssemblyProduct("Waka.Lego.Icon")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("4c43710a-0bfd-48e2-aa0e-8f9c4ee60d62")]
+[assembly: Guid("328b6806-cc39-4232-ae51-13aabf9a583b")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

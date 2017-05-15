@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Waka.Lego.StringApp.Properties
+namespace Waka.Lego.Icon.Properties
 {
 
 

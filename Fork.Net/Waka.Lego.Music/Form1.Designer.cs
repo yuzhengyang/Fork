@@ -1,4 +1,4 @@
-﻿namespace Waka.Lego.CommApp
+﻿namespace Waka.Lego.Music
 {
     partial class Form1
     {
@@ -37,18 +37,18 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(457, 211);
-            this.webBrowser1.TabIndex = 1;
-            this.webBrowser1.Url = new System.Uri("http://www.baidu.com", System.UriKind.Absolute);
+            this.webBrowser1.Size = new System.Drawing.Size(284, 261);
+            this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.Url = new System.Uri("http://fm.baidu.com/", System.UriKind.Absolute);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(457, 211);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.webBrowser1);
             this.Name = "Form1";
-            this.Text = "CommApp";
+            this.Text = "Form1";
             this.ResumeLayout(false);
 
         }

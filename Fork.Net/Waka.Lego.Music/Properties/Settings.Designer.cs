@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Waka.Lego.CommApp.Properties
+namespace Waka.Lego.Music.Properties
 {
 
 

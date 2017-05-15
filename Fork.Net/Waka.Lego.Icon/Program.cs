@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Waka.Lego.CommApp
+namespace Waka.Lego.Icon
 {
     static class Program
     {
