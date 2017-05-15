@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Waka.Lego.ImageTool.Properties
+namespace Waka.Lego.Baidu.Properties
 {
 
 

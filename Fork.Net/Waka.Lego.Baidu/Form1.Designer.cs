@@ -1,4 +1,4 @@
-﻿namespace Waka.Lego.FileTool
+﻿namespace Waka.Lego.Baidu
 {
     partial class Form1
     {

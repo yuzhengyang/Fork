@@ -1,4 +1,4 @@
-﻿namespace Waka.Lego.ImageTool
+﻿namespace Waka.Lego.StringApp
 {
     partial class Form1
     {

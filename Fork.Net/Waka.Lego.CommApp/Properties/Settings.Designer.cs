@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Waka.Lego.FileTool.Properties
+namespace Waka.Lego.CommApp.Properties
 {
 
 

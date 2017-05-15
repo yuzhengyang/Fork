@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Waka.Lego.ImageTool
+namespace Waka.Lego.CommApp
 {
     public partial class Form1 : Form
     {

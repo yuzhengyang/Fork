@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Waka.Lego.FileTool
+namespace Waka.Lego.Baidu
 {
     public partial class Form1 : Form
     {

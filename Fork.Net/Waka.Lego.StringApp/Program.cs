@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Waka.Lego.ImageTool
+namespace Waka.Lego.StringApp
 {
     static class Program
     {
