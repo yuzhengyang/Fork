@@ -22,20 +22,20 @@ namespace Y.Utils.ReflectionUtils.ReflectionCoreUtils
         //{
         //    return SearchAssembly(AssemblyPath, args.Name);
         //}
+
         private Assembly SearchAssembly(string path, string name)
         {
-            try
+            List<string> dlls = FileTool.GetFile(path, "*.dll");
+            foreach (var dll in dlls)
             {
-                List<string> dlls = FileTool.GetFile(path, "*.dll");
-                foreach (var dll in dlls)
+                try
                 {
                     Assembly ass = Assembly.LoadFile(dll);
                     if (ass.FullName == name)
                         return ass;
                 }
+                catch { }
             }
-            catch (Exception e)
-            { }
             return null;
         }
 
