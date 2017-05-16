@@ -17,7 +17,7 @@ namespace Y.Test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChineseCalendarForm());
+            Application.Run(new MainForm());
         }
     }
 }

@@ -16,5 +16,16 @@ namespace Waka.Lego.Icon
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ShowInTaskbar = false;
+            Visible = false;
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
