@@ -18,7 +18,7 @@ namespace Waka.Lego.Views
     {
         string[] plugins = new string[] {
                 @"D:\CoCo\GitHub\Fork\Fork.Net\Waka.Lego\bin\Debug\Bin\Plugins\Waka.Lego.Baidu\Waka.Lego.Baidu.dll" ,
-                @"D:\CoCo\GitHub\Fork\Fork.Net\Waka.Lego\bin\Debug\Bin\Plugins\Waka.Lego.Icon\Waka.Lego.Icon.dll",
+                @"D:\CoCo\GitHub\Fork\Fork.Net\Waka.Lego\bin\Debug\Bin\Plugins\Waka.Lego.Icon\Waka.Lego.Icon.exe",
                 @"D:\CoCo\GitHub\Fork\Fork.Net\Waka.Lego\bin\Debug\Bin\Plugins\Waka.Lego.Music\Waka.Lego.Music.dll"};
 
         public MainForm()
