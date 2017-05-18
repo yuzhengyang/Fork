@@ -13,6 +13,12 @@ namespace Y.Utils.DataUtils.EncryptUtils
 {
     public class AesTool
     {
+        /// <summary>
+        /// 加密
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static string Encrypt(string s, string key)
         {
             //byte[] keyArray = UTF8Encoding.UTF8.GetBytes("12345678901234567890123456789012");
@@ -29,6 +35,12 @@ namespace Y.Utils.DataUtils.EncryptUtils
 
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
+        /// <summary>
+        /// 解密
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static string Decrypt(string s, string key)
         {
             byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);

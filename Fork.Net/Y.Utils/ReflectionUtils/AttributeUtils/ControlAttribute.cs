@@ -21,20 +21,20 @@ namespace Y.Utils.ReflectionUtils.AttributeUtils
 
         public static void Band(Form form)
         {
-            string buttonName = "ShowMsg";
-            Type type = form.GetType();
-            FieldInfo fieldShowMsg = type.GetField(buttonName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-            ControlAttribute controlAttribute = (ControlAttribute)fieldShowMsg.GetCustomAttribute(typeof(ControlAttribute));
+            //string buttonName = "ShowMsg";
+            //Type type = form.GetType();
+            //FieldInfo fieldShowMsg = type.GetField(buttonName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            //ControlAttribute controlAttribute = (ControlAttribute)fieldShowMsg.GetCustomAttribute(typeof(ControlAttribute));
 
-            FieldInfo fieldButton1 = type.GetField(controlAttribute.Widget, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-            fieldShowMsg.SetValue(form, fieldButton1.GetValue(form));
+            //FieldInfo fieldButton1 = type.GetField(controlAttribute.Widget, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            //fieldShowMsg.SetValue(form, fieldButton1.GetValue(form));
 
-            MethodInfo method = type.GetMethod(controlAttribute.Click, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+            //MethodInfo method = type.GetMethod(controlAttribute.Click, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
 
-            EventInfo evt = fieldShowMsg.FieldType.GetEvent("Click", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-            evt.AddEventHandler(fieldShowMsg.GetValue(form), Delegate.CreateDelegate(typeof(EventHandler), form, method));
+            //EventInfo evt = fieldShowMsg.FieldType.GetEvent("Click", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+            //evt.AddEventHandler(fieldShowMsg.GetValue(form), Delegate.CreateDelegate(typeof(EventHandler), form, method));
 
-            int a = 0;
+            //int a = 0;
         }
     }
 }

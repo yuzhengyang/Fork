@@ -14,7 +14,13 @@ namespace Y.Utils.DataUtils.EncryptUtils
 {
     public class DesTool
     {
-        #region DESEnCode DES加密     
+        /// <summary>
+        /// DESEnCode DES加密
+        /// </summary>
+        /// <param name="pToEncrypt"></param>
+        /// <param name="sKey"></param>
+        /// <returns></returns>
+
         public static string Encrypt(string pToEncrypt, string sKey)
         {
             // string pToEncrypt1 = HttpContext.Current.Server.UrlEncode(pToEncrypt);     
@@ -40,9 +46,12 @@ namespace Y.Utils.DataUtils.EncryptUtils
             ret.ToString();
             return ret.ToString();
         }
-        #endregion
-
-        #region DESDeCode DES解密     
+        /// <summary>
+        /// DESDeCode DES解密
+        /// </summary>
+        /// <param name="pToDecrypt"></param>
+        /// <param name="sKey"></param>
+        /// <returns></returns>
         public static string Decrypt(string pToDecrypt, string sKey)
         {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
@@ -64,9 +73,6 @@ namespace Y.Utils.DataUtils.EncryptUtils
             StringBuilder ret = new StringBuilder();
 
             return System.Text.Encoding.Default.GetString(ms.ToArray());
-        }
-        #endregion
-
-
+        } 
     }
 }

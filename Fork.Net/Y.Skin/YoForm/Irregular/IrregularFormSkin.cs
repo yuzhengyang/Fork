@@ -19,6 +19,9 @@ namespace Y.Skin.YoForm.Irregular
             InitializeComponent();
             SetStyles();//减少闪烁
             Main = main;//获取控件层对象
+            Text = main.Text;//设置标题栏文本
+            Icon = main.Icon;//设置图标
+            TopMost = main.TopMost;
             FormBorderStyle = FormBorderStyle.None;//设置无边框的窗口样式
             ShowInTaskbar = true;//使控件层显示到任务栏
             BackgroundImage = Main.BackgroundImage;//将控件层背景图应用到皮肤层
