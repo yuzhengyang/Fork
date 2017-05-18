@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
     <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\AttributeTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\CustomAttributeHelper.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="IOUtils\FileUtils\FileCodeTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileTool.cs" />
     <Compile Include="WindowsUtils\APIUtils\FormStyleAPI.cs" />
+    <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ClipboardTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\AesTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\DesTool.cs" />
@@ -74,8 +76,9 @@
     <Compile Include="IOUtils\ImageUtils\AffineTool.cs" />
     <Compile Include="IOUtils\ImageUtils\ThunbnailTool.cs" />
     <Compile Include="IOUtils\LogUtils\Log.cs" />
-    <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
     <Compile Include="AppUtils\PermissionTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\DeviceInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\RegisterTool.cs" />
     <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="IOUtils\LogUtils\LogLevel.cs" />

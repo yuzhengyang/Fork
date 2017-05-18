@@ -1,10 +1,5 @@
-﻿//////////////////////////////////
-//  C# 也可以做Sniffer
-//  SharpSniffer
-////////////////////////////////
-using System;
+﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
@@ -18,6 +13,12 @@ namespace SharpSniffer
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Begin this Work");
+            DoWork();
+            Console.Read();
+        }
+        private static void DoWork()
+        {
             try
             {
                 //创建socket
@@ -30,6 +31,7 @@ namespace SharpSniffer
                     //绑定到本机，端口可以任意
                     var localHostIpAddress = GetHostAdress();
                     Console.WriteLine("trying to bind to local IP: {0}", localHostIpAddress);
+                    socket.Blocking = false;
                     socket.Bind(new IPEndPoint(localHostIpAddress, 0));
                     PrintLine("binded to [" + socket.LocalEndPoint + "]");
 
