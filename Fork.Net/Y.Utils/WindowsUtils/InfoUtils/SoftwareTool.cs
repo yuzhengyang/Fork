@@ -18,31 +18,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
         /// <returns></returns>
         public static bool ExistControl(string name)
         {
-            List<string> list = new List<string>();
-            try
-            {
-                //打开注册列表卸载选项 SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
-                RegistryKey Key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
-                if (Key != null)//如果系统禁止访问则返回null
-                {
-                    foreach (String SubKeyName in Key.GetSubKeyNames())
-                    {
-                        //打开对应的软件名称
-                        RegistryKey SubKey = Key.OpenSubKey(SubKeyName);
-                        if (SubKey != null)
-                        {
-                            String SoftwareName = SubKey.GetValue("DisplayName", "Nothing").ToString();
-                            //如果没有取到，则不存入动态数组
-                            if (SoftwareName != "Nothing")
-                            {
-                                list.Add(SoftwareName.Trim());
-                            }
-                        }
-                    }
-                }
-            }
-            catch { }
-            if (list.Contains(name))
+            if (GetControlList().Contains(name))
                 return true;
             return false;
         }
@@ -58,6 +34,43 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                 }
             }
             return flag;
+        }
+        public static List<string> GetControlList()
+        {
+            List<string> result = new List<string>();
+            result.AddRange(GetControlList(Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")));
+            result.AddRange(GetControlList(Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall")));
+            result.AddRange(GetControlList(Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")));
+            result.AddRange(GetControlList(Registry.CurrentUser.OpenSubKey("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall")));
+            return result;
+        }
+        private static List<string> GetControlList(RegistryKey key)
+        {
+            List<string> result = new List<string>();
+            try
+            {
+                if (key != null)//如果系统禁止访问则返回null
+                {
+                    foreach (string SubKeyName in key.GetSubKeyNames())
+                    {
+                        //打开对应的软件名称
+                        RegistryKey SubKey = key.OpenSubKey(SubKeyName);
+                        if (SubKey != null)
+                        {
+                            String SoftwareName = SubKey.GetValue("DisplayName", "Nothing").ToString();
+                            //如果没有取到，则不存入动态数组
+                            if (SoftwareName != "Nothing")
+                            {
+                                result.Add(SoftwareName.Trim());
+                            }
+                        }
+                        SubKey?.Close();
+                    }
+                }
+                key?.Close();
+            }
+            catch { }
+            return result;
         }
         /// <summary>
         /// 存在进程

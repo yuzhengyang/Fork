@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CapturePackage">
       <HintPath>..\Dlls\CapturePackage\CapturePackage.dll</HintPath>
@@ -53,12 +56,6 @@
   <ItemGroup>
     <Compile Include="Commons\P.cs" />
     <Compile Include="Commons\R.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\SendHelper.cs" />
     <Compile Include="Models\NetProcess.cs" />
     <Compile Include="Models\ProcessPort.cs" />
@@ -89,6 +86,12 @@
     <Compile Include="Views\NetReportForm.Designer.cs">
       <DependentUpon>NetReportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\WelcomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +120,10 @@
     <EmbeddedResource Include="Views\NetReportForm.resx">
       <DependentUpon>NetReportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -138,7 +145,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets')" />

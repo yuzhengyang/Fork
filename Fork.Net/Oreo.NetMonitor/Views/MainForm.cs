@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,9 +26,12 @@ namespace Oreo.NetMonitor.Views
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            FloatForm ff = new FloatForm();
-            ff.Show();
+            //FloatForm ff = new FloatForm();
+            //ff.Show();
+
+            new TestForm().Show();
         }
+
 
     }
 }

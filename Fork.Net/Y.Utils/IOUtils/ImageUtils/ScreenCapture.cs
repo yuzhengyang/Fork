@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Y.Utils.WindowsUtils.InfoUtils
+namespace Y.Utils.IOUtils.ImageUtils
 {
     /// <summary>
     /// 屏幕捕获类

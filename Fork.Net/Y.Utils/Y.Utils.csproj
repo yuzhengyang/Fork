@@ -78,6 +78,7 @@
     <Compile Include="AppUtils\PermissionTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\DeviceInfoTool.cs" />
+    <Compile Include="WindowsUtils\ProcessUtils\NetProcessTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\RegisterTool.cs" />
     <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="IOUtils\LogUtils\LogLevel.cs" />
@@ -110,10 +111,11 @@
     <Compile Include="IOUtils\TxtUtils\IniTool.cs" />
     <Compile Include="IOUtils\TxtUtils\TxtTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\UnixTimeTool.cs" />
-    <Compile Include="WindowsUtils\InfoUtils\ScreenCapture.cs" />
+    <Compile Include="IOUtils\ImageUtils\ScreenCapture.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ShortcutTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\SoftwareTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\TaskSchedulerTool.cs" />
+    <Compile Include="WindowsUtils\ProcessUtils\ProcessInfoTool.cs" />
     <Compile Include="WindowsUtils\ProcessUtils\ProcessTool.cs" />
   </ItemGroup>
   <ItemGroup>
