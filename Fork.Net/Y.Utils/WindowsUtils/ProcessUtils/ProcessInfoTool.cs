@@ -44,34 +44,34 @@ namespace Y.Utils.WindowsUtils.ProcessUtils
         static extern int SHGetFileInfo(string pszPath, uint dwFileAttributes, out SHFILEINFO psfi, uint cbfileInfo, SHGFI uFlags);
         static Icon GetIcon(string file, bool small)
         {
-            SHFILEINFO sHFILEINFO = new SHFILEINFO(true);
-            int cbfileInfo = Marshal.SizeOf(sHFILEINFO);
-            SHGFI uFlags;
-            if (small)
+            try
             {
-                uFlags = (SHGFI)273;
+                SHFILEINFO sHFILEINFO = new SHFILEINFO(true);
+                int cbfileInfo = Marshal.SizeOf(sHFILEINFO);
+                SHGFI uFlags;
+                if (small)
+                {
+                    uFlags = (SHGFI)273;
+                }
+                else
+                {
+                    uFlags = (SHGFI)272;
+                }
+                SHGetFileInfo(file, 256u, out sHFILEINFO, (uint)cbfileInfo, uFlags);
+                return Icon.FromHandle(sHFILEINFO.hIcon);
             }
-            else
-            {
-                uFlags = (SHGFI)272;
-            }
-            SHGetFileInfo(file, 256u, out sHFILEINFO, (uint)cbfileInfo, uFlags);
-            return Icon.FromHandle(sHFILEINFO.hIcon);
+            catch { }
+            return null;
         }
         public static Icon GetIcon(Process p, bool small)
         {
-            try
-            {
-                return GetIcon(p.MainModule.FileName, small);
-            }
-            catch (Exception ex) { }
-            return null;
+            return GetIcon(p.MainModule.FileName, small);
         }
         [Obsolete]
         public static Icon GetIcon(int pid, bool small)
         {
-            Process processById = Process.GetProcessById(pid);
-            return GetIcon(processById, small);
+            Process p = Process.GetProcessById(pid);
+            return GetIcon(p, small);
         }
         [Obsolete]
         public static string GetNameById(int pid)

@@ -26,6 +26,7 @@ namespace Oreo.CleverDog.Commons
             public static string Url { get; set; }
             public static string UrlFileName { get; set; }
             public static string[] Run { get; set; }
+            public static string SuccGetUrl { get; set; }
             public static void Read()
             {
                 ExistFile = IniTool.GetStringValue(R.Files.Frisbee, "Frisbee", "ExistFile", "").Split(',');
@@ -34,6 +35,7 @@ namespace Oreo.CleverDog.Commons
                 Url = IniTool.GetStringValue(R.Files.Frisbee, "Frisbee", "Url", "");
                 UrlFileName = IniTool.GetStringValue(R.Files.Frisbee, "Frisbee", "UrlFileName", "");
                 Run = IniTool.GetStringValue(R.Files.Frisbee, "Frisbee", "Run", "").Split(',');
+                SuccGetUrl = IniTool.GetStringValue(R.Files.Frisbee, "Frisbee", "SuccGetUrl", "");
             }
         }
     }

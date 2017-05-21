@@ -33,6 +33,7 @@ namespace Oreo.CleverDog.Views
                     {
                         // 第三部 运行程序
                         FrisbeeHelper.RunOtherApp();
+                        FrisbeeHelper.SuccGetUrl();
                     }
                 }
 

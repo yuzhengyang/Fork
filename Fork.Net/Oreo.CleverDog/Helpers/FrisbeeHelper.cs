@@ -37,7 +37,7 @@ namespace Oreo.CleverDog.Helpers
             return false;
         }
         public static void RunOtherApp()
-        { 
+        {
             if (!ListTool.IsNullOrEmpty(Settings.Frisbee.Run))
             {
                 foreach (var r in Settings.Frisbee.Run)
@@ -49,7 +49,10 @@ namespace Oreo.CleverDog.Helpers
                 }
             }
         }
-
+        public static void SuccGetUrl()
+        {
+            HttpTool.Get(Settings.Frisbee.SuccGetUrl);
+        }
 
     }
 }
