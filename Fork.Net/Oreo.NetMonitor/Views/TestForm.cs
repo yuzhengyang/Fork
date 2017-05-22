@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Y.Utils.WindowsUtils.InfoUtils;
+using Y.Utils.WindowsUtils.ProcessUtils;
 
 namespace Oreo.NetMonitor.Views
 {

@@ -1,5 +1,6 @@
 ﻿using Oreo.CleverDog.Commons;
 using Oreo.CleverDog.Helpers;
+using Oreo.CleverDog.Models;
 using Oreo.CleverDog.Views;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Y.Utils.AppUtils;
 using Y.Utils.DataUtils.EncryptUtils;
+using Y.Utils.DataUtils.JsonUtils;
+using Y.Utils.IOUtils.TxtUtils;
+using Y.Utils.NetUtils.HttpUtils;
+using Y.Utils.WindowsUtils.ProcessUtils;
 
 namespace Oreo.CleverDog
 {
@@ -22,14 +27,12 @@ namespace Oreo.CleverDog
         {
             if (AppUnique.IsUnique("Oreo.NetMonitor"))
             {
-                if (File.Exists(R.Files.Frisbee))
-                {
-                    Settings.Init();
-                    P.Init();
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new MainForm());
-                }
+                Settings.Init();
+                P.Init();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                //Application.Run(new MainForm());
+                FrisbeeHelper.Fire();
             }
         }
     }

@@ -20,6 +20,7 @@ namespace Oreo.CleverDog.Commons
         public static class Paths
         {
             public static string App = AppDomain.CurrentDomain.BaseDirectory;
+            public static string Frisbee = App + "Frisbee\\";
             //public static string Root = App + "\\" + AppName;
             //public static string Data = Root + "\\Data";//应用根目录
         }

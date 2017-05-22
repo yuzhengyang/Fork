@@ -17,7 +17,7 @@ namespace Oreo.NetMonitor.Commons
         static void InitLog()
         {
             R.Log = new Log();
-            R.Log.IsWriteFile = true;
+            R.Log.SetWriteFile(true, "Oreo.NetMonitor.Log");
             R.Log.LogLevel = LogLevel.All;
             Log.AllocConsole();
         }

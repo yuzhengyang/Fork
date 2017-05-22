@@ -35,8 +35,21 @@ namespace Y.Utils.IOUtils.LogUtils
 
         private object LogFileLock = new object();//写日志文件锁
 
-        public bool IsWriteFile = true;//是否写日志文件
+        private bool IsWriteFile = false;//是否写日志文件
+        public string LogPath = "Log";
         public LogLevel LogLevel = LogLevel.All;//日志输出等级
+
+        public bool SetWriteFile(bool isWrite, string logPath)
+        {
+            if (isWrite && !string.IsNullOrWhiteSpace(logPath))
+            {
+                LogPath = logPath.Trim();
+                IsWriteFile = true;
+                return true;
+            }
+            IsWriteFile = false;
+            return false;
+        }
 
         #region Console 开启/关闭 API
         [DllImport("kernel32.dll")]
@@ -50,7 +63,7 @@ namespace Y.Utils.IOUtils.LogUtils
         /// </summary>
         /// <param name="type">输出类型</param>
         /// <returns></returns>
-        private static ConsoleColor GetColor(LogType type)
+        private ConsoleColor GetColor(LogType type)
         {
             switch (type)
             {
@@ -83,7 +96,7 @@ namespace Y.Utils.IOUtils.LogUtils
                 lock (LogFileLock)
                 {
                     //设置日志目录
-                    string logPath = AppDomain.CurrentDomain.BaseDirectory + "Log";
+                    string logPath = AppDomain.CurrentDomain.BaseDirectory + LogPath;
                     string file = string.Format(@"{0}\{1}.txt", logPath, DateTime.Now.ToString("yyyy-MM-dd"));
                     //创建日志目录
                     DirTool.Create(logPath);

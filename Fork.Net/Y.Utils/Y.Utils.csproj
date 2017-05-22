@@ -56,6 +56,7 @@
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
     <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
+    <Compile Include="NetUtils\NetDiagnoseUtils\NetflowTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\AttributeTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\CustomAttributeHelper.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\ControlAttribute.cs" />

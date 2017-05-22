@@ -12,11 +12,11 @@ namespace Oreo.CleverDog.Commons
         {
             InitLog();
         }
-        
+
         static void InitLog()
         {
             R.Log = new Log();
-            R.Log.IsWriteFile = true;
+            R.Log.SetWriteFile(true, "Oreo.CleverDog.Log");
             R.Log.LogLevel = LogLevel.All;
         }
     }
