@@ -56,7 +56,8 @@
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
     <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
-    <Compile Include="NetUtils\NetDiagnoseUtils\NetflowTool.cs" />
+    <Compile Include="NetUtils\NetInfoUtils\NetcardInfoTool.cs" />
+    <Compile Include="NetUtils\NetInfoUtils\NetflowTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\AttributeTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\CustomAttributeHelper.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\ControlAttribute.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="AppUtils\PermissionTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\DeviceInfoTool.cs" />
-    <Compile Include="WindowsUtils\ProcessUtils\NetProcessTool.cs" />
+    <Compile Include="NetUtils\NetInfoUtils\NetProcessTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\RegisterTool.cs" />
     <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="IOUtils\LogUtils\LogLevel.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="IOUtils\ImageUtils\ExifHelper.cs" />
     <Compile Include="IOUtils\ImageUtils\ImageHelper.cs" />
     <Compile Include="DataUtils\CurrencyUtils\RMB.cs" />
-    <Compile Include="NetUtils\NetDiagnoseUtils\PingTool.cs" />
+    <Compile Include="NetUtils\NetInfoUtils\PingTool.cs" />
     <Compile Include="IOUtils\OfficeUtils\WordTool.cs" />
     <Compile Include="Test\WordToolTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

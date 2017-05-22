@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Y.Utils.DataUtils.Collections;
 using Y.Utils.DataUtils.JsonUtils;
+using Y.Utils.NetUtils.NetInfoUtils;
 using Y.Utils.WindowsUtils.InfoUtils;
 
 namespace Oreo.NetMonitor.Services
@@ -151,7 +152,7 @@ namespace Oreo.NetMonitor.Services
                 {
                     //获取实时数据包
                     #region 设置IP
-                    var networkInfo = ComputerInfoTool.GetNetworkCardInfo();
+                    var networkInfo = NetcardInfoTool.GetNetworkCardInfo();
                     if (!ListTool.IsNullOrEmpty(networkInfo))
                     {
                         IP = networkInfo[0].Item3;

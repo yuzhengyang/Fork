@@ -7,6 +7,6 @@ namespace Oreo.NetMonitor.Services
 {
     public class NetflowService
     {
-
+       
     }
 }

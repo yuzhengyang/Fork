@@ -6,7 +6,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Y.Utils.WindowsUtils.ProcessUtils
+namespace Y.Utils.NetUtils.NetInfoUtils
 {
     public class NetProcessTool
     {

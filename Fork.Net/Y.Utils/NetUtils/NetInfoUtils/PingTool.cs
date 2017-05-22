@@ -9,7 +9,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Y.Utils.NetUtils.NetDiagnoseUtils
+namespace Y.Utils.NetUtils.NetInfoUtils
 {
     public class PingTool
     {
