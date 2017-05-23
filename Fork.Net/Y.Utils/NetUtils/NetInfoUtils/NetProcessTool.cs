@@ -125,7 +125,7 @@ namespace Y.Utils.NetUtils.NetInfoUtils
         [DllImport("iphlpapi.dll", SetLastError = true)]
         static extern uint GetExtendedUdpTable(IntPtr pUdpTable, ref int dwOutBufLen, bool sort, int ipVersion, UDP_TABLE_CLASS tblClass, uint reserved = 0u);
 
-        public static TcpRow[] GetTcpConn()
+        public static TcpRow[] GetTcpConnection()
         {
             TcpRow[] array = null;
             int ipVersion = 2;
@@ -158,7 +158,7 @@ namespace Y.Utils.NetUtils.NetInfoUtils
             }
             return array;
         }
-        public static UdpRow[] GetUdpConn()
+        public static UdpRow[] GetUdpConnection()
         {
             UdpRow[] array = null;
             int ipVersion = 2;

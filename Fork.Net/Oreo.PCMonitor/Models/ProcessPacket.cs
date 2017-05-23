@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+
+namespace Oreo.NetMonitor.Models
+{
+    public class ProcessPacket
+    {
+        public string ProcessName { get; set; }
+        public string ProcessFile { get; set; }
+        public int ProcessID { get; set; }
+        public Icon ProcessIcon { get; set; }
+        public DateTime LastUpdateTime { get; set; }
+        public int UploadData { get; set; }
+        public int DownloadData { get; set; }
+        public long UploadDataCount { get; set; }
+        public long DownloadDataCount { get; set; }
+        public int UploadBag { get; set; }
+        public int DownloadBag { get; set; }
+        public long UploadBagCount { get; set; }
+        public long DownloadBagCount { get; set; }
+        public int ConnectCount { get; set; }
+    }
+}

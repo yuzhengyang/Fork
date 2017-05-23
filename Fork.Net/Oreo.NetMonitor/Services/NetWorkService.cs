@@ -152,7 +152,7 @@ namespace Oreo.NetMonitor.Services
                 {
                     //获取实时数据包
                     #region 设置IP
-                    var networkInfo = NetcardInfoTool.GetNetworkCardInfo();
+                    var networkInfo = NetCardInfoTool.GetNetworkCardInfo();
                     if (!ListTool.IsNullOrEmpty(networkInfo))
                     {
                         IP = networkInfo[0].Item3;

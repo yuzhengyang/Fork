@@ -16,7 +16,7 @@ namespace Y.Utils.AppUtils
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
-        public static bool IsAdministrator2()
+        public static bool IsAdmin()
         {
             const int SECURITY_BUILTIN_DOMAIN_RID = 0x20;
             const int DOMAIN_ALIAS_RID_ADMINS = 0x220;

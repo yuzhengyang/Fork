@@ -56,8 +56,9 @@
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
     <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
-    <Compile Include="NetUtils\NetInfoUtils\NetcardInfoTool.cs" />
-    <Compile Include="NetUtils\NetInfoUtils\NetflowTool.cs" />
+    <Compile Include="NetUtils\NetInfoUtils\NetCardInfoTool.cs" />
+    <Compile Include="NetUtils\NetInfoUtils\NetFlowTool.cs" />
+    <Compile Include="NetUtils\NetInfoUtils\NetPacketTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\AttributeTool.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\CustomAttributeHelper.cs" />
     <Compile Include="ReflectionUtils\AttributeUtils\ControlAttribute.cs" />
