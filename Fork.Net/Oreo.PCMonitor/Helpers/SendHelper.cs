@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Oreo.NetMonitor.Helpers
+namespace Oreo.PCMonitor.Helpers
 {
     public class SendHelper
     {

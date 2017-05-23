@@ -65,7 +65,13 @@ namespace Y.Utils.WindowsUtils.ProcessUtils
         }
         public static Icon GetIcon(Process p, bool small)
         {
-            return GetIcon(p.MainModule.FileName, small);
+            try
+            {
+                string fileName = p.MainModule.FileName;
+                return GetIcon(fileName, small);
+            }
+            catch { }
+            return null;
         }
         [Obsolete]
         public static Icon GetIcon(int pid, bool small)
@@ -81,6 +87,7 @@ namespace Y.Utils.WindowsUtils.ProcessUtils
             {
                 Process processById = Process.GetProcessById(pid);
                 result = processById.ProcessName;
+                processById.Close();
             }
             catch (Exception ex) { }
             return result.Trim();

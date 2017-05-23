@@ -1,4 +1,4 @@
-﻿namespace Oreo.NetMonitor.Views
+﻿namespace Oreo.PCMonitor.Views
 {
     partial class WelcomeForm
     {
@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // WelcomeForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "WelcomeForm";
             this.Text = "WelcomeForm";
+            this.Load += new System.EventHandler(this.WelcomeForm_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

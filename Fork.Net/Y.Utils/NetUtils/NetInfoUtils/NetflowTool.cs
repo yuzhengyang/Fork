@@ -84,6 +84,7 @@ namespace Y.Utils.NetUtils.NetInfoUtils
                 {
                     while (DataMonitorSwitch)
                     {
+                        DataMonitorEvent?.Invoke(this);
                         try
                         {
                             _UploadDataCount += _UploadData;
@@ -100,7 +101,6 @@ namespace Y.Utils.NetUtils.NetInfoUtils
                             }
                         }
                         catch { }
-                        DataMonitorEvent?.Invoke(this);
                         Thread.Sleep(DataCounterInterval);
                     }
                 });

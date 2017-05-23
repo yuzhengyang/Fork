@@ -4,13 +4,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace Oreo.NetMonitor.Models
+namespace Oreo.PCMonitor.Models
 {
-    public class ProcessPacket
+    public class NetProcessInfo
     {
         public string ProcessName { get; set; }
-        public string ProcessFile { get; set; }
-        public int ProcessID { get; set; }
         public Icon ProcessIcon { get; set; }
         public DateTime LastUpdateTime { get; set; }
         public int UploadData { get; set; }

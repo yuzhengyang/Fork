@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Oreo.NetMonitor.Views
+namespace Oreo.PCMonitor.Views
 {
     public partial class WelcomeForm : Form
     {
         public WelcomeForm()
         {
             InitializeComponent();
+        }
+
+        private void WelcomeForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

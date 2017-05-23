@@ -1,16 +1,16 @@
-﻿using Oreo.NetMonitor.Commons;
-using Oreo.NetMonitor.Models;
+﻿using Oreo.PCMonitor.Commons;
+using Oreo.PCMonitor.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
 using Y.Utils.AppUtils;
 using Y.Utils.DataUtils.Collections;
-using Y.Utils.DataUtils.UnitConvertUtils;
 using Y.Utils.NetUtils.NetInfoUtils;
+using Y.Utils.WindowsUtils.ProcessUtils;
 
-namespace Oreo.NetMonitor.Services
+namespace Oreo.PCMonitor.Services
 {
     public class NetFlowService
     {
@@ -19,19 +19,20 @@ namespace Oreo.NetMonitor.Services
         public bool IsNetPacketRun { get { return _IsNetPacketRun; } }
         private bool _IsNetPacketRun = false;
 
-        List<ProcessPacket> ProcessPacketList = new List<ProcessPacket>();
-        NetFlowTool NetFlow = new NetFlowTool();
+        public List<NetProcessInfo> NetProcessInfoList = new List<NetProcessInfo>();
+        public List<NetConnectionInfo> NetConnectionInfoList = new List<NetConnectionInfo>();
+
+        public NetFlowTool NetFlow = new NetFlowTool();
         List<NetPacketTool> NetPacketList = new List<NetPacketTool>();
 
         NetProcessTool.TcpRow[] TcpConnection;
         NetProcessTool.UdpRow[] UdpConnection;
+        Process[] NowProcess;
 
-        private long LostPacketCount { get; set; }
+        public long LostPacketCount { get; set; }
 
         public void Start()
         {
-            GetConnection();
-
             #region 启动系统性能计数器统计
             try
             {
@@ -78,46 +79,189 @@ namespace Oreo.NetMonitor.Services
 
         public void DataMonitorEvent(NetFlowTool n)
         {
-            //GetConnection();
+            NowProcess = Process.GetProcesses();
+            GetConnection();
+            SetNetProcess();
+            CalcNetProcessInfo();
+
             //#region 统计
             //p.Protocol == Protocol.Tcp
             //#endregion
         }
-        private void NewPacketEvent(NetPacketTool pm, Packet p)
+        private void NewPacketEvent(NetPacketTool tool, Packet packet)
         {
             // 给数据包归类，并添加至列表
             bool isGather = false;
-            lock (TcpConnection)
+            #region 整理TCP包
+            if (packet.Protocol == Protocol.Tcp && ListTool.HasElements(TcpConnection) && ListTool.HasElements(NowProcess))
             {
-                if (ListTool.HasElements(TcpConnection))
+                lock (TcpConnection)
                 {
-                    var tr = TcpConnection.First(x => x.LocalIP == p.SourceAddress && x.LocalPort == p.SourcePort);
-                    //if (tr != null)
+                    // tcp 上传
+                    if (TcpConnection.Any(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort))
                     {
-                        var np = ProcessPacketList.First(x => x.ProcessID == tr.ProcessId);
-                        if (np != null)
+                        var tcUpload = TcpConnection.FirstOrDefault(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort);
+                        var process = NowProcess.FirstOrDefault(x => x.Id == tcUpload.ProcessId);
+                        if (process != null)
                         {
-                            np.UploadBag += p.TotalLength;
+                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            if (info != null)
+                            {
+                                isGather = true;
+                                info.UploadBag += packet.TotalLength;
+                            }
+                        }
+                    }
+                    // tcp 下载
+                    if (TcpConnection.Any(x => x.RemoteIP.ToString() == packet.DestinationAddress.ToString() && x.RemotePort == packet.DestinationPort))
+                    {
+                        var tcpDownload = TcpConnection.FirstOrDefault(x => x.RemoteIP.ToString() == packet.DestinationAddress.ToString() && x.RemotePort == packet.DestinationPort);
+                        var process = NowProcess.FirstOrDefault(x => x.Id == tcpDownload.ProcessId);
+                        if (process != null)
+                        {
+                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            if (info != null)
+                            {
+                                isGather = true;
+                                info.DownloadBag += packet.TotalLength;
+                            }
                         }
                     }
                 }
             }
-            lock (UdpConnection)
+            #endregion
+            #region 整理UDP包
+            if (packet.Protocol == Protocol.Udp && ListTool.HasElements(UdpConnection) && ListTool.HasElements(NowProcess))
             {
-                if (ListTool.HasElements(UdpConnection))
+                lock (UdpConnection)
                 {
-                    NetProcessTool.UdpRow ur = UdpConnection.First(x => x.LocalIP == p.SourceAddress && x.LocalPort == p.SourcePort);
-
+                    // udp 上传
+                    if (UdpConnection.Any(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort))
+                    {
+                        var ucUpload = UdpConnection.FirstOrDefault(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort);
+                        var process = NowProcess.FirstOrDefault(x => x.Id == ucUpload.ProcessId);
+                        if (process != null)
+                        {
+                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            if (info != null)
+                            {
+                                isGather = true;
+                                info.UploadBag += packet.TotalLength;
+                            }
+                        }
+                    }
+                    // tcp 下载
+                    if (UdpConnection.Any(x => x.LocalIP.ToString() == packet.DestinationAddress.ToString() && x.LocalPort == packet.DestinationPort))
+                    {
+                        var udpDownload = UdpConnection.FirstOrDefault(x => x.LocalIP.ToString() == packet.DestinationAddress.ToString() && x.LocalPort == packet.DestinationPort);
+                        var process = NowProcess.FirstOrDefault(x => x.Id == udpDownload.ProcessId);
+                        if (process != null)
+                        {
+                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            if (info != null)
+                            {
+                                isGather = true;
+                                info.DownloadBag += packet.TotalLength;
+                            }
+                        }
+                    }
                 }
             }
+            #endregion
             if (!isGather) LostPacketCount++;
         }
 
-        #region 获取当前连接
-        public void GetConnection()
+        #region 获取当前程序的所有连接
+        void GetConnection()
         {
             TcpConnection = NetProcessTool.GetTcpConnection();
             UdpConnection = NetProcessTool.GetUdpConnection();
+        }
+        #endregion
+        #region 设置程序流量及连接数统计列表
+        void SetNetProcess()
+        {
+            // 清空已有连接数
+            if (ListTool.HasElements(NetProcessInfoList))
+                NetProcessInfoList.ForEach(x =>
+                {
+                    x.ConnectCount = 0;
+                });
+
+            // 统计TCP连接数
+            if (ListTool.HasElements(TcpConnection))
+            {
+                foreach (var t in TcpConnection)
+                {
+                    SetNetProcessConnection(t.ProcessId);
+                }
+            }
+            // 统计UDP连接数
+            if (ListTool.HasElements(UdpConnection))
+            {
+                foreach (var u in UdpConnection)
+                {
+                    SetNetProcessConnection(u.ProcessId);
+                }
+            }
+        }
+        void SetNetProcessConnection(int pid)
+        {
+            try
+            {
+                Process p = NowProcess.FirstOrDefault(x => x.Id == pid);
+                if (p != null)
+                {
+                    var ppl = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == p.ProcessName);
+                    if (ppl == null)
+                    {
+                        NetProcessInfoList.Add(
+                            new NetProcessInfo()
+                            {
+                                ProcessIcon = ProcessInfoTool.GetIcon(p, false),
+                                ProcessName = p.ProcessName,
+                                ConnectCount = 1,
+                                LastUpdateTime = DateTime.Now,
+                            });
+                    }
+                    else
+                    {
+                        ppl.ConnectCount++;
+                        ppl.LastUpdateTime = DateTime.Now;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                R.Log.e("对程序列表和网络连接列表整理时发生错误");
+                R.Log.e(e.Message);
+            }
+        }
+        #endregion
+        #region 整理程序流量汇总信息
+        void CalcNetProcessInfo()
+        {
+            if (ListTool.HasElements(NetProcessInfoList))
+            {
+                NetProcessInfoList.ForEach(p =>
+                {
+                    p.UploadDataCount += p.UploadData;
+                    p.DownloadDataCount += p.DownloadData;
+                });
+
+                NetProcessInfoList.ForEach(p =>
+                {
+                    p.LastUpdateTime = DateTime.Now;
+                    p.UploadData = (int)((float)p.UploadBag / (NetProcessInfoList.Sum(x => x.UploadBag) + 0.01) * NetFlow.UploadData);
+                    p.DownloadData = (int)((float)p.DownloadBag / (NetProcessInfoList.Sum(x => x.DownloadBag + 0.01)) * NetFlow.DownloadData);
+
+                    p.UploadBagCount += p.UploadBag;
+                    p.DownloadBagCount += p.DownloadBag;
+
+                    p.UploadBag = 0;
+                    p.DownloadBag = 0;
+                });
+            }
         }
         #endregion
     }

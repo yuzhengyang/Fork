@@ -91,7 +91,10 @@ namespace Y.Utils.NetUtils.NetInfoUtils
                         OnNewPacket(new Packet(packet));
                     }
                 }
-                catch { } // invalid packet; ignore
+                catch (Exception e)
+                {
+                    // invalid packet; ignore
+                }
                 m_Monitor.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, new AsyncCallback(this.OnReceive), null);
             }
             catch

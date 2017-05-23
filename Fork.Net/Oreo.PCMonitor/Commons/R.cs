@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Oreo.PCMonitor.Services;
+using System;
 using Y.Utils.IOUtils.LogUtils;
 
-namespace Oreo.NetMonitor.Commons
+namespace Oreo.PCMonitor.Commons
 {
     public static class R
     {
         public static Log Log { get; set; }
+        public static NetFlowService NFS { get; set; }
+
         public static class Files { }
         public static class Paths
         {
             public static string BasePath = AppDomain.CurrentDomain.BaseDirectory;
-        }
-        public static class Settings
-        {
-            public static double FlowThreshold { get; set; }
-            public static int ThresholdTime { get; set; }
-            public static int MaxProConnect { get; set; }
-            public static int RecProConnect { get; set; }
         }
         public static class Servers
         {

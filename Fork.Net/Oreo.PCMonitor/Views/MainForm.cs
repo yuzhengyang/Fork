@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Oreo.NetMonitor.Views
+namespace Oreo.PCMonitor.Views
 {
     public partial class MainForm : Form
     {
@@ -11,6 +11,7 @@ namespace Oreo.NetMonitor.Views
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            new NetDetailForm().Show();
         }
     }
 }
