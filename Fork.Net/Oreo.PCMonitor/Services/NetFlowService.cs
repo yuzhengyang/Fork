@@ -110,6 +110,7 @@ namespace Oreo.PCMonitor.Services
                             {
                                 isGather = true;
                                 info.DownloadBag += packet.TotalLength;
+                                info.DownloadBagCount += packet.TotalLength;
                             }
                         }
                     }
@@ -125,6 +126,7 @@ namespace Oreo.PCMonitor.Services
                             {
                                 isGather = true;
                                 info.UploadBag += packet.TotalLength;
+                                info.UploadBagCount += packet.TotalLength;
                             }
                         }
                     }
@@ -148,6 +150,7 @@ namespace Oreo.PCMonitor.Services
                             {
                                 isGather = true;
                                 info.DownloadBag += packet.TotalLength;
+                                info.DownloadBagCount += packet.TotalLength;
                                 if (info.ProcessName == "Idle")
                                 {
 
@@ -168,6 +171,7 @@ namespace Oreo.PCMonitor.Services
                             {
                                 isGather = true;
                                 info.UploadBag += packet.TotalLength;
+                                info.UploadBagCount += packet.TotalLength;
                                 if (info.ProcessName == "Idle")
                                 {
 
@@ -178,7 +182,10 @@ namespace Oreo.PCMonitor.Services
                 }
             }
             #endregion
-            if (!isGather) LostPacketCount++;
+            if (!isGather)
+            {
+                LostPacketCount++;
+            }
         }
 
         #region 获取当前程序的所有连接
@@ -259,17 +266,25 @@ namespace Oreo.PCMonitor.Services
                     p.DownloadDataCount += p.DownloadData;
                 });
 
+                int allupbag = NetProcessInfoList.Sum(x => x.UploadBag);
+                int alldownbag = NetProcessInfoList.Sum(x => x.DownloadBag);
+
                 NetProcessInfoList.ForEach(p =>
                 {
-                    p.LastUpdateTime = DateTime.Now;
-                    p.UploadData = (int)((float)p.UploadBag / (NetProcessInfoList.Sum(x => x.UploadBag) + 0.01) * NetFlow.UploadData);
-                    p.DownloadData = (int)((float)p.DownloadBag / (NetProcessInfoList.Sum(x => x.DownloadBag + 0.01)) * NetFlow.DownloadData);
-
-                    p.UploadBagCount += p.UploadBag;
-                    p.DownloadBagCount += p.DownloadBag;
+                    if (allupbag > 0 && NetFlow.UploadData > 0)
+                    {
+                        float uprate = (float)p.UploadBag / allupbag;
+                        p.UploadData = (int)(uprate * NetFlow.UploadData);
+                    }
+                    if (alldownbag > 0 && NetFlow.DownloadData > 0)
+                    {
+                        float downrate = (float)p.DownloadBag / alldownbag;
+                        p.DownloadData = (int)(downrate * NetFlow.DownloadData);
+                    }
 
                     p.UploadBag = 0;
                     p.DownloadBag = 0;
+                    p.LastUpdateTime = DateTime.Now;
                 });
             }
         }

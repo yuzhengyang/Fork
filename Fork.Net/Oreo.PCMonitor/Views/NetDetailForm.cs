@@ -59,8 +59,7 @@ namespace Oreo.PCMonitor.Views
                                 r.Cells["CoUpload"].Value = ByteConvertTool.Fmt(p.UploadData);
                                 r.Cells["CoDownloadCount"].Value = ByteConvertTool.Fmt(p.DownloadDataCount);
                                 r.Cells["CoUploadCount"].Value = ByteConvertTool.Fmt(p.UploadDataCount);
-                                //r.Cells["CoConnectionCount"].Value = p.ConnectCount;
-                                r.Cells["CoConnectionCount"].Value = p.DownloadBagCount;
+                                r.Cells["CoConnectionCount"].Value = p.ConnectCount;
                             }
                         }
                         if (!isUpdate)
@@ -69,7 +68,7 @@ namespace Oreo.PCMonitor.Views
                                 p.ProcessIcon,p.ProcessName,
                                 ByteConvertTool.Fmt(p.DownloadData),ByteConvertTool.Fmt(p.UploadData),
                                 ByteConvertTool.Fmt(p.DownloadDataCount),ByteConvertTool.Fmt(p.UploadDataCount),
-                                p.ConnectCount});
+                               p.DownloadBagCount});
                         }
                     });
                 }
