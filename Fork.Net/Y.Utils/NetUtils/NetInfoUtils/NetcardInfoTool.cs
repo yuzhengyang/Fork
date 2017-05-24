@@ -84,5 +84,31 @@ namespace Y.Utils.NetUtils.NetInfoUtils
             catch (Exception e) { }
             return hosts;
         }
+        /// <summary>
+        /// 获取本机IPv4的IP地址
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetAllIPv4Address()
+        {
+            List<string> hosts = new List<string>();
+            try
+            {
+                var temp = Dns.GetHostAddresses(Dns.GetHostName());
+                if (ListTool.HasElements(temp))
+                {
+                    foreach (var t in temp)
+                    {
+                        if (t.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            hosts.Add(t.ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception e) { }
+            hosts.Add("0.0.0.0");
+            hosts.Add("127.0.0.1");
+            return hosts;
+        }
     }
 }

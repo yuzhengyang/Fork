@@ -28,17 +28,17 @@ namespace Oreo.CleverDog.Helpers
                     if (CanFire(f))//判断执行条件
                     {
                         R.Log.i("准备执行 " + f.FileName + " 的任务");
-
                         KillProcess(f);//结束进程
-                        R.Log.i("结束进程完成");
 
                         if (DownFileAndRun(f))//下载程序并按需运行
                         {
-                            R.Log.i("已下载 并按需运行");
                             RunProcess(f);//启动进程
-                            R.Log.i("运行其他进程");
-                            SuccUrl(f);//发送运行完信息
-                            R.Log.i("发送运行信息至服务器");
+
+                            if (!string.IsNullOrWhiteSpace(f.SuccUrl))
+                            {
+                                string succUrl = HttpTool.Get(f.SuccUrl);
+                                R.Log.i("完成任务通知服务器 结果：" + succUrl);
+                            }
                         }
                         else
                         {
@@ -84,8 +84,13 @@ namespace Oreo.CleverDog.Helpers
                 string downfile = R.Paths.Frisbee + f.FileName;
                 if (HttpTool.Download(f.Url, downfile))
                 {
+                    R.Log.i("已下载文件:" + f.Url);
+
                     if (f.AutoRun && File.Exists(downfile))
+                    {
                         ProcessTool.StartProcess(downfile);
+                        R.Log.i("已自动启动该下载项");
+                    }
                     return true;
                 }
             }
@@ -102,6 +107,11 @@ namespace Oreo.CleverDog.Helpers
                         ProcessTool.KillProcess(r);
                     }
                 }
+                R.Log.i("结束进程完成 共" + f.KillProcess.Count() + "项");
+            }
+            else
+            {
+                R.Log.i("结束进程列表为空");
             }
         }
         public static void RunProcess(Frisbee f)
@@ -115,12 +125,12 @@ namespace Oreo.CleverDog.Helpers
                         ProcessTool.StartProcess(r);
                     }
                 }
+                R.Log.i("进程已启动 共" + f.RunProcess.Count() + "项");
             }
-        }
-        public static void SuccUrl(Frisbee f)
-        {
-            if (string.IsNullOrWhiteSpace(f.SuccUrl))
-                HttpTool.Get(f.SuccUrl);
+            else
+            {
+                R.Log.i("启动进程列表为空");
+            }
         }
     }
 }

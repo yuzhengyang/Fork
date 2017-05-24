@@ -28,6 +28,7 @@ namespace Oreo.PCMonitor.Services
         NetProcessTool.TcpRow[] TcpConnection;
         NetProcessTool.UdpRow[] UdpConnection;
         Process[] NowProcess;
+        List<string> AllIPv4Address = new List<string>();
 
         public long LostPacketCount { get; set; }
 
@@ -47,6 +48,7 @@ namespace Oreo.PCMonitor.Services
             if (PermissionTool.IsAdmin())
             {
                 List<IPAddress> hosts = NetCardInfoTool.GetIPv4Address();
+                AllIPv4Address = NetCardInfoTool.GetAllIPv4Address();
                 foreach (var host in hosts)
                 {
                     try
@@ -90,28 +92,12 @@ namespace Oreo.PCMonitor.Services
         }
         private void NewPacketEvent(NetPacketTool tool, Packet packet)
         {
-            // 给数据包归类，并添加至列表
             bool isGather = false;
             #region 整理TCP包
             if (packet.Protocol == Protocol.Tcp && ListTool.HasElements(TcpConnection) && ListTool.HasElements(NowProcess))
             {
                 lock (TcpConnection)
                 {
-                    // tcp 上传
-                    if (TcpConnection.Any(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort))
-                    {
-                        var tcUpload = TcpConnection.FirstOrDefault(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort);
-                        var process = NowProcess.FirstOrDefault(x => x.Id == tcUpload.ProcessId);
-                        if (process != null)
-                        {
-                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
-                            if (info != null)
-                            {
-                                isGather = true;
-                                info.UploadBag += packet.TotalLength;
-                            }
-                        }
-                    }
                     // tcp 下载
                     if (TcpConnection.Any(x => x.RemoteIP.ToString() == packet.DestinationAddress.ToString() && x.RemotePort == packet.DestinationPort))
                     {
@@ -127,19 +113,11 @@ namespace Oreo.PCMonitor.Services
                             }
                         }
                     }
-                }
-            }
-            #endregion
-            #region 整理UDP包
-            if (packet.Protocol == Protocol.Udp && ListTool.HasElements(UdpConnection) && ListTool.HasElements(NowProcess))
-            {
-                lock (UdpConnection)
-                {
-                    // udp 上传
-                    if (UdpConnection.Any(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort))
+                    // tcp 上传
+                    if (TcpConnection.Any(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort))
                     {
-                        var ucUpload = UdpConnection.FirstOrDefault(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort);
-                        var process = NowProcess.FirstOrDefault(x => x.Id == ucUpload.ProcessId);
+                        var tcUpload = TcpConnection.FirstOrDefault(x => x.LocalIP.ToString() == packet.SourceAddress.ToString() && x.LocalPort == packet.SourcePort);
+                        var process = NowProcess.FirstOrDefault(x => x.Id == tcUpload.ProcessId);
                         if (process != null)
                         {
                             var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
@@ -150,10 +128,18 @@ namespace Oreo.PCMonitor.Services
                             }
                         }
                     }
+                }
+            }
+            #endregion
+            #region 整理UDP包
+            if (packet.Protocol == Protocol.Udp && ListTool.HasElements(UdpConnection) && ListTool.HasElements(NowProcess))
+            {
+                lock (UdpConnection)
+                {
                     // tcp 下载
-                    if (UdpConnection.Any(x => x.LocalIP.ToString() == packet.DestinationAddress.ToString() && x.LocalPort == packet.DestinationPort))
+                    if (UdpConnection.Any(x => x.LocalPort == packet.DestinationPort) && AllIPv4Address.Contains(packet.DestinationAddress.ToString()))
                     {
-                        var udpDownload = UdpConnection.FirstOrDefault(x => x.LocalIP.ToString() == packet.DestinationAddress.ToString() && x.LocalPort == packet.DestinationPort);
+                        var udpDownload = UdpConnection.FirstOrDefault(x => AllIPv4Address.Contains(x.LocalIP.ToString()) && x.LocalPort == packet.DestinationPort);
                         var process = NowProcess.FirstOrDefault(x => x.Id == udpDownload.ProcessId);
                         if (process != null)
                         {
@@ -162,6 +148,30 @@ namespace Oreo.PCMonitor.Services
                             {
                                 isGather = true;
                                 info.DownloadBag += packet.TotalLength;
+                                if (info.ProcessName == "Idle")
+                                {
+
+                                }
+                            }
+                        }
+                    }
+                    // udp 上传
+                    if (UdpConnection.Any(x => x.LocalPort == packet.SourcePort) && AllIPv4Address.Contains(packet.SourceAddress.ToString()))
+                    {
+                        var udpIp = AllIPv4Address.FirstOrDefault(x => x == packet.SourceAddress.ToString());
+                        var ucUpload = UdpConnection.FirstOrDefault(x => AllIPv4Address.Contains(x.LocalIP.ToString()) && x.LocalPort == packet.SourcePort);
+                        var process = NowProcess.FirstOrDefault(x => x.Id == ucUpload.ProcessId);
+                        if (process != null)
+                        {
+                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            if (info != null)
+                            {
+                                isGather = true;
+                                info.UploadBag += packet.TotalLength;
+                                if (info.ProcessName == "Idle")
+                                {
+
+                                }
                             }
                         }
                     }

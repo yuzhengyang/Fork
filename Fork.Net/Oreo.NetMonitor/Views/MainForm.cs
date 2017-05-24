@@ -29,7 +29,7 @@ namespace Oreo.NetMonitor.Views
             //FloatForm ff = new FloatForm();
             //ff.Show();
 
-            new TestForm().Show();
+            //new TestForm().Show();
         }
 
 

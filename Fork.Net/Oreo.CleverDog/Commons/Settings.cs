@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Y.Utils.DataUtils.Collections;
 using Y.Utils.DataUtils.JsonUtils;
 using Y.Utils.IOUtils.TxtUtils;
 using Y.Utils.NetUtils.HttpUtils;
@@ -57,6 +58,17 @@ namespace Oreo.CleverDog.Commons
         public static void ReadFromWeb()
         {
             Frisbee = HttpTool.Get<Frisbee[]>(ServerUrl);
+            if (ListTool.IsNullOrEmpty(Frisbee))
+            {
+                R.Log.e("从服务器读取配置失败 准备第二次尝试");
+                Frisbee = HttpTool.Get<Frisbee[]>(ServerUrl);
+
+                if (ListTool.IsNullOrEmpty(Frisbee))
+                {
+                    R.Log.e("从服务器读取配置失败 准备第三次尝试");
+                    Frisbee = HttpTool.Get<Frisbee[]>(ServerUrl);
+                }
+            }
         }
     }
 }

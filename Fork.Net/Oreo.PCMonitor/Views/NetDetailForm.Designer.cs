@@ -46,6 +46,7 @@
             this.CoConnectionCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgProcessDetail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,11 +164,21 @@
             this.label1.TabIndex = 26;
             this.label1.Text = "label1";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(506, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "label2";
+            // 
             // NetDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 561);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DgProcessDetail);
             this.Controls.Add(this.status);
@@ -192,5 +203,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CoDownloadCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn CoUploadCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn CoConnectionCount;
+        private System.Windows.Forms.Label label2;
     }
 }

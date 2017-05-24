@@ -27,11 +27,11 @@ namespace Oreo.PCMonitor.Views
                 {
                     if (R.NFS.IsNetFlowRun || R.NFS.IsNetPacketRun)
                     {
-                        R.Log.v("IsNetFlowRun: " + R.NFS.IsNetFlowRun + " IsNetPacketRun: " + R.NFS.IsNetPacketRun +
-                            " Upload: " + R.NFS.NetFlow.UploadData + " Download: " + R.NFS.NetFlow.DownloadData);
+                        //R.Log.v("IsNetFlowRun: " + R.NFS.IsNetFlowRun + " IsNetPacketRun: " + R.NFS.IsNetPacketRun +
+                        //    " Upload: " + R.NFS.NetFlow.UploadData + " Download: " + R.NFS.NetFlow.DownloadData);
                         UIDgProcessDetailUpdate();
                     }
-                    Thread.Sleep(10000);
+                    Thread.Sleep(1000);
                 }
             });
         }
@@ -45,6 +45,8 @@ namespace Oreo.PCMonitor.Views
                 if (R.NFS != null && ListTool.HasElements(R.NFS.NetProcessInfoList))
                 {
                     label1.Text = "丢包数：" + R.NFS.LostPacketCount;
+                    label2.Text = "下载：" + ByteConvertTool.Fmt(R.NFS.NetFlow.DownloadData) +
+                                  " 上传：" + ByteConvertTool.Fmt(R.NFS.NetFlow.UploadData);
                     R.NFS.NetProcessInfoList.ForEach(p =>
                     {
                         bool isUpdate = false;
@@ -57,7 +59,8 @@ namespace Oreo.PCMonitor.Views
                                 r.Cells["CoUpload"].Value = ByteConvertTool.Fmt(p.UploadData);
                                 r.Cells["CoDownloadCount"].Value = ByteConvertTool.Fmt(p.DownloadDataCount);
                                 r.Cells["CoUploadCount"].Value = ByteConvertTool.Fmt(p.UploadDataCount);
-                                r.Cells["CoConnectionCount"].Value = p.ConnectCount;
+                                //r.Cells["CoConnectionCount"].Value = p.ConnectCount;
+                                r.Cells["CoConnectionCount"].Value = p.DownloadBagCount;
                             }
                         }
                         if (!isUpdate)
