@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Oreo.Update.Properties
+namespace Oreo.VersionBuilder.Properties
 {
 
 
