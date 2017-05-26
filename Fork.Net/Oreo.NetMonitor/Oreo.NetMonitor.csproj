@@ -123,6 +123,8 @@
     <EmbeddedResource Include="Views\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="NewFolder1\NumenTCPPorts.dat" />
+    <None Include="NewFolder1\NumenUDPPorts.dat" />
     <None Include="Properties\app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

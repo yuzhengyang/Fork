@@ -19,21 +19,21 @@
         /// </summary>
         public string ServerPath { get; set; }
         /// <summary>
-        /// 更新前 关闭进程
-        /// </summary>
-        public string[] BeforeUpdateKillProcess { get; set; }
-        /// <summary>
         /// 更新前 启动进程
         /// </summary>
         public string[] BeforeUpdateStartProcess { get; set; }
         /// <summary>
-        /// 更新后 关闭进程
+        /// 更新前 关闭进程
         /// </summary>
-        public string[] AfterUpdateKillProcess { get; set; }
+        public string[] BeforeUpdateKillProcess { get; set; }
         /// <summary>
         /// 更新后 启动进程
         /// </summary>
         public string[] AfterUpdateStartProcess { get; set; }
+        /// <summary>
+        /// 更新后 关闭进程
+        /// </summary>
+        public string[] AfterUpdateKillProcess { get; set; }
         /// <summary>
         /// 文件列表
         /// </summary>

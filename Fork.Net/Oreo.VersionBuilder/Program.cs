@@ -1,4 +1,5 @@
-﻿using Oreo.VersionBuilder.Views;
+﻿using Oreo.VersionBuilder.Commons;
+using Oreo.VersionBuilder.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Oreo.VersionBuilder
         [STAThread]
         static void Main()
         {
+            P.Init();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

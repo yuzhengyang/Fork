@@ -1,0 +1,544 @@
+TCP_1-TCP Port Service Multiplexer
+TCP_2-Death
+TCP_5-Remote Job Entry,yoyo
+TCP_7-Echo
+TCP_11-Skun
+TCP_12-Bomber
+TCP_16-Skun
+TCP_17-Skun
+TCP_18-消息传输协议,skun
+TCP_19-Skun
+TCP_20-FTP Data,Amanda
+TCP_21-文件传输,Back Construction,Blade Runner,Doly Trojan,Fore,FTP trojan,Invisible FTP,Larva, WebEx,WinCrash
+TCP_22-远程登录协议
+TCP_23-远程登录(Telnet),Tiny Telnet Server (- TTS)
+TCP_25-电子邮件(SMTP),Ajan,Antigen,Email Password Sender,Happy 99,Kuang2,ProMail trojan,Shtrilitz,Stealth,Tapiras,Terminator,WinPC,WinSpy,Haebu Coceda
+TCP_27-Assasin
+TCP_28-Amanda
+TCP_29-MSG ICP
+TCP_30-Agent 40421
+TCP_31-Agent 31,Hackers Paradise,Masters Paradise,Agent 40421
+TCP_37-Time,ADM worm
+TCP_39-SubSARI
+TCP_41-DeepThroat,Foreplay
+TCP_42-Host Name Server
+TCP_43-WHOIS
+TCP_44-Arctic
+TCP_48-DRAT
+TCP_49-主机登录协议
+TCP_50-DRAT
+TCP_51-IMP Logical Address Maintenance,Fuck Lamers Backdoor
+TCP_52-MuSka52,Skun
+TCP_53-DNS,Bonk (DOS Exploit)
+TCP_54-MuSka52
+TCP_58-DMSetup
+TCP_59-DMSetup
+TCP_63-whois++
+TCP_64-Communications Integrator
+TCP_65-TACACS-Database Service
+TCP_66-Oracle SQL*NET,AL-Bareki
+TCP_67-Bootstrap Protocol Server
+TCP_68-Bootstrap Protocol Client
+TCP_69-W32.Evala.Worm,BackGate Kit,Nimda,Pasana,Storm,Storm worm,Theef,Worm.Cycle.a
+TCP_70-Gopher服务,ADM worm
+TCP_79-用户查询(Finger),Firehotcker,ADM worm
+TCP_80-超文本服务器(Http),Executor,RingZero
+TCP_81-Chubo,Worm.Bbeagle.q
+TCP_82-Netsky-Z
+TCP_88-Kerberos krb5服务
+TCP_99-Hidden Port
+TCP_102-消息传输代理
+TCP_108-SNA网关访问服务器
+TCP_109-Pop2
+TCP_110-电子邮件(Pop3),ProMail
+TCP_113-Kazimas, Auther Idnet
+TCP_115-简单文件传输协议
+TCP_118-SQL Services, Infector 1.4.2
+TCP_119-新闻组传输协议(Newsgroup(Nntp)), Happy 99
+TCP_121-JammerKiller, Bo jammerkillah
+TCP_123-网络时间协议(NTP),Net Controller
+TCP_129-Password Generator Protocol
+TCP_133-Infector 1.x
+TCP_135-微软DCE RPC end-point mapper服务
+TCP_137-微软Netbios Name服务(网上邻居传输文件使用)
+TCP_138-微软Netbios Name服务(网上邻居传输文件使用)
+TCP_139-微软Netbios Name服务(用于文件及打印机共享)
+TCP_142-NetTaxi
+TCP_143-IMAP
+TCP_146-FC Infector,Infector
+TCP_150-NetBIOS Session Service
+TCP_156-SQL服务器
+TCP_161-Snmp
+TCP_162-Snmp-Trap
+TCP_170-A-Trojan
+TCP_177-X Display管理控制协议
+TCP_179-Border网关协议(BGP)
+TCP_190-网关访问控制协议(GACP)
+TCP_194-Irc
+TCP_197-目录定位服务(DLS)
+TCP_256-Nirvana
+TCP_315-The Invasor
+TCP_371-ClearCase版本管理软件
+TCP_389-Lightweight Directory Access Protocol (LDAP)
+TCP_396-Novell Netware over IP
+TCP_420-Breach
+TCP_421-TCP Wrappers
+TCP_443-安全服务
+TCP_444-Simple Network Paging Protocol(SNPP)
+TCP_445-Microsoft-DS
+TCP_455-Fatal Connections
+TCP_456-Hackers paradise,FuseSpark
+TCP_458-苹果公司QuickTime
+TCP_513-Grlogin
+TCP_514-RPC Backdoor
+TCP_520-Rip
+TCP_531-Rasmin,Net666
+TCP_544-kerberos kshell
+TCP_546-DHCP Client
+TCP_547-DHCP Server
+TCP_548-Macintosh文件服务
+TCP_555-Ini-Killer,Phase Zero,Stealth Spy
+TCP_569-MSN
+TCP_605-SecretService
+TCP_606-Noknok8
+TCP_660-DeepThroat
+TCP_661-Noknok8
+TCP_666-Attack FTP,Satanz Backdoor,Back Construction,Dark Connection Inside 1.2
+TCP_667-Noknok7.2
+TCP_668-Noknok6
+TCP_669-DP trojan
+TCP_692-GayOL
+TCP_707-Welchia
+TCP_777-AIM Spy
+TCP_808-RemoteControl,WinHole
+TCP_815-Everyone Darling
+TCP_901-Backdoor.Devil
+TCP_911-Dark Shadow
+TCP_993-IMAP
+TCP_999-DeepThroat
+TCP_1000-Der Spaeher
+TCP_1001-Silencer,WebEx,Der Spaeher
+TCP_1003-BackDoor
+TCP_1010-Doly
+TCP_1011-Doly
+TCP_1012-Doly
+TCP_1015-Doly
+TCP_1016-Doly
+TCP_1020-Vampire
+TCP_1023-Worm.Sasser.e
+TCP_1024-NetSpy.698(YAI)
+TCP_1025-NetSpy.698,Unused Windows Services Block
+TCP_1026-Unused Windows Services Block
+TCP_1027-Unused Windows Services Block
+TCP_1028-应用层网关服务
+TCP_1029-Unused Windows Services Block
+TCP_1030-Unused Windows Services Block
+TCP_1033-Netspy
+TCP_1035-Multidropper
+TCP_1042-Bla
+TCP_1045-Rasmin
+TCP_1047-GateCrasher
+TCP_1050-MiniCommand
+TCP_1058-nim
+TCP_1059-nimreg
+TCP_1069-Backdoor.TheefServer.202
+TCP_1070-Voice,Psyber Stream Server,Streaming Audio Trojan
+TCP_1079-ASPROVATalk
+TCP_1080-Wingate,Worm.BugBear.B,Worm.Novarg.B
+TCP_1090-Xtreme, VDOLive
+TCP_1092-LoveGate
+TCP_1095-Rat
+TCP_1097-Rat
+TCP_1098-Rat
+TCP_1099-Rat
+TCP_1109-Pop with Kerberos
+TCP_1110-nfsd-keepalive
+TCP_1111-Backdoor.AIMVision
+TCP_1155-Network File Access
+TCP_1170-Psyber Stream Server,Streaming Audio trojan,Voice
+TCP_1200-NoBackO
+TCP_1201-NoBackO
+TCP_1207-Softwar
+TCP_1212-Nirvana,Visul Killer
+TCP_1234-Ultors
+TCP_1243-BackDoor-G, SubSeven, SubSeven Apocalypse
+TCP_1245-VooDoo Doll
+TCP_1269-Mavericks Matrix
+TCP_1270-Microsoft Operations Manager
+TCP_1313-Nirvana
+TCP_1349-BioNet
+TCP_1352-Lotus Notes
+TCP_1433-Microsoft SQL服务
+TCP_1434-Microsoft SQL Monitor
+TCP_1441-Remote Storm
+TCP_1492-FTP99CMP(BackOriffice.FTP)
+TCP_1503-NetMeeting T.120
+TCP_1512-Microsoft Windows Internet Name Service
+TCP_1509-Psyber Streaming Server
+TCP_1570-Orbix Daemon
+TCP_1600-Shivka-Burka
+TCP_1703-Exloiter 1.1
+TCP_1720-NetMeeting H.233 call Setup
+TCP_1731-NetMeeting音频调用控制
+TCP_1745-ISA Server proxy autoconfig, Remote Winsock
+TCP_1801-Microsoft Message Queue
+TCP_1807-SpySender
+TCP_1990-stun-p1 cisco STUN Priority 1 port
+TCP_1991-stun-p2 cisco STUN Priority 2 port
+TCP_1992-stun-p3 cisco STUN Priority 3 port,ipsendmsg IPsendmsg
+TCP_1993-snmp-tcp-port cisco SNMP TCP port
+TCP_1994-stun-port cisco serial tunnel port
+TCP_1995-perf-port cisco perf port
+TCP_1996-tr-rsrb-port cisco Remote SRB port
+TCP_1997-gdp-port cisco Gateway Discovery Protocol
+TCP_1998-x25-svc-port cisco X.25 service (XOT)
+TCP_1999-BackDoor, TransScout
+TCP_2000-Der Spaeher,INsane Network
+TCP_2001-Transmisson scout
+TCP_2002-Transmisson scout,W32.Beagle.AX @mm
+TCP_2003-Transmisson scout
+TCP_2004-Transmisson scout
+TCP_2005-TTransmisson scout
+TCP_2011-cypress
+TCP_2015-raid-cs
+TCP_2023-Ripper,Pass Ripper,Hack City Ripper Pro
+TCP_2049-NFS
+TCP_2115-Bugs
+TCP_2121-Nirvana
+TCP_2140-Deep Throat, The Invasor
+TCP_2155-Nirvana
+TCP_2208-RuX
+TCP_2234-DirectPlay
+TCP_2255-Illusion Mailer
+TCP_2283-HVL Rat5
+TCP_2300-PC Explorer
+TCP_2311-Studio54
+TCP_2556-Worm.Bbeagle.q
+TCP_2565-Striker
+TCP_2583-WinCrash
+TCP_2600-Digital RootBeer
+TCP_2716-Prayer Trojan
+TCP_2745-Worm.BBeagle.k
+TCP_2773-Backdoor,SubSeven
+TCP_2774-SubSeven2.1&2.2
+TCP_2801-Phineas Phucker
+TCP_2967-SSC Agent
+TCP_2989-Rat
+TCP_3024-WinCrash trojan
+TCP_3074-Microsoft Xbox game port
+TCP_3127-Worm.Novarg
+TCP_3128-RingZero,Worm.Novarg.B
+TCP_3129-Masters Paradise
+TCP_3132-Microsoft Business Rule Engine Update Service
+TCP_3150-Deep Throat, The Invasor
+TCP_3198-Worm.Novarg
+TCP_3210-SchoolBus
+TCP_3268-Microsoft Global Catalog
+TCP_3269-Microsoft Global Catalog with LDAP/SSL
+TCP_3332-Worm.Cycle.a
+TCP_3333-Prosiak
+TCP_3335-Microsoft Class Server
+TCP_3389-超级终端
+TCP_3456-Terror
+TCP_3459-Eclipse 2000
+TCP_3700-Portal of Doom
+TCP_3791-Eclypse
+TCP_3801-Eclypse
+TCP_3847-Microsoft Firewall Control
+TCP_3996-Portal of Doom,RemoteAnything
+TCP_4000-腾讯QQ客户端
+TCP_4060-Portal of Doom,RemoteAnything
+TCP_4092-WinCrash
+TCP_4242-VHM
+TCP_4267-SubSeven2.1&2.2
+TCP_4321-BoBo
+TCP_4350-Net Device
+TCP_4444-Prosiak,Swift remote
+TCP_4500-Microsoft IPsec NAT-T,W32.HLLW.Tufas
+TCP_4567-File Nail
+TCP_4590-ICQTrojan
+TCP_4661-Backdoor/Surila.f
+TCP_4899-Remote Administrator服务器
+TCP_4950-ICQTrojan
+TCP_5000-WindowsXP服务器,Blazer 5,Bubbel,Back Door Setup,Sockets de Troie
+TCP_5001-Back Door Setup, Sockets de Troie
+TCP_5002-cd00r,Shaft
+TCP_5011-One of the Last Trojans (OOTLT)
+TCP_5025-WM Remote KeyLogger
+TCP_5031-Firehotcker,Metropolitan,NetMetro
+TCP_5032-Metropolitan
+TCP_5190-ICQ Query
+TCP_5321-Firehotcker
+TCP_5333-Backage Trojan Box 3
+TCP_5343-WCrat
+TCP_5400-Blade Runner, BackConstruction1.2
+TCP_5401-Blade Runner,Back Construction
+TCP_5402-Blade Runner,Back Construction
+TCP_5471-WinCrash
+TCP_5512-Illusion Mailer
+TCP_5521-Illusion Mailer
+TCP_5550-Xtcp,INsane Network
+TCP_5554-Worm.Sasser
+TCP_5555-ServeMe
+TCP_5556-BO Facil
+TCP_5557-BO Facil
+TCP_5569-Robo-Hack
+TCP_5598-BackDoor 2.03
+TCP_5631-PCAnyWhere data
+TCP_5632-PCAnyWhere
+TCP_5637-PC Crasher
+TCP_5638-PC Crasher
+TCP_5678-Remote Replication Agent Connection
+TCP_5679-Direct Cable Connect Manager
+TCP_5698-BackDoor
+TCP_5714-Wincrash3
+TCP_5720-Microsoft Licensing
+TCP_5741-WinCrash3
+TCP_5742-WinCrash
+TCP_5760-Portmap Remote Root Linux Exploit
+TCP_5880-Y3K RAT
+TCP_5881-Y3K RAT
+TCP_5882-Y3K RAT
+TCP_5888-Y3K RAT
+TCP_5889-Y3K RAT
+TCP_5900-WinVnc,Wise VGA广播端口
+TCP_6000-Backdoor.AB
+TCP_6006-Noknok8
+TCP_6073-DirectPlay8
+TCP_6129-Dameware Nt Utilities服务器
+TCP_6272-SecretService
+TCP_6267-广外女生
+TCP_6400-Backdoor.AB,The Thing
+TCP_6500-Devil 1.03
+TCP_6661-Teman
+TCP_6666-TCPshell.c
+TCP_6667-NT Remote Control,Wise 播放器接收端口
+TCP_6668-Wise Video广播端口
+TCP_6669-Vampyre
+TCP_6670-DeepThroat,iPhone
+TCP_6671-Deep Throat 3.0
+TCP_6711-SubSeven
+TCP_6712-SubSeven1.x
+TCP_6713-SubSeven
+TCP_6723-Mstream
+TCP_6767-NT Remote Control
+TCP_6771-DeepThroat
+TCP_6776-BackDoor-G,SubSeven,2000 Cracks
+TCP_6777-Worm.BBeagle
+TCP_6789-Doly Trojan
+TCP_6838-Mstream
+TCP_6883-DeltaSource
+TCP_6912-Shit Heep
+TCP_6939-Indoctrination
+TCP_6969-GateCrasher, Priority, IRC 3
+TCP_6970-RealAudio,GateCrasher
+TCP_7000-Remote Grab,NetMonitor,SubSeven1.x
+TCP_7001-Freak88,Freak2k
+TCP_7201-NetMonitor
+TCP_7215-BackDoor-G, SubSeven
+TCP_7300-NetMonitor
+TCP_7301-NetMonitor
+TCP_7306-NetMonitor,NetSpy 1.0
+TCP_7307-NetMonitor, ProcSpy
+TCP_7308-NetMonitor, X Spy
+TCP_7323-Sygate服务器端
+TCP_7424-Host Control
+TCP_7511-聪明基因
+TCP_7597-Qaz
+TCP_7609-Snid X2
+TCP_7626-冰河
+TCP_7777-The Thing
+TCP_7789-Back Door Setup, ICQKiller
+TCP_7983-Mstream
+TCP_8000-腾讯OICQ服务器端,XDMA
+TCP_8010-Wingate,Logfile
+TCP_8011-WAY2.4
+TCP_8080-WWW 代理,Ring Zero,Chubo,Worm.Novarg.B
+TCP_8102-网络神偷
+TCP_8181-W32.Erkez.D@mm
+TCP_8520-W32.Socay.Worm
+TCP_8594-I-Worm/Bozori.a
+TCP_8787-BackOfrice 2000
+TCP_8888-Winvnc
+TCP_8897-Hack Office,Armageddon
+TCP_8989-Recon
+TCP_9000-Netministrator
+TCP_9325-Mstream
+TCP_9400-InCommand 1.0
+TCP_9401-InCommand 1.0
+TCP_9402-InCommand 1.0
+TCP_9535-Remote Man Server
+TCP_9872-Portal of Doom
+TCP_9873-Portal of Doom
+TCP_9874-Portal of Doom
+TCP_9875-Portal of Doom
+TCP_9876-Cyber Attacker
+TCP_9878-TransScout
+TCP_9889-Ini-Killer
+TCP_9898-Worm.Win32.Dabber.a
+TCP_9999-Prayer Trojan
+TCP_10067-Portal of Doom
+TCP_10080-Worm.Novarg.B
+TCP_10084-Syphillis
+TCP_10085-Syphillis
+TCP_10086-Syphillis
+TCP_10101-BrainSpy
+TCP_10167-Portal Of Doom
+TCP_10168-Worm.Supnot.78858.c,Worm.LovGate.T
+TCP_10520-Acid Shivers
+TCP_10607-Coma trojan
+TCP_10666-Ambush
+TCP_11000-Senna Spy
+TCP_11050-Host Control
+TCP_11051-Host Control
+TCP_11223-Progenic,Hack '99KeyLogger
+TCP_11320-IMIP Channels Port
+TCP_11831-TROJ_LATINUS.SVR
+TCP_12076-Gjamer, MSH.104b
+TCP_12223-Hack'99 KeyLogger
+TCP_12345-GabanBus, NetBus 1.6/1.7, Pie Bill Gates, X-bill
+TCP_12346-GabanBus, NetBus 1.6/1.7, X-bill
+TCP_12349-BioNet
+TCP_12361-Whack-a-mole
+TCP_12362-Whack-a-mole
+TCP_12363-Whack-a-mole
+TCP_12378-W32/Gibe@MM
+TCP_12456-NetBus
+TCP_12623-DUN Control
+TCP_12624-Buttman
+TCP_12631-WhackJob, WhackJob.NB1.7
+TCP_12701-Eclipse2000
+TCP_12754-Mstream
+TCP_13000-Senna Spy
+TCP_13010-Hacker Brazil
+TCP_13013-Psychward
+TCP_13223-Tribal Voice的聊天程序PowWow
+TCP_13700-Kuang2 The Virus
+TCP_14456-Solero
+TCP_14500-PC Invader
+TCP_14501-PC Invader
+TCP_14502-PC Invader
+TCP_14503-PC Invader
+TCP_15000-NetDaemon 1.0
+TCP_15092-Host Control
+TCP_15104-Mstream
+TCP_16484-Mosucker
+TCP_16660-Stacheldraht (DDoS)
+TCP_16772-ICQ Revenge
+TCP_16959-Priority
+TCP_16969-Priority
+TCP_17027-提供广告服务的Conducent"adbot"共享软件
+TCP_17166-Mosaic
+TCP_17300-Kuang2 The Virus
+TCP_17490-CrazyNet
+TCP_17500-CrazyNet
+TCP_17569-Infector 1.4.x + 1.6.x
+TCP_17777-Nephron
+TCP_18753-Shaft (DDoS)
+TCP_19191-蓝色火焰
+TCP_19864-ICQ Revenge
+TCP_20000-Millennium II (GrilFriend)
+TCP_20001-Millennium II (GrilFriend)
+TCP_20002-AcidkoR
+TCP_20034-NetBus 2 Pro
+TCP_20168-Lovgate
+TCP_20203-Logged,Chupacabra
+TCP_20331-Bla
+TCP_20432-Shaft (DDoS)
+TCP_20808-Worm.LovGate.v.QQ
+TCP_21335-Tribal Flood Network,Trinoo
+TCP_21544-Schwindler 1.82,GirlFriend
+TCP_21554-Schwindler 1.82,GirlFriend,Exloiter 1.0.1.2
+TCP_22222-Prosiak,RuX Uploader 2.0
+TCP_22784-Backdoor.Intruzzo
+TCP_23432-Asylum 0.1.3
+TCP_23444-网络公牛
+TCP_23456-Evil FTP, Ugly FTP, WhackJob
+TCP_23476-Donald Dick
+TCP_23477-Donald Dick
+TCP_23777-INet Spy
+TCP_26274-Delta
+TCP_26681-Spy Voice
+TCP_27374-Sub Seven 2.0+, Backdoor.Baste
+TCP_27444-Tribal Flood Network,Trinoo
+TCP_27665-Tribal Flood Network,Trinoo
+TCP_29104-Host Control
+TCP_29431-Hack Attack
+TCP_29432-Hack Attack
+TCP_29559-TROJ_LATINUS.SVR
+TCP_29891-The Unexplained
+TCP_30001-Terr0r32
+TCP_30003-Death,Lamers Death
+TCP_30029-AOL trojan
+TCP_30100-NetSphere 1.27a,NetSphere 1.31
+TCP_30101-NetSphere 1.31,NetSphere 1.27a
+TCP_30102-NetSphere 1.27a,NetSphere 1.31
+TCP_30103-NetSphere 1.31
+TCP_30303-Sockets de Troie
+TCP_30722-W32.Esbot.A
+TCP_30947-Intruse
+TCP_30999-Kuang2
+TCP_31336-Bo Whack
+TCP_31337-Baron Night,BO client,BO2,Bo Facil,BackFire,Back Orifice,DeepBO,Freak2k,NetSpy
+TCP_31338-NetSpy,Back Orifice,DeepBO
+TCP_31339-NetSpy DK
+TCP_31554-Schwindler
+TCP_31666-BOWhack
+TCP_31778-Hack Attack
+TCP_31785-Hack Attack
+TCP_31787-Hack Attack
+TCP_31789-Hack Attack
+TCP_31791-Hack Attack
+TCP_31792-Hack Attack
+TCP_32100-PeanutBrittle
+TCP_32418-Acid Battery
+TCP_33333-Prosiak,Blakharaz 1.0
+TCP_33577-Son Of Psychward
+TCP_33777-Son Of Psychward
+TCP_33911-Spirit 2001a
+TCP_34324-BigGluck,TN,Tiny Telnet Server
+TCP_34555-Trin00 (Windows) (DDoS)
+TCP_35555-Trin00 (Windows) (DDoS)
+TCP_36794-Worm.Bugbear-A
+TCP_37651-YAT
+TCP_40412-The Spy
+TCP_40421-Agent 40421,Masters Paradise.96
+TCP_40422-Masters Paradise
+TCP_40423-Masters Paradise.97
+TCP_40425-Masters Paradise
+TCP_40426-Masters Paradise 3.x
+TCP_41666-Remote Boot
+TCP_43210-Schoolbus 1.6/2.0
+TCP_44444-Delta Source
+TCP_44445-Happypig
+TCP_45576-未知代理
+TCP_47252-Prosiak
+TCP_47262-Delta
+TCP_47878-BirdSpy2
+TCP_49301-Online Keylogger
+TCP_50505-Sockets de Troie
+TCP_50766-Fore, Schwindler
+TCP_51966-CafeIni
+TCP_53001-Remote Windows Shutdown
+TCP_53217-Acid Battery 2000
+TCP_54283-Back Door-G, Sub7
+TCP_54320-Back Orifice 2000,Sheep
+TCP_54321-School Bus .69-1.11,Sheep, BO2K
+TCP_57341-NetRaider
+TCP_58008-BackDoor.Tron
+TCP_58009-BackDoor.Tron
+TCP_58339-ButtFunnel
+TCP_59211-BackDoor.DuckToy
+TCP_60000-Deep Throat
+TCP_60068-Xzip 6000068
+TCP_60411-Connection
+TCP_60606-TROJ_BCKDOR.G2.A
+TCP_61466-Telecommando
+TCP_61603-Bunker-kill
+TCP_63485-Bunker-kill
+TCP_65000-Devil, DDoS
+TCP_65432-Th3tr41t0r, The Traitor
+TCP_65530-TROJ_WINMITE.10
+TCP_65535-RC,Adore Worm/Linux
+TCP_69123-ShitHeep
+TCP_88798-Armageddon,Hack Office
