@@ -31,7 +31,7 @@
         /// </summary>
         public string[] AfterUpdateKillProcess { get; set; }
         /// <summary>
-        /// 更新后 启动金城
+        /// 更新后 启动进程
         /// </summary>
         public string[] AfterUpdateStartProcess { get; set; }
         /// <summary>
