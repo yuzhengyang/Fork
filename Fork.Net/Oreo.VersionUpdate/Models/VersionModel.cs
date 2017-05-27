@@ -1,4 +1,6 @@
-﻿namespace Oreo.VersionUpdate.Models
+﻿using System.Collections.Generic;
+
+namespace Oreo.VersionUpdate.Models
 {
     public class VersionModel
     {
@@ -19,29 +21,25 @@
         /// </summary>
         public string ServerPath { get; set; }
         /// <summary>
+        /// 更新前 启动进程
+        /// </summary>
+        public string[] BeforeUpdateStartProcess { get; set; }
+        /// <summary>
         /// 更新前 关闭进程
         /// </summary>
         public string[] BeforeUpdateKillProcess { get; set; }
         /// <summary>
-        /// 更新前 启动进程
+        /// 更新后 启动进程
         /// </summary>
-        public string[] BeforeUpdateStartProcess { get; set; }
+        public string[] AfterUpdateStartProcess { get; set; }
         /// <summary>
         /// 更新后 关闭进程
         /// </summary>
         public string[] AfterUpdateKillProcess { get; set; }
         /// <summary>
-        /// 更新后 启动金城
-        /// </summary>
-        public string[] AfterUpdateStartProcess { get; set; }
-        /// <summary>
         /// 文件列表
         /// </summary>
-        public VersionFile[] FileList { get; set; }
-        /// <summary>
-        /// 属于插件（用于更新插件清单）
-        /// </summary>
-        public bool IsPlugin { get; set; }
+        public List<VersionFile> FileList { get; set; }
         /// <summary>
         /// 插件名称
         /// </summary>
@@ -66,8 +64,8 @@
         /// </summary>
         public string FileMD5 { get; set; }
         /// <summary>
-        /// 删除文件（用于清理冗余）
+        /// 清理文件（用于清理冗余）
         /// </summary>
-        public bool Delete { get; set; }
+        public bool IsClean { get; set; }
     }
 }

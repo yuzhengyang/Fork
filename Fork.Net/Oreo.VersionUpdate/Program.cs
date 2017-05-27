@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Oreo.VersionUpdate.Commons;
+using Oreo.VersionUpdate.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +16,10 @@ namespace Oreo.VersionUpdate
         [STAThread]
         static void Main()
         {
+            P.Init();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }

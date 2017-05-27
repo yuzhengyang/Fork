@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TbVersionDesc = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,13 +37,11 @@
             this.TbVersionNumber = new System.Windows.Forms.TextBox();
             this.TbCodeName = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DgFileList = new System.Windows.Forms.DataGridView();
             this.TbPluginEntry = new System.Windows.Forms.TextBox();
             this.TbPluginName = new System.Windows.Forms.TextBox();
-            this.CbIsPlugin = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.TbServerPath = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.TbAfterUpdateKillProcess = new System.Windows.Forms.TextBox();
@@ -60,31 +59,33 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.生成配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生成配置到指定目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.打开默认配置目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PnMain = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.ClServer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClLocal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClUpdate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ClDelete = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.TsslRunStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.PnMain = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BtClear = new System.Windows.Forms.Button();
+            this.BtImport = new System.Windows.Forms.Button();
+            this.BtAddFile = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ClFileListServer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClFileListLocal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClFileListMD5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClFileListClean = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.DgFileList)).BeginInit();
             this.MsMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.PnMain.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TbVersionDesc
@@ -140,67 +141,68 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(18, 144);
+            this.label12.Location = new System.Drawing.Point(18, 120);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(89, 12);
             this.label12.TabIndex = 30;
             this.label12.Text = "更新文件列表：";
             // 
-            // dataGridView1
+            // DgFileList
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ClServer,
-            this.ClLocal,
-            this.ClUpdate,
-            this.ClDelete});
-            this.dataGridView1.Location = new System.Drawing.Point(20, 170);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(521, 388);
-            this.dataGridView1.TabIndex = 29;
+            this.DgFileList.AllowUserToAddRows = false;
+            this.DgFileList.AllowUserToResizeColumns = false;
+            this.DgFileList.AllowUserToResizeRows = false;
+            this.DgFileList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgFileList.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgFileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DgFileList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DgFileList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ClFileListServer,
+            this.ClFileListLocal,
+            this.ClFileListMD5,
+            this.ClFileListClean});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgFileList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DgFileList.Location = new System.Drawing.Point(20, 142);
+            this.DgFileList.Name = "DgFileList";
+            this.DgFileList.RowHeadersVisible = false;
+            this.DgFileList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.DgFileList.RowTemplate.Height = 23;
+            this.DgFileList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgFileList.Size = new System.Drawing.Size(521, 416);
+            this.DgFileList.TabIndex = 29;
             // 
             // TbPluginEntry
             // 
-            this.TbPluginEntry.Location = new System.Drawing.Point(155, 108);
+            this.TbPluginEntry.Location = new System.Drawing.Point(155, 84);
             this.TbPluginEntry.Name = "TbPluginEntry";
             this.TbPluginEntry.Size = new System.Drawing.Size(213, 21);
             this.TbPluginEntry.TabIndex = 28;
             // 
             // TbPluginName
             // 
-            this.TbPluginName.Location = new System.Drawing.Point(155, 80);
+            this.TbPluginName.Location = new System.Drawing.Point(155, 56);
             this.TbPluginName.Name = "TbPluginName";
             this.TbPluginName.Size = new System.Drawing.Size(213, 21);
             this.TbPluginName.TabIndex = 27;
             // 
-            // CbIsPlugin
-            // 
-            this.CbIsPlugin.AutoSize = true;
-            this.CbIsPlugin.Location = new System.Drawing.Point(155, 57);
-            this.CbIsPlugin.Name = "CbIsPlugin";
-            this.CbIsPlugin.Size = new System.Drawing.Size(15, 14);
-            this.CbIsPlugin.TabIndex = 26;
-            this.CbIsPlugin.UseVisualStyleBackColor = true;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(18, 112);
+            this.label11.Location = new System.Drawing.Point(18, 88);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(89, 12);
             this.label11.TabIndex = 25;
@@ -209,20 +211,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(18, 85);
+            this.label10.Location = new System.Drawing.Point(18, 61);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 12);
             this.label10.TabIndex = 24;
             this.label10.Text = "插件名称：";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 58);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 12);
-            this.label9.TabIndex = 23;
-            this.label9.Text = "独立插件：";
             // 
             // TbServerPath
             // 
@@ -334,26 +327,26 @@
             // 新建ToolStripMenuItem
             // 
             this.新建ToolStripMenuItem.Name = "新建ToolStripMenuItem";
-            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.新建ToolStripMenuItem.Text = "新建";
             this.新建ToolStripMenuItem.Click += new System.EventHandler(this.新建ToolStripMenuItem_Click);
             // 
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.打开ToolStripMenuItem.Text = "打开";
             this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
@@ -368,18 +361,6 @@
             this.生成ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.生成ToolStripMenuItem.Text = "生成";
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1,
-            this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 589);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(584, 22);
-            this.statusStrip1.TabIndex = 25;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
             // 生成配置ToolStripMenuItem
             // 
             this.生成配置ToolStripMenuItem.Name = "生成配置ToolStripMenuItem";
@@ -392,6 +373,7 @@
             this.生成配置到指定目录ToolStripMenuItem.Name = "生成配置到指定目录ToolStripMenuItem";
             this.生成配置到指定目录ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.生成配置到指定目录ToolStripMenuItem.Text = "生成配置到指定目录";
+            this.生成配置到指定目录ToolStripMenuItem.Click += new System.EventHandler(this.生成配置到指定目录ToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -416,8 +398,31 @@
             // 查看帮助ToolStripMenuItem
             // 
             this.查看帮助ToolStripMenuItem.Name = "查看帮助ToolStripMenuItem";
-            this.查看帮助ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.查看帮助ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.查看帮助ToolStripMenuItem.Text = "查看帮助";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.TsslRunStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 589);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(584, 22);
+            this.statusStrip1.TabIndex = 25;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel1.Text = "状态：";
+            // 
+            // TsslRunStatus
+            // 
+            this.TsslRunStatus.Name = "TsslRunStatus";
+            this.TsslRunStatus.Size = new System.Drawing.Size(108, 17);
+            this.TsslRunStatus.Text = "ready to building";
             // 
             // PnMain
             // 
@@ -430,40 +435,6 @@
             this.PnMain.Name = "PnMain";
             this.PnMain.Size = new System.Drawing.Size(584, 564);
             this.PnMain.TabIndex = 26;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.TbVersionDesc);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.TbCodeName);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.TbVersionNumber);
-            this.groupBox1.Location = new System.Drawing.Point(3, 18);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(561, 266);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "版本概述";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Controls.Add(this.TbServerPath);
-            this.groupBox2.Controls.Add(this.TbPluginEntry);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.TbPluginName);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.CbIsPlugin);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Location = new System.Drawing.Point(3, 305);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(561, 577);
-            this.groupBox2.TabIndex = 25;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "文件清单";
             // 
             // groupBox3
             // 
@@ -482,50 +453,94 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其他操作";
             // 
-            // ClServer
+            // groupBox2
             // 
-            this.ClServer.FillWeight = 40F;
-            this.ClServer.HeaderText = "服务器路径";
-            this.ClServer.Name = "ClServer";
-            this.ClServer.ReadOnly = true;
+            this.groupBox2.Controls.Add(this.BtClear);
+            this.groupBox2.Controls.Add(this.BtImport);
+            this.groupBox2.Controls.Add(this.BtAddFile);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.DgFileList);
+            this.groupBox2.Controls.Add(this.TbServerPath);
+            this.groupBox2.Controls.Add(this.TbPluginEntry);
+            this.groupBox2.Controls.Add(this.TbPluginName);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Location = new System.Drawing.Point(3, 305);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(561, 577);
+            this.groupBox2.TabIndex = 25;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "文件清单";
             // 
-            // ClLocal
+            // BtClear
             // 
-            this.ClLocal.FillWeight = 40F;
-            this.ClLocal.HeaderText = "本地路径";
-            this.ClLocal.Name = "ClLocal";
-            this.ClLocal.ReadOnly = true;
+            this.BtClear.Location = new System.Drawing.Point(466, 115);
+            this.BtClear.Name = "BtClear";
+            this.BtClear.Size = new System.Drawing.Size(75, 23);
+            this.BtClear.TabIndex = 33;
+            this.BtClear.Text = "清空";
+            this.BtClear.UseVisualStyleBackColor = true;
+            this.BtClear.Click += new System.EventHandler(this.BtClear_Click);
             // 
-            // ClUpdate
+            // BtImport
             // 
-            this.ClUpdate.FillWeight = 10F;
-            this.ClUpdate.HeaderText = "更新";
-            this.ClUpdate.Name = "ClUpdate";
-            this.ClUpdate.ReadOnly = true;
+            this.BtImport.Location = new System.Drawing.Point(304, 115);
+            this.BtImport.Name = "BtImport";
+            this.BtImport.Size = new System.Drawing.Size(75, 23);
+            this.BtImport.TabIndex = 32;
+            this.BtImport.Text = "批量导入";
+            this.BtImport.UseVisualStyleBackColor = true;
+            this.BtImport.Click += new System.EventHandler(this.BtImport_Click);
             // 
-            // ClDelete
+            // BtAddFile
             // 
-            this.ClDelete.FillWeight = 10F;
-            this.ClDelete.HeaderText = "删除";
-            this.ClDelete.Name = "ClDelete";
-            this.ClDelete.ReadOnly = true;
+            this.BtAddFile.Location = new System.Drawing.Point(385, 115);
+            this.BtAddFile.Name = "BtAddFile";
+            this.BtAddFile.Size = new System.Drawing.Size(75, 23);
+            this.BtAddFile.TabIndex = 31;
+            this.BtAddFile.Text = "添加文件";
+            this.BtAddFile.UseVisualStyleBackColor = true;
+            this.BtAddFile.Click += new System.EventHandler(this.BtAddFile_Click);
             // 
-            // toolStripStatusLabel1
+            // groupBox1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
-            this.toolStripStatusLabel1.Text = "状态：";
+            this.groupBox1.Controls.Add(this.TbVersionDesc);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.TbCodeName);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.TbVersionNumber);
+            this.groupBox1.Location = new System.Drawing.Point(3, 18);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(561, 266);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "版本概述";
             // 
-            // toolStripProgressBar1
+            // ClFileListServer
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.ClFileListServer.FillWeight = 35F;
+            this.ClFileListServer.HeaderText = "服务器路径";
+            this.ClFileListServer.Name = "ClFileListServer";
             // 
-            // toolStripStatusLabel2
+            // ClFileListLocal
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(108, 17);
-            this.toolStripStatusLabel2.Text = "ready to building";
+            this.ClFileListLocal.FillWeight = 35F;
+            this.ClFileListLocal.HeaderText = "本地路径";
+            this.ClFileListLocal.Name = "ClFileListLocal";
+            // 
+            // ClFileListMD5
+            // 
+            this.ClFileListMD5.FillWeight = 20F;
+            this.ClFileListMD5.HeaderText = "MD5";
+            this.ClFileListMD5.Name = "ClFileListMD5";
+            // 
+            // ClFileListClean
+            // 
+            this.ClFileListClean.FillWeight = 10F;
+            this.ClFileListClean.HeaderText = "清理";
+            this.ClFileListClean.Name = "ClFileListClean";
             // 
             // MainForm
             // 
@@ -540,18 +555,19 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "版本生成器";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DgFileList)).EndInit();
             this.MsMain.ResumeLayout(false);
             this.MsMain.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.PnMain.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -566,10 +582,8 @@
         private System.Windows.Forms.TextBox TbCodeName;
         private System.Windows.Forms.TextBox TbPluginEntry;
         private System.Windows.Forms.TextBox TbPluginName;
-        private System.Windows.Forms.CheckBox CbIsPlugin;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox TbServerPath;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox TbAfterUpdateKillProcess;
@@ -581,7 +595,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView DgFileList;
         private System.Windows.Forms.MenuStrip MsMain;
         private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -600,12 +614,14 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClServer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClLocal;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ClUpdate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ClDelete;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel TsslRunStatus;
+        private System.Windows.Forms.Button BtImport;
+        private System.Windows.Forms.Button BtAddFile;
+        private System.Windows.Forms.Button BtClear;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClFileListServer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClFileListLocal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClFileListMD5;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ClFileListClean;
     }
 }

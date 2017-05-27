@@ -1,4 +1,6 @@
-﻿namespace Oreo.VersionBuilder.Models
+﻿using System.Collections.Generic;
+
+namespace Oreo.VersionBuilder.Models
 {
     public class VersionModel
     {
@@ -37,11 +39,7 @@
         /// <summary>
         /// 文件列表
         /// </summary>
-        public VersionFile[] FileList { get; set; }
-        /// <summary>
-        /// 属于插件（用于更新插件清单）
-        /// </summary>
-        public bool IsPlugin { get; set; }
+        public List<VersionFile> FileList { get; set; }
         /// <summary>
         /// 插件名称
         /// </summary>
@@ -66,8 +64,8 @@
         /// </summary>
         public string FileMD5 { get; set; }
         /// <summary>
-        /// 删除文件（用于清理冗余）
+        /// 清理文件（用于清理冗余）
         /// </summary>
-        public bool Delete { get; set; }
+        public bool IsClean { get; set; }
     }
 }
