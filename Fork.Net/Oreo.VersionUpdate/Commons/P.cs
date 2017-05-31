@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Y.Utils.IOUtils.LogUtils;
+using Y.Utils.IOUtils.TxtUtils;
 
 namespace Oreo.VersionUpdate.Commons
 {
@@ -11,13 +12,20 @@ namespace Oreo.VersionUpdate.Commons
     {
         public static void Init()
         {
+            InitSettings();
+
             InitLog();
         }
-
-        static void InitLog()
-        { 
-            R.Log.SetWriteFile(true, "Oreo.CleverDog.Log");
-            R.Log.LogLevel = LogLevel.All;
+        static void InitSettings()
+        {
+            IniTool.GetStringValue(R.Files.Settings, "Version", "Number", R.Settings.Version.Number);
+            R.LogLevel = (LogLevel)IniTool.GetIntValue(R.Files.Settings, "Log", "Level");
         }
+        static void InitLog()
+        {
+            R.Log.SetWriteFile(true, "Oreo.VersionUpdate.Log");
+            R.Log.LogLevel = R.LogLevel;
+        }
+       
     }
 }

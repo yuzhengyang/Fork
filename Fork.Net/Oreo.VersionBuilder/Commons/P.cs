@@ -18,7 +18,7 @@ namespace Oreo.VersionBuilder.Commons
         static void InitLog()
         {
             R.Log = new Log();
-            R.Log.SetWriteFile(true, "Oreo.CleverDog.Log");
+            R.Log.SetWriteFile(true, "Oreo.VersionBuilder.Log");
             R.Log.LogLevel = LogLevel.All;
         }
     }

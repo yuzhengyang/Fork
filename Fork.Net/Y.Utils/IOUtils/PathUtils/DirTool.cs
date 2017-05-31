@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Y.Utils.DataUtils.Collections;
 
 namespace Y.Utils.IOUtils.PathUtils
@@ -17,7 +18,13 @@ namespace Y.Utils.IOUtils.PathUtils
             if (Directory.Exists(path))
                 return true;
             else
-                try { Directory.CreateDirectory(path); return true; } catch (Exception e) { }
+                try
+                {
+                    Directory.CreateDirectory(path); return true;
+                }
+                catch (Exception e)
+                {
+                }
             return false;
         }
         public static string Parent(string path)
@@ -51,6 +58,56 @@ namespace Y.Utils.IOUtils.PathUtils
                 return result;
             }
             return null;
+        }
+        public static bool IsDriver(string path)
+        {
+            if (path != null && path.Length >= 2)
+            {
+                if (path.Substring(1, 1) == ":")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 获取文件所在的目录
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static string GetFilePath(string filePath)
+        {
+            string result = "";
+            if (!string.IsNullOrWhiteSpace(filePath))
+            {
+                string fileName = Path.GetFileName(filePath);
+                result = filePath.Substring(0, filePath.Length - fileName.Length);
+            }
+            return result;
+        }
+        public static string Combine(params string[] paths)
+        {
+            if (ListTool.HasElements(paths))
+            {
+                if (paths.Length > 1)
+                {
+                    StringBuilder result = new StringBuilder();
+                    foreach (var path in paths)
+                    {
+                        result.Append(path);
+                    }
+                    while (result.ToString().IndexOf("\\\\") >= 0)
+                    {
+                        result.Replace("\\\\", "\\");
+                    }
+                    return result.ToString();
+                }
+                else
+                {
+                    return paths[0];
+                }
+            }
+            return "";
         }
     }
 }

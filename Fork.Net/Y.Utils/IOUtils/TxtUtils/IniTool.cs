@@ -390,6 +390,19 @@ namespace Y.Utils.IOUtils.TxtUtils
             string flag = GetStringValue(iniFile, section, key, "");
             return flag.ToLower() == "true" ? true : false;
         }
+
+        public static bool WriteValue(string iniFile, string section, string key, int value)
+        {
+            return WriteValue(iniFile, section, key, value);
+        }
+        public static int GetIntValue(string iniFile, string section, string key)
+        {
+            string flag = GetStringValue(iniFile, section, key, "0");
+            int result = 0;
+            int.TryParse(flag,out result);
+            return result;
+        }
+
         #endregion
 
         #endregion

@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Net;
+using Y.Utils.IOUtils.PathUtils;
 
 namespace Y.Utils.NetUtils.FTPUtils
 {
@@ -48,6 +49,38 @@ namespace Y.Utils.NetUtils.FTPUtils
                     using (Stream responseStream = response.GetResponseStream())
                     {
                         using (FileStream fs = new FileStream(Path.Combine(saveDir, filename), FileMode.CreateNew))
+                        {
+                            byte[] buffer = new byte[2048];
+                            int read = 0;
+                            do
+                            {
+                                read = responseStream.Read(buffer, 0, buffer.Length);
+                                fs.Write(buffer, 0, read);
+                            } while (!(read == 0));
+                            fs.Flush();
+                        }
+                    }
+                }
+                return true;
+            }
+            catch { }
+            return false;
+        }
+        public bool Download(string ftpFile, string localFile)
+        {
+            try
+            {
+                string localPath = DirTool.GetFilePath(localFile);
+                if (!Directory.Exists(localPath)) Directory.CreateDirectory(localPath);
+
+                string uri = Path.Combine(ftpURI, ftpFile);
+                FtpWebRequest ftp = GetRequest(uri);
+                ftp.Method = WebRequestMethods.Ftp.DownloadFile;
+                using (FtpWebResponse response = (FtpWebResponse)ftp.GetResponse())
+                {
+                    using (Stream responseStream = response.GetResponseStream())
+                    {
+                        using (FileStream fs = new FileStream(localFile, FileMode.CreateNew))
                         {
                             byte[] buffer = new byte[2048];
                             int read = 0;
