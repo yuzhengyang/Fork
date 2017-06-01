@@ -14,12 +14,17 @@ namespace Oreo.VersionUpdate
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            P.Init();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            if (args != null && args.Length == 2)
+            {
+                R.Paths.ProjectRoot = args[0];
+                R.Files.Plugins = args[1];
+                P.Init();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm());
+            }
         }
     }
 }

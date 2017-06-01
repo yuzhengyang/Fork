@@ -9,9 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Oreo.VersionUpdate</RootNamespace>
     <AssemblyName>Oreo.VersionUpdate</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,7 +24,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,7 +35,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\Icons\app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Costura, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.1.6.0\lib\dotnet\Costura.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Dlls\Fork.Net\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -54,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Commons\P.cs" />
     <Compile Include="Commons\R.cs" />
+    <Compile Include="Helpers\DataHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Models\PluginModel.cs" />
     <Compile Include="Models\VersionModel.cs" />
     <Compile Include="Program.cs" />
@@ -72,10 +84,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -95,7 +109,23 @@
       <Name>Y.Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+    <Content Include="Images\Icons\app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\Backgrounds\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.2.0.0\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.0\build\dotnet\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.2.0.0\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.0\build\dotnet\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.1.6.0\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.6.0\build\dotnet\Costura.Fody.targets'))" />
+  </Target>
+  <Import Project="..\packages\Costura.Fody.1.6.0\build\dotnet\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.6.0\build\dotnet\Costura.Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

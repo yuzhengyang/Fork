@@ -18,7 +18,6 @@ namespace Oreo.VersionUpdate.Commons
         }
         static void InitSettings()
         {
-            IniTool.GetStringValue(R.Files.Settings, "Version", "Number", R.Settings.Version.Number);
             R.LogLevel = (LogLevel)IniTool.GetIntValue(R.Files.Settings, "Log", "Level");
         }
         static void InitLog()

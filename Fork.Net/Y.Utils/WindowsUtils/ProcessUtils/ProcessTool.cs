@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Y.Utils.DataUtils.Collections;
 
 namespace Y.Utils.WindowsUtils.ProcessUtils
 {
@@ -59,6 +60,29 @@ namespace Y.Utils.WindowsUtils.ProcessUtils
                 if (process.Id == current.Id)
                 {
                     process.Kill();
+                }
+            }
+        }
+
+        public static void Starts(string[] files)
+        {
+            if (ListTool.HasElements(files))
+            {
+                foreach (var f in files)
+                {
+                    if (!string.IsNullOrWhiteSpace(f))
+                        StartProcess(f);
+                }
+            }
+        }
+        public static void Kills(string[] pro)
+        {
+            if (ListTool.HasElements(pro))
+            {
+                foreach (var p in pro)
+                {
+                    if (!string.IsNullOrWhiteSpace(p))
+                        KillProcess(p);
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using Oreo.VersionUpdate.Commons;
+using Oreo.VersionUpdate.Helpers;
 using Oreo.VersionUpdate.Models;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,8 @@ namespace Oreo.VersionUpdate.Views
 
         string VersionNumber = "";
         string VersionDesc = "";
-        string TempFile = "Temp";
+        string DownTemp = "DownTemp";
+        string BackupTemp = "BackupTemp";
 
         public MainForm()
         {
@@ -41,129 +43,81 @@ namespace Oreo.VersionUpdate.Views
         {
             Task.Factory.StartNew(() =>
             {
-                //读取标准更新最新版本号 获取需要标准更新的配置
-                StartUpdateStandard();
-
-                //使用本地插件名称和版本号 获取需要更新插件的配置
-                StartUpdatePlugin();
-            });
-        }
-        private void StartUpdateStandard()
-        {
-            R.Log.i("读取本地标准更新版本号");
-            string versionNumber = GetStandardVersionNumber();
-            R.Log.i("读取当前标准版本 " + versionNumber + "，准备请求服务器新版本");
-            VersionModel standardNewVersion = GetStandardNewVersion(versionNumber);
-            if (standardNewVersion != null)
-            {
-                R.Log.i("有新的更新，版本号 " + standardNewVersion.VersionNumber);
-                bool flag = Update(standardNewVersion);
-                if (flag)
+                R.Log.i("读取要更新的插件列表");
+                List<PluginModel> pluginList = DataHelper.GetPluginList();
+                if (ListTool.HasElements(pluginList))
                 {
-                    R.Log.i(versionNumber + " 更新成功，当前版本" + standardNewVersion.VersionNumber);
-                }
-                else
-                {
-                    R.Log.w(versionNumber + " 更新失败");
-                }
-            }
-            else
-            {
-                R.Log.i("当前标准版本为最新，不需要更新");
-            }
-        }
-        private void StartUpdatePlugin()
-        {
-            R.Log.i("读取本地插件列表（名称、版本号）");
-            List<PluginModel> pluginList = GetPluginList();
-            if (ListTool.HasElements(pluginList))
-            {
-                R.Log.i("共读取到 " + pluginList.Count + " 个插件");
-                pluginList.ForEach(x =>
-                {
-                    R.Log.i("请求 " + x.Name + " / " + x.Version + " 插件的更新");
-                    VersionModel pluginNewVersion = GetPluginNewVersion(x);
-                    if (pluginNewVersion != null)
+                    R.Log.i("共读取到 " + pluginList.Count + " 个插件");
+                    pluginList.ForEach(x =>
                     {
-                        R.Log.i(x.Name + " / " + x.Version + " 插件有新版本 " + pluginNewVersion.VersionNumber + " 需要更新，准备更新");
-                        bool flag = Update(pluginNewVersion);
-                        if (flag)
+                        R.Log.i("请求 " + x.Name + " / " + x.Version + " 插件的更新");
+                        VersionModel pluginNewVersion = DataHelper.GetPluginNewVersion(x);
+                        if (pluginNewVersion != null)
                         {
-                            R.Log.i(x.Name + " 更新成功，当前版本" + pluginNewVersion.VersionNumber);
+                            R.Log.i("准备更新 " + x.Name);
+                            BeforeUpdate(pluginNewVersion);//更新前操作
+                            bool flag = Update(pluginNewVersion);
+                            AfterUpdate(pluginNewVersion);//更新后操作
+                            if (flag)
+                            {
+                                R.Log.i(x.Name + " 更新成功，当前版本" + pluginNewVersion.VersionNumber);
+                            }
+                            else
+                            {
+                                R.Log.w(x.Name + " 更新失败");
+                            }
                         }
                         else
                         {
-                            R.Log.w(x.Name + " 更新失败");
+                            R.Log.i("更新配置请求失败，跳过当前更新");
                         }
-                    }
-                    else
-                    {
-                        R.Log.i("当前插件版本为最新版本，不需要更新");
-                    }
-                });
-            }
-            else
-            {
-                R.Log.w("本地插件列表为空");
-            }
-            R.Log.i("本地插件更新操作结束");
+                    });
+                }
+                else
+                {
+                    R.Log.w("更新插件列表为空");
+                }
+                R.Log.i("本地插件更新操作结束");
+            });
         }
-        #region 读取本地数据操作
-        private List<PluginModel> GetPluginList()
-        {
-            List<PluginModel> rs = null;
-            return rs;
-        }
-        private string GetStandardVersionNumber()
-        {
-            string rs = R.Settings.Version.Number;
-            return rs;
-        }
-        #endregion
-        #region 读取网络数据操作
-        private VersionModel GetStandardNewVersion(string vn)
-        {
-            VersionModel rs = JsonTool.ToObjFromFile<VersionModel>(@"D:\CoCo\GitHub\Fork\Fork.Net\Oreo.VersionBuilder\bin\Debug\VersionFile\0527112916.version");
-            return rs;
-        }
-        private VersionModel GetPluginNewVersion(PluginModel pm)
-        {
-            VersionModel rs = JsonTool.ToObjFromFile<VersionModel>(@"D:\CoCo\GitHub\Fork\Fork.Net\Oreo.VersionBuilder\bin\Debug\VersionFile\0527112916.version");
-            return rs;
-        }
-        #endregion
+
         #region 更新操作
+        /// <summary>
+        /// 更新的完整流程
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         private bool Update(VersionModel vm)
         {
             VersionNumber = vm.VersionNumber;
             VersionDesc = vm.VersionDesc;
-            TempFile = Guid.NewGuid().ToString();
-            if (DirTool.Create(R.Paths.Temp + TempFile))
+            DownTemp = Guid.NewGuid().ToString();
+            BackupTemp = Guid.NewGuid().ToString();
+            if (DirTool.Create(R.Paths.Temp + DownTemp))
             {
-                R.Log.i("创建临时存放文件目录 " + R.Paths.Temp + TempFile);
+                R.Log.i("创建临时下载目录 " + R.Paths.Temp + DownTemp);
+                R.Log.i("创建临时备份目录 " + R.Paths.Temp + BackupTemp);
 
                 R.Log.i("将版本信息显示到 UI");
                 UILoadVersion(vm);
-                UpdateBefore(vm);
 
                 if (UpdateDownload(vm))
                 {
-                    R.Log.i("文件已下载成功");
-                    if (UpdateInstead(vm))
+                    R.Log.i("文件已全部下载成功");
+                    if (UpdateInsteadAndBackup(vm))
                     {
                         R.Log.i("文件已替换，准备执行清理任务");
-                        UpdateClean(vm);
-
-
-                        R.Log.i("配置文件信息更新完毕，准备写入新版本配置和描述信息");
-                        UpdateConfig(vm);
-                        UpdateWhatsnew(vm);
-                        UpdateAfter(vm);
+                        FileHelper.Clean(vm);
+                        R.Log.i("准备更新配置信息");
+                        DataHelper.UpdatePluginConfig(vm);
+                        DataHelper.UpdateWhatsnew(vm);
+                        UIUpdateDetail("添加新版本特性说明 Whatsnew.txt");
                         return true;
                     }
                     else
                     {
-                        R.Log.w("文件替换失败，当前更新失败");
+                        UpdateRollback(vm);
+                        R.Log.w("文件替换失败，当前更新失败，准备回滚备份的文件");
                     }
                 }
                 else
@@ -173,29 +127,34 @@ namespace Oreo.VersionUpdate.Views
             }
             else
             {
-                R.Log.i("创建临时存放文件目录 " + R.Paths.Temp + TempFile + " 失败，中止更新");
+                R.Log.i("创建临时存放文件目录 " + R.Paths.Temp + DownTemp + " 失败，中止更新");
             }
             return false;
         }
-        private void UpdateBefore(VersionModel vm)
+        /// <summary>
+        /// 更新前操作（启动或关闭进程）
+        /// </summary>
+        /// <param name="vm"></param>
+        private void BeforeUpdate(VersionModel vm)
         {
-            if (ListTool.HasElements(vm.BeforeUpdateKillProcess))
-            {
-                foreach (var p in vm.BeforeUpdateKillProcess)
-                {
-                    if (!string.IsNullOrWhiteSpace(p))
-                        ProcessTool.KillProcess(p);
-                }
-            }
-            if (ListTool.HasElements(vm.BeforeUpdateStartProcess))
-            {
-                foreach (var p in vm.BeforeUpdateStartProcess)
-                {
-                    if (!string.IsNullOrWhiteSpace(p))
-                        ProcessTool.StartProcess(p);
-                }
-            }
+            ProcessTool.Kills(vm.BeforeUpdateKillProcess);
+            ProcessTool.Starts(vm.BeforeUpdateStartProcess);
         }
+        /// <summary>
+        /// 更新后操作（启动或关闭进程）
+        /// </summary>
+        /// <param name="vm"></param>
+        private void AfterUpdate(VersionModel vm)
+        {
+            ProcessTool.Kills(vm.AfterUpdateKillProcess);
+            ProcessTool.Starts(vm.AfterUpdateStartProcess);
+            UIUpdateDetail("当前更新完成");
+        }
+        /// <summary>
+        /// 下载要更新的文件
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         private bool UpdateDownload(VersionModel vm)
         {
             FileCodeTool fcode = new FileCodeTool();
@@ -206,8 +165,8 @@ namespace Oreo.VersionUpdate.Views
                 {
                     R.Log.v("当前处理文件：" + file.ServerFile);
                     string serverFile = DirTool.Combine(vm.ServerPath, file.ServerFile);
-                    string tempFile = DirTool.Combine(R.Paths.Temp, TempFile, file.ServerFile);//下载到目标位置（带文件名）
-                    string localFile = DirTool.IsDriver(file.LocalFile) ? file.LocalFile : DirTool.Combine(R.Paths.App, file.LocalFile);//旧文件位置
+                    string tempFile = DirTool.Combine(R.Paths.Temp, DownTemp, file.ServerFile);//下载到目标位置（带文件名）
+                    string localFile = DirTool.IsDriver(file.LocalFile) ? file.LocalFile : DirTool.Combine(R.Paths.ProjectRoot, file.LocalFile);//旧文件位置
                     if (fcode.GetMD5(localFile) != file.FileMD5)
                     {
                         UIUpdateDetail("准备下载：" + Path.GetFileName(file.ServerFile));
@@ -230,20 +189,38 @@ namespace Oreo.VersionUpdate.Views
             }
             return false;
         }
-        private bool UpdateInstead(VersionModel vm)
+        /// <summary>
+        /// 备份并替换文件
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        private bool UpdateInsteadAndBackup(VersionModel vm)
         {
             var insteadFile = vm.FileList.Where(x => x.IsClean == false);
             foreach (var file in insteadFile)
             {
-                string tempFile = DirTool.Combine(R.Paths.Temp, TempFile, file.ServerFile);//下载到目标位置（带文件名）
-                string localFile = DirTool.IsDriver(file.LocalFile) ? file.LocalFile : DirTool.Combine(R.Paths.App, file.LocalFile);//旧文件位置
+                string tempDown = DirTool.Combine(R.Paths.Temp, DownTemp, file.ServerFile);//下载到目标位置（带文件名）
+                string tempBack = DirTool.Combine(R.Paths.Temp, BackupTemp, file.ServerFile);//备份到目标位置（带文件名）
+                string localFile = DirTool.IsDriver(file.LocalFile) ? file.LocalFile : DirTool.Combine(R.Paths.ProjectRoot, file.LocalFile);//旧文件位置
 
-                if (File.Exists(tempFile))
+                //备份文件
+                if (File.Exists(localFile) && File.Exists(tempDown))
+                {
+                    try
+                    {
+                        DirTool.Create(DirTool.GetFilePath(tempBack));
+                        File.Copy(localFile, tempBack, true);
+                        UIUpdateDetail("正在备份：" + tempBack);
+                    }
+                    catch (Exception e) { }
+                }
+                //替换文件
+                if (File.Exists(tempDown))
                 {
                     try
                     {
                         DirTool.Create(DirTool.GetFilePath(localFile));
-                        File.Copy(tempFile, localFile, true);
+                        File.Copy(tempDown, localFile, true);
                         UIUpdateDetail("正在更新：" + file.LocalFile);
                     }
                     catch (Exception e)
@@ -251,73 +228,41 @@ namespace Oreo.VersionUpdate.Views
                         return false;
                     }
                 }
+
             }
             return true;
         }
-        private void UpdateClean(VersionModel vm)
+        /// <summary>
+        /// 更新回滚
+        /// </summary>
+        /// <param name="vm"></param>
+        private void UpdateRollback(VersionModel vm)
         {
-            //清理临时文件夹
-            if (Directory.Exists(R.Paths.Temp))
+            var backFile = vm.FileList.Where(x => x.IsClean == false);
+            foreach (var file in backFile)
             {
-                try { Directory.Delete(R.Paths.Temp, true); } catch { }
-                UIUpdateDetail("正在清理临时文件夹：Temp");
-            }
-            //清理指定文件
-            var cleanFile = vm.FileList.Where(x => x.IsClean == true);
-            foreach (var file in cleanFile)
-            {
-                string fff = DirTool.IsDriver(file.LocalFile) ? file.LocalFile : R.Paths.App + file.LocalFile;
-                if (File.Exists(fff))
+                string tempBack = DirTool.Combine(R.Paths.Temp, BackupTemp, file.ServerFile);//备份到目标位置（带文件名）
+                string localFile = DirTool.IsDriver(file.LocalFile) ? file.LocalFile : DirTool.Combine(R.Paths.ProjectRoot, file.LocalFile);//旧文件位置
+
+                //还原备份文件
+                if (File.Exists(tempBack))
                 {
-                    try { File.Delete(fff); } catch { }
-                    UIUpdateDetail("正在清理指定位置文件：" + fff);
+                    try
+                    {
+                        DirTool.Create(DirTool.GetFilePath(localFile));
+                        File.Copy(tempBack, localFile, true);
+                        UIUpdateDetail("正在还原备份文件：" + file.LocalFile);
+                    }
+                    catch (Exception e) { }
                 }
             }
-        }
-        private void UpdateConfig(VersionModel vm)
-        {
-            if (string.IsNullOrWhiteSpace(vm.PluginName) || string.IsNullOrWhiteSpace(vm.PluginEntry))
-            {
-                //标准版本更改设置
-                IniTool.WriteValue(R.Files.Settings, "Version", "Number", vm.VersionNumber);
-                UIUpdateDetail("修改主版本号：" + vm.VersionNumber);
-            }
-            else
-            {
-                //插件版本更改设置
-                UIUpdateDetail("修改插件版本号：" + vm.PluginName + " " + vm.VersionNumber);
-            }
-        }
-        private void UpdateWhatsnew(VersionModel vm)
-        {
-            TxtTool.Append(R.Files.Whatsnew, string.Format("{0} {1} {2}",
-                    vm.CodeName, vm.VersionNumber, (vm.PluginName == "" ? "" : "For:" + vm.PluginName)));
-            TxtTool.Append(R.Files.Whatsnew, vm.VersionDesc);
-            TxtTool.Append(R.Files.Whatsnew, new string('=', 50));
-            UIUpdateDetail("添加新版本特性说明 Whatsnew.txt");
-        }
-        private void UpdateAfter(VersionModel vm)
-        {
-            if (ListTool.HasElements(vm.AfterUpdateKillProcess))
-            {
-                foreach (var p in vm.AfterUpdateKillProcess)
-                {
-                    if (!string.IsNullOrWhiteSpace(p))
-                        ProcessTool.KillProcess(p);
-                }
-            }
-            if (ListTool.HasElements(vm.AfterUpdateStartProcess))
-            {
-                foreach (var p in vm.AfterUpdateStartProcess)
-                {
-                    if (!string.IsNullOrWhiteSpace(p))
-                        ProcessTool.StartProcess(p);
-                }
-            }
-            UIUpdateDetail("当前更新完成");
         }
         #endregion
         #region UI操作
+        /// <summary>
+        /// 显示更新详情
+        /// </summary>
+        /// <param name="s"></param>
         void UIUpdateDetail(string s)
         {
             Invoke(new Action(() =>
@@ -326,6 +271,10 @@ namespace Oreo.VersionUpdate.Views
             }));
             Thread.Sleep(DETAIL_SHOWTIME);
         }
+        /// <summary>
+        /// 读取当前要更新的信息
+        /// </summary>
+        /// <param name="vm"></param>
         void UILoadVersion(VersionModel vm)
         {
             Invoke(new Action(() =>
@@ -335,6 +284,9 @@ namespace Oreo.VersionUpdate.Views
                 LbUpdateDetail.Text = "配置已加载，准备更新……";
             }));
         }
+        /// <summary>
+        /// 退出程序
+        /// </summary>
         void UIClose()
         {
             Invoke(new Action(() =>
@@ -343,8 +295,12 @@ namespace Oreo.VersionUpdate.Views
             }));
         }
         #endregion
-
         #region 控件事件
+        /// <summary>
+        /// 点击版本号 显示版本特性
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LbVersionNumber_Click(object sender, EventArgs e)
         {
             MessageBox.Show(VersionDesc, VersionNumber + " 新特性");

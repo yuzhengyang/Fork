@@ -22,20 +22,18 @@ namespace Oreo.VersionUpdate.Commons
         public static class Paths
         {
             public static string App = AppDomain.CurrentDomain.BaseDirectory;
-            public static string Temp = App + "Temp\\";
+            public static string ProjectRoot = AppDomain.CurrentDomain.BaseDirectory;
+            public static string Temp = ProjectRoot + "Temp\\";
         }
         public static class Files
         {
             public static string App = Application.ExecutablePath;
-            public static string Settings = Paths.App + "\\upd.ini";
-            public static string Whatsnew = Paths.App + "\\Whatsnew.txt";
+            public static string Settings = Paths.ProjectRoot + "\\upd.ini";
+            public static string Whatsnew = Paths.ProjectRoot + "\\Whatsnew.txt";
+            public static string Plugins = "";
         }
         public static class Settings
         {
-            public static class Version
-            {
-                public static string Number = "0.0.0.0";
-            }
             public static class FTP
             {
                 public static string Address = "192.168.3.56";

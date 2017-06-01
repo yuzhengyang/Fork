@@ -68,4 +68,23 @@ namespace Oreo.VersionUpdate.Models
         /// </summary>
         public bool IsClean { get; set; }
     }
+    public class VersionRegister
+    {
+        /// <summary>
+        /// 注册表键（路径）
+        /// </summary>
+        public string Key { get; set; }
+        /// <summary>
+        /// 注册表项（名称）
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 注册表值
+        /// </summary>
+        public string Value { get; set; }
+        /// <summary>
+        /// 是否清理该项
+        /// </summary>
+        public bool IsClean { get; set; }
+    }
 }
