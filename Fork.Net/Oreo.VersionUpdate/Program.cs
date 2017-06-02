@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Y.Utils.DataUtils.Collections;
 
 namespace Oreo.VersionUpdate
 {
@@ -16,15 +17,15 @@ namespace Oreo.VersionUpdate
         [STAThread]
         static void Main(string[] args)
         {
-            if (args != null && args.Length == 2)
+            if (ListTool.HasElements(args))
             {
-                R.Paths.ProjectRoot = args[0];
-                R.Files.Plugins = args[1];
-                P.Init();
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MainForm());
+                if (args.Length > 0) R.Paths.ProjectRoot = args[0];
+                if (args.Length > 1) R.Files.Plugins = args[1];
             }
+            P.Init();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
     }
 }

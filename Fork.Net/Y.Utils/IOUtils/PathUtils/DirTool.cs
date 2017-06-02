@@ -91,10 +91,11 @@ namespace Y.Utils.IOUtils.PathUtils
             {
                 if (paths.Length > 1)
                 {
-                    StringBuilder result = new StringBuilder();
-                    foreach (var path in paths)
+                    StringBuilder result = new StringBuilder(paths[0]);
+                    for (int i = 1; i < paths.Length; i++)
                     {
-                        result.Append(path);
+                        result.Append("\\");
+                        result.Append(paths[i]);
                     }
                     while (result.ToString().IndexOf("\\\\") >= 0)
                     {

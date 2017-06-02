@@ -20,7 +20,7 @@ namespace Oreo.PCMonitor.Commons
             R.Log = new Log();
             R.Log.SetWriteFile(true, "Oreo.PCMonitor.Log");
             R.Log.LogLevel = LogLevel.All;
-            //Log.AllocConsole();
+            Log.AllocConsole();
         }
         static void InitNFS()
         {

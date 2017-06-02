@@ -10,6 +10,5 @@ namespace Oreo.VersionUpdate.Models
     {
         public string Name { get; set; }
         public string Version { get; set; }
-        public string Entry { get; set; }
     }
 }

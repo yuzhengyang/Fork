@@ -18,13 +18,14 @@ namespace Oreo.VersionUpdate.Commons
         }
         static void InitSettings()
         {
-            R.LogLevel = (LogLevel)IniTool.GetIntValue(R.Files.Settings, "Log", "Level");
+            int level = IniTool.GetIntValue(R.Files.Settings, "Log", "Level");
+            R.LogLevel = (LogLevel)level;
         }
         static void InitLog()
         {
             R.Log.SetWriteFile(true, "Oreo.VersionUpdate.Log");
             R.Log.LogLevel = R.LogLevel;
         }
-       
+
     }
 }

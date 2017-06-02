@@ -2,12 +2,14 @@
 using Oreo.VersionUpdate.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Y.Utils.DataUtils.Collections;
 using Y.Utils.DataUtils.JsonUtils;
+using Y.Utils.IOUtils.PathUtils;
 using Y.Utils.IOUtils.TxtUtils;
 using Y.Utils.WindowsUtils.InfoUtils;
 
@@ -21,6 +23,16 @@ namespace Oreo.VersionUpdate.Helpers
         /// <returns></returns>
         public static List<PluginModel> GetPluginList()
         {
+            #region 本地插件列表是否存在
+            if (!File.Exists(R.Files.Plugins))
+            {
+                DirTool.Create(DirTool.GetFilePath(R.Files.Plugins));
+
+                //如果文件不存在 创建新的插件xml
+                XElement xe = new XElement("Plugins");
+                xe.Save(R.Files.Plugins);
+            }
+            #endregion
             #region 读取本地插件列表
             List<PluginModel> localPluginList = new List<PluginModel>();
             try
@@ -34,7 +46,6 @@ namespace Oreo.VersionUpdate.Helpers
                         PluginModel plug = new PluginModel()
                         {
                             Name = ele.Attribute("Name").Value,
-                            Entry = ele.Attribute("Entry").Value,
                             Version = ele.Attribute("Version").Value
                         };
                         localPluginList.Add(plug);
@@ -46,8 +57,7 @@ namespace Oreo.VersionUpdate.Helpers
             #region 读取服务器插件列表
             List<PluginModel> serverPluginList = new List<PluginModel>()
             {
-                new PluginModel() { Name="yo",Version=Guid.NewGuid().ToString(),Entry="C:\\aa"},
-                new PluginModel() { Name="yooo2",Version=Guid.NewGuid().ToString(),Entry="C:\\ab"}
+                new PluginModel() { Name="测试服务器插件列表01",Version=Guid.NewGuid().ToString()}
             };
             #endregion
             #region 整理需要更新的插件列表
@@ -82,7 +92,7 @@ namespace Oreo.VersionUpdate.Helpers
         /// <returns></returns>
         public static VersionModel GetPluginNewVersion(PluginModel pm)
         {
-            VersionModel rs = JsonTool.ToObjFromFile<VersionModel>(@"D:\CoCo\GitHub\Fork\Fork.Net\Oreo.VersionBuilder\bin\Debug\VersionFile\0527112916.version");
+            VersionModel rs = JsonTool.ToObjFromFile<VersionModel>(@"D:\CoCo\GitHub\Fork\Fork.Net\Oreo.VersionBuilder\bin\Debug\VersionFile\0602104746.version");
             return rs;
         }
         /// <summary>
@@ -102,23 +112,34 @@ namespace Oreo.VersionUpdate.Helpers
         /// <param name="vm"></param>
         public static void UpdatePluginConfig(VersionModel vm)
         {
-            if (!string.IsNullOrWhiteSpace(vm.PluginName) && !string.IsNullOrWhiteSpace(vm.PluginEntry))
+            try
             {
-                //插入更新的插件配置
-                XElement insertXE = XElement.Load(R.Files.Plugins);
-                XElement record = new XElement("Item", new XAttribute("Name", vm.PluginName), new XAttribute("Entry", vm.PluginEntry), new XAttribute("Version", vm.VersionNumber));
-                insertXE.Add(record);
-                insertXE.Save(R.Files.Plugins);
-                //删除老版本插件配置
-                XElement deleteXE = XElement.Load(R.Files.Plugins);
-                IEnumerable<XElement> elements = from ele in deleteXE.Elements("book")
-                                                 where (string)ele.Attribute("ISBN") == id
-                                                 select ele;
+                if (!string.IsNullOrWhiteSpace(vm.PluginName) && !string.IsNullOrWhiteSpace(vm.PluginEntry))
                 {
-                    if (elements.Count() > 0)
-                        elements.First().Remove();
+                    XElement xe = XElement.Load(R.Files.Plugins);
+                    XElement record = xe.Elements("Item").FirstOrDefault(x => x.Attribute("Name").Value == vm.PluginName);
+                    if (record != null)
+                    {
+                        //如果xml包含改插件，则更新
+                        string entryFile = DirTool.IsDriver(vm.PluginEntry) ? vm.PluginEntry : DirTool.Combine(R.Paths.ProjectRoot, vm.PluginEntry);
+
+                        record.Attribute("Entry").Value = entryFile;
+                        record.Attribute("Version").Value = vm.VersionNumber;
+                    }
+                    else
+                    {
+                        //如果xml不包含插件，则添加插件
+                        string entryFile = DirTool.IsDriver(vm.PluginEntry) ? vm.PluginEntry : DirTool.Combine(R.Paths.ProjectRoot, vm.PluginEntry);
+
+                        XElement insertRec = new XElement("Item", new XAttribute("Name", vm.PluginName), new XAttribute("Entry", entryFile), new XAttribute("Version", vm.VersionNumber));
+                        xe.Add(insertRec);
+                    }
+                    xe.Save(R.Files.Plugins);
                 }
-                deleteXE.Save(R.Files.Plugins);
+            }
+            catch (Exception e)
+            {
+                R.Log.e("修改插件配置信息出错:" + e.Message);
             }
         }
         /// <summary>

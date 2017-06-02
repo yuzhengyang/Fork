@@ -22,15 +22,15 @@ namespace Oreo.VersionUpdate.Commons
         public static class Paths
         {
             public static string App = AppDomain.CurrentDomain.BaseDirectory;
-            public static string ProjectRoot = AppDomain.CurrentDomain.BaseDirectory;
-            public static string Temp = ProjectRoot + "Temp\\";
+            public static string ProjectRoot = @"C:\Noah\NoahSafe\\";
+            public static string Temp = ProjectRoot + "Temp\\Update\\";
         }
         public static class Files
         {
             public static string App = Application.ExecutablePath;
-            public static string Settings = Paths.ProjectRoot + "\\upd.ini";
+            public static string Settings = Paths.App + "\\upd.ini";
             public static string Whatsnew = Paths.ProjectRoot + "\\Whatsnew.txt";
-            public static string Plugins = "";
+            public static string Plugins = Paths.ProjectRoot + @"Plugins.xml";
         }
         public static class Settings
         {

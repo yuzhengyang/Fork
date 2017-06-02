@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Oreo.PCMonitor.Properties
+namespace Test.WpfApplication1.Properties
 {
 
 

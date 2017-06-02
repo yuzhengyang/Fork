@@ -63,7 +63,7 @@ namespace Oreo.VersionBuilder.Views
                             vm.FileList.ForEach(f =>
                             {
                                 DgFileList.Rows.Add(new object[] {
-                                    f.ServerFile,f.LocalFile,f.IsClean
+                                    f.ServerFile,f.LocalFile,f.FileMD5,f.IsClean
                                 });
                             });
                         }

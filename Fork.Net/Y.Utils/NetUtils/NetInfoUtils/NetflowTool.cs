@@ -44,25 +44,28 @@ namespace Y.Utils.NetUtils.NetInfoUtils
         public delegate void MonitorEvent(NetFlowTool n);
         public MonitorEvent DataMonitorEvent;
 
+        public string[] Instances { get { return _Instances; } }
+        private string[] _Instances;
+
         private bool Init()
         {
-            string[] instances = NetCardInfoTool.GetInstanceNames();
-            if (ListTool.HasElements(instances))
+            _Instances = NetCardInfoTool.GetInstanceNames();
+            if (ListTool.HasElements(_Instances))
             {
                 UploadCounter = new List<PerformanceCounter>();
                 DownloadCounter = new List<PerformanceCounter>();
-                for (int i = 0; i < instances.Count(); i++)
+                for (int i = 0; i < _Instances.Count(); i++)
                 {
                     try
                     {
                         // 添加 上行流量计数器
-                        UploadCounter.Add(new PerformanceCounter("Network Interface", "Bytes Sent/sec", instances[i]));
+                        UploadCounter.Add(new PerformanceCounter("Network Interface", "Bytes Sent/sec", _Instances[i]));
                     }
                     catch { }
                     try
                     {
                         // 添加 下行流量计数器
-                        DownloadCounter.Add(new PerformanceCounter("Network Interface", "Bytes Received/sec", instances[i]));
+                        DownloadCounter.Add(new PerformanceCounter("Network Interface", "Bytes Received/sec", _Instances[i]));
                     }
                     catch { }
                 }
@@ -100,13 +103,29 @@ namespace Y.Utils.NetUtils.NetInfoUtils
                                 _DownloadData += (int)dc?.NextValue();
                             }
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+
+                        }
                         Thread.Sleep(DataCounterInterval);
                     }
                 });
                 return true;
             }
             return false;
+        }
+        public void Restart()
+        {
+            foreach (var uc in UploadCounter)
+            {
+                uc?.Close();
+            }
+            foreach (var dc in DownloadCounter)
+            {
+                dc?.Close();
+            }
+
+            Init();
         }
         public void Stop()
         {

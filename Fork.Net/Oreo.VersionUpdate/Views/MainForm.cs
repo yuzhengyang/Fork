@@ -137,8 +137,7 @@ namespace Oreo.VersionUpdate.Views
         /// <param name="vm"></param>
         private void BeforeUpdate(VersionModel vm)
         {
-            ProcessTool.Kills(vm.BeforeUpdateKillProcess);
-            ProcessTool.Starts(vm.BeforeUpdateStartProcess);
+            ProcessHelper.BeforeUpdate(vm);
         }
         /// <summary>
         /// 更新后操作（启动或关闭进程）
@@ -146,8 +145,7 @@ namespace Oreo.VersionUpdate.Views
         /// <param name="vm"></param>
         private void AfterUpdate(VersionModel vm)
         {
-            ProcessTool.Kills(vm.AfterUpdateKillProcess);
-            ProcessTool.Starts(vm.AfterUpdateStartProcess);
+            ProcessHelper.AfterUpdate(vm);
             UIUpdateDetail("当前更新完成");
         }
         /// <summary>
@@ -161,15 +159,15 @@ namespace Oreo.VersionUpdate.Views
             var downFile = vm.FileList.Where(x => x.IsClean == false);
             if (vm != null && ListTool.HasElements(downFile))
             {
-                foreach (var file in vm.FileList)
+                foreach (var file in downFile)
                 {
-                    R.Log.v("当前处理文件：" + file.ServerFile);
+                    R.Log.v("当前下载文件：" + file.ServerFile);
                     string serverFile = DirTool.Combine(vm.ServerPath, file.ServerFile);
                     string tempFile = DirTool.Combine(R.Paths.Temp, DownTemp, file.ServerFile);//下载到目标位置（带文件名）
                     string localFile = DirTool.IsDriver(file.LocalFile) ? file.LocalFile : DirTool.Combine(R.Paths.ProjectRoot, file.LocalFile);//旧文件位置
                     if (fcode.GetMD5(localFile) != file.FileMD5)
                     {
-                        UIUpdateDetail("准备下载：" + Path.GetFileName(file.ServerFile));
+                        UIUpdateDetail("正在下载：" + Path.GetFileName(file.ServerFile));
                         R.Log.v("MD5码不相同，准备下载");
                         FtpHelper ftp = new FtpHelper(R.Settings.FTP.Address, R.Settings.FTP.Account, R.Settings.FTP.Password);
                         if (!ftp.Download(serverFile, tempFile))
@@ -210,7 +208,7 @@ namespace Oreo.VersionUpdate.Views
                     {
                         DirTool.Create(DirTool.GetFilePath(tempBack));
                         File.Copy(localFile, tempBack, true);
-                        UIUpdateDetail("正在备份：" + tempBack);
+                        UIUpdateDetail("正在备份：" + Path.GetFileName(tempBack));
                     }
                     catch (Exception e) { }
                 }
@@ -281,6 +279,7 @@ namespace Oreo.VersionUpdate.Views
             {
                 LbCodeName.Text = vm.CodeName;
                 LbPluginName.Text = vm.PluginName;
+                LbVersionNumber.Text = vm.VersionNumber;
                 LbUpdateDetail.Text = "配置已加载，准备更新……";
             }));
         }

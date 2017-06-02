@@ -1,0 +1,23 @@
+﻿<Window x:Class="Oreo.PCMonitor.Views.NetDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Oreo.PCMonitor.Views"
+        mc:Ignorable="d"
+        Title="NetDetailsWindow" Height="400" Width="650" Loaded="Window_Loaded">
+    <Grid>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="319" Width="622" ColumnWidth="SizeToHeader">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="名称"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="下载速度"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="上传速度"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="已下载流量"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="已上传流量"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="连接数"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="LbStatus" Content="Label" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
