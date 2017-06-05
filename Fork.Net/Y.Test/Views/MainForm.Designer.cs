@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,7 +38,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(93, 176);
+            this.button1.Location = new System.Drawing.Point(77, 136);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -48,7 +49,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(180, 269);
+            this.checkBox1.Location = new System.Drawing.Point(164, 229);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(78, 16);
             this.checkBox1.TabIndex = 1;
@@ -58,7 +59,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(201, 332);
+            this.label1.Location = new System.Drawing.Point(185, 292);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 2;
@@ -66,7 +67,7 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(270, 102);
+            this.listView1.Location = new System.Drawing.Point(254, 62);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(121, 97);
             this.listView1.TabIndex = 3;
@@ -74,7 +75,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(315, 244);
+            this.button2.Location = new System.Drawing.Point(299, 204);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -86,7 +87,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 532);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.ClientSize = new System.Drawing.Size(418, 320);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);

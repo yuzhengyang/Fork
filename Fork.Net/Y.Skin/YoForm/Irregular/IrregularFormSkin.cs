@@ -218,5 +218,11 @@ namespace Y.Skin.YoForm.Irregular
             }
         }
         #endregion
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            FormStyleAPI.ReleaseCapture();
+            FormStyleAPI.SendMessage(Handle, FormStyleAPI.WM_NCLBUTTONDOWN, FormStyleAPI.HTCAPTION, 0);
+        }
     }
 }

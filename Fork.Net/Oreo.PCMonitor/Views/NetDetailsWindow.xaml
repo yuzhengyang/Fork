@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="NetDetailsWindow" Height="400" Width="650" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="319" Width="622" ColumnWidth="SizeToHeader">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="319" Width="622" ColumnWidth="SizeToHeader" ItemsSource="{Binding GetAllData2}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="名称"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="下载速度"/>
@@ -17,7 +17,7 @@
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="连接数"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="LbStatus" Content="Label" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LbStatus" Content="{Binding Status}" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

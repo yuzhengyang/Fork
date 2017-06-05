@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <TextBox x:Name="tbDataFirst" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding BindData}" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label" Content="{Binding BindData}" HorizontalAlignment="Left" Margin="184,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-4.754,0.783"/>
+        <TextBox x:Name="tbDataSecond" HorizontalAlignment="Left" Height="23" Margin="387,10,0,0" TextWrapping="Wrap" Text="{Binding TextBoxData}" VerticalAlignment="Top" Width="120"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="271" Width="497" ItemsSource="{Binding GuidList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="文本内容"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>
