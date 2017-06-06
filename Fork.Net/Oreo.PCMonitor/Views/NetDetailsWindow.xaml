@@ -12,14 +12,14 @@
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="336" Margin="10,73,0,0" VerticalAlignment="Top" Width="622">
             <TabItem Header="程序网速">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="307" Width="616" ColumnWidth="SizeToHeader" ItemsSource="{Binding ObNetPro}">
+                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="307" Width="616" ColumnWidth="SizeToHeader" ItemsSource="{Binding ObNetPro}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding ProcessName}" ClipboardContentBinding="{x:Null}" Header="名称"/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="下载速度"/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="上传速度"/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="已下载流量"/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="已上传流量"/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="连接数"/>
+                            <DataGridTextColumn Binding="{Binding DownloadData}" ClipboardContentBinding="{x:Null}" Header="下载速度"/>
+                            <DataGridTextColumn Binding="{Binding UploadData}" ClipboardContentBinding="{x:Null}" Header="上传速度"/>
+                            <DataGridTextColumn Binding="{Binding DownloadData}" ClipboardContentBinding="{x:Null}" Header="已下载流量"/>
+                            <DataGridTextColumn Binding="{Binding UploadDataCount}" ClipboardContentBinding="{x:Null}" Header="已上传流量"/>
+                            <DataGridTextColumn Binding="{Binding ConnectCount}" ClipboardContentBinding="{x:Null}" Header="连接数"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
