@@ -17,7 +17,7 @@ namespace Y.Test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TestMove());
+            Application.Run(new MainForm());
         }
     }
 }

@@ -111,15 +111,15 @@ namespace Y.Skin.YoForm.Irregular
         private void FormMovableEvent()
         {
             //绘制层窗体移动
-            this.MouseDown += new MouseEventHandler(Frm_MouseDown);
-            this.MouseMove += new MouseEventHandler(Frm_MouseMove);
-            this.MouseUp += new MouseEventHandler(Frm_MouseUp);
+            //this.MouseDown += new MouseEventHandler(Frm_MouseDown);
+            //this.MouseMove += new MouseEventHandler(Frm_MouseMove);
+            //this.MouseUp += new MouseEventHandler(Frm_MouseUp);
             this.LocationChanged += new EventHandler(Frm_LocationChanged);
             //控制层层窗体移动
-            Main.MouseDown += new MouseEventHandler(Frm_MouseDown);
-            Main.MouseMove += new MouseEventHandler(Frm_MouseMove);
-            Main.MouseUp += new MouseEventHandler(Frm_MouseUp);
-            Main.LocationChanged += new EventHandler(Frm_LocationChanged);
+            //Main.MouseDown += new MouseEventHandler(Frm_MouseDown);
+            //Main.MouseMove += new MouseEventHandler(Frm_MouseMove);
+            //Main.MouseUp += new MouseEventHandler(Frm_MouseUp);
+            //Main.LocationChanged += new EventHandler(Frm_LocationChanged);
         }
 
         /// <summary>

@@ -36,6 +36,16 @@ namespace Oreo.PCMonitor.Views
                 OnPropertyChanged("Status");
             }
         }
+        private ObservableCollection<NetProcessInfo> _ObNetPro = new ObservableCollection<NetProcessInfo>();
+        public ObservableCollection<NetProcessInfo> ObNetPro
+        {
+            get { return _ObNetPro; }
+            set
+            {
+                _ObNetPro = value;
+                OnPropertyChanged("ObNetPro");
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         public virtual void OnPropertyChanged(string propertyName)
         {
@@ -51,7 +61,7 @@ namespace Oreo.PCMonitor.Views
         {
             Task.Factory.StartNew(() =>
             {
-                while (true)
+                while (IsVisible)
                 {
                     if (R.NFS.IsNetFlowRun || R.NFS.IsNetPacketRun)
                     {
@@ -73,6 +83,7 @@ namespace Oreo.PCMonitor.Views
                         ByteConvertTool.Fmt(R.NFS.NetFlow.DownloadData),
                         ByteConvertTool.Fmt(R.NFS.NetFlow.UploadData),
                          R.NFS.LostPacketCount);
+                    ObNetPro = new ObservableCollection<NetProcessInfo>(R.NFS.NetProcessInfoList);
 
                     //label1.Text = "丢包数：" + R.NFS.LostPacketCount;
                     //LbStatus.Content = "下载：" + ByteConvertTool.Fmt(R.NFS.NetFlow.DownloadData) +
@@ -103,18 +114,6 @@ namespace Oreo.PCMonitor.Views
                     //});
                 }
             }));
-        }
-        public List<NetProcessInfo> GetNetProcessInfoList()
-        {
-            return R.NFS.NetProcessInfoList;
-        }
-        public ObservableCollection<Tuple<int, string, string>> GetAllData()
-        {
-            return null;
-        }
-        public ObservableCollection<Tuple<int, string, string>> GetAllData2
-        {
-            get; set;
         }
     }
 }

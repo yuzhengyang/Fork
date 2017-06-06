@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,12 @@ namespace Test.WpfApplication1
                 }
             }
         }
+        ObservableCollection<StudentModel> StudentModelList = new ObservableCollection<StudentModel>()
+            {
+                new StudentModel() { Number = Guid.NewGuid().ToString().Substring(0,2),Name = "张三"},
+                new StudentModel() { Number = Guid.NewGuid().ToString().Substring(0,2),Name = "李四"},
+                new StudentModel() { Number = Guid.NewGuid().ToString().Substring(0,2),Name = "王五"},
+            };
 
         public event PropertyChangedEventHandler PropertyChanged;
         public virtual void OnPropertyChanged(string propertyName)
@@ -61,8 +68,8 @@ namespace Test.WpfApplication1
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private List<string> _GuidList;
-        public List<string> GuidList
+        private ObservableCollection<StudentModel> _GuidList;
+        public ObservableCollection<StudentModel> GuidList
         {
             get { return _GuidList; }
             set
@@ -77,19 +84,17 @@ namespace Test.WpfApplication1
             InitializeComponent();
             DataContext = this;
 
+            GuidList = StudentModelList;
+
             Task.Factory.StartNew(() =>
             {
                 for (int i = 0; i < 10000; i++)
                 {
-                    List<string> gl = new List<string>() {
-                        Guid.NewGuid().ToString(),
-                        Guid.NewGuid().ToString(),
-                        Guid.NewGuid().ToString(),
-                        new string('1',DateTime.Now.Second),
-                        DateTime.Now.ToString("HH:mm:ss.fff"),
-                        "12234567890-hgfdaWWERTYHBNBBVVCXZ"
-                    };
-                    GuidList = gl;
+                    foreach (var item in GuidList)
+                    {
+                        item.Number = Guid.NewGuid().ToString().Substring(0, 2);
+                    }
+                    GuidList = new ObservableCollection<StudentModel>(StudentModelList);
 
 
                     TextBoxData = DateTime.Now.ToString("HH:mm:ss.fff");
