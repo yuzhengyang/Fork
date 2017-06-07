@@ -13,5 +13,10 @@ namespace Oreo.PCMonitor.Views
         {
             new NetDetailForm().Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

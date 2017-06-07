@@ -73,7 +73,9 @@ namespace Oreo.PCMonitor.Views
                 }
             });
         }
-        public void Order() { }
+        public void Order(object sender, MouseButtonEventArgs e)
+        { 
+        }
         private void UIDgProcessDetailUpdate()
         {
             Dispatcher.Invoke(new Action(() =>
