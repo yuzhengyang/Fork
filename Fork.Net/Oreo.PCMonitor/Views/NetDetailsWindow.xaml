@@ -14,7 +14,7 @@
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="307" Width="616" ColumnWidth="SizeToHeader" ItemsSource="{Binding ObNetPro}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding ProcessName}" ClipboardContentBinding="{x:Null}" Header="名称"/>
+                            <DataGridTextColumn Binding="{Binding ProcessName}" ClipboardContentBinding="{x:Null}" Header="名称" Width="150"/>
                             <DataGridTextColumn Binding="{Binding DownloadData}" ClipboardContentBinding="{x:Null}" Header="下载速度"/>
                             <DataGridTextColumn Binding="{Binding UploadData}" ClipboardContentBinding="{x:Null}" Header="上传速度"/>
                             <DataGridTextColumn Binding="{Binding DownloadData}" ClipboardContentBinding="{x:Null}" Header="已下载流量"/>
