@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using Y.Utils.DataUtils.Collections;
 using Y.Utils.DataUtils.UnitConvertUtils;
 
@@ -178,6 +179,18 @@ namespace Y.Utils.IOUtils.FileUtils
         {
             return ByteConvertTool.Cvt(Size(fileName), unit);
         }
+        public static string GetMD5(string file)
+        {
+            string result = string.Empty;
+            if (!File.Exists(file)) return result;
 
+            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+            {
+                HashAlgorithm algorithm = MD5.Create();
+                byte[] hashBytes = algorithm.ComputeHash(fs);
+                result = BitConverter.ToString(hashBytes).Replace("-", "");
+            }
+            return result;
+        }
     }
 }

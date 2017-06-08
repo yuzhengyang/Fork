@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
+    <Compile Include="IOUtils\FileUtils\FileEncryptTool.cs" />
     <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
     <Compile Include="IOUtils\TxtUtils\XmlTool.cs" />
     <Compile Include="NetUtils\NetInfoUtils\NetCardInfoTool.cs" />
