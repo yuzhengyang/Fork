@@ -53,7 +53,7 @@ namespace Oreo.FileMan.Views
 
         private void BtFileDecrypt_Click(object sender, EventArgs e)
         {
-            string pwd = "12345678901234567890123456789012";
+            string pwd = "123456789012";
             string[] fileInfo = new string[128];
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Title = "请选择要解密的文件";
