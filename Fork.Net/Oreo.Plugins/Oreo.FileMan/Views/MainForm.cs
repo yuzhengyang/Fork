@@ -33,12 +33,11 @@ namespace Oreo.FileMan.Views
                 string file = fileDialog.FileName;
                 if (File.Exists(file))
                 {
-                    string md5 = fct.GetMD5(file);
                     string newfile = file + ".fmk";
 
                     if (!File.Exists(newfile))
                     {
-                        if (FileEncryptTool.Encrypt(file, newfile, pwd))
+                        if (FileEncryptTool.Encrypt(file, newfile, pwd) > 0)
                         {
                             MessageBox.Show("恭喜你，加密成功。", "加密成功");
                         }
@@ -53,7 +52,7 @@ namespace Oreo.FileMan.Views
 
         private void BtFileDecrypt_Click(object sender, EventArgs e)
         {
-            string pwd = "123456789012";
+            string pwd = "1234567890121";
             string[] fileInfo = new string[128];
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Title = "请选择要解密的文件";
@@ -66,7 +65,7 @@ namespace Oreo.FileMan.Views
                     string newfile = file.Substring(0, file.Length - ".fmk".Length);
                     if (!File.Exists(newfile))
                     {
-                        if (FileEncryptTool.Decrypt(file, newfile, pwd))
+                        if (FileEncryptTool.Decrypt(file, newfile, pwd) > 0)
                         {
                             MessageBox.Show("恭喜你，解密成功。", "解密成功");
                         }

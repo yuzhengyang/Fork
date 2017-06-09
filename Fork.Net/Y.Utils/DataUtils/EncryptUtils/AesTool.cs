@@ -13,7 +13,11 @@ namespace Y.Utils.DataUtils.EncryptUtils
 {
     public class AesTool
     {
-        //byte[] keyArray = UTF8Encoding.UTF8.GetBytes("12345678901234567890123456789012");
+        private static int AESKeyLength = 32;//AES加密的密码为32位
+        private static char AESFillChar = 'Y';//AES密码填充字符
+
+        public static string DefaultPassword = "yuzhengyang";//默认密码
+
         /// <summary>
         /// 加密
         /// </summary>
@@ -22,6 +26,7 @@ namespace Y.Utils.DataUtils.EncryptUtils
         /// <returns></returns>
         public static string Encrypt(string str, string key)
         {
+            key = FmtPassword(key);
             byte[] keyArray = Encoding.UTF8.GetBytes(key);
             byte[] toEncryptArray = Encoding.UTF8.GetBytes(str);
 
@@ -43,6 +48,7 @@ namespace Y.Utils.DataUtils.EncryptUtils
         /// <returns></returns>
         public static byte[] Encrypt(byte[] array, string key)
         {
+            key = FmtPassword(key);
             byte[] keyArray = Encoding.UTF8.GetBytes(key);
 
             RijndaelManaged rDel = new RijndaelManaged();
@@ -63,6 +69,7 @@ namespace Y.Utils.DataUtils.EncryptUtils
         /// <returns></returns>
         public static string Decrypt(string str, string key)
         {
+            key = FmtPassword(key);
             byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
             byte[] toEncryptArray = Convert.FromBase64String(str);
 
@@ -84,6 +91,7 @@ namespace Y.Utils.DataUtils.EncryptUtils
         /// <returns></returns>
         public static byte[] Decrypt(byte[] array, string key)
         {
+            key = FmtPassword(key);
             byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
 
             RijndaelManaged rDel = new RijndaelManaged();
@@ -95,6 +103,28 @@ namespace Y.Utils.DataUtils.EncryptUtils
             byte[] resultArray = cTransform.TransformFinalBlock(array, 0, array.Length);
 
             return resultArray;
+        }
+        /// <summary>
+        /// 格式化密码
+        /// </summary>
+        /// <param name="s">要格式化的密码</param>
+        /// <returns></returns>
+        public static string FmtPassword(string s)
+        {
+            string password = s ?? "";
+
+            //格式化密码
+            if (password.Length < AESKeyLength)
+            {
+                //补足不够长的密码
+                password = password + new string(AESFillChar, AESKeyLength - password.Length);
+            }
+            else if (password.Length > AESKeyLength)
+            {
+                //截取过长的密码
+                password = password.Substring(0, AESKeyLength);
+            }
+            return password;
         }
     }
 }
