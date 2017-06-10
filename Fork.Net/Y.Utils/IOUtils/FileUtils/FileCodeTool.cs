@@ -1,11 +1,17 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.6.10
+//      desc:       获取文件特征码
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using System;
 
 namespace Y.Utils.IOUtils.FileUtils
 {
+    /// <summary>
+    /// 获取文件特征码（MD5，SHA1）
+    /// </summary>
     public class FileCodeTool
     {
         /// <summary>

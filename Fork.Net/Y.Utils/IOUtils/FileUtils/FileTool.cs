@@ -1,7 +1,10 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.6.10
+//      desc:       文件操作工具
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +15,9 @@ using Y.Utils.DataUtils.UnitConvertUtils;
 
 namespace Y.Utils.IOUtils.FileUtils
 {
+    /// <summary>
+    /// 文件操作工具
+    /// </summary>
     public class FileTool
     {
         /// <summary>
@@ -132,53 +138,63 @@ namespace Y.Utils.IOUtils.FileUtils
         /// </summary>
         /// <param name="file">文件路径</param>
         /// <returns></returns>
-        public static bool Delete(string file)
+        public static void Delete(string file)
         {
             try
             {
-                if (System.IO.File.Exists(file))
-                {
-                    System.IO.File.Delete(file);
-                    return true;
-                }
-                else
-                {
-                    return true;
-                }
+                File.Delete(file);
             }
-            catch { }
-            return false;
+            catch (Exception e) { }
         }
         /// <summary>
         /// 删除文件（多个）
         /// </summary>
         /// <param name="files">文件路径（支持多个文件路径）</param>
         /// <returns></returns>
-        public static bool Delete(string[] files)
+        public static void Delete(string[] files)
         {
-            bool result = true;
-            if (!ListTool.IsNullOrEmpty(files))
+            if (ListTool.HasElements(files))
             {
                 foreach (var file in files)
                 {
-                    result = result || Delete(file);
+                    Delete(file);
                 }
             }
-            return result;
         }
+        /// <summary>
+        /// 获取文件的大小（字节数）
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static long Size(string fileName)
         {
             FileInfo fi = new FileInfo(fileName);
             return fi.Length;
         }
+        /// <summary>
+        /// 获取文件大小（根据单位换算）
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="unit">B，KB，MB，GB</param>
+        /// <returns></returns>
+        public static double Size(string fileName, string unit)
+        {
+            return ByteConvertTool.Cvt(Size(fileName), unit);
+        }
+        /// <summary>
+        /// 获取文件大小信息（自动适配）（如：1MB，10KB...）
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static string SizeFormat(string fileName)
         {
             return ByteConvertTool.Fmt(Size(fileName));
         }
-        public static string SizeConvert(string fileName, string unit)
-        {
-            return ByteConvertTool.Cvt(Size(fileName), unit);
-        }
+        /// <summary>
+        /// 获取文件的MD5特征码
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static string GetMD5(string file)
         {
             string result = string.Empty;

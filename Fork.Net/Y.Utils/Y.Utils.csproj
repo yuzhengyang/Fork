@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />
+    <Compile Include="Readme.cs" />
     <Compile Include="DataUtils\EncryptUtils\MD5Tool.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
     <Compile Include="IOUtils\FileUtils\FileEncryptTool.cs" />

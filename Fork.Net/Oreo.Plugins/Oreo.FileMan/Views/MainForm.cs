@@ -37,9 +37,10 @@ namespace Oreo.FileMan.Views
 
                     if (!File.Exists(newfile))
                     {
-                        if (FileEncryptTool.Encrypt(file, newfile, pwd) > 0)
+                        int spendtime = 0;
+                        if ((spendtime = FileEncryptTool.Encrypt(file, newfile, pwd)) > 0)
                         {
-                            MessageBox.Show("恭喜你，加密成功。", "加密成功");
+                            MessageBox.Show("恭喜你，加密成功。共耗时：" + spendtime, "加密成功");
                         }
                     }
                     else
@@ -52,7 +53,7 @@ namespace Oreo.FileMan.Views
 
         private void BtFileDecrypt_Click(object sender, EventArgs e)
         {
-            string pwd = "1234567890121";
+            string pwd = "123456789012";
             string[] fileInfo = new string[128];
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Title = "请选择要解密的文件";
@@ -65,9 +66,10 @@ namespace Oreo.FileMan.Views
                     string newfile = file.Substring(0, file.Length - ".fmk".Length);
                     if (!File.Exists(newfile))
                     {
-                        if (FileEncryptTool.Decrypt(file, newfile, pwd) > 0)
+                        int spendtime = 0;
+                        if ((spendtime = FileEncryptTool.Decrypt(file, newfile, pwd)) > 0)
                         {
-                            MessageBox.Show("恭喜你，解密成功。", "解密成功");
+                            MessageBox.Show("恭喜你，解密成功。共耗时：" + spendtime, "解密成功");
                         }
                     }
                     else
@@ -80,6 +82,17 @@ namespace Oreo.FileMan.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            ////打包
+            //Dictionary<string, object> dicToPack = new Dictionary<string, object>();
+            ////dicToPack.Add("key1", Image.FromFile(@"D:\temp\测试打包\1511925984.jpeg"));
+            ////dicToPack.Add("key2", Image.FromFile(@"D:\temp\测试打包\1555714799.jpeg"));
+            //dicToPack.Add("key1", FilePackageTool.FileDeSerialize(@"D:\temp\测试打包\新建文件夹\新建文本文档 1.txt"));
+            //dicToPack.Add("key2", FilePackageTool.FileDeSerialize(@"D:\temp\测试打包\新建文件夹\新建文本文档 2.txt"));
+            //dicToPack.Add("key3", "hello world");
+            //FilePackageTool.ResourcePackage(dicToPack, @"D:\temp\测试打包\pkg1.pkg");
+            ////解包
+            ////Dictionary<string, object> dicRcv = FilePackageTool.ResourceUnpack(@"D:\temp\测试打包\pkg1.pkg");
         }
+
     }
 }

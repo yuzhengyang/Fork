@@ -100,7 +100,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Y.Utils\Y.Utils.csproj">
+    <ProjectReference Include="..\..\Y.Utils\Y.Utils.csproj">
       <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>
       <Name>Y.Utils</Name>
     </ProjectReference>
