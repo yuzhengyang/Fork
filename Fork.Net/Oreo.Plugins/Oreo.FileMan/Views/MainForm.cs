@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,6 +94,15 @@ namespace Oreo.FileMan.Views
             ////解包
             ////Dictionary<string, object> dicRcv = FilePackageTool.ResourceUnpack(@"D:\temp\测试打包\pkg1.pkg");
         }
+        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //string a = @"D:\Temp\测试压缩\Root\Plugin\NetAssist.exe";
+            //FileCompressTool.Compress(a);
 
+            //string b = @"D:\Temp\测试压缩\Root\Plugin\NetAssist.exe.gz";
+            //FileCompressTool.Decompress(b);
+
+        } 
     }
 }

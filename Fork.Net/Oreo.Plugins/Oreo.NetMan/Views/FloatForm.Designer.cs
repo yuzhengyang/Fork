@@ -1,6 +1,6 @@
-﻿namespace Oreo.PCMonitor.Views
+﻿namespace Oreo.NetMan.Views
 {
-    partial class WelcomeForm
+    partial class FloatForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // WelcomeForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "WelcomeForm";
-            this.Text = "WelcomeForm";
-            this.Load += new System.EventHandler(this.WelcomeForm_Load);
-            this.ResumeLayout(false);
-
+            this.Text = "FloatForm";
         }
 
         #endregion

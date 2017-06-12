@@ -1,16 +1,20 @@
-﻿using Oreo.PCMonitor.Commons;
+﻿using Oreo.NetMan.Commons;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
-using System.Net;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Y.Utils.DataUtils.Collections;
 using Y.Utils.DataUtils.UnitConvertUtils;
+using Y.Utils.WindowsUtils.ProcessUtils;
 
-namespace Oreo.PCMonitor.Views
+namespace Oreo.NetMan.Views
 {
     public partial class NetDetailForm : Form
     {
@@ -30,12 +34,12 @@ namespace Oreo.PCMonitor.Views
                         //R.Log.v("IsNetFlowRun: " + R.NFS.IsNetFlowRun + " IsNetPacketRun: " + R.NFS.IsNetPacketRun +
                         //    " Upload: " + R.NFS.NetFlow.UploadData + " Download: " + R.NFS.NetFlow.DownloadData);
                         UIDgProcessDetailUpdate();
+                        //UIDgConnectDetailUpdate();
                     }
                     Thread.Sleep(1000);
                 }
             });
         }
-
         private void UIDgProcessDetailUpdate()
         {
             if (IsDisposed) return;
@@ -74,5 +78,51 @@ namespace Oreo.PCMonitor.Views
                 }
             }));
         }
+        private void UIDgConnectDetailUpdate()
+        {
+            if (IsDisposed) return;
+
+            BeginInvoke(new Action(() =>
+            {
+                if (R.NFS != null && ListTool.HasElements(R.NFS.NetConnectionInfoList))
+                {
+                    R.NFS.NetConnectionInfoList.ForEach(conn =>
+                    {
+                        try
+                        {
+                            Process p = Process.GetProcessById(conn.ProcessId);
+                            bool isUpdate = false;
+                            foreach (DataGridViewRow r in DgvConnList.Rows)
+                            {
+                                if (r.Cells["DgvConnListProcess"].Value.ToString() == p.ProcessName &&
+                                    r.Cells["DgvConnListLocalIP"].Value.ToString() == conn.LocalIP &&
+                                    r.Cells["DgvConnListLocalPort"].Value.ToString() == conn.LocalPort.ToString())
+                                {
+                                    isUpdate = true;
+                                    r.Cells["DgvConnListIcon"].Value = ProcessInfoTool.GetIcon(p, false);
+                                    r.Cells["DgvConnListProcess"].Value = p.ProcessName;
+                                    r.Cells["DgvConnListProtocol"].Value = conn.ProtocolName;
+                                    r.Cells["DgvConnListLocalIP"].Value = conn.LocalIP;
+                                    r.Cells["DgvConnListLocalPort"].Value = conn.LocalPort;
+                                    r.Cells["DgvConnListRemoteIP"].Value = conn.RemoteIP;
+                                    r.Cells["DgvConnListRemotePort"].Value = conn.RemotePort;
+                                    r.Cells["DgvConnListStatus"].Value = conn.Status;
+                                }
+                            }
+                            if (!isUpdate)
+                            {
+                                DgvConnList.Rows.Add(new object[] {
+                                 ProcessInfoTool.GetIcon(p, false), p.ProcessName, conn.ProtocolName,
+                                 conn.LocalIP, conn.LocalPort, conn.RemoteIP, conn.RemotePort, conn.Status
+                            });
+                            }
+                        }
+                        catch (Exception e) { }
+                    });
+                }
+            }));
+        }
+
+
     }
 }

@@ -72,13 +72,17 @@ namespace Y.Utils.NetUtils.NetInfoUtils
 
         public struct TcpRow
         {
-            ConnectionState state;
+            private ConnectionState state;
             private uint localAddr;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
             private byte[] localPort;
             private uint remoteAddr;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
             private byte[] remotePort;
+            public ConnectionState State
+            {
+                get { return state; }
+            }
 
             public IPAddress LocalIP
             {

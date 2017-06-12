@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
+using System.Drawing;
 
-namespace Oreo.PCMonitor.Models
+namespace Y.Utils.NetUtils.NetManUtils
 {
     public class NetConnectionInfo
     {
-        public string ProcessName { get; set; }
+        public int ProcessId { get; set; }
         public string ProtocolName { get; set; }
         public string LocalIP { get; set; }
         public int LocalPort { get; set; }
         public string RemoteIP { get; set; }
         public int RemotePort { get; set; }
-        public string Status { get; set; }
+        public ConnectionState Status { get; set; }
     }
 }

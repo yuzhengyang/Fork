@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Y.Utils.IOUtils.LogUtils;
+using Y.Utils.NetUtils.NetManUtils;
 
-namespace Oreo.PCMonitor.Commons
+namespace Oreo.NetMan.Commons
 {
     public static class P
     {
@@ -24,7 +25,7 @@ namespace Oreo.PCMonitor.Commons
         }
         static void InitNFS()
         {
-            R.NFS = new Services.NetFlowService();
+            R.NFS = new NetFlowService();
             R.NFS.Start();
         }
     }

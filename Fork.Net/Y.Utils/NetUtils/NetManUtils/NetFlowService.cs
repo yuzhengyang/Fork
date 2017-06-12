@@ -1,5 +1,10 @@
-﻿using Oreo.PCMonitor.Commons;
-using Oreo.PCMonitor.Models;
+﻿//************************************************************************
+//      https://github.com/yuzhengyang
+//      author:     yuzhengyang
+//      date:       2016.5.1 - 2017.6.12
+//      desc:       网络流量监测工具
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +15,7 @@ using Y.Utils.DataUtils.Collections;
 using Y.Utils.NetUtils.NetInfoUtils;
 using Y.Utils.WindowsUtils.ProcessUtils;
 
-namespace Oreo.PCMonitor.Services
+namespace Y.Utils.NetUtils.NetManUtils
 {
     public class NetFlowService
     {
@@ -20,7 +25,6 @@ namespace Oreo.PCMonitor.Services
         private bool _IsNetPacketRun = false;
 
         public List<NetProcessInfo> NetProcessInfoList = new List<NetProcessInfo>();
-        public List<NetConnectionInfo> NetConnectionInfoList = new List<NetConnectionInfo>();
 
         public NetFlowTool NetFlow = new NetFlowTool();
         List<NetPacketTool> NetPacketList = new List<NetPacketTool>();
@@ -32,6 +36,9 @@ namespace Oreo.PCMonitor.Services
 
         public long LostPacketCount { get; set; }
 
+        /// <summary>
+        /// 开启网络流量监控
+        /// </summary>
         public void Start()
         {
             #region 启动系统性能计数器统计
@@ -64,6 +71,9 @@ namespace Oreo.PCMonitor.Services
             }
             #endregion
         }
+        /// <summary>
+        /// 关闭网络流量监控
+        /// </summary>
         public void Stop()
         {
             if (_IsNetFlowRun)
@@ -79,6 +89,10 @@ namespace Oreo.PCMonitor.Services
             }
         }
 
+        /// <summary>
+        /// 系统性能计数器每秒统计事件
+        /// </summary>
+        /// <param name="n"></param>
         public void DataMonitorEvent(NetFlowTool n)
         {
             NowProcess = Process.GetProcesses();
@@ -87,10 +101,12 @@ namespace Oreo.PCMonitor.Services
             CalcNetProcessInfo();
 
             CheckRestart();
-            //#region 统计
-            //p.Protocol == Protocol.Tcp
-            //#endregion
         }
+        /// <summary>
+        /// 整理数据包到所属的进程
+        /// </summary>
+        /// <param name="tool"></param>
+        /// <param name="packet"></param>
         private void NewPacketEvent(NetPacketTool tool, Packet packet)
         {
             bool isGather = false;
@@ -189,7 +205,10 @@ namespace Oreo.PCMonitor.Services
             }
         }
 
-        #region 获取当前程序的所有连接
+        #region 获取所有网络连接
+        /// <summary>
+        /// 获取所有网络连接并整理列表
+        /// </summary>
         void GetConnection()
         {
             TcpConnection = NetProcessTool.GetTcpConnection();
@@ -197,6 +216,9 @@ namespace Oreo.PCMonitor.Services
         }
         #endregion
         #region 设置程序流量及连接数统计列表
+        /// <summary>
+        /// 清空并重置当前所有程序的连接数
+        /// </summary>
         void SetNetProcess()
         {
             // 清空已有连接数
@@ -223,6 +245,10 @@ namespace Oreo.PCMonitor.Services
                 }
             }
         }
+        /// <summary>
+        /// 整理连接到所属的进程
+        /// </summary>
+        /// <param name="pid"></param>
         void SetNetProcessConnection(int pid)
         {
             try
@@ -250,13 +276,13 @@ namespace Oreo.PCMonitor.Services
                 }
             }
             catch (Exception e)
-            {
-                R.Log.e("对程序列表和网络连接列表整理时发生错误");
-                R.Log.e(e.Message);
-            }
+            { }
         }
         #endregion
         #region 整理程序流量汇总信息
+        /// <summary>
+        /// 整理计算程序网络流量
+        /// </summary>
         void CalcNetProcessInfo()
         {
             if (ListTool.HasElements(NetProcessInfoList))
@@ -291,6 +317,9 @@ namespace Oreo.PCMonitor.Services
         }
         #endregion
         #region 联网断网重启计划
+        /// <summary>
+        /// 联网断网重启计划（应对断网或重连后网卡抓包报错造成的不准确）
+        /// </summary>
         private void CheckRestart()
         {
             bool rest = false;

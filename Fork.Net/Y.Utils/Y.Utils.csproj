@@ -55,7 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />
+    <Compile Include="NetUtils\NetManUtils\NetConnectionInfo.cs" />
+    <Compile Include="NetUtils\NetManUtils\NetFlowService.cs" />
+    <Compile Include="NetUtils\NetManUtils\NetProcessInfo.cs" />
     <Compile Include="Readme.cs" />
     <Compile Include="DataUtils\EncryptUtils\MD5Tool.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />

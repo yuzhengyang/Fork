@@ -77,7 +77,9 @@ namespace Y.Utils.WindowsUtils.ProcessUtils
         public static Icon GetIcon(int pid, bool small)
         {
             Process p = Process.GetProcessById(pid);
-            return GetIcon(p, small);
+            Icon ic = GetIcon(p, small);
+            p.Close();
+            return ic;
         }
         [Obsolete]
         public static string GetNameById(int pid)

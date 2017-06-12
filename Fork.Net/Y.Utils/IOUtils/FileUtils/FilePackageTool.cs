@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.6.10 - 2017.6.10
+//      date:       2017.6.10 - 2017.6.12
 //      desc:       文件打包工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -141,6 +141,9 @@ namespace Y.Utils.IOUtils.FileUtils
         public static int Pack(string srcPath, string dstFile, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
+            if (!Directory.Exists(srcPath)) return -11; //要打包的路径不存在
+            if (File.Exists(dstFile) && !overwrite) return -12;//加密后的目标文件已存在
+
             return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
         }
         /// <summary>
@@ -150,6 +153,9 @@ namespace Y.Utils.IOUtils.FileUtils
         public static int UnPack(string srcFile, string dstPath, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
+            if (!File.Exists(srcFile)) return -11; //要解包的文件不存在
+            if (Directory.Exists(dstPath) && !overwrite) return -12;//要解包的目标文件夹已存在
+
             return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
         }
     }

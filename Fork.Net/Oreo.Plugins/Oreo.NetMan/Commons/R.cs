@@ -1,8 +1,8 @@
-﻿using Oreo.PCMonitor.Services;
-using System;
+﻿using System;
 using Y.Utils.IOUtils.LogUtils;
+using Y.Utils.NetUtils.NetManUtils;
 
-namespace Oreo.PCMonitor.Commons
+namespace Oreo.NetMan.Commons
 {
     public static class R
     {

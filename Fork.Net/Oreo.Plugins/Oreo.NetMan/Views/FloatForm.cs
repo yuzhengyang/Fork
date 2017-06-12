@@ -5,21 +5,15 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Oreo.PCMonitor.Views
+namespace Oreo.NetMan.Views
 {
-    public partial class WelcomeForm : Form
+    public partial class FloatForm : Form
     {
-        public WelcomeForm()
+        public FloatForm()
         {
             InitializeComponent();
-        }
-
-        private void WelcomeForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

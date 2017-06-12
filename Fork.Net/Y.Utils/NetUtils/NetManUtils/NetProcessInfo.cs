@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
-namespace Oreo.PCMonitor.Models
+namespace Y.Utils.NetUtils.NetManUtils
 {
     public class NetProcessInfo
     {
