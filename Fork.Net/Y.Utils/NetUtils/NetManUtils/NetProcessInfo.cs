@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Y.Utils.NetUtils.NetManUtils
 {
     public class NetProcessInfo
     {
+        public int ProcessId { get; set; }
         public string ProcessName { get; set; }
         public Icon ProcessIcon { get; set; }
         public DateTime LastUpdateTime { get; set; }
@@ -16,6 +18,6 @@ namespace Y.Utils.NetUtils.NetManUtils
         public int DownloadBag { get; set; }
         public long UploadBagCount { get; set; }
         public long DownloadBagCount { get; set; }
-        public int ConnectCount { get; set; }
+        public List<NetConnectionInfo> NetConnectionInfoList { get; set; }
     }
 }

@@ -31,10 +31,8 @@ namespace Oreo.NetMan.Views
                 {
                     if (R.NFS.IsNetFlowRun || R.NFS.IsNetPacketRun)
                     {
-                        //R.Log.v("IsNetFlowRun: " + R.NFS.IsNetFlowRun + " IsNetPacketRun: " + R.NFS.IsNetPacketRun +
-                        //    " Upload: " + R.NFS.NetFlow.UploadData + " Download: " + R.NFS.NetFlow.DownloadData);
                         UIDgProcessDetailUpdate();
-                        //UIDgConnectDetailUpdate();
+                        UIDgConnectDetailUpdate();
                     }
                     Thread.Sleep(1000);
                 }
@@ -63,7 +61,7 @@ namespace Oreo.NetMan.Views
                                 r.Cells["CoUpload"].Value = ByteConvertTool.Fmt(p.UploadData);
                                 r.Cells["CoDownloadCount"].Value = ByteConvertTool.Fmt(p.DownloadDataCount);
                                 r.Cells["CoUploadCount"].Value = ByteConvertTool.Fmt(p.UploadDataCount);
-                                r.Cells["CoConnectionCount"].Value = p.ConnectCount;
+                                r.Cells["CoConnectionCount"].Value = p.NetConnectionInfoList.Count();
                             }
                         }
                         if (!isUpdate)
@@ -84,45 +82,46 @@ namespace Oreo.NetMan.Views
 
             BeginInvoke(new Action(() =>
             {
-                if (R.NFS != null && ListTool.HasElements(R.NFS.NetConnectionInfoList))
+                if (R.NFS != null && ListTool.HasElements(R.NFS.NetProcessInfoList))
                 {
-                    R.NFS.NetConnectionInfoList.ForEach(conn =>
+                    R.NFS.NetProcessInfoList.ForEach(p =>
                     {
-                        try
+                        if (ListTool.HasElements(p.NetConnectionInfoList) && p.ProcessIcon != null)
                         {
-                            Process p = Process.GetProcessById(conn.ProcessId);
-                            bool isUpdate = false;
-                            foreach (DataGridViewRow r in DgvConnList.Rows)
+                            p.NetConnectionInfoList.ForEach(conn =>
                             {
-                                if (r.Cells["DgvConnListProcess"].Value.ToString() == p.ProcessName &&
-                                    r.Cells["DgvConnListLocalIP"].Value.ToString() == conn.LocalIP &&
-                                    r.Cells["DgvConnListLocalPort"].Value.ToString() == conn.LocalPort.ToString())
+                                try
                                 {
-                                    isUpdate = true;
-                                    r.Cells["DgvConnListIcon"].Value = ProcessInfoTool.GetIcon(p, false);
-                                    r.Cells["DgvConnListProcess"].Value = p.ProcessName;
-                                    r.Cells["DgvConnListProtocol"].Value = conn.ProtocolName;
-                                    r.Cells["DgvConnListLocalIP"].Value = conn.LocalIP;
-                                    r.Cells["DgvConnListLocalPort"].Value = conn.LocalPort;
-                                    r.Cells["DgvConnListRemoteIP"].Value = conn.RemoteIP;
-                                    r.Cells["DgvConnListRemotePort"].Value = conn.RemotePort;
-                                    r.Cells["DgvConnListStatus"].Value = conn.Status;
+                                    bool isUpdate = false;
+                                    foreach (DataGridViewRow r in DgvConnList.Rows)
+                                    {
+                                        if (r.Cells["DgvConnListProcess"].Value.ToString() == p.ProcessName &&
+                                            r.Cells["DgvConnListLocalIP"].Value.ToString() == conn.LocalIP &&
+                                            r.Cells["DgvConnListLocalPort"].Value.ToString() == conn.LocalPort.ToString())
+                                        {
+                                            isUpdate = true;
+                                            r.Cells["DgvConnListProtocol"].Value = conn.ProtocolName;
+                                            r.Cells["DgvConnListLocalIP"].Value = conn.LocalIP;
+                                            r.Cells["DgvConnListLocalPort"].Value = conn.LocalPort;
+                                            r.Cells["DgvConnListRemoteIP"].Value = conn.RemoteIP;
+                                            r.Cells["DgvConnListRemotePort"].Value = conn.RemotePort;
+                                            r.Cells["DgvConnListStatus"].Value = conn.Status;
+                                        }
+                                    }
+                                    if (!isUpdate)
+                                    {
+                                        DgvConnList.Rows.Add(new object[] {
+                                        p.ProcessIcon, p.ProcessName, conn.ProtocolName,
+                                        conn.LocalIP, conn.LocalPort, conn.RemoteIP, conn.RemotePort, conn.Status
+                                    });
+                                    }
                                 }
-                            }
-                            if (!isUpdate)
-                            {
-                                DgvConnList.Rows.Add(new object[] {
-                                 ProcessInfoTool.GetIcon(p, false), p.ProcessName, conn.ProtocolName,
-                                 conn.LocalIP, conn.LocalPort, conn.RemoteIP, conn.RemotePort, conn.Status
+                                catch (Exception e) { }
                             });
-                            }
                         }
-                        catch (Exception e) { }
                     });
                 }
             }));
         }
-
-
     }
 }

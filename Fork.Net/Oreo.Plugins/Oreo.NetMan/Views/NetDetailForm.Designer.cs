@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.DgProcessDetail = new System.Windows.Forms.DataGridView();
@@ -51,7 +52,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.DgvConnList = new System.Windows.Forms.DataGridView();
-            this.DgvConnListIcon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DgvConnListIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.DgvConnListProcess = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvConnListProtocol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvConnListLocalIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,14 +93,14 @@
             this.DgProcessDetail.AllowUserToResizeRows = false;
             this.DgProcessDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgProcessDetail.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgProcessDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgProcessDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DgProcessDetail.ColumnHeadersHeight = 40;
             this.DgProcessDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DgProcessDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -110,14 +111,14 @@
             this.CoDownloadCount,
             this.CoUploadCount,
             this.CoConnectionCount});
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgProcessDetail.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgProcessDetail.DefaultCellStyle = dataGridViewCellStyle8;
             this.DgProcessDetail.Location = new System.Drawing.Point(0, 0);
             this.DgProcessDetail.Name = "DgProcessDetail";
             this.DgProcessDetail.ReadOnly = true;
@@ -135,48 +136,48 @@
             // 
             // CoName
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.CoName.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CoName.DefaultCellStyle = dataGridViewCellStyle2;
             this.CoName.HeaderText = "";
             this.CoName.Name = "CoName";
             this.CoName.ReadOnly = true;
             // 
             // CoDownload
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CoDownload.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CoDownload.DefaultCellStyle = dataGridViewCellStyle3;
             this.CoDownload.HeaderText = "下载速度";
             this.CoDownload.Name = "CoDownload";
             this.CoDownload.ReadOnly = true;
             // 
             // CoUpload
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CoUpload.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CoUpload.DefaultCellStyle = dataGridViewCellStyle4;
             this.CoUpload.HeaderText = "上传速度";
             this.CoUpload.Name = "CoUpload";
             this.CoUpload.ReadOnly = true;
             // 
             // CoDownloadCount
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CoDownloadCount.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CoDownloadCount.DefaultCellStyle = dataGridViewCellStyle5;
             this.CoDownloadCount.HeaderText = "已下载流量";
             this.CoDownloadCount.Name = "CoDownloadCount";
             this.CoDownloadCount.ReadOnly = true;
             // 
             // CoUploadCount
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CoUploadCount.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CoUploadCount.DefaultCellStyle = dataGridViewCellStyle6;
             this.CoUploadCount.HeaderText = "已上传流量";
             this.CoUploadCount.Name = "CoUploadCount";
             this.CoUploadCount.ReadOnly = true;
             // 
             // CoConnectionCount
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.CoConnectionCount.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CoConnectionCount.DefaultCellStyle = dataGridViewCellStyle7;
             this.CoConnectionCount.HeaderText = "连接数";
             this.CoConnectionCount.Name = "CoConnectionCount";
             this.CoConnectionCount.ReadOnly = true;
@@ -228,7 +229,20 @@
             // 
             this.DgvConnList.AllowUserToAddRows = false;
             this.DgvConnList.AllowUserToDeleteRows = false;
-            this.DgvConnList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvConnList.AllowUserToResizeColumns = false;
+            this.DgvConnList.AllowUserToResizeRows = false;
+            this.DgvConnList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvConnList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvConnList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.DgvConnList.ColumnHeadersHeight = 40;
+            this.DgvConnList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DgvConnList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DgvConnListIcon,
             this.DgvConnListProcess,
@@ -242,7 +256,8 @@
             this.DgvConnList.Name = "DgvConnList";
             this.DgvConnList.ReadOnly = true;
             this.DgvConnList.RowHeadersVisible = false;
-            this.DgvConnList.RowTemplate.Height = 23;
+            this.DgvConnList.RowTemplate.Height = 40;
+            this.DgvConnList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvConnList.Size = new System.Drawing.Size(811, 468);
             this.DgvConnList.TabIndex = 0;
             // 
@@ -251,13 +266,15 @@
             this.DgvConnListIcon.HeaderText = "进程";
             this.DgvConnListIcon.Name = "DgvConnListIcon";
             this.DgvConnListIcon.ReadOnly = true;
-            this.DgvConnListIcon.Width = 108;
+            this.DgvConnListIcon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvConnListIcon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // DgvConnListProcess
             // 
             this.DgvConnListProcess.HeaderText = "";
             this.DgvConnListProcess.Name = "DgvConnListProcess";
             this.DgvConnListProcess.ReadOnly = true;
+            this.DgvConnListProcess.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // DgvConnListProtocol
             // 
@@ -331,7 +348,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView DgvConnList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DgvConnListIcon;
+        private System.Windows.Forms.DataGridViewImageColumn DgvConnListIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvConnListProcess;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvConnListProtocol;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvConnListLocalIP;

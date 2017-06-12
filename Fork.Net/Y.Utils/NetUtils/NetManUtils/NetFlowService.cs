@@ -14,6 +14,7 @@ using Y.Utils.AppUtils;
 using Y.Utils.DataUtils.Collections;
 using Y.Utils.NetUtils.NetInfoUtils;
 using Y.Utils.WindowsUtils.ProcessUtils;
+using static Y.Utils.NetUtils.NetInfoUtils.NetProcessTool;
 
 namespace Y.Utils.NetUtils.NetManUtils
 {
@@ -225,7 +226,7 @@ namespace Y.Utils.NetUtils.NetManUtils
             if (ListTool.HasElements(NetProcessInfoList))
                 NetProcessInfoList.ForEach(x =>
                 {
-                    x.ConnectCount = 0;
+                    x.NetConnectionInfoList = new List<NetConnectionInfo>();
                 });
 
             // 统计TCP连接数
@@ -233,7 +234,7 @@ namespace Y.Utils.NetUtils.NetManUtils
             {
                 foreach (var t in TcpConnection)
                 {
-                    SetNetProcessConnection(t.ProcessId);
+                    SetNetProcessConnection(t);
                 }
             }
             // 统计UDP连接数
@@ -241,19 +242,19 @@ namespace Y.Utils.NetUtils.NetManUtils
             {
                 foreach (var u in UdpConnection)
                 {
-                    SetNetProcessConnection(u.ProcessId);
+                    SetNetProcessConnection(u);
                 }
             }
         }
         /// <summary>
-        /// 整理连接到所属的进程
+        /// 整理TCP连接到所属的进程
         /// </summary>
-        /// <param name="pid"></param>
-        void SetNetProcessConnection(int pid)
+        /// <param name="t"></param>
+        void SetNetProcessConnection(TcpRow t)
         {
             try
             {
-                Process p = NowProcess.FirstOrDefault(x => x.Id == pid);
+                Process p = NowProcess.FirstOrDefault(x => x.Id == t.ProcessId);
                 if (p != null)
                 {
                     var ppl = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == p.ProcessName);
@@ -262,16 +263,91 @@ namespace Y.Utils.NetUtils.NetManUtils
                         NetProcessInfoList.Add(
                             new NetProcessInfo()
                             {
+                                ProcessId = p.Id,
                                 ProcessIcon = ProcessInfoTool.GetIcon(p, false),
                                 ProcessName = p.ProcessName,
-                                ConnectCount = 1,
                                 LastUpdateTime = DateTime.Now,
+                                NetConnectionInfoList = new List<NetConnectionInfo>() {
+                                    new NetConnectionInfo() {
+                                        LocalIP = t.LocalIP.ToString(),
+                                        LocalPort = t.LocalPort,
+                                        RemoteIP = t.RemoteIP.ToString(),
+                                        RemotePort = t.RemotePort,
+                                        ProtocolName = "TCP",
+                                        Status = t.State,
+                                        LastUpdateTime = DateTime.Now,
+                                    }
+                                },
                             });
                     }
                     else
                     {
-                        ppl.ConnectCount++;
                         ppl.LastUpdateTime = DateTime.Now;
+                        var conn = ppl.NetConnectionInfoList.FirstOrDefault(x => x.LocalIP == t.LocalIP.ToString() && x.LocalPort == t.LocalPort && x.RemoteIP == t.RemoteIP.ToString() && x.RemotePort == t.RemotePort);
+                        if (conn == null)
+                        {
+                            ppl.NetConnectionInfoList.Add(new NetConnectionInfo()
+                            {
+                                LocalIP = t.LocalIP.ToString(),
+                                LocalPort = t.LocalPort,
+                                RemoteIP = t.RemoteIP.ToString(),
+                                RemotePort = t.RemotePort,
+                                ProtocolName = "TCP",
+                                Status = t.State,
+                                LastUpdateTime = DateTime.Now,
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            { }
+        }
+        /// <summary>
+        /// 整理UDP连接到所属的进程
+        /// </summary>
+        /// <param name="u"></param>
+        void SetNetProcessConnection(UdpRow u)
+        {
+            try
+            {
+                Process p = NowProcess.FirstOrDefault(x => x.Id == u.ProcessId);
+                if (p != null)
+                {
+                    var ppl = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == p.ProcessName);
+                    if (ppl == null)
+                    {
+                        NetProcessInfoList.Add(
+                            new NetProcessInfo()
+                            {
+                                ProcessId = p.Id,
+                                ProcessIcon = ProcessInfoTool.GetIcon(p, false),
+                                ProcessName = p.ProcessName,
+                                LastUpdateTime = DateTime.Now,
+                                NetConnectionInfoList = new List<NetConnectionInfo>() {
+                                    new NetConnectionInfo() {
+                                        LocalIP = u.LocalIP.ToString(),
+                                        LocalPort = u.LocalPort,
+                                        ProtocolName = "UDP",
+                                        LastUpdateTime = DateTime.Now,
+                                    }
+                                },
+                            });
+                    }
+                    else
+                    {
+                        ppl.LastUpdateTime = DateTime.Now;
+                        var conn = ppl.NetConnectionInfoList.FirstOrDefault(x => x.LocalIP == u.LocalIP.ToString() && x.LocalPort == u.LocalPort);
+                        if (conn == null)
+                        {
+                            ppl.NetConnectionInfoList.Add(new NetConnectionInfo()
+                            {
+                                LocalIP = u.LocalIP.ToString(),
+                                LocalPort = u.LocalPort,
+                                ProtocolName = "UDP",
+                                LastUpdateTime = DateTime.Now,
+                            });
+                        }
                     }
                 }
             }

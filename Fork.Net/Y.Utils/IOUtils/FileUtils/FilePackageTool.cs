@@ -14,6 +14,7 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using Y.Utils.DataUtils.Collections;
 
 namespace Y.Utils.IOUtils.FileUtils
 {
@@ -142,7 +143,27 @@ namespace Y.Utils.IOUtils.FileUtils
         {
             DateTime beginTime = DateTime.Now;
             if (!Directory.Exists(srcPath)) return -11; //要打包的路径不存在
-            if (File.Exists(dstFile) && !overwrite) return -12;//加密后的目标文件已存在
+            if (File.Exists(dstFile) && !overwrite) return -12;//打包后的目标文件已存在
+
+            List<string> allfile = FileTool.GetAllFile(srcPath);
+            if (ListTool.HasElements(allfile))
+            {
+                using (FileStream fsWrite = new FileStream(dstFile, FileMode.Create))
+                {
+                    allfile.ForEach(x =>
+                    {
+                        using (FileStream fsRead = new FileStream(x, FileMode.Open))
+                        {
+                            fsRead.Close();
+                        }
+                    });
+                    fsWrite.Close();
+                }
+            }
+            else
+            {
+                return -13;//要打包的路径中没有文件
+            }
 
             return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
         }
@@ -150,7 +171,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// 解包
         /// </summary>
         /// <returns></returns>
-        public static int UnPack(string srcFile, string dstPath, bool overwrite = true)
+        public static int Unpack(string srcFile, string dstPath, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
             if (!File.Exists(srcFile)) return -11; //要解包的文件不存在
