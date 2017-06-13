@@ -1,12 +1,18 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.6.13
+//      desc:       注册表操作工具
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using Microsoft.Win32;
 using System;
 
 namespace Y.Utils.WindowsUtils.InfoUtils
 {
+    /// <summary>
+    /// 注册表操作工具
+    /// </summary>
     public class RegisterTool
     {
         [Obsolete]
@@ -78,7 +84,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
             }
         }
         /// <summary>
-        /// 删除注册表值
+        /// 读取注册表值
         /// </summary>
         /// <param name="key"></param>
         /// <param name="name"></param>

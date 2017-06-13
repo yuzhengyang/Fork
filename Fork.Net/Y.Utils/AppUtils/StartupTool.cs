@@ -1,12 +1,18 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.6.13
+//      desc:       设为开机启动
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using System;
 using Y.Utils.WindowsUtils.InfoUtils;
 
 namespace Y.Utils.AppUtils
 {
+    /// <summary>
+    /// 设为开机启动
+    /// </summary>
     public class StartupTool
     {
         [Obsolete]

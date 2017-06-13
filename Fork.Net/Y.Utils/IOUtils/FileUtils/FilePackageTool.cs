@@ -138,16 +138,27 @@ namespace Y.Utils.IOUtils.FileUtils
         /// <summary>
         /// 打包
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// -11;//要打包的路径不存在
+        /// -12;//打包后的目标文件已存在
+        /// -13;//要打包的路径中没有文件
+        /// -21;//读取文件大小异常
+        /// </returns>
         public static int Pack(string srcPath, string dstFile, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
-            if (!Directory.Exists(srcPath)) return -11; //要打包的路径不存在
+            if (!Directory.Exists(srcPath)) return -11;//要打包的路径不存在
             if (File.Exists(dstFile) && !overwrite) return -12;//打包后的目标文件已存在
 
             List<string> allfile = FileTool.GetAllFile(srcPath);
             if (ListTool.HasElements(allfile))
             {
+                //读取所有文件的文件大小并检查
+                long[] filesize = FileTool.Size(allfile);
+                foreach (var fs in filesize) { if (fs < 0) return -21; }//读取文件大小异常
+                //读取所有文件的MD5码
+                string[] filemd5 = FileTool.GetMD5(allfile);
+
                 using (FileStream fsWrite = new FileStream(dstFile, FileMode.Create))
                 {
                     allfile.ForEach(x =>

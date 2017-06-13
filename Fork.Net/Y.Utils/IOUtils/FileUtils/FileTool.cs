@@ -168,8 +168,31 @@ namespace Y.Utils.IOUtils.FileUtils
         /// <returns></returns>
         public static long Size(string fileName)
         {
-            FileInfo fi = new FileInfo(fileName);
-            return fi.Length;
+            long result = -1;
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    FileInfo fi = new FileInfo(fileName);
+                    result = fi.Length;
+                }
+                catch (Exception e) { }
+            }
+            return result;
+        }
+        /// <summary>
+        /// 获取多个文件的大小（字节数）
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
+        public static long[] Size(List<string> files)
+        {
+            long[] result = new long[files.Count];
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = Size(files[i]);
+            }
+            return result;
         }
         /// <summary>
         /// 获取文件大小（根据单位换算）
@@ -205,6 +228,20 @@ namespace Y.Utils.IOUtils.FileUtils
                 HashAlgorithm algorithm = MD5.Create();
                 byte[] hashBytes = algorithm.ComputeHash(fs);
                 result = BitConverter.ToString(hashBytes).Replace("-", "");
+            }
+            return result;
+        }
+        /// <summary>
+        /// 获取多个文件的MD5特征码
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static string[] GetMD5(List<string> files)
+        {
+            string[] result = new string[files.Length];
+            for (int i = 0; i < files.Length; i++)
+            {
+                result[i] = GetMD5(files[i]);
             }
             return result;
         }
