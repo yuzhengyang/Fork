@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.6.10 - 2017.6.12
+//      date:       2017.6.10 - 2017.6.15
 //      desc:       文件打包工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -251,15 +251,27 @@ namespace Y.Utils.IOUtils.FileUtils
                     {
                         files.ForEach(x =>
                         {
-                            using (FileStream fsWrite = new FileStream(DirTool.Combine(dstPath, x.Path, x.Name), FileMode.Create))
+                            if (DirTool.Create(DirTool.Combine(dstPath, x.Path)))
                             {
-                                //int allread = 0, readCount = 0;
-                                //byte[] buffer = new byte[FileBuffer];
-                                //while ((readCount = fsRead.Read(buffer, 0, buffer.Length)) > 0)
-                                //{
-                                //    fsWrite.Write(buffer, 0, readCount);
-                                //}
-                                fsWrite.Close();
+                                using (FileStream fsWrite = new FileStream(DirTool.Combine(dstPath, x.Path, x.Name), FileMode.Create))
+                                {
+                                    long size = x.Size;
+                                    int readCount = 0;
+                                    byte[] buffer = new byte[FileBuffer];
+
+                                    while (size > FileBuffer)
+                                    {
+                                        readCount = fsRead.Read(buffer, 0, buffer.Length);
+                                        fsWrite.Write(buffer, 0, readCount);
+                                        size -= readCount;
+                                    } 
+                                    if (size <= FileBuffer)
+                                    {
+                                        readCount = fsRead.Read(buffer, 0, (int)size);
+                                        fsWrite.Write(buffer, 0, readCount);
+                                    }
+                                    fsWrite.Close();
+                                }
                             }
                         });
                     }
@@ -341,7 +353,7 @@ namespace Y.Utils.IOUtils.FileUtils
                     //文件大小
                     byte[] sizebyte = new byte[sizelength];
                     Buffer.BlockCopy(headdata, index, sizebyte, 0, sizelength);
-                    int size = BitConverter.ToInt32(sizebyte, 4);
+                    long size = BitConverter.ToInt64(sizebyte, 0);
                     index += sizebyte.Length;
                     #endregion
 
