@@ -102,8 +102,8 @@ namespace Oreo.FileMan.Views
 
             //string b = @"D:\Temp\测试压缩\Root\Plugin\NetAssist.exe.gz";
             //FileCompressTool.Decompress(b);
-            //FilePackageTool.Pack(@"D:\Temp\测试压缩\Root2", @"D:\Temp\测试压缩\Root2.pkg");
-            FilePackageTool.Unpack(@"D:\Temp\测试压缩\Root2.pkg", @"D:\Temp\测试压缩\Root2");
+            //FilePackageTool.Pack(@"D:\temp\测试打包\新建文件夹", @"D:\temp\测试打包\新建文件夹.pkg");
+            FilePackageTool.Unpack(@"D:\temp\测试打包\新建文件夹.pkg", @"D:\temp\测试打包\新建文件夹");
         } 
     }
 }

@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.6.8 - 2017.6.10
+//      date:       2017.6.8 - 2017.6.14
 //      desc:       文件加密工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -19,7 +19,8 @@ namespace Y.Utils.IOUtils.FileUtils
     /// </summary>
     public class FileEncryptTool
     {
-        private static string FileTypeDesc = "FileEncrypt [文件加密]";
+        const string FileType = "Y.Utils.FileEncrypt";//文件类型 禁止修改长度（19位）
+        const string FileVersion = "100001";//类型的版本 禁止修改长度（6位）
         private static int FileBuffer = 1024 * 1024;
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// <param name="password">加密密码</param>
         /// <param name="overwrite">是否覆盖已有目标文件</param>
         /// <returns>
-        /// 1：操作成功
+        /// >0：操作成功（操作共计秒数）
         /// -11：要加密的文件不存在
         /// -12：加密后的目标文件已存在
         /// -404：未知错误，操作失败
@@ -51,10 +52,14 @@ namespace Y.Utils.IOUtils.FileUtils
                 {
                     try
                     {
+                        //写入文件类型标识和版本号
+                        byte[] filetypeandversion = Encoding.Default.GetBytes(FileType + FileVersion);
+                        fsWrite.Write(filetypeandversion, 0, filetypeandversion.Length);
+
                         //文件头部数据定义
                         List<byte[]> headdata = new List<byte[]>()
                             {
-                                Encoding.Default.GetBytes(FileTypeDesc),
+                                Encoding.Default.GetBytes(FileType),
                                 Encoding.Default.GetBytes(md5),
                                 Encoding.Default.GetBytes(AesTool.Encrypt(fmtPwd,AesTool.DefaultPassword)),
                                 Encoding.Default.GetBytes(pwdMd5),
@@ -112,9 +117,10 @@ namespace Y.Utils.IOUtils.FileUtils
         /// <param name="password">解密密码</param>
         /// <param name="overwrite">是否覆盖已有目标文件</param>
         /// <returns>
-        /// 1：操作成功
+        /// >0：操作成功（操作共计秒数）
         /// -11：要解密的文件不存在
         /// -12：解密后的目标文件已存在
+        /// -20：文件类型不匹配
         /// -30：文件头不长度不吻合
         /// -90：解锁密码错误
         /// -404：未知错误，操作失败
@@ -134,6 +140,15 @@ namespace Y.Utils.IOUtils.FileUtils
                 {
                     try
                     {
+                        //读取文件类型标识和版本号
+                        byte[] filetype = Encoding.Default.GetBytes(FileType);
+                        fsRead.Read(filetype, 0, filetype.Length);
+                        string filetypestr = Encoding.Default.GetString(filetype);
+                        byte[] fileversion = Encoding.Default.GetBytes(FileVersion);
+                        fsRead.Read(fileversion, 0, fileversion.Length);
+                        string fileversionstr = Encoding.Default.GetString(fileversion);
+                        if (filetypestr != FileType && fileversionstr != FileVersion) return -20;//文件类型不匹配
+
                         //读取头部信息个数
                         byte[] count = new byte[4];
                         fsRead.Read(count, 0, count.Length);

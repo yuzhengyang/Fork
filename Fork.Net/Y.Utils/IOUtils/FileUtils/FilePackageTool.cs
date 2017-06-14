@@ -24,7 +24,8 @@ namespace Y.Utils.IOUtils.FileUtils
     /// </summary>
     public class FilePackageTool
     {
-        private static string FileTypeDesc = "FilePackage";
+        const string FileType = "Y.Utils.FilePackage";//文件类型 禁止修改长度（19位）
+        const string FileVersion = "100001";//类型的版本 禁止修改长度（6位）
         private static int FileBuffer = 1024 * 1024;
 
         #region 类型单一，文件处理复杂，加载占用超大内存（这都是辣鸡）
@@ -161,7 +162,7 @@ namespace Y.Utils.IOUtils.FileUtils
                     files.Add(new FilePackageModel()
                     {
                         Name = Path.GetFileName(x),
-                        Path = DirTool.GetFilePath(x),
+                        Path = DirTool.GetFilePath(x).Substring(srcPath.Count()),
                         Size = FileTool.Size(x),
                         MD5 = FileTool.GetMD5(x),
                     });
@@ -170,6 +171,10 @@ namespace Y.Utils.IOUtils.FileUtils
                 long allfilesize = files.Sum(x => x.Size);
                 using (FileStream fsWrite = new FileStream(dstFile, FileMode.Create))
                 {
+                    //写入文件类型标识和版本号
+                    byte[] filetypeandversion = Encoding.Default.GetBytes(FileType + FileVersion);
+                    fsWrite.Write(filetypeandversion, 0, filetypeandversion.Length);
+
                     //写入头部总长度
                     int headl = files.Sum(x => x.AllByteLength);
                     byte[] headlength = BitConverter.GetBytes(headl);
@@ -189,7 +194,7 @@ namespace Y.Utils.IOUtils.FileUtils
                     //循环写入文件
                     files.ForEach(x =>
                     {
-                        using (FileStream fsRead = new FileStream(DirTool.Combine(x.Path, x.Name), FileMode.Open))
+                        using (FileStream fsRead = new FileStream(DirTool.Combine(srcPath, x.Path, x.Name), FileMode.Open))
                         {
                             int readCount = 0;
                             byte[] buffer = new byte[FileBuffer];
@@ -228,6 +233,9 @@ namespace Y.Utils.IOUtils.FileUtils
 
             using (FileStream fsRead = new FileStream(srcFile, FileMode.Open))
             {
+                string version = GetFileVersion(fsRead);
+                if (version == null) return -20;// 文件类型不匹配
+
                 //读取头部总长度
                 byte[] headl = new byte[4];
                 int headlength = 0;
@@ -237,86 +245,131 @@ namespace Y.Utils.IOUtils.FileUtils
                 {
                     //读取文件列表信息
                     byte[] headdata = new byte[headlength];
-                    List<FilePackageModel> files = new List<FilePackageModel>();
                     fsRead.Read(headdata, 0, headlength);
-
-                    int index = 0;
-                    while (index < headlength)
+                    List<FilePackageModel> files = GetFilePackageModel(headdata);
+                    if (ListTool.HasElements(files))
                     {
-                        #region 读取文件名长度和内容
-                        //文件名长度
-                        byte[] namelengthbyte = new byte[4];
-                        Buffer.BlockCopy(headdata, index, namelengthbyte, 0, namelengthbyte.Length);
-                        int namelength = BitConverter.ToInt32(namelengthbyte, 0);
-                        index += namelengthbyte.Length;
-
-                        //文件名内容
-                        byte[] namebyte = new byte[namelength];
-                        Buffer.BlockCopy(headdata, index, namebyte, 0, namelength);
-                        string name = Encoding.Default.GetString(namebyte);
-                        index += namebyte.Length;
-                        #endregion
-
-                        #region 读取路径长度和内容
-                        //路径长度
-                        byte[] pathlengthbyte = new byte[4];
-                        Buffer.BlockCopy(headdata, index, pathlengthbyte, 0, pathlengthbyte.Length);
-                        int pathlength = BitConverter.ToInt32(pathlengthbyte, 0);
-                        index += pathlengthbyte.Length;
-
-                        //路径内容
-                        byte[] pathbyte = new byte[pathlength];
-                        Buffer.BlockCopy(headdata, index, pathbyte, 0, pathlength);
-                        string path = Encoding.Default.GetString(pathbyte);
-                        index += pathbyte.Length;
-                        #endregion
-
-                        #region 读取文件大小长度和内容
-                        //文件大小长度
-                        byte[] sizelengthbyte = new byte[4];
-                        Buffer.BlockCopy(headdata, index, sizelengthbyte, 0, sizelengthbyte.Length);
-                        int sizelength = BitConverter.ToInt32(sizelengthbyte, 0);
-                        index += sizelengthbyte.Length;
-
-                        //文件大小
-                        byte[] sizebyte = new byte[sizelength];
-                        Buffer.BlockCopy(headdata, index, sizebyte, 0, sizelength);
-                        int size = BitConverter.ToInt32(sizebyte, 4);
-                        index += sizebyte.Length;
-                        #endregion
-
-                        #region 读取文件MD5码长度和内容
-                        //文件大小长度
-                        byte[] md5lengthbyte = new byte[4];
-                        Buffer.BlockCopy(headdata, index, md5lengthbyte, 0, md5lengthbyte.Length);
-                        int md5length = BitConverter.ToInt32(md5lengthbyte, 0);
-                        index += md5lengthbyte.Length;
-
-                        //文件大小
-                        byte[] md5byte = new byte[md5length];
-                        Buffer.BlockCopy(headdata, index, md5byte, 0, md5length);
-                        string md5 = Encoding.Default.GetString(md5byte);
-                        index += md5byte.Length;
-                        #endregion
-
-                        files.Add(new FilePackageModel()
+                        files.ForEach(x =>
                         {
-                            Name = name,
-                            Path = path,
-                            Size = size,
-                            MD5 = md5,
+                            using (FileStream fsWrite = new FileStream(DirTool.Combine(dstPath, x.Path, x.Name), FileMode.Create))
+                            {
+                                //int allread = 0, readCount = 0;
+                                //byte[] buffer = new byte[FileBuffer];
+                                //while ((readCount = fsRead.Read(buffer, 0, buffer.Length)) > 0)
+                                //{
+                                //    fsWrite.Write(buffer, 0, readCount);
+                                //}
+                                fsWrite.Close();
+                            }
                         });
                     }
 
                     int a = 111;
-
-                    //fsWrite.Write(x.SizeLengthByte, 0, x.SizeLengthByte.Length);
-                    //fsWrite.Write(x.SizeByte, 0, x.SizeByte.Length);
-                    //fsWrite.Write(x.MD5LengthByte, 0, x.MD5LengthByte.Length);
-                    //fsWrite.Write(x.MD5Byte, 0, x.MD5Byte.Length);
                 }
+                fsRead.Close();
             }
             return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
+        }
+
+        /// <summary>
+        /// 获取文件类型的类型版本
+        /// </summary>
+        /// <param name="fs"></param>
+        /// <returns>
+        /// 如果文件类型不匹配，则返回null
+        /// </returns>
+        private static string GetFileVersion(FileStream fs)
+        {
+            string result = null;
+            //读取文件类型标识和版本号
+            byte[] filetype = Encoding.Default.GetBytes(FileType);
+            fs.Read(filetype, 0, filetype.Length);
+            string filetypestr = Encoding.Default.GetString(filetype);
+
+            byte[] fileversion = Encoding.Default.GetBytes(FileVersion);
+            fs.Read(fileversion, 0, fileversion.Length);
+            string fileversionstr = Encoding.Default.GetString(fileversion);
+
+            //如果文件类型匹配，则返回版本号
+            if (filetypestr == FileType) result = fileversionstr;
+
+            return result;
+        }
+        private static List<FilePackageModel> GetFilePackageModel(byte[] headdata)
+        {
+            List<FilePackageModel> files = new List<FilePackageModel>();
+            int index = 0;
+            try
+            {
+                while (index < headdata.Length)
+                {
+                    #region 读取文件名长度和内容
+                    //文件名长度
+                    byte[] namelengthbyte = new byte[4];
+                    Buffer.BlockCopy(headdata, index, namelengthbyte, 0, namelengthbyte.Length);
+                    int namelength = BitConverter.ToInt32(namelengthbyte, 0);
+                    index += namelengthbyte.Length;
+
+                    //文件名内容
+                    byte[] namebyte = new byte[namelength];
+                    Buffer.BlockCopy(headdata, index, namebyte, 0, namelength);
+                    string name = Encoding.Default.GetString(namebyte);
+                    index += namebyte.Length;
+                    #endregion
+
+                    #region 读取路径长度和内容
+                    //路径长度
+                    byte[] pathlengthbyte = new byte[4];
+                    Buffer.BlockCopy(headdata, index, pathlengthbyte, 0, pathlengthbyte.Length);
+                    int pathlength = BitConverter.ToInt32(pathlengthbyte, 0);
+                    index += pathlengthbyte.Length;
+
+                    //路径内容
+                    byte[] pathbyte = new byte[pathlength];
+                    Buffer.BlockCopy(headdata, index, pathbyte, 0, pathlength);
+                    string path = Encoding.Default.GetString(pathbyte);
+                    index += pathbyte.Length;
+                    #endregion
+
+                    #region 读取文件大小长度和内容
+                    //文件大小长度
+                    byte[] sizelengthbyte = new byte[4];
+                    Buffer.BlockCopy(headdata, index, sizelengthbyte, 0, sizelengthbyte.Length);
+                    int sizelength = BitConverter.ToInt32(sizelengthbyte, 0);
+                    index += sizelengthbyte.Length;
+
+                    //文件大小
+                    byte[] sizebyte = new byte[sizelength];
+                    Buffer.BlockCopy(headdata, index, sizebyte, 0, sizelength);
+                    int size = BitConverter.ToInt32(sizebyte, 4);
+                    index += sizebyte.Length;
+                    #endregion
+
+                    #region 读取文件MD5码长度和内容
+                    //文件大小长度
+                    byte[] md5lengthbyte = new byte[4];
+                    Buffer.BlockCopy(headdata, index, md5lengthbyte, 0, md5lengthbyte.Length);
+                    int md5length = BitConverter.ToInt32(md5lengthbyte, 0);
+                    index += md5lengthbyte.Length;
+
+                    //文件大小
+                    byte[] md5byte = new byte[md5length];
+                    Buffer.BlockCopy(headdata, index, md5byte, 0, md5length);
+                    string md5 = Encoding.Default.GetString(md5byte);
+                    index += md5byte.Length;
+                    #endregion
+
+                    files.Add(new FilePackageModel()
+                    {
+                        Name = name,
+                        Path = path,
+                        Size = size,
+                        MD5 = md5,
+                    });
+                }
+                return files;
+            }
+            catch (Exception e) { return null; }
         }
     }
 }
