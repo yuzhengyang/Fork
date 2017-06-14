@@ -238,8 +238,8 @@ namespace Y.Utils.IOUtils.FileUtils
         /// <returns></returns>
         public static string[] GetMD5(List<string> files)
         {
-            string[] result = new string[files.Length];
-            for (int i = 0; i < files.Length; i++)
+            string[] result = new string[files.Count];
+            for (int i = 0; i < files.Count; i++)
             {
                 result[i] = GetMD5(files[i]);
             }

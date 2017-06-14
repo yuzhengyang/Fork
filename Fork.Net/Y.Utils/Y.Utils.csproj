@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FilePackageModel.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />
     <Compile Include="NetUtils\NetManUtils\NetConnectionInfo.cs" />
     <Compile Include="NetUtils\NetManUtils\NetFlowService.cs" />
