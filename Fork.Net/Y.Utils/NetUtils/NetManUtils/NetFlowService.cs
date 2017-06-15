@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2016.5.1 - 2017.6.12
+//      date:       2016.5.1 - 2017.6.16
 //      desc:       网络流量监测工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -25,9 +25,17 @@ namespace Y.Utils.NetUtils.NetManUtils
         public bool IsNetPacketRun { get { return _IsNetPacketRun; } }
         private bool _IsNetPacketRun = false;
 
-        public List<NetProcessInfo> NetProcessInfoList = new List<NetProcessInfo>();
+        /// <summary>
+        /// 程序联网信息列表
+        /// </summary>
+        public List<NetProcessInfo> NetProcessInfoList { get { return _NetProcessInfoList; } }
+        List<NetProcessInfo> _NetProcessInfoList = new List<NetProcessInfo>();
 
-        public NetFlowTool NetFlow = new NetFlowTool();
+        /// <summary>
+        /// 网络流量计数器
+        /// </summary>
+        public NetFlowTool NetFlow { get { return _NetFlow; } }
+        NetFlowTool _NetFlow = new NetFlowTool();
         List<NetPacketTool> NetPacketList = new List<NetPacketTool>();
 
         NetProcessTool.TcpRow[] TcpConnection;
@@ -45,8 +53,8 @@ namespace Y.Utils.NetUtils.NetManUtils
             #region 启动系统性能计数器统计
             try
             {
-                NetFlow.Start();
-                NetFlow.DataMonitorEvent += DataMonitorEvent;
+                _NetFlow.Start();
+                _NetFlow.DataMonitorEvent += DataMonitorEvent;
                 _IsNetFlowRun = true;
             }
             catch { }
@@ -79,7 +87,7 @@ namespace Y.Utils.NetUtils.NetManUtils
         {
             if (_IsNetFlowRun)
             {
-                NetFlow.Stop();
+                _NetFlow.Stop();
                 _IsNetFlowRun = false;
             }
 
@@ -123,7 +131,7 @@ namespace Y.Utils.NetUtils.NetManUtils
                         var process = NowProcess.FirstOrDefault(x => x.Id == tcpDownload.ProcessId);
                         if (process != null)
                         {
-                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            var info = _NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
                             if (info != null)
                             {
                                 isGather = true;
@@ -139,7 +147,7 @@ namespace Y.Utils.NetUtils.NetManUtils
                         var process = NowProcess.FirstOrDefault(x => x.Id == tcUpload.ProcessId);
                         if (process != null)
                         {
-                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            var info = _NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
                             if (info != null)
                             {
                                 isGather = true;
@@ -163,7 +171,7 @@ namespace Y.Utils.NetUtils.NetManUtils
                         var process = NowProcess.FirstOrDefault(x => x.Id == udpDownload.ProcessId);
                         if (process != null)
                         {
-                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            var info = _NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
                             if (info != null)
                             {
                                 isGather = true;
@@ -184,7 +192,7 @@ namespace Y.Utils.NetUtils.NetManUtils
                         var process = NowProcess.FirstOrDefault(x => x.Id == ucUpload.ProcessId);
                         if (process != null)
                         {
-                            var info = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
+                            var info = _NetProcessInfoList.FirstOrDefault(x => x.ProcessName == process.ProcessName);
                             if (info != null)
                             {
                                 isGather = true;
@@ -223,8 +231,8 @@ namespace Y.Utils.NetUtils.NetManUtils
         void SetNetProcess()
         {
             // 清空已有连接数
-            if (ListTool.HasElements(NetProcessInfoList))
-                NetProcessInfoList.ForEach(x =>
+            if (ListTool.HasElements(_NetProcessInfoList))
+                _NetProcessInfoList.ForEach(x =>
                 {
                     x.NetConnectionInfoList = new List<NetConnectionInfo>();
                 });
@@ -257,10 +265,10 @@ namespace Y.Utils.NetUtils.NetManUtils
                 Process p = NowProcess.FirstOrDefault(x => x.Id == t.ProcessId);
                 if (p != null)
                 {
-                    var ppl = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == p.ProcessName);
+                    var ppl = _NetProcessInfoList.FirstOrDefault(x => x.ProcessName == p.ProcessName);
                     if (ppl == null)
                     {
-                        NetProcessInfoList.Add(
+                        _NetProcessInfoList.Add(
                             new NetProcessInfo()
                             {
                                 ProcessId = p.Id,
@@ -314,10 +322,10 @@ namespace Y.Utils.NetUtils.NetManUtils
                 Process p = NowProcess.FirstOrDefault(x => x.Id == u.ProcessId);
                 if (p != null)
                 {
-                    var ppl = NetProcessInfoList.FirstOrDefault(x => x.ProcessName == p.ProcessName);
+                    var ppl = _NetProcessInfoList.FirstOrDefault(x => x.ProcessName == p.ProcessName);
                     if (ppl == null)
                     {
-                        NetProcessInfoList.Add(
+                        _NetProcessInfoList.Add(
                             new NetProcessInfo()
                             {
                                 ProcessId = p.Id,
@@ -361,28 +369,28 @@ namespace Y.Utils.NetUtils.NetManUtils
         /// </summary>
         void CalcNetProcessInfo()
         {
-            if (ListTool.HasElements(NetProcessInfoList))
+            if (ListTool.HasElements(_NetProcessInfoList))
             {
-                NetProcessInfoList.ForEach(p =>
+                _NetProcessInfoList.ForEach(p =>
                 {
                     p.UploadDataCount += p.UploadData;
                     p.DownloadDataCount += p.DownloadData;
                 });
 
-                int allupbag = NetProcessInfoList.Sum(x => x.UploadBag);
-                int alldownbag = NetProcessInfoList.Sum(x => x.DownloadBag);
+                int allupbag = _NetProcessInfoList.Sum(x => x.UploadBag);
+                int alldownbag = _NetProcessInfoList.Sum(x => x.DownloadBag);
 
-                NetProcessInfoList.ForEach(p =>
+                _NetProcessInfoList.ForEach(p =>
                 {
-                    if (allupbag > 0 && NetFlow.UploadData > 0)
+                    if (allupbag > 0 && _NetFlow.UploadData > 0)
                     {
                         float uprate = (float)p.UploadBag / allupbag;
-                        p.UploadData = (int)(uprate * NetFlow.UploadData);
+                        p.UploadData = (int)(uprate * _NetFlow.UploadData);
                     }
-                    if (alldownbag > 0 && NetFlow.DownloadData > 0)
+                    if (alldownbag > 0 && _NetFlow.DownloadData > 0)
                     {
                         float downrate = (float)p.DownloadBag / alldownbag;
-                        p.DownloadData = (int)(downrate * NetFlow.DownloadData);
+                        p.DownloadData = (int)(downrate * _NetFlow.DownloadData);
                     }
 
                     p.UploadBag = 0;
@@ -401,12 +409,12 @@ namespace Y.Utils.NetUtils.NetManUtils
             bool rest = false;
 
             string[] ints = NetCardInfoTool.GetInstanceNames();
-            if (ListTool.IsNullOrEmpty(NetFlow.Instances) && ListTool.HasElements(ints))
+            if (ListTool.IsNullOrEmpty(_NetFlow.Instances) && ListTool.HasElements(ints))
             {
                 rest = true;
             }
-            if (ListTool.HasElements(NetFlow.Instances) && ListTool.HasElements(ints) &&
-                string.Join("-", NetFlow.Instances) != string.Join("-", ints))
+            if (ListTool.HasElements(_NetFlow.Instances) && ListTool.HasElements(ints) &&
+                string.Join("-", _NetFlow.Instances) != string.Join("-", ints))
             {
                 rest = true;
             }
@@ -414,7 +422,7 @@ namespace Y.Utils.NetUtils.NetManUtils
             if (rest)
             {
                 //重启 系统性能计数器
-                NetFlow.Restart();
+                _NetFlow.Restart();
                 //重启 抓包监听
                 List<IPAddress> hosts = NetCardInfoTool.GetIPv4Address();
                 AllIPv4Address = NetCardInfoTool.GetAllIPv4Address();
