@@ -153,21 +153,9 @@ namespace Y.Utils.IOUtils.FileUtils
             if (File.Exists(dstFile) && !overwrite) return -12;//打包后的目标文件已存在
 
             List<string> tempfiles = FileTool.GetAllFile(srcPath);
-            List<FilePackageModel> files = new List<FilePackageModel>();
-            if (ListTool.HasElements(tempfiles))
+            List<FilePackageModel> files = CreateFilePackageModel(tempfiles, srcPath);
+            if (ListTool.HasElements(files))
             {
-                //汇总所有文件
-                tempfiles.ForEach(x =>
-                {
-                    files.Add(new FilePackageModel()
-                    {
-                        Name = Path.GetFileName(x),
-                        Path = DirTool.GetFilePath(x).Substring(srcPath.Count()),
-                        Size = FileTool.Size(x),
-                        MD5 = FileTool.GetMD5(x),
-                    });
-                });
-
                 long allfilesize = files.Sum(x => x.Size);
                 using (FileStream fsWrite = new FileStream(dstFile, FileMode.Create))
                 {
@@ -264,7 +252,7 @@ namespace Y.Utils.IOUtils.FileUtils
                                         readCount = fsRead.Read(buffer, 0, buffer.Length);
                                         fsWrite.Write(buffer, 0, readCount);
                                         size -= readCount;
-                                    } 
+                                    }
                                     if (size <= FileBuffer)
                                     {
                                         readCount = fsRead.Read(buffer, 0, (int)size);
@@ -307,6 +295,11 @@ namespace Y.Utils.IOUtils.FileUtils
 
             return result;
         }
+        /// <summary>
+        /// 解析打包文件文件列表
+        /// </summary>
+        /// <param name="headdata"></param>
+        /// <returns></returns>
         private static List<FilePackageModel> GetFilePackageModel(byte[] headdata)
         {
             List<FilePackageModel> files = new List<FilePackageModel>();
@@ -382,6 +375,30 @@ namespace Y.Utils.IOUtils.FileUtils
                 return files;
             }
             catch (Exception e) { return null; }
+        }
+        /// <summary>
+        /// 创建打包文件列表信息
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="srcPath"></param>
+        /// <returns></returns>
+        private static List<FilePackageModel> CreateFilePackageModel(List<string> files, string srcPath)
+        {
+            if (ListTool.IsNullOrEmpty(files)) return null;
+
+            List<FilePackageModel> result = new List<FilePackageModel>();
+            //汇总所有文件
+            files.ForEach(x =>
+            {
+                result.Add(new FilePackageModel()
+                {
+                    Name = Path.GetFileName(x),
+                    Path = DirTool.GetFilePath(x).Substring(srcPath.Count()),
+                    Size = FileTool.Size(x),
+                    MD5 = FileTool.GetMD5(x),
+                });
+            });
+            return result;
         }
     }
 }

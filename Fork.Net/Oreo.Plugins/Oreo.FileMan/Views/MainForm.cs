@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -83,27 +84,62 @@ namespace Oreo.FileMan.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ////打包
-            //Dictionary<string, object> dicToPack = new Dictionary<string, object>();
-            ////dicToPack.Add("key1", Image.FromFile(@"D:\temp\测试打包\1511925984.jpeg"));
-            ////dicToPack.Add("key2", Image.FromFile(@"D:\temp\测试打包\1555714799.jpeg"));
-            //dicToPack.Add("key1", FilePackageTool.FileDeSerialize(@"D:\temp\测试打包\新建文件夹\新建文本文档 1.txt"));
-            //dicToPack.Add("key2", FilePackageTool.FileDeSerialize(@"D:\temp\测试打包\新建文件夹\新建文本文档 2.txt"));
-            //dicToPack.Add("key3", "hello world");
-            //FilePackageTool.ResourcePackage(dicToPack, @"D:\temp\测试打包\pkg1.pkg");
-            ////解包
-            ////Dictionary<string, object> dicRcv = FilePackageTool.ResourceUnpack(@"D:\temp\测试打包\pkg1.pkg");
+            bool flag = CanUpdate();
         }
-        
+
         private void button2_Click(object sender, EventArgs e)
         {
-            //string a = @"D:\Temp\测试压缩\Root\Plugin\NetAssist.exe";
-            //FileCompressTool.Compress(a);
+            FilePackageTool.Pack(@"D:\Temp\测试压缩\Root", @"D:\Temp\测试压缩\Root.pkg");
+        }
 
-            //string b = @"D:\Temp\测试压缩\Root\Plugin\NetAssist.exe.gz";
-            //FileCompressTool.Decompress(b);
-            //FilePackageTool.Pack(@"D:\temp\测试打包\新建文件夹", @"D:\temp\测试打包\新建文件夹.pkg");
-            FilePackageTool.Unpack(@"D:\temp\测试打包\新建文件夹.pkg", @"D:\temp\测试打包\新建文件夹");
-        } 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FilePackageTool.Unpack(@"D:\Temp\测试压缩\Root.pkg", @"D:\Temp\测试压缩\Root");
+        }
+
+        private bool CanUpdate()
+        {
+            string key = "TodayUpdateTimes";
+            DateTime today = DateTime.Parse(string.Format("{0}-{1}-{2} 00:00:00", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
+            DateTime setday = today;
+
+            //读取配置
+            string temp = ConfigurationManager.AppSettings[key];
+            if (DateTime.TryParse(temp, out setday) && setday >= today && setday <= today.AddDays(1))
+            {
+                if (setday.Hour < 5)
+                    CanUpdateSetConfig(key, setday.AddHours(1).ToString());//累加hour记录次数
+                else
+                    return false;
+            }
+            else
+            {
+                //配置失效，设置为默认值
+                CanUpdateSetConfig(key, today.ToString());
+            }
+            return true;
+        }
+        private bool CanUpdateSetConfig(string key, string value)
+        {
+            try
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                if (config.AppSettings.Settings.AllKeys.Contains(key))
+                {
+                    config.AppSettings.Settings[key].Value = value;
+                }
+                else
+                {
+                    config.AppSettings.Settings.Add(key, value);
+                }
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("appSettings");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
