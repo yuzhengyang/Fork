@@ -101,9 +101,7 @@ namespace Y.Utils.IOUtils.FileUtils
                         return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
                     }
                     catch (Exception e) { }
-                    fsWrite.Close();
                 }
-                fsRead.Close();
                 //加密失败后，删除加密的文件
                 try { File.Delete(dstFile); } catch (Exception e) { }
             }
@@ -187,9 +185,7 @@ namespace Y.Utils.IOUtils.FileUtils
                         }
                     }
                     catch (Exception e) { }
-                    fsWrite.Close();
                 }
-                fsRead.Close();
             }
             string md5 = FileTool.GetMD5(dstFile);
             if (headdata.Count > 1 && md5 == headdata[1])

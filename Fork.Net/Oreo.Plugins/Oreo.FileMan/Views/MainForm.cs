@@ -89,12 +89,16 @@ namespace Oreo.FileMan.Views
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FilePackageTool.Pack(@"D:\Temp\测试压缩\Root", @"D:\Temp\测试压缩\Root.pkg");
+            int flag = FilePackageTool.Pack(@"D:\temp\测试打包\新建文件夹", @"D:\temp\测试打包\新建文件夹.pkg");
+            if (flag > 0)
+                MessageBox.Show("打包成功");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FilePackageTool.Unpack(@"D:\Temp\测试压缩\Root.pkg", @"D:\Temp\测试压缩\Root");
+            int flag = FilePackageTool.Unpack(@"D:\temp\测试打包\新建文件夹.pkg", @"D:\temp\测试打包\新建文件夹");
+            if (flag > 0)
+                MessageBox.Show("拆包成功");
         }
 
         private bool CanUpdate()
@@ -107,7 +111,7 @@ namespace Oreo.FileMan.Views
             string temp = ConfigurationManager.AppSettings[key];
             if (DateTime.TryParse(temp, out setday) && setday >= today && setday <= today.AddDays(1))
             {
-                if (setday.Hour < 5)
+                if (setday.Hour < 3)
                     CanUpdateSetConfig(key, setday.AddHours(1).ToString());//累加hour记录次数
                 else
                     return false;
