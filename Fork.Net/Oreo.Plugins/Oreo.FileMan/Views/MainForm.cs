@@ -14,6 +14,7 @@ using System.Xml.Linq;
 using Y.Utils.DataUtils.EncryptUtils;
 using Y.Utils.IOUtils.FileUtils;
 using Y.Utils.IOUtils.PathUtils;
+using Y.Utils.NetUtils.HttpUtils;
 
 namespace Oreo.FileMan.Views
 {
@@ -98,7 +99,7 @@ namespace Oreo.FileMan.Views
         {
             Task.Factory.StartNew(() =>
             {
-                int flag = FilePackageTool.Pack(@"D:\Temp\测试压缩\Root", @"D:\Temp\测试压缩\Root.pkg", UIProgress);
+                int flag = FilePackageTool.Pack(@"D:\temp\测试打包\新建文件夹", @"D:\temp\测试打包\新建文件夹.pkg", UIProgress);
                 if (flag > 0)
                     MessageBox.Show("打包成功");
             });
@@ -108,7 +109,7 @@ namespace Oreo.FileMan.Views
         {
             Task.Factory.StartNew(() =>
             {
-                int flag = FilePackageTool.Unpack(@"D:\Temp\测试压缩\Root.pkg", @"D:\Temp\测试压缩\Root", UIProgress);
+                int flag = FilePackageTool.Unpack(@"D:\temp\测试打包\新建文件夹.pkg", @"D:\temp\测试打包\新建文件夹", UIProgress);
                 if (flag > 0)
                     MessageBox.Show("拆包成功");
             });
@@ -119,6 +120,7 @@ namespace Oreo.FileMan.Views
             {
                 progressBar1.Maximum = 100;
                 progressBar1.Value = (int)(current * 100 / total);
+                label1.Text = current + "/" + total;
             }));
         }
 
@@ -184,6 +186,14 @@ namespace Oreo.FileMan.Views
             }
             catch (Exception e) { }
             return null;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                HttpTool.Download("http://sw.bos.baidu.com/sw-search-sp/software/5b71d074792c3/googleearth_7.1.8.3036.exe", @"D:\temp\测试加密\googleearth_7.1.8.3036.exe", UIProgress);
+            });
         }
     }
 }

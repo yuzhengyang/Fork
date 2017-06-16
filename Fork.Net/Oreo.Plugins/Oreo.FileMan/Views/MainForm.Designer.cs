@@ -35,6 +35,8 @@
             this.BtFileDecrypt = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtFileEncrypt
@@ -59,7 +61,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(51, 148);
+            this.button3.Location = new System.Drawing.Point(158, 201);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 2;
@@ -102,11 +104,31 @@
             this.progressBar1.Size = new System.Drawing.Size(281, 23);
             this.progressBar1.TabIndex = 6;
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(140, 269);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(153, 12);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "label1";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(51, 152);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(305, 319);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BtFileDecrypt);
@@ -130,5 +152,7 @@
         private System.Windows.Forms.Button BtFileDecrypt;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button5;
     }
 }

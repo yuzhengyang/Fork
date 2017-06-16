@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using Y.Utils.DataUtils.StringUtils;
+using Y.Utils.DelegateUtils;
 
 namespace Y.Utils.NetUtils.HttpUtils
 {
@@ -203,7 +204,7 @@ namespace Y.Utils.NetUtils.HttpUtils
         /// <param name="url">下载文件地址</param>
         /// <param name="file">文件存放地址，包含文件名</param>
         /// <returns></returns>
-        public static bool Download(string url, string file)
+        public static bool Download(string url, string file, ProgressDelegate.ProgressHandler progress = null)
         {
             string tempPath = Path.GetDirectoryName(file) + @"\temp";
             Directory.CreateDirectory(tempPath);  //创建临时文件目录
@@ -223,13 +224,12 @@ namespace Y.Utils.NetUtils.HttpUtils
                 Stream responseStream = response.GetResponseStream();
                 //创建本地文件写入流
                 //Stream stream = new FileStream(tempFile, FileMode.Create);
-                byte[] bArr = new byte[1024];
-                int size = responseStream.Read(bArr, 0, (int)bArr.Length);
-                while (size > 0)
+                byte[] buffer = new byte[100 * 1024];
+                int readCount = 0;
+                while ((readCount = responseStream.Read(buffer, 0, buffer.Length)) > 0)
                 {
-                    //stream.Write(bArr, 0, size);
-                    fs.Write(bArr, 0, size);
-                    size = responseStream.Read(bArr, 0, (int)bArr.Length);
+                    fs.Write(buffer, 0, readCount);
+                    //progress?.Invoke(responseStream.Position, responseStream.Length);
                 }
                 //stream.Close();
                 fs.Close();

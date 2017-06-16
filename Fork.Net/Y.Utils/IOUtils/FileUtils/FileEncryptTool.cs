@@ -30,6 +30,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// <param name="srcFile">源文件</param>
         /// <param name="dstFile">目标文件</param>
         /// <param name="password">加密密码</param>
+        /// <param name="progress">回调进度</param>
         /// <param name="overwrite">是否覆盖已有目标文件</param>
         /// <returns>
         /// >0：操作成功（操作共计秒数）
@@ -37,7 +38,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// -12：加密后的目标文件已存在
         /// -404：未知错误，操作失败
         /// </returns>
-        public static int Encrypt(string srcFile, string dstFile, string password, ProgressDelegate.ProgressHandler progress, bool overwrite = true)
+        public static int Encrypt(string srcFile, string dstFile, string password, ProgressDelegate.ProgressHandler progress = null, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
             if (!File.Exists(srcFile)) return -11; //要加密的文件不存在
@@ -47,7 +48,6 @@ namespace Y.Utils.IOUtils.FileUtils
             string pwdMd5 = MD5Tool.Encrypt(MD5Tool.Encrypt(fmtPwd));
 
             string md5 = FileTool.GetMD5(srcFile);
-            long current = 0;
             using (FileStream fsRead = new FileStream(srcFile, FileMode.Open))
             {
                 using (FileStream fsWrite = new FileStream(dstFile, FileMode.Create))
@@ -99,8 +99,7 @@ namespace Y.Utils.IOUtils.FileUtils
                                 byte[] enbyte = AesTool.Encrypt(buffer, fmtPwd);
                                 fsWrite.Write(enbyte, 0, enbyte.Length);
                             }
-                            current += readCount;
-                            progress?.Invoke(current, fsRead.Length);
+                            progress?.Invoke(fsRead.Position, fsRead.Length);
                         }
                         return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
                     }
@@ -117,6 +116,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// <param name="srcFile">源文件</param>
         /// <param name="dstFile">目标文件</param>
         /// <param name="password">解密密码</param>
+        /// <param name="progress">回调进度</param>
         /// <param name="overwrite">是否覆盖已有目标文件</param>
         /// <returns>
         /// >0：操作成功（操作共计秒数）
@@ -127,7 +127,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// -90：解锁密码错误
         /// -404：未知错误，操作失败
         /// </returns>
-        public static int Decrypt(string srcFile, string dstFile, string password, ProgressDelegate.ProgressHandler progress, bool overwrite = true)
+        public static int Decrypt(string srcFile, string dstFile, string password, ProgressDelegate.ProgressHandler progress = null, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
             if (!File.Exists(srcFile)) return -11;//要解密的文件不存在
@@ -137,7 +137,6 @@ namespace Y.Utils.IOUtils.FileUtils
             string pwdMd5 = MD5Tool.Encrypt(MD5Tool.Encrypt(fmtPwd));
             List<string> headdata = new List<string>();
 
-            long current = 0;
             using (FileStream fsRead = new FileStream(srcFile, FileMode.Open))
             {
                 using (FileStream fsWrite = new FileStream(dstFile, FileMode.Create))
@@ -146,27 +145,26 @@ namespace Y.Utils.IOUtils.FileUtils
                     {
                         //读取文件类型标识和版本号
                         byte[] filetype = Encoding.Default.GetBytes(FileType);
-                        current += fsRead.Read(filetype, 0, filetype.Length);
+                        fsRead.Read(filetype, 0, filetype.Length);
                         string filetypestr = Encoding.Default.GetString(filetype);
                         byte[] fileversion = Encoding.Default.GetBytes(FileVersion);
-                        current += fsRead.Read(fileversion, 0, fileversion.Length);
+                        fsRead.Read(fileversion, 0, fileversion.Length);
                         string fileversionstr = Encoding.Default.GetString(fileversion);
                         if (filetypestr != FileType && fileversionstr != FileVersion) return -20;//文件类型不匹配
 
                         //读取头部信息个数
                         byte[] count = new byte[4];
-                        current += fsRead.Read(count, 0, count.Length);
+                        fsRead.Read(count, 0, count.Length);
                         int countint = BitConverter.ToInt32(count, 0);
                         //读取各部分长度和数据
                         byte[] headlength = new byte[4 * countint];
                         if (fsRead.Read(headlength, 0, headlength.Length) == headlength.Length)
                         {
-                            current += headlength.Length;
                             for (int i = 0; i < countint; i++)
                             {
                                 int datalong = BitConverter.ToInt32(headlength, i * 4);
                                 byte[] tempdata = new byte[datalong];
-                                current += fsRead.Read(tempdata, 0, datalong);
+                                fsRead.Read(tempdata, 0, datalong);
                                 headdata.Add(Encoding.Default.GetString(tempdata));
                             }
                         }
@@ -189,8 +187,7 @@ namespace Y.Utils.IOUtils.FileUtils
                                 byte[] debyte = AesTool.Decrypt(buffer, fmtPwd);
                                 fsWrite.Write(debyte, 0, debyte.Length);
                             }
-                            current += readCount;
-                            progress?.Invoke(current, fsRead.Length);
+                            progress?.Invoke(fsRead.Position, fsRead.Length);
                         }
                     }
                     catch (Exception e) { }
