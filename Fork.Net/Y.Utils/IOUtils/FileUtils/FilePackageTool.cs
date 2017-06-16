@@ -15,6 +15,7 @@ using System.Resources;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using Y.Utils.DataUtils.Collections;
+using Y.Utils.DelegateUtils;
 using Y.Utils.IOUtils.PathUtils;
 
 namespace Y.Utils.IOUtils.FileUtils
@@ -29,15 +30,19 @@ namespace Y.Utils.IOUtils.FileUtils
         private static int FileBuffer = 1024 * 1024;
 
         /// <summary>
-        /// 打包
+        /// 文件打包
         /// </summary>
+        /// <param name="srcPath">要打包的路径</param>
+        /// <param name="dstFile">打包后的文件</param>
+        /// <param name="progress">回调进度</param>
+        /// <param name="overwrite">覆盖打包后的文件（重复时）</param>
         /// <returns>
         /// -11;//要打包的路径不存在
         /// -12;//打包后的目标文件已存在
         /// -13;//要打包的路径中没有文件
         /// -404;//未知错误，操作失败
         /// </returns>
-        public static int Pack(string srcPath, string dstFile, bool overwrite = true)
+        public static int Pack(string srcPath, string dstFile, ProgressDelegate.ProgressHandler progress, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
             if (!Directory.Exists(srcPath)) return -11;//要打包的路径不存在
@@ -47,7 +52,8 @@ namespace Y.Utils.IOUtils.FileUtils
             List<FilePackageModel> files = CreateFilePackageModel(tempfiles, srcPath);
             if (ListTool.HasElements(files))
             {
-                long allfilesize = files.Sum(x => x.Size);
+                long allfilesize = files.Sum(x => x.Size);//文件总大小
+                long surplusfilesize = allfilesize;//剩余要写入的文件大小
                 using (FileStream fsWrite = new FileStream(dstFile, FileMode.Create))
                 {
                     try
@@ -82,14 +88,15 @@ namespace Y.Utils.IOUtils.FileUtils
                                 while ((readCount = fsRead.Read(buffer, 0, buffer.Length)) > 0)
                                 {
                                     fsWrite.Write(buffer, 0, readCount);
-                                    allfilesize -= readCount;
+                                    surplusfilesize -= readCount;
+                                    progress?.Invoke(allfilesize - surplusfilesize, allfilesize);
                                 }
                             }
                         });
                     }
                     catch (Exception e) { }
                 }
-                if (allfilesize == 0)
+                if (surplusfilesize == 0)
                 {
                     return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
                 }
@@ -103,15 +110,19 @@ namespace Y.Utils.IOUtils.FileUtils
             return -404;//未知错误，操作失败
         }
         /// <summary>
-        /// 解包
+        /// 拆包
         /// </summary>
+        /// <param name="srcFile">包文件路径</param>
+        /// <param name="dstPath">拆包到的目录 </param>
+        /// <param name="progress">回调进度</param>
+        /// <param name="overwrite">覆盖拆包后的文件（重复时）</param>
         /// <returns>
         /// -11; //要解包的文件不存在
         /// -12;//要解包的目标文件夹已存在
         /// -20;// 文件类型不匹配
         /// -404;//未知错误，操作失败
         /// </returns>
-        public static int Unpack(string srcFile, string dstPath, bool overwrite = true)
+        public static int Unpack(string srcFile, string dstPath, ProgressDelegate.ProgressHandler progress, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
             if (!File.Exists(srcFile)) return -11; //要解包的文件不存在
@@ -137,6 +148,8 @@ namespace Y.Utils.IOUtils.FileUtils
                         List<FilePackageModel> files = GetFilePackageModel(headdata);
                         if (ListTool.HasElements(files))
                         {
+                            long allfilesize = files.Sum(x => x.Size);//文件总大小
+                            long current = 0;//当前进度
                             //读取写出所有文件
                             files.ForEach(x =>
                             {
@@ -153,11 +166,15 @@ namespace Y.Utils.IOUtils.FileUtils
                                             readCount = fsRead.Read(buffer, 0, buffer.Length);
                                             fsWrite.Write(buffer, 0, readCount);
                                             size -= readCount;
+                                            current += readCount;
+                                            progress?.Invoke(current, allfilesize);
                                         }
                                         if (size <= FileBuffer)
                                         {
                                             readCount = fsRead.Read(buffer, 0, (int)size);
                                             fsWrite.Write(buffer, 0, readCount);
+                                            current += readCount;
+                                            progress?.Invoke(current, allfilesize);
                                         }
                                     }
                                 }
@@ -167,8 +184,8 @@ namespace Y.Utils.IOUtils.FileUtils
                             foreach (var file in files)
                             {
                                 string temp = DirTool.Combine(dstPath, file.Path, file.Name);
-                                string tempMD5 = FileTool.GetMD5(temp);
-                                if (tempMD5 != file.MD5)//验证文件MD5不匹配则跳出验证
+                                string tempCk = FileTool.GetMD5(temp);
+                                if (tempCk != file.MD5)//验证文件（Size：速度会快一些，MD5在大文件的验证上非常耗时）
                                 {
                                     allCheck = false;
                                     break;
@@ -182,6 +199,7 @@ namespace Y.Utils.IOUtils.FileUtils
             }
             return -404;//未知错误，操作失败
         }
+
 
         /// <summary>
         /// 获取文件类型的类型版本
