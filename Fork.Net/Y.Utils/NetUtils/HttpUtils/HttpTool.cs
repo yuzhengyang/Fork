@@ -203,6 +203,7 @@ namespace Y.Utils.NetUtils.HttpUtils
         /// </summary>
         /// <param name="url">下载文件地址</param>
         /// <param name="file">文件存放地址，包含文件名</param>
+        /// <param name="progress">回调进度</param>
         /// <returns></returns>
         public static bool Download(string url, string file, ProgressDelegate.ProgressHandler progress = null)
         {
@@ -226,10 +227,12 @@ namespace Y.Utils.NetUtils.HttpUtils
                 //Stream stream = new FileStream(tempFile, FileMode.Create);
                 byte[] buffer = new byte[100 * 1024];
                 int readCount = 0;
+                long filesize = response.ContentLength, current = 0;
                 while ((readCount = responseStream.Read(buffer, 0, buffer.Length)) > 0)
                 {
                     fs.Write(buffer, 0, readCount);
-                    //progress?.Invoke(responseStream.Position, responseStream.Length);
+                    current += readCount;
+                    progress?.Invoke(current, filesize);
                 }
                 //stream.Close();
                 fs.Close();

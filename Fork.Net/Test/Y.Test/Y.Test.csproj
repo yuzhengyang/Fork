@@ -144,11 +144,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Y.Skin\Y.Skin.csproj">
+    <ProjectReference Include="..\..\Y.Skin\Y.Skin.csproj">
       <Project>{E9A97673-3E27-4A49-90BC-8806411A2F57}</Project>
       <Name>Y.Skin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Y.Utils\Y.Utils.csproj">
+    <ProjectReference Include="..\..\Y.Utils\Y.Utils.csproj">
       <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>
       <Name>Y.Utils</Name>
     </ProjectReference>
