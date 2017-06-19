@@ -95,7 +95,7 @@
     <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="IOUtils\LogUtils\LogLevel.cs" />
     <Compile Include="IOUtils\LogUtils\LogType.cs" />
-    <Compile Include="NetUtils\FTPUtils\FTPTool.cs" />
+    <Compile Include="NetUtils\FTPUtils\FtpTool.cs" />
     <Compile Include="NetUtils\EmailUtils\EmailTool.cs" />
     <Compile Include="IOUtils\ImageUtils\CaptchaHelper.cs" />
     <Compile Include="DataUtils\JsonUtils\ConvertJson.cs" />

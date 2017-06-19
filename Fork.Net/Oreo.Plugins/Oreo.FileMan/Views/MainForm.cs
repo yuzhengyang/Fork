@@ -11,14 +11,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Y.Skin.YoForm.NoTitle;
 using Y.Utils.DataUtils.EncryptUtils;
 using Y.Utils.IOUtils.FileUtils;
 using Y.Utils.IOUtils.PathUtils;
+using Y.Utils.NetUtils.FTPUtils;
 using Y.Utils.NetUtils.HttpUtils;
+using Y.Utils.WindowsUtils.APIUtils;
 
 namespace Oreo.FileMan.Views
 {
-    public partial class MainForm : Form
+    public partial class MainForm : NoTitleForm
     {
         FileCodeTool fct = new FileCodeTool();
         public MainForm()
@@ -92,7 +95,7 @@ namespace Oreo.FileMan.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -188,12 +191,14 @@ namespace Oreo.FileMan.Views
             return null;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void imageButton1_Click(object sender, EventArgs e)
         {
-            Task.Factory.StartNew(() =>
-            {
-                HttpTool.Download("http://sw.bos.baidu.com/sw-search-sp/software/5b71d074792c3/googleearth_7.1.8.3036.exe", @"D:\temp\测试加密\googleearth_7.1.8.3036.exe", UIProgress);
-            });
+            //MessageBox.Show("");
         }
+
+        private void imageButton4_Click(object sender, EventArgs e)
+        {
+        }
+        
     }
 }

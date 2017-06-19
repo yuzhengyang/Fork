@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace Y.Controls.Container
+namespace Y.Controls.Containers
 {
     public partial class FlexiblePanel : Panel
     {

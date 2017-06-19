@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace Y.Controls.Container
+namespace Y.Controls.Containers
 {
     partial class FlexiblePanel
     {

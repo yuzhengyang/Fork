@@ -42,10 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Container\FlexiblePanel.cs">
+    <Compile Include="Buttons\ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Container\FlexiblePanel.Designer.cs">
+    <Compile Include="Buttons\ImageButton.Designer.cs">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Containers\FlexiblePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Containers\FlexiblePanel.Designer.cs">
       <DependentUpon>FlexiblePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Loadings\SimpleLoading.cs">
@@ -62,6 +68,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Buttons\ImageButton.resx">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Loadings\SimpleLoading.resx">
       <DependentUpon>SimpleLoading.cs</DependentUpon>
     </EmbeddedResource>
@@ -73,6 +82,7 @@
   <ItemGroup>
     <Content Include="Resource\Image\SimpleLoading.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

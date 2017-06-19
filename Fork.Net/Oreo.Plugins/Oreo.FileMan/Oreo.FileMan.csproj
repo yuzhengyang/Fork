@@ -46,6 +46,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Y.Controls">
+      <HintPath>..\..\Y.Controls\obj\Debug\Y.Controls.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -87,10 +90,21 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Y.Skin\Y.Skin.csproj">
+      <Project>{e9a97673-3e27-4a49-90bc-8806411a2f57}</Project>
+      <Name>Y.Skin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Y.Utils\Y.Utils.csproj">
       <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>
       <Name>Y.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\FileType\TypeMusic.png" />
+    <Content Include="Images\FileType\TypeMusic_Press.png" />
+    <Content Include="Images\hover.png" />
+    <Content Include="Images\mousedown.png" />
+    <Content Include="Images\normal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

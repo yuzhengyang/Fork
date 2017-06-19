@@ -187,7 +187,7 @@ namespace Oreo.VersionUpdate.Views
                     {
                         UIUpdateDetail("正在下载：" + Path.GetFileName(file.ServerFile));
                         R.Log.v(string.Format("{0} 文件有更新，正在下载文件", Path.GetFileName(file.ServerFile)));
-                        FtpHelper ftp = new FtpHelper(R.Settings.FTP.Address, R.Settings.FTP.Account, R.Settings.FTP.Password);
+                        FtpTool ftp = new FtpTool(R.Settings.FTP.Address, R.Settings.FTP.Account, R.Settings.FTP.Password);
                         if (!ftp.Download(serverFile, tempFile))
                             if (!ftp.Download(serverFile, tempFile))
                                 if (!ftp.Download(serverFile, tempFile))

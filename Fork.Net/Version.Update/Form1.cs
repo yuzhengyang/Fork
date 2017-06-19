@@ -164,7 +164,7 @@ namespace Version.Update
                         }
                         else
                         {
-                            FtpHelper ftp = new FtpHelper(R.FtpIp, R.FtpAccount, R.FtpPassword);
+                            FtpTool ftp = new FtpTool(R.FtpIp, R.FtpAccount, R.FtpPassword);
                             if (!ftp.DownloadFile(sourceFile, destPath))
                                 if (!ftp.DownloadFile(sourceFile, destPath))
                                     if (!ftp.DownloadFile(sourceFile, destPath))
