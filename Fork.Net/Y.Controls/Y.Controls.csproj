@@ -48,6 +48,12 @@
     <Compile Include="Buttons\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Buttons\ImageTextButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Buttons\ImageTextButton.Designer.cs">
+      <DependentUpon>ImageTextButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Containers\FlexiblePanel.cs">
       <SubType>Component</SubType>
     </Compile>

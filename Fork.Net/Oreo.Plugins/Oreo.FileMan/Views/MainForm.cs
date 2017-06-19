@@ -95,7 +95,9 @@ namespace Oreo.FileMan.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+            //设置选项卡控件标签栏高度为1
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+            tabControl1.ItemSize = new Size(0, 1);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -199,6 +201,20 @@ namespace Oreo.FileMan.Views
         private void imageButton4_Click(object sender, EventArgs e)
         {
         }
-        
+
+        private void LbFileType_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab("TpFileType");
+        }
+
+        private void LbFileEncrypt_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab("TpFileEncrypt");
+        }
+
+        private void LbFileBackup_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab("TpFileBackup");
+        }
     }
 }
