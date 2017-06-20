@@ -38,42 +38,22 @@ namespace Y.Utils.IOUtils.FileUtils
                 catch (Exception e) { }
             return null;
         }
-        /// <summary>
-        /// 获取文件（向下钻取所有目录）
-        /// </summary>
-        /// <param name="path">路径</param>
-        /// <param name="pattern">通配符</param>
-        /// <returns></returns>
-        public static List<string> GetAllFile(string path, string pattern = "*")
-        {
-            List<string> result = null;
-            try
-            {
-                result = Directory.EnumerateFiles(path, pattern, SearchOption.TopDirectoryOnly).ToList();
-            }
-            catch (Exception e) { }
-            return result;
-        }
-        /// <summary>
-        /// 获取文件（向下钻取所有目录）
-        /// </summary>
-        /// <param name="path">路径</param>
-        /// <param name="pattern">通配符（支持多个通配符）</param>
-        /// <returns></returns>
-        [Obsolete]
-        public static List<string> GetAllFile(string path, string[] patterns)
-        {
-            List<string> result = new List<string>();
-            if (!ListTool.IsNullOrEmpty(patterns))
-            {
-                foreach (var p in patterns)
-                {
-                    List<string> temp = GetAllFile(path, p);
-                    if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
-                }
-            }
-            return result;
-        }
+        ///// <summary>
+        ///// 获取文件（向下钻取所有目录）
+        ///// </summary>
+        ///// <param name="path">路径</param>
+        ///// <param name="pattern">通配符</param>
+        ///// <returns></returns>
+        //public static List<string> GetAllFile(string path, string pattern = "*")
+        //{
+        //    List<string> result = null;
+        //    try
+        //    {
+        //        result = Directory.EnumerateFiles(path, pattern, SearchOption.TopDirectoryOnly).ToList();
+        //    }
+        //    catch (Exception e) { }
+        //    return result;
+        //}
         /// <summary>
         /// 获取目录下的所有文件
         /// 防止遇到（$文件夹报错无法获取目录的错误）
@@ -81,7 +61,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// <param name="path"></param>
         /// <param name="patterns"></param>
         /// <returns></returns>
-        public static List<string> GetAllFile2(string path, string[] patterns)
+        public static List<string> GetAllFile(string path, string[] patterns = null)
         {
             List<string> allpath = DirTool.GetAllPath(path);
             allpath.Add(path);
@@ -104,50 +84,50 @@ namespace Y.Utils.IOUtils.FileUtils
                     {
                         foreach (var pattern in patterns)
                         {
-                            List<string> temp = GetAllFile(path, pattern);
+                            List<string> temp = GetFile(path, pattern);
                             if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
                         }
                     }
                     else
                     {
-                        List<string> temp = GetAllFile(path);
+                        List<string> temp = GetFile(path);
                         if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
                     }
                 }
             }
             return result;
         }
-        /// <summary>
-        /// 获取文件（所有目录）（严格模式：从第一个.开始截取后缀）
-        /// </summary>
-        /// <param name="paths">路径（支持多个路径）</param>
-        /// <param name="patterns">通配符（支持多个通配符）</param>
-        /// <returns></returns>
-        public static List<string> GetAllFileByExt(string[] paths, string[] patterns)
-        {
-            List<string> result = new List<string>();
-            if (!ListTool.IsNullOrEmpty(paths))
-            {
-                foreach (var path in paths)
-                {
-                    List<string> temp = GetAllFile(path);
-                    if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
-                }
-            }
-            if (!ListTool.IsNullOrEmpty(patterns) && !ListTool.IsNullOrEmpty(result))
-            {
-                for (int i = result.Count() - 1; i >= 0; i--)
-                {
-                    string ext = System.IO.Path.GetFileName(result[i]);
-                    if (ext.IndexOf('.') >= 0)
-                    {
-                        ext = ext.Substring(ext.IndexOf('.'));
-                    }
-                    if (!patterns.Contains(ext)) result.RemoveAt(i);
-                }
-            }
-            return result;
-        }
+        ///// <summary>
+        ///// 获取文件（所有目录）（严格模式：从第一个.开始截取后缀）
+        ///// </summary>
+        ///// <param name="paths">路径（支持多个路径）</param>
+        ///// <param name="patterns">通配符（支持多个通配符）</param>
+        ///// <returns></returns>
+        //public static List<string> GetAllFileByExt(string[] paths, string[] patterns)
+        //{
+        //    List<string> result = new List<string>();
+        //    if (!ListTool.IsNullOrEmpty(paths))
+        //    {
+        //        foreach (var path in paths)
+        //        {
+        //            List<string> temp = GetAllFile(path);
+        //            if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
+        //        }
+        //    }
+        //    if (!ListTool.IsNullOrEmpty(patterns) && !ListTool.IsNullOrEmpty(result))
+        //    {
+        //        for (int i = result.Count() - 1; i >= 0; i--)
+        //        {
+        //            string ext = System.IO.Path.GetFileName(result[i]);
+        //            if (ext.IndexOf('.') >= 0)
+        //            {
+        //                ext = ext.Substring(ext.IndexOf('.'));
+        //            }
+        //            if (!patterns.Contains(ext)) result.RemoveAt(i);
+        //        }
+        //    }
+        //    return result;
+        //}
 
 
         /// <summary>

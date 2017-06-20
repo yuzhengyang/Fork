@@ -12,6 +12,8 @@ using Y.Utils.DataUtils.Collections;
 using Y.Utils.IOUtils.FileUtils;
 using System.Threading;
 using Y.Utils.IOUtils.PathUtils;
+using Oreo.FileMan.Models;
+using Oreo.FileMan.DatabaseEngine;
 
 namespace Oreo.FileMan.Partial
 {
@@ -79,8 +81,19 @@ namespace Oreo.FileMan.Partial
                 //    {
                 //        if (item.IsReady)
                 //        {
-                List<string> files = FileTool.GetAllFile2("J:\\", type);
-                if (ListTool.HasElements(files)) result += files.Count();
+                List<string> files = FileTool.GetAllFile("D:\\", type);
+                if (ListTool.HasElements(files))
+                {
+                    result += files.Count();
+                    using (var db = new Muse())
+                    {
+                        files.ForEach(x =>
+                        {
+                            var a = db.Set<Files>().Add(new Files() { FullPath = x, FileName = Path.GetFileName(x), ExtName = Path.GetExtension(x) });
+                        });
+                        int count = db.SaveChanges();
+                    }
+                }
                 //        }
                 //    }
                 //}
