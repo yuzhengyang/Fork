@@ -43,6 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YoButton\ImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="YoButton\ImageButton.Designer.cs">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="YoForm\Irregular\IrregularForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,9 +92,7 @@
       <DependentUpon>FlexiblePanel.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="YoCtrl\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Y.Utils\Y.Utils.csproj">
       <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>
@@ -96,6 +100,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="YoButton\ImageButton.resx">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="YoForm\Irregular\IrregularForm.resx">
       <DependentUpon>IrregularForm.cs</DependentUpon>
     </EmbeddedResource>

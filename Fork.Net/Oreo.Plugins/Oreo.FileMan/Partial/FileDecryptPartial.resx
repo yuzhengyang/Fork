@@ -117,56 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="File-Zip-Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Zip-Press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Doc-Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Doc-Press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Setup-Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Setup-Press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Doc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Picture-Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Picture-Press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Collect-Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Collect-Press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Picture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Download-Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Download-Press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Setup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Setup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Music-Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Music-Press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Zip" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Zip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Collect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Collect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Video-Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Video-Press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Video" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Video.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File-Music" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\FileType\File-Music.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Wait-Hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\WaitingGif\Wait-Hor.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <metadata name="CoFileDecryptName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="CoFileDecryptStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

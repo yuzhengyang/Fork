@@ -86,7 +86,7 @@ namespace Y.Utils.NetUtils.FTPUtils
             catch (Exception e) { }
             return result;
         }
-        public bool Download(string ftpFile, string localFile, ProgressDelegate.ProgressHandler progress = null, bool overwrite = true)
+        public bool Download(string ftpFile, string localFile, ProgressDelegate.ProgressHandler progress = null, object sender = null, bool overwrite = true)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace Y.Utils.NetUtils.FTPUtils
                                 read = responseStream.Read(buffer, 0, buffer.Length);
                                 fs.Write(buffer, 0, read);
                                 current += read;
-                                progress?.Invoke(current, filesize);
+                                progress?.Invoke(sender, new ProgressEventArgs(current, filesize));
                             } while (!(read == 0));
                             fs.Flush();
                         }

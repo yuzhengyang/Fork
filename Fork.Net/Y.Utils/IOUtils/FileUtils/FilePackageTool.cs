@@ -42,7 +42,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// -13;//要打包的路径中没有文件
         /// -404;//未知错误，操作失败
         /// </returns>
-        public static int Pack(string srcPath, string dstFile, ProgressDelegate.ProgressHandler progress = null, bool overwrite = true)
+        public static int Pack(string srcPath, string dstFile, ProgressDelegate.ProgressHandler progress = null, object sender = null, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
             if (!Directory.Exists(srcPath)) return -11;//要打包的路径不存在
@@ -89,7 +89,7 @@ namespace Y.Utils.IOUtils.FileUtils
                                 {
                                     fsWrite.Write(buffer, 0, readCount);
                                     surplusfilesize -= readCount;
-                                    progress?.Invoke(allfilesize - surplusfilesize, allfilesize);
+                                    progress?.Invoke(sender, new ProgressEventArgs(allfilesize - surplusfilesize, allfilesize));
                                 }
                             }
                         });
@@ -122,7 +122,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// -20;// 文件类型不匹配
         /// -404;//未知错误，操作失败
         /// </returns>
-        public static int Unpack(string srcFile, string dstPath, ProgressDelegate.ProgressHandler progress = null, bool overwrite = true)
+        public static int Unpack(string srcFile, string dstPath, ProgressDelegate.ProgressHandler progress = null, object sender = null, bool overwrite = true)
         {
             DateTime beginTime = DateTime.Now;
             if (!File.Exists(srcFile)) return -11; //要解包的文件不存在
@@ -167,14 +167,14 @@ namespace Y.Utils.IOUtils.FileUtils
                                             fsWrite.Write(buffer, 0, readCount);
                                             size -= readCount;
                                             current += readCount;
-                                            progress?.Invoke(current, allfilesize);
+                                            progress?.Invoke(sender, new ProgressEventArgs(current, allfilesize));
                                         }
                                         if (size <= FileBuffer)
                                         {
                                             readCount = fsRead.Read(buffer, 0, (int)size);
                                             fsWrite.Write(buffer, 0, readCount);
                                             current += readCount;
-                                            progress?.Invoke(current, allfilesize);
+                                            progress?.Invoke(sender, new ProgressEventArgs(current, allfilesize));
                                         }
                                     }
                                 }

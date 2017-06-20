@@ -51,6 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Partial\FileDecryptPartial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Partial\FileDecryptPartial.Designer.cs">
+      <DependentUpon>FileDecryptPartial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Partial\FileEncryptPartial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Partial\FileEncryptPartial.Designer.cs">
+      <DependentUpon>FileEncryptPartial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Partial\FileTypePartial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Partial\FileTypePartial.Designer.cs">
+      <DependentUpon>FileTypePartial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MainForm.cs">
@@ -59,6 +77,15 @@
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Partial\FileDecryptPartial.resx">
+      <DependentUpon>FileDecryptPartial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Partial\FileEncryptPartial.resx">
+      <DependentUpon>FileEncryptPartial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Partial\FileTypePartial.resx">
+      <DependentUpon>FileTypePartial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -67,6 +94,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -90,10 +118,6 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Y.Controls\Y.Controls.csproj">
-      <Project>{e10ec8d2-22e2-4387-9d9b-36a5429b67c1}</Project>
-      <Name>Y.Controls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Y.Skin\Y.Skin.csproj">
       <Project>{e9a97673-3e27-4a49-90bc-8806411a2f57}</Project>
       <Name>Y.Skin</Name>
@@ -122,6 +146,7 @@
     <Content Include="Images\FileType\File-Zip.png" />
     <Content Include="Images\Icon\Logo.png" />
     <Content Include="Images\Icon\Icon.ico" />
+    <Content Include="Images\WaitingGif\Wait-Hor.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

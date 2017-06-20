@@ -205,7 +205,7 @@ namespace Y.Utils.NetUtils.HttpUtils
         /// <param name="file">文件存放地址，包含文件名</param>
         /// <param name="progress">回调进度</param>
         /// <returns></returns>
-        public static bool Download(string url, string file, ProgressDelegate.ProgressHandler progress = null)
+        public static bool Download(string url, string file, ProgressDelegate.ProgressHandler progress = null, object sender = null)
         {
             string tempPath = Path.GetDirectoryName(file) + @"\temp";
             Directory.CreateDirectory(tempPath);  //创建临时文件目录
@@ -232,7 +232,7 @@ namespace Y.Utils.NetUtils.HttpUtils
                 {
                     fs.Write(buffer, 0, readCount);
                     current += readCount;
-                    progress?.Invoke(current, filesize);
+                    progress?.Invoke(sender, new ProgressEventArgs(current, filesize));
                 }
                 //stream.Close();
                 fs.Close();

@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.3.29 - 2017.6.10
+//      date:       2017.3.29 - 2017.6.20
 //      desc:       文件操作工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -12,6 +12,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Y.Utils.DataUtils.Collections;
 using Y.Utils.DataUtils.UnitConvertUtils;
+using Y.Utils.IOUtils.PathUtils;
 
 namespace Y.Utils.IOUtils.FileUtils
 {
@@ -38,7 +39,7 @@ namespace Y.Utils.IOUtils.FileUtils
             return null;
         }
         /// <summary>
-        /// 获取文件（所有目录）
+        /// 获取文件（向下钻取所有目录）
         /// </summary>
         /// <param name="path">路径</param>
         /// <param name="pattern">通配符</param>
@@ -48,23 +49,24 @@ namespace Y.Utils.IOUtils.FileUtils
             List<string> result = null;
             try
             {
-                result = Directory.EnumerateFiles(path, pattern, SearchOption.AllDirectories).ToList();
+                result = Directory.EnumerateFiles(path, pattern, SearchOption.TopDirectoryOnly).ToList();
             }
             catch (Exception e) { }
             return result;
         }
         /// <summary>
-        /// 获取文件（所有目录）
+        /// 获取文件（向下钻取所有目录）
         /// </summary>
         /// <param name="path">路径</param>
         /// <param name="pattern">通配符（支持多个通配符）</param>
         /// <returns></returns>
-        public static List<string> GetAllFile(string path, string[] pattern)
+        [Obsolete]
+        public static List<string> GetAllFile(string path, string[] patterns)
         {
             List<string> result = new List<string>();
-            if (!ListTool.IsNullOrEmpty(pattern))
+            if (!ListTool.IsNullOrEmpty(patterns))
             {
-                foreach (var p in pattern)
+                foreach (var p in patterns)
                 {
                     List<string> temp = GetAllFile(path, p);
                     if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
@@ -73,12 +75,25 @@ namespace Y.Utils.IOUtils.FileUtils
             return result;
         }
         /// <summary>
-        /// 获取文件（所有目录）
+        /// 获取目录下的所有文件
+        /// 防止遇到（$文件夹报错无法获取目录的错误）
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="patterns"></param>
+        /// <returns></returns>
+        public static List<string> GetAllFile2(string path, string[] patterns)
+        {
+            List<string> allpath = DirTool.GetAllPath(path);
+            allpath.Add(path);
+            return FileTool.GetAllFile(allpath, patterns);
+        }
+        /// <summary>
+        /// 获取文件（多个目录）（向下钻取所有目录）
         /// </summary>
         /// <param name="paths">路径（支持多个路径）</param>
         /// <param name="patterns">通配符（支持多个通配符）</param>
         /// <returns></returns>
-        public static List<string> GetAllFile(string[] paths, string[] patterns)
+        public static List<string> GetAllFile(List<string> paths, string[] patterns = null)
         {
             List<string> result = new List<string>();
             if (!ListTool.IsNullOrEmpty(paths))
@@ -133,6 +148,8 @@ namespace Y.Utils.IOUtils.FileUtils
             }
             return result;
         }
+
+
         /// <summary>
         /// 删除文件
         /// </summary>

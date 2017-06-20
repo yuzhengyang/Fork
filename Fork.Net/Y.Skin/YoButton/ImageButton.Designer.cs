@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-
-namespace Y.Controls.Containers
+﻿namespace Y.Skin.YoButton
 {
-    partial class FlexiblePanel
+    partial class ImageButton
     {
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        public System.Windows.Forms.AutoSizeMode AutoScaleMode { get; set; }
+
         /// <summary> 
         /// 清理所有正在使用的资源。
         /// </summary>
@@ -39,9 +28,19 @@ namespace Y.Controls.Containers
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = base.AutoSizeMode;
-            this.BackColor = System.Drawing.Color.White;
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // ImageButton
+            // 
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ImageButton_MouseDown);
+            this.MouseEnter += new System.EventHandler(this.ImageButton_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.ImageButton_MouseLeave);
+            this.MouseHover += new System.EventHandler(this.ImageButton_MouseHover);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ImageButton_MouseUp);
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
