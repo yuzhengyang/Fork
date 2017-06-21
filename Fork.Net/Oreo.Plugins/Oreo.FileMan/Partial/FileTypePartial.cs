@@ -14,17 +14,18 @@ using System.Threading;
 using Y.Utils.IOUtils.PathUtils;
 using Oreo.FileMan.Models;
 using Oreo.FileMan.DatabaseEngine;
+using Oreo.FileMan.Helpers;
 
 namespace Oreo.FileMan.Partial
 {
     public partial class FileTypePartial : UserControl
     {
-        string[] TypeVideo = new string[] { "*.mp4", "*.rmvb" };
-        string[] TypeDoc = new string[] { "*.doc", "*.xls" };
-        string[] TypePicture = new string[] { "*.jpg", "*.bmp" };
-        string[] TypeMusic = new string[] { "*.mp3", "*.wma" };
-        string[] TypeSetup = new string[] { "*.apk", "*.msi" };
-        string[] TypeZip = new string[] { "*.zip", "*.rar" };
+        string[] TypeVideo = new string[] { ".mp4", ".rmvb", ".wma" };
+        string[] TypeDoc = new string[] { ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".txt" };
+        string[] TypePicture = new string[] { ".jpg", ".bmp", ".png", ".icon", ".ico" };
+        string[] TypeMusic = new string[] { ".mp3", ".wma" };
+        string[] TypeSetup = new string[] { ".apk", ".msi" };
+        string[] TypeZip = new string[] { ".zip", ".rar", ".iso" };
         public FileTypePartial()
         {
             InitializeComponent();
@@ -32,40 +33,47 @@ namespace Oreo.FileMan.Partial
 
         private void FileTypePartial_Load(object sender, EventArgs e)
         {
+            Task.Factory.StartNew(() => { FileHelper.GetAllFileToDb(); });
+
             Task.Factory.StartNew(() =>
             {
-                //视频
-                Thread.Sleep(2000);
-                UISearchFileWaiting(LbVideoCount);
-                int ctv = GetTypeFileCount(TypeVideo);
-                UISetFileCount(LbVideoCount, ctv);
-                //文档
-                Thread.Sleep(2000);
-                UISearchFileWaiting(LbDocCount);
-                int ctd = GetTypeFileCount(TypeDoc);
-                UISetFileCount(LbDocCount, ctd);
-                //图片
-                Thread.Sleep(2000);
-                UISearchFileWaiting(LbPictureCount);
-                int ctp = GetTypeFileCount(TypePicture);
-                UISetFileCount(LbPictureCount, ctp);
-                //音乐
-                Thread.Sleep(2000);
-                UISearchFileWaiting(LbMusicCount);
-                int ctm = GetTypeFileCount(TypeMusic);
-                UISetFileCount(LbMusicCount, ctm);
-                //安装包
-                Thread.Sleep(2000);
-                UISearchFileWaiting(LbSetupCount);
-                int cts = GetTypeFileCount(TypeSetup);
-                UISetFileCount(LbSetupCount, cts);
-                //压缩包
-                Thread.Sleep(2000);
-                UISearchFileWaiting(LbZipCount);
-                int ctz = GetTypeFileCount(TypeZip);
-                UISetFileCount(LbZipCount, ctz);
+                while (!IsDisposed)
+                {
+                    Thread.Sleep(30 * 1000);
 
-                UISearchFileWaiting(LbZipCount, false);
+                    //视频
+                    UISearchFileWaiting(LbVideoCount);
+                    Thread.Sleep(2000);
+                    int ctv = GetTypeFileCount(TypeVideo);
+                    UISetFileCount(LbVideoCount, ctv);
+                    //文档
+                    UISearchFileWaiting(LbDocCount);
+                    Thread.Sleep(2000);
+                    int ctd = GetTypeFileCount(TypeDoc);
+                    UISetFileCount(LbDocCount, ctd);
+                    //图片
+                    UISearchFileWaiting(LbPictureCount);
+                    Thread.Sleep(2000);
+                    int ctp = GetTypeFileCount(TypePicture);
+                    UISetFileCount(LbPictureCount, ctp);
+                    //音乐
+                    UISearchFileWaiting(LbMusicCount);
+                    Thread.Sleep(2000);
+                    int ctm = GetTypeFileCount(TypeMusic);
+                    UISetFileCount(LbMusicCount, ctm);
+                    //安装包
+                    UISearchFileWaiting(LbSetupCount);
+                    Thread.Sleep(2000);
+                    int cts = GetTypeFileCount(TypeSetup);
+                    UISetFileCount(LbSetupCount, cts);
+                    //压缩包
+                    UISearchFileWaiting(LbZipCount);
+                    Thread.Sleep(2000);
+                    int ctz = GetTypeFileCount(TypeZip);
+                    UISetFileCount(LbZipCount, ctz);
+
+                    UISearchFileWaiting(LbZipCount, false);
+                }
             });
         }
 
@@ -74,33 +82,21 @@ namespace Oreo.FileMan.Partial
             int result = 0;
             try
             {
-                //DriveInfo[] allDirves = DriveInfo.GetDrives();
-                //if (ListTool.HasElements(allDirves))
-                //{
-                //    foreach (var item in allDirves)
-                //    {
-                //        if (item.IsReady)
-                //        {
-                List<string> files = FileTool.GetAllFile("D:\\", type);
-                if (ListTool.HasElements(files))
+                using (var db = new Muse())
                 {
-                    result += files.Count();
-                    using (var db = new Muse())
+                    if (ListTool.HasElements(type))
                     {
-                        files.ForEach(x =>
+                        foreach (var t in type)
                         {
-                            var a = db.Set<Files>().Add(new Files() { FullPath = x, FileName = Path.GetFileName(x), ExtName = Path.GetExtension(x) });
-                        });
-                        int count = db.SaveChanges();
+                            result += db.Set<Files>().Count(x => x.ExtName == t);
+                        }
                     }
                 }
-                //        }
-                //    }
-                //}
             }
             catch (Exception e) { }
             return result;
         }
+
 
         /// <summary>
         /// 读取文件分类的加载动画
@@ -123,6 +119,11 @@ namespace Oreo.FileMan.Partial
                 }
             }));
         }
+        /// <summary>
+        /// 设置文件个数
+        /// </summary>
+        /// <param name="lb"></param>
+        /// <param name="count"></param>
         void UISetFileCount(Label lb, int count)
         {
             BeginInvoke(new Action(() =>

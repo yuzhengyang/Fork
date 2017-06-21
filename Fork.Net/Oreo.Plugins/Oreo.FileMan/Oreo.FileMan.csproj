@@ -82,8 +82,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commons\R.cs" />
     <Compile Include="DatabaseEngine\Mapping.cs" />
     <Compile Include="DatabaseEngine\Muse.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Models\Files.cs" />
     <Compile Include="Partial\FileDecryptPartial.cs">
       <SubType>UserControl</SubType>
@@ -148,7 +150,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commons\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
