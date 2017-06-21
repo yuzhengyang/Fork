@@ -15,6 +15,7 @@ using Y.Utils.IOUtils.PathUtils;
 using Oreo.FileMan.Models;
 using Oreo.FileMan.DatabaseEngine;
 using Oreo.FileMan.Helpers;
+using Y.FileQueryEngine.QueryEngine;
 
 namespace Oreo.FileMan.Partial
 {
