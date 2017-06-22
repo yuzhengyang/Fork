@@ -34,7 +34,30 @@ namespace Oreo.FileMan.Partial
 
         private void FileTypePartial_Load(object sender, EventArgs e)
         {
-            Task.Factory.StartNew(() => { FileHelper.GetAllFileToDb(); });
+            //Start();
+
+            Task.Factory.StartNew(() =>
+            {
+                List<string> strlist = new List<string>();
+                for (int i = 0; i < 500000; i++)
+                {
+                    strlist.Add(
+                        DateTime.Now.ToString() +
+                        Guid.NewGuid().ToString() +
+                        Guid.NewGuid().ToString() +
+                        Guid.NewGuid().ToString());
+
+                    if ((i + 1) % 1000 == 0)
+                    {
+                        UISetFileCount(i + 1, 500000);
+                    }
+                }
+            });
+        }
+
+        void Start()
+        {
+            Task.Factory.StartNew(() => { GetAllFileToDb(); });
 
             Task.Factory.StartNew(() =>
             {
@@ -98,6 +121,45 @@ namespace Oreo.FileMan.Partial
             return result;
         }
 
+        private void GetAllFileToDb()
+        {
+            var drives = FileQueryEngine.GetReadyNtfsDrives().OrderByDescending(x => x.Name);
+            if (ListTool.HasElements(drives))
+            {
+                foreach (var drive in drives)
+                {
+                    var allFiles = FileQueryEngine.GetAllFiles(drive);
+                    int current = 0, total = allFiles.Count();
+                    using (var db = new Muse())
+                    {
+                        List<Files> temp = new List<Files>();
+                        while (ListTool.HasElements(allFiles))
+                        {
+                            //if (!db.Set<Files>().Any(x => x.FullPath == file))
+
+                            temp.Add(new Files()
+                            {
+                                FullPath = allFiles[0],
+                                FileName = Path.GetFileName(allFiles[0]),
+                                ExtName = Path.GetExtension(allFiles[0]),
+                                Size = FileTool.Size(allFiles[0]),
+                            });
+                            allFiles.RemoveAt(0);
+
+                            if (temp.Count() % 100 == 0)
+                            {
+                                UISetFileCount(current, total);
+                            }
+                            current++;
+                        }
+                        UISetFileCount(current, total);
+                        db.Set<Files>().AddRange(temp);
+                        int count = db.SaveChanges();
+                        UISetFileCount(count, total);
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// 读取文件分类的加载动画
@@ -130,6 +192,13 @@ namespace Oreo.FileMan.Partial
             BeginInvoke(new Action(() =>
             {
                 lb.Text = count + "项";
+            }));
+        }
+        void UISetFileCount(int current, int total)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                LbFileCount.Text = string.Format("{0} / {1}", current, total);
             }));
         }
     }

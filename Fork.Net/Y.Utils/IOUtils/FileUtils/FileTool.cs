@@ -64,6 +64,7 @@ namespace Y.Utils.IOUtils.FileUtils
         public static List<string> GetAllFile(string path, string[] patterns = null)
         {
             List<string> allpath = DirTool.GetAllPath(path);
+            if (allpath == null) allpath = new List<string>();
             allpath.Add(path);
             return FileTool.GetAllFile(allpath, patterns);
         }

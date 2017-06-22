@@ -50,18 +50,34 @@ namespace Y.FileQueryEngine.QueryEngine
                 .Where(d => d.IsReady && d.DriveFormat.ToUpper() == "NTFS");
         }
 
-        public static List<FileAndDirectoryEntry> GetAllFiles(DriveInfo drive)
+        public static List<string> GetAllFiles(DriveInfo drive)
+        {
+            List<string> result = new List<string>();
+            var usnOperator = new UsnOperator(drive);
+            var usnEntries = usnOperator.GetEntries().Where(e => !excludeFolders.Contains(e.FileName.ToUpper()));
+            var folders = usnEntries.Where(e => e.IsFolder).ToArray();
+            List<FrnFilePath> paths = GetFolderPath(folders, drive);
+            var range = usnEntries.Join(
+               paths,
+               usn => usn.ParentFileReferenceNumber,
+               path => path.FileReferenceNumber,
+               (usn, path) => string.Concat(path.Path + "\\" + usn.FileName));
+            result.AddRange(range);
+            return result;
+        }
+        public static List<FileAndDirectoryEntry> GetAllFileEntrys(DriveInfo drive)
         {
             List<FileAndDirectoryEntry> result = new List<FileAndDirectoryEntry>();
             var usnOperator = new UsnOperator(drive);
             var usnEntries = usnOperator.GetEntries().Where(e => !excludeFolders.Contains(e.FileName.ToUpper()));
             var folders = usnEntries.Where(e => e.IsFolder).ToArray();
             List<FrnFilePath> paths = GetFolderPath(folders, drive);
-            result.AddRange(usnEntries.Join(
+            var range = usnEntries.Join(
                 paths,
                 usn => usn.ParentFileReferenceNumber,
                 path => path.FileReferenceNumber,
-                (usn, path) => new FileAndDirectoryEntry(usn, path.Path)));
+                (usn, path) => new FileAndDirectoryEntry(usn, path.Path));
+            result.AddRange(range);
             return result;
         }
 

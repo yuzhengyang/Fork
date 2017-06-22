@@ -53,6 +53,9 @@
             this.imageButton9 = new Y.Skin.YoButton.ImageButton();
             this.imageButton8 = new Y.Skin.YoButton.ImageButton();
             this.imageButton7 = new Y.Skin.YoButton.ImageButton();
+            this.LbFileCount = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PbWaiting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageButton2)).BeginInit();
@@ -62,13 +65,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageButton9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageButton8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageButton7)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(148, 220);
+            this.label9.Location = new System.Drawing.Point(148, 260);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(37, 20);
             this.label9.TabIndex = 42;
@@ -78,7 +82,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(38, 220);
+            this.label8.Location = new System.Drawing.Point(38, 260);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 20);
             this.label8.TabIndex = 41;
@@ -88,7 +92,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(554, 95);
+            this.label7.Location = new System.Drawing.Point(554, 135);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 20);
             this.label7.TabIndex = 40;
@@ -98,7 +102,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(451, 95);
+            this.label6.Location = new System.Drawing.Point(451, 135);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 20);
             this.label6.TabIndex = 39;
@@ -108,7 +112,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(354, 95);
+            this.label5.Location = new System.Drawing.Point(354, 135);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 20);
             this.label5.TabIndex = 38;
@@ -118,7 +122,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(251, 95);
+            this.label4.Location = new System.Drawing.Point(251, 135);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 20);
             this.label4.TabIndex = 37;
@@ -128,7 +132,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(148, 95);
+            this.label3.Location = new System.Drawing.Point(148, 135);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 20);
             this.label3.TabIndex = 36;
@@ -139,7 +143,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(45, 95);
+            this.label2.Location = new System.Drawing.Point(45, 135);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 20);
             this.label2.TabIndex = 35;
@@ -149,7 +153,7 @@
             // 
             this.LbVideoCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbVideoCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbVideoCount.Location = new System.Drawing.Point(36, 116);
+            this.LbVideoCount.Location = new System.Drawing.Point(36, 156);
             this.LbVideoCount.Name = "LbVideoCount";
             this.LbVideoCount.Size = new System.Drawing.Size(60, 16);
             this.LbVideoCount.TabIndex = 51;
@@ -160,7 +164,7 @@
             // 
             this.LbDocCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbDocCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbDocCount.Location = new System.Drawing.Point(139, 116);
+            this.LbDocCount.Location = new System.Drawing.Point(139, 156);
             this.LbDocCount.Name = "LbDocCount";
             this.LbDocCount.Size = new System.Drawing.Size(60, 16);
             this.LbDocCount.TabIndex = 52;
@@ -171,7 +175,7 @@
             // 
             this.LbPictureCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbPictureCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbPictureCount.Location = new System.Drawing.Point(242, 116);
+            this.LbPictureCount.Location = new System.Drawing.Point(242, 156);
             this.LbPictureCount.Name = "LbPictureCount";
             this.LbPictureCount.Size = new System.Drawing.Size(60, 16);
             this.LbPictureCount.TabIndex = 53;
@@ -182,7 +186,7 @@
             // 
             this.LbMusicCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbMusicCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbMusicCount.Location = new System.Drawing.Point(345, 116);
+            this.LbMusicCount.Location = new System.Drawing.Point(345, 156);
             this.LbMusicCount.Name = "LbMusicCount";
             this.LbMusicCount.Size = new System.Drawing.Size(60, 16);
             this.LbMusicCount.TabIndex = 54;
@@ -193,7 +197,7 @@
             // 
             this.LbSetupCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbSetupCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbSetupCount.Location = new System.Drawing.Point(448, 116);
+            this.LbSetupCount.Location = new System.Drawing.Point(448, 156);
             this.LbSetupCount.Name = "LbSetupCount";
             this.LbSetupCount.Size = new System.Drawing.Size(60, 16);
             this.LbSetupCount.TabIndex = 55;
@@ -204,7 +208,7 @@
             // 
             this.LbZipCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbZipCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbZipCount.Location = new System.Drawing.Point(551, 116);
+            this.LbZipCount.Location = new System.Drawing.Point(551, 156);
             this.LbZipCount.Name = "LbZipCount";
             this.LbZipCount.Size = new System.Drawing.Size(60, 16);
             this.LbZipCount.TabIndex = 56;
@@ -215,7 +219,7 @@
             // 
             this.LbDownloadCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbDownloadCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbDownloadCount.Location = new System.Drawing.Point(136, 241);
+            this.LbDownloadCount.Location = new System.Drawing.Point(136, 281);
             this.LbDownloadCount.Name = "LbDownloadCount";
             this.LbDownloadCount.Size = new System.Drawing.Size(60, 16);
             this.LbDownloadCount.TabIndex = 58;
@@ -226,7 +230,7 @@
             // 
             this.LbCollectCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbCollectCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbCollectCount.Location = new System.Drawing.Point(36, 241);
+            this.LbCollectCount.Location = new System.Drawing.Point(36, 281);
             this.LbCollectCount.Name = "LbCollectCount";
             this.LbCollectCount.Size = new System.Drawing.Size(57, 16);
             this.LbCollectCount.TabIndex = 57;
@@ -236,7 +240,7 @@
             // PbWaiting
             // 
             this.PbWaiting.Image = global::Oreo.FileMan.Properties.Resources.Wait_Hor;
-            this.PbWaiting.Location = new System.Drawing.Point(240, 241);
+            this.PbWaiting.Location = new System.Drawing.Point(240, 281);
             this.PbWaiting.Name = "PbWaiting";
             this.PbWaiting.Size = new System.Drawing.Size(60, 16);
             this.PbWaiting.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -248,7 +252,7 @@
             // 
             this.imageButton1.DefaultImage = global::Oreo.FileMan.Properties.Resources.File_Download;
             this.imageButton1.Image = global::Oreo.FileMan.Properties.Resources.File_Download;
-            this.imageButton1.Location = new System.Drawing.Point(137, 157);
+            this.imageButton1.Location = new System.Drawing.Point(137, 197);
             this.imageButton1.MouseDownImage = global::Oreo.FileMan.Properties.Resources.File_Download_Press;
             this.imageButton1.MouseHoverImage = null;
             this.imageButton1.Name = "imageButton1";
@@ -261,7 +265,7 @@
             // 
             this.imageButton2.DefaultImage = global::Oreo.FileMan.Properties.Resources.File_Collect;
             this.imageButton2.Image = global::Oreo.FileMan.Properties.Resources.File_Collect;
-            this.imageButton2.Location = new System.Drawing.Point(34, 157);
+            this.imageButton2.Location = new System.Drawing.Point(34, 197);
             this.imageButton2.MouseDownImage = global::Oreo.FileMan.Properties.Resources.File_Collect_Press;
             this.imageButton2.MouseHoverImage = null;
             this.imageButton2.Name = "imageButton2";
@@ -274,7 +278,7 @@
             // 
             this.imageButton14.DefaultImage = global::Oreo.FileMan.Properties.Resources.File_Zip;
             this.imageButton14.Image = global::Oreo.FileMan.Properties.Resources.File_Zip;
-            this.imageButton14.Location = new System.Drawing.Point(549, 32);
+            this.imageButton14.Location = new System.Drawing.Point(549, 72);
             this.imageButton14.MouseDownImage = global::Oreo.FileMan.Properties.Resources.File_Zip_Press;
             this.imageButton14.MouseHoverImage = null;
             this.imageButton14.Name = "imageButton14";
@@ -287,7 +291,7 @@
             // 
             this.imageButton13.DefaultImage = global::Oreo.FileMan.Properties.Resources.File_Setup;
             this.imageButton13.Image = global::Oreo.FileMan.Properties.Resources.File_Setup;
-            this.imageButton13.Location = new System.Drawing.Point(446, 32);
+            this.imageButton13.Location = new System.Drawing.Point(446, 72);
             this.imageButton13.MouseDownImage = global::Oreo.FileMan.Properties.Resources.File_Setup_Press;
             this.imageButton13.MouseHoverImage = null;
             this.imageButton13.Name = "imageButton13";
@@ -300,7 +304,7 @@
             // 
             this.imageButton10.DefaultImage = global::Oreo.FileMan.Properties.Resources.File_Music;
             this.imageButton10.Image = global::Oreo.FileMan.Properties.Resources.File_Music;
-            this.imageButton10.Location = new System.Drawing.Point(343, 32);
+            this.imageButton10.Location = new System.Drawing.Point(343, 72);
             this.imageButton10.MouseDownImage = global::Oreo.FileMan.Properties.Resources.File_Music_Press;
             this.imageButton10.MouseHoverImage = null;
             this.imageButton10.Name = "imageButton10";
@@ -313,7 +317,7 @@
             // 
             this.imageButton9.DefaultImage = global::Oreo.FileMan.Properties.Resources.File_Picture;
             this.imageButton9.Image = global::Oreo.FileMan.Properties.Resources.File_Picture;
-            this.imageButton9.Location = new System.Drawing.Point(240, 32);
+            this.imageButton9.Location = new System.Drawing.Point(240, 72);
             this.imageButton9.MouseDownImage = global::Oreo.FileMan.Properties.Resources.File_Picture_Press;
             this.imageButton9.MouseHoverImage = null;
             this.imageButton9.Name = "imageButton9";
@@ -326,7 +330,7 @@
             // 
             this.imageButton8.DefaultImage = global::Oreo.FileMan.Properties.Resources.File_Doc;
             this.imageButton8.Image = global::Oreo.FileMan.Properties.Resources.File_Doc;
-            this.imageButton8.Location = new System.Drawing.Point(137, 32);
+            this.imageButton8.Location = new System.Drawing.Point(137, 72);
             this.imageButton8.MouseDownImage = global::Oreo.FileMan.Properties.Resources.File_Doc_Press;
             this.imageButton8.MouseHoverImage = null;
             this.imageButton8.Name = "imageButton8";
@@ -339,7 +343,7 @@
             // 
             this.imageButton7.DefaultImage = global::Oreo.FileMan.Properties.Resources.File_Video;
             this.imageButton7.Image = global::Oreo.FileMan.Properties.Resources.File_Video;
-            this.imageButton7.Location = new System.Drawing.Point(34, 32);
+            this.imageButton7.Location = new System.Drawing.Point(34, 72);
             this.imageButton7.MouseDownImage = global::Oreo.FileMan.Properties.Resources.File_Video_Press;
             this.imageButton7.MouseHoverImage = null;
             this.imageButton7.Name = "imageButton7";
@@ -348,11 +352,41 @@
             this.imageButton7.TabIndex = 43;
             this.imageButton7.TabStop = false;
             // 
+            // LbFileCount
+            // 
+            this.LbFileCount.ForeColor = System.Drawing.Color.Gray;
+            this.LbFileCount.Location = new System.Drawing.Point(297, 7);
+            this.LbFileCount.Name = "LbFileCount";
+            this.LbFileCount.Size = new System.Drawing.Size(152, 14);
+            this.LbFileCount.TabIndex = 60;
+            this.LbFileCount.Text = "已整理/总文件";
+            this.LbFileCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.LbFileCount);
+            this.panel1.Location = new System.Drawing.Point(93, 18);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(456, 29);
+            this.panel1.TabIndex = 61;
+            // 
+            // label1
+            // 
+            this.label1.ForeColor = System.Drawing.Color.Gray;
+            this.label1.Location = new System.Drawing.Point(14, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(284, 14);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "搜索";
+            // 
             // FileTypePartial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.PbWaiting);
             this.Controls.Add(this.LbDownloadCount);
             this.Controls.Add(this.LbCollectCount);
@@ -390,6 +424,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageButton9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageButton8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageButton7)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,5 +457,8 @@
         private System.Windows.Forms.Label LbDownloadCount;
         private System.Windows.Forms.Label LbCollectCount;
         private System.Windows.Forms.PictureBox PbWaiting;
+        private System.Windows.Forms.Label LbFileCount;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }

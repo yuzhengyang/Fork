@@ -17,7 +17,7 @@ namespace Oreo.FileMan.Helpers
     {
         public static void GetAllFileToDb()
         {
-            var drives = FileQueryEngine.GetReadyNtfsDrives();
+            var drives = FileQueryEngine.GetReadyNtfsDrives().OrderByDescending(x => x.Name);
             if (ListTool.HasElements(drives))
             {
                 foreach (var drive in drives)
@@ -30,65 +30,25 @@ namespace Oreo.FileMan.Helpers
                             int addcount = 0;
                             foreach (var file in allFiles)
                             {
-                                if (!db.Set<Files>().Any(x => x.FullPath == file.FullFileName))
+                                if (!db.Set<Files>().Any(x => x.FullPath == file))
                                 {
                                     var a = db.Set<Files>().Add(
                                         new Files()
                                         {
-                                            FullPath = file.FullFileName,
-                                            FileName = file.FileName,
-                                            ExtName = Path.GetExtension(file.FullFileName),
-                                            Size = FileTool.Size(file.FullFileName),
+                                            FullPath = file,
+                                            FileName = Path.GetFileName(file),
+                                            ExtName = Path.GetExtension(file),
+                                            Size = FileTool.Size(file),
                                         });
                                     addcount++;
                                 }
-                                if (addcount >= 1000)
+                                if (addcount >= 500)
                                 {
                                     addcount = 0;
                                     db.SaveChanges();
                                 }
                             }
                             int count = db.SaveChanges();
-                        }
-                    }
-                }
-            }
-
-            DriveInfo[] allDirves = DriveInfo.GetDrives();
-            if (ListTool.HasElements(allDirves))
-            {
-                foreach (var item in allDirves)
-                {
-                    if (item.IsReady)
-                    {
-                        using (var db = new Muse())
-                        {
-                            List<string> paths = DirTool.GetAllPath(item.Name);
-                            if (ListTool.HasElements(paths))
-                            {
-                                paths.ForEach(path =>
-                                {
-                                    List<string> files = FileTool.GetFile(path);
-                                    if (ListTool.HasElements(files))
-                                    {
-                                        files.ForEach(file =>
-                                        {
-                                            if (!db.Set<Files>().Any(x => x.FullPath == file))
-                                            {
-                                                var a = db.Set<Files>().Add(
-                                                new Files()
-                                                {
-                                                    FullPath = file,
-                                                    FileName = Path.GetFileName(file),
-                                                    ExtName = Path.GetExtension(file),
-                                                    Size = FileTool.Size(file),
-                                                });
-                                            }
-                                        });
-                                        int count = db.SaveChanges();
-                                    }
-                                });
-                            }
                         }
                     }
                 }

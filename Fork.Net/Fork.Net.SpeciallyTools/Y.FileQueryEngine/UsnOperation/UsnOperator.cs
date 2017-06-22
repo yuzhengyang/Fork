@@ -93,24 +93,17 @@ namespace Y.FileQueryEngine.UsnOperation
             var result = new List<UsnEntry>();
 
             UsnErrorCode usnErrorCode = this.QueryUSNJournal();
-
             if (usnErrorCode == UsnErrorCode.SUCCESS)
             {
                 MFT_ENUM_DATA mftEnumData = new MFT_ENUM_DATA();
                 mftEnumData.StartFileReferenceNumber = 0;
                 mftEnumData.LowUsn = 0;
                 mftEnumData.HighUsn = this.ntfsUsnJournalData.NextUsn;
-
                 int sizeMftEnumData = Marshal.SizeOf(mftEnumData);
-
                 IntPtr ptrMftEnumData = GetHeapGlobalPtr(sizeMftEnumData);
-
                 Marshal.StructureToPtr(mftEnumData, ptrMftEnumData, true);
-
                 int ptrDataSize = sizeof(UInt64) + 10000;
-
                 IntPtr ptrData = GetHeapGlobalPtr(ptrDataSize);
-
                 uint outBytesCount;
 
                 while (false != Win32Api.DeviceIoControl(
@@ -135,14 +128,10 @@ namespace Y.FileQueryEngine.UsnOperation
                     while (outBytesCount > 60)
                     {
                         var usnRecord = new USN_RECORD_V2(ptrUsnRecord);
-
                         result.Add(new UsnEntry(usnRecord));
-
                         ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + usnRecord.RecordLength);
-
                         outBytesCount -= usnRecord.RecordLength;
                     }
-
                     Marshal.WriteInt64(ptrMftEnumData, Marshal.ReadInt64(ptrData, 0));
                 }
 
