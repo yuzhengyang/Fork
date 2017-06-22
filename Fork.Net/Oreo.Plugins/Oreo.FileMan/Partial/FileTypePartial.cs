@@ -34,25 +34,7 @@ namespace Oreo.FileMan.Partial
 
         private void FileTypePartial_Load(object sender, EventArgs e)
         {
-            //Start();
-
-            Task.Factory.StartNew(() =>
-            {
-                List<string> strlist = new List<string>();
-                for (int i = 0; i < 500000; i++)
-                {
-                    strlist.Add(
-                        DateTime.Now.ToString() +
-                        Guid.NewGuid().ToString() +
-                        Guid.NewGuid().ToString() +
-                        Guid.NewGuid().ToString());
-
-                    if ((i + 1) % 1000 == 0)
-                    {
-                        UISetFileCount(i + 1, 500000);
-                    }
-                }
-            });
+            Start();
         }
 
         void Start()
