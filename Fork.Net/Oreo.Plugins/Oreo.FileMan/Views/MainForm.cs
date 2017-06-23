@@ -54,7 +54,15 @@ namespace Oreo.FileMan.Views
             now.ForeColor = Color.White;
         }
         #endregion
-        #region 退出
+        /// <summary>
+        /// 设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BTSettings_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().ShowDialog();
+        }
         /// <summary>
         /// 退出
         /// </summary>
@@ -64,7 +72,5 @@ namespace Oreo.FileMan.Views
         {
             BeginInvoke(new Action(() => { Close(); }));
         }
-
-        #endregion
     }
 }

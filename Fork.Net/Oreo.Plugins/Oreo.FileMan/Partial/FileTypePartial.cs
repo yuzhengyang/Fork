@@ -39,48 +39,54 @@ namespace Oreo.FileMan.Partial
 
         void Start()
         {
-            Task.Factory.StartNew(() => { GetAllFileToDb(); });
-
-            Task.Factory.StartNew(() =>
+            if (true)
             {
-                while (!IsDisposed)
+                Task.Factory.StartNew(() => { GetAllFileToDb(); });
+            }
+
+            if (false)
+            {
+                Task.Factory.StartNew(() =>
                 {
-                    Thread.Sleep(30 * 1000);
+                    while (!IsDisposed)
+                    {
+                        Thread.Sleep(30 * 1000);
 
-                    //视频
-                    UISearchFileWaiting(LbVideoCount);
-                    Thread.Sleep(2000);
-                    int ctv = GetTypeFileCount(TypeVideo);
-                    UISetFileCount(LbVideoCount, ctv);
-                    //文档
-                    UISearchFileWaiting(LbDocCount);
-                    Thread.Sleep(2000);
-                    int ctd = GetTypeFileCount(TypeDoc);
-                    UISetFileCount(LbDocCount, ctd);
-                    //图片
-                    UISearchFileWaiting(LbPictureCount);
-                    Thread.Sleep(2000);
-                    int ctp = GetTypeFileCount(TypePicture);
-                    UISetFileCount(LbPictureCount, ctp);
-                    //音乐
-                    UISearchFileWaiting(LbMusicCount);
-                    Thread.Sleep(2000);
-                    int ctm = GetTypeFileCount(TypeMusic);
-                    UISetFileCount(LbMusicCount, ctm);
-                    //安装包
-                    UISearchFileWaiting(LbSetupCount);
-                    Thread.Sleep(2000);
-                    int cts = GetTypeFileCount(TypeSetup);
-                    UISetFileCount(LbSetupCount, cts);
-                    //压缩包
-                    UISearchFileWaiting(LbZipCount);
-                    Thread.Sleep(2000);
-                    int ctz = GetTypeFileCount(TypeZip);
-                    UISetFileCount(LbZipCount, ctz);
+                        //视频
+                        UISearchFileWaiting(LbVideoCount);
+                        Thread.Sleep(2000);
+                        int ctv = GetTypeFileCount(TypeVideo);
+                        UISetFileCount(LbVideoCount, ctv);
+                        //文档
+                        UISearchFileWaiting(LbDocCount);
+                        Thread.Sleep(2000);
+                        int ctd = GetTypeFileCount(TypeDoc);
+                        UISetFileCount(LbDocCount, ctd);
+                        //图片
+                        UISearchFileWaiting(LbPictureCount);
+                        Thread.Sleep(2000);
+                        int ctp = GetTypeFileCount(TypePicture);
+                        UISetFileCount(LbPictureCount, ctp);
+                        //音乐
+                        UISearchFileWaiting(LbMusicCount);
+                        Thread.Sleep(2000);
+                        int ctm = GetTypeFileCount(TypeMusic);
+                        UISetFileCount(LbMusicCount, ctm);
+                        //安装包
+                        UISearchFileWaiting(LbSetupCount);
+                        Thread.Sleep(2000);
+                        int cts = GetTypeFileCount(TypeSetup);
+                        UISetFileCount(LbSetupCount, cts);
+                        //压缩包
+                        UISearchFileWaiting(LbZipCount);
+                        Thread.Sleep(2000);
+                        int ctz = GetTypeFileCount(TypeZip);
+                        UISetFileCount(LbZipCount, ctz);
 
-                    UISearchFileWaiting(LbZipCount, false);
-                }
-            });
+                        UISearchFileWaiting(LbZipCount, false);
+                    }
+                });
+            }
         }
 
         private int GetTypeFileCount(string[] type)
@@ -140,6 +146,7 @@ namespace Oreo.FileMan.Partial
                         UISetFileCount(count, total);
                     }
                 }
+                //GC.Collect();
             }
         }
 

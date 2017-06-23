@@ -32,8 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TpFIleType = new System.Windows.Forms.TabPage();
+            this.fileTypePartial1 = new Oreo.FileMan.Partial.FileTypePartial();
             this.TpFileEncrypt = new System.Windows.Forms.TabPage();
+            this.fileEncryptPartial1 = new Oreo.FileMan.Partial.FileEncryptPartial();
             this.TpFileDecrypt = new System.Windows.Forms.TabPage();
+            this.fileDecryptPartial1 = new Oreo.FileMan.Partial.FileDecryptPartial();
             this.TpFileBackup = new System.Windows.Forms.TabPage();
             this.LbFileType = new System.Windows.Forms.Label();
             this.LbFileBackup = new System.Windows.Forms.Label();
@@ -41,17 +44,23 @@
             this.LbTitle = new System.Windows.Forms.Label();
             this.BtClose = new System.Windows.Forms.Button();
             this.tip = new System.Windows.Forms.ToolTip(this.components);
+            this.LbAppVersion = new System.Windows.Forms.Label();
+            this.BTSettings = new System.Windows.Forms.Button();
             this.LbFileDecrypt = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PnBody = new System.Windows.Forms.Panel();
+            this.NiMain = new System.Windows.Forms.NotifyIcon(this.components);
+            this.PnMain = new System.Windows.Forms.Panel();
+            this.PnBotton = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.fileTypePartial1 = new Oreo.FileMan.Partial.FileTypePartial();
-            this.fileEncryptPartial1 = new Oreo.FileMan.Partial.FileEncryptPartial();
-            this.fileDecryptPartial1 = new Oreo.FileMan.Partial.FileDecryptPartial();
+            this.fileBackupPartial1 = new Oreo.FileMan.Partial.FileBackupPartial();
             this.tabControl1.SuspendLayout();
             this.TpFIleType.SuspendLayout();
             this.TpFileEncrypt.SuspendLayout();
             this.TpFileDecrypt.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.TpFileBackup.SuspendLayout();
+            this.PnBody.SuspendLayout();
+            this.PnMain.SuspendLayout();
+            this.PnBotton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,6 +87,15 @@
             this.TpFIleType.Text = "文件分类";
             this.TpFIleType.UseVisualStyleBackColor = true;
             // 
+            // fileTypePartial1
+            // 
+            this.fileTypePartial1.BackColor = System.Drawing.Color.White;
+            this.fileTypePartial1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileTypePartial1.Location = new System.Drawing.Point(3, 3);
+            this.fileTypePartial1.Name = "fileTypePartial1";
+            this.fileTypePartial1.Size = new System.Drawing.Size(646, 326);
+            this.fileTypePartial1.TabIndex = 0;
+            // 
             // TpFileEncrypt
             // 
             this.TpFileEncrypt.Controls.Add(this.fileEncryptPartial1);
@@ -88,6 +106,14 @@
             this.TpFileEncrypt.TabIndex = 2;
             this.TpFileEncrypt.Text = "文件加密";
             this.TpFileEncrypt.UseVisualStyleBackColor = true;
+            // 
+            // fileEncryptPartial1
+            // 
+            this.fileEncryptPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileEncryptPartial1.Location = new System.Drawing.Point(3, 3);
+            this.fileEncryptPartial1.Name = "fileEncryptPartial1";
+            this.fileEncryptPartial1.Size = new System.Drawing.Size(646, 326);
+            this.fileEncryptPartial1.TabIndex = 0;
             // 
             // TpFileDecrypt
             // 
@@ -100,8 +126,17 @@
             this.TpFileDecrypt.Text = "文件解密";
             this.TpFileDecrypt.UseVisualStyleBackColor = true;
             // 
+            // fileDecryptPartial1
+            // 
+            this.fileDecryptPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileDecryptPartial1.Location = new System.Drawing.Point(3, 3);
+            this.fileDecryptPartial1.Name = "fileDecryptPartial1";
+            this.fileDecryptPartial1.Size = new System.Drawing.Size(646, 326);
+            this.fileDecryptPartial1.TabIndex = 0;
+            // 
             // TpFileBackup
             // 
+            this.TpFileBackup.Controls.Add(this.fileBackupPartial1);
             this.TpFileBackup.Location = new System.Drawing.Point(4, 22);
             this.TpFileBackup.Name = "TpFileBackup";
             this.TpFileBackup.Padding = new System.Windows.Forms.Padding(3);
@@ -172,6 +207,32 @@
             this.BtClose.UseVisualStyleBackColor = true;
             this.BtClose.Click += new System.EventHandler(this.BtClose_Click);
             // 
+            // LbAppVersion
+            // 
+            this.LbAppVersion.ForeColor = System.Drawing.Color.Gray;
+            this.LbAppVersion.Location = new System.Drawing.Point(501, 4);
+            this.LbAppVersion.Name = "LbAppVersion";
+            this.LbAppVersion.Size = new System.Drawing.Size(140, 19);
+            this.LbAppVersion.TabIndex = 0;
+            this.LbAppVersion.Text = "当前版本：10.10.10.10";
+            this.LbAppVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tip.SetToolTip(this.LbAppVersion, "当前软件版本");
+            // 
+            // BTSettings
+            // 
+            this.BTSettings.FlatAppearance.BorderSize = 0;
+            this.BTSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTSettings.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.BTSettings.ForeColor = System.Drawing.Color.White;
+            this.BTSettings.Location = new System.Drawing.Point(583, 7);
+            this.BTSettings.Name = "BTSettings";
+            this.BTSettings.Size = new System.Drawing.Size(30, 23);
+            this.BTSettings.TabIndex = 23;
+            this.BTSettings.Text = "✿";
+            this.tip.SetToolTip(this.BTSettings, "设置");
+            this.BTSettings.UseVisualStyleBackColor = true;
+            this.BTSettings.Click += new System.EventHandler(this.BTSettings_Click);
+            // 
             // LbFileDecrypt
             // 
             this.LbFileDecrypt.AutoSize = true;
@@ -184,14 +245,39 @@
             this.LbFileDecrypt.Text = "/ 解密";
             this.LbFileDecrypt.Click += new System.EventHandler(this.LbFileDecrypt_Click);
             // 
-            // panel1
+            // PnBody
             // 
-            this.panel1.Controls.Add(this.tabControl1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 72);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(650, 328);
-            this.panel1.TabIndex = 21;
+            this.PnBody.Controls.Add(this.tabControl1);
+            this.PnBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnBody.Location = new System.Drawing.Point(0, 0);
+            this.PnBody.Name = "PnBody";
+            this.PnBody.Size = new System.Drawing.Size(650, 356);
+            this.PnBody.TabIndex = 21;
+            // 
+            // NiMain
+            // 
+            this.NiMain.Icon = ((System.Drawing.Icon)(resources.GetObject("NiMain.Icon")));
+            this.NiMain.Text = "notifyIcon1";
+            this.NiMain.Visible = true;
+            // 
+            // PnMain
+            // 
+            this.PnMain.Controls.Add(this.PnBotton);
+            this.PnMain.Controls.Add(this.PnBody);
+            this.PnMain.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PnMain.Location = new System.Drawing.Point(0, 70);
+            this.PnMain.Name = "PnMain";
+            this.PnMain.Size = new System.Drawing.Size(650, 356);
+            this.PnMain.TabIndex = 22;
+            // 
+            // PnBotton
+            // 
+            this.PnBotton.Controls.Add(this.LbAppVersion);
+            this.PnBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PnBotton.Location = new System.Drawing.Point(0, 329);
+            this.PnBotton.Name = "PnBotton";
+            this.PnBotton.Size = new System.Drawing.Size(650, 27);
+            this.PnBotton.TabIndex = 22;
             // 
             // pictureBox1
             // 
@@ -203,37 +289,22 @@
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
-            // fileTypePartial1
+            // fileBackupPartial1
             // 
-            this.fileTypePartial1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileTypePartial1.Location = new System.Drawing.Point(3, 3);
-            this.fileTypePartial1.Name = "fileTypePartial1";
-            this.fileTypePartial1.Size = new System.Drawing.Size(646, 326);
-            this.fileTypePartial1.TabIndex = 0;
-            // 
-            // fileEncryptPartial1
-            // 
-            this.fileEncryptPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileEncryptPartial1.Location = new System.Drawing.Point(3, 3);
-            this.fileEncryptPartial1.Name = "fileEncryptPartial1";
-            this.fileEncryptPartial1.Size = new System.Drawing.Size(646, 326);
-            this.fileEncryptPartial1.TabIndex = 0;
-            // 
-            // fileDecryptPartial1
-            // 
-            this.fileDecryptPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileDecryptPartial1.Location = new System.Drawing.Point(3, 3);
-            this.fileDecryptPartial1.Name = "fileDecryptPartial1";
-            this.fileDecryptPartial1.Size = new System.Drawing.Size(646, 326);
-            this.fileDecryptPartial1.TabIndex = 0;
+            this.fileBackupPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileBackupPartial1.Location = new System.Drawing.Point(3, 3);
+            this.fileBackupPartial1.Name = "fileBackupPartial1";
+            this.fileBackupPartial1.Size = new System.Drawing.Size(646, 326);
+            this.fileBackupPartial1.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(43)))), ((int)(((byte)(54)))));
-            this.ClientSize = new System.Drawing.Size(650, 400);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(650, 426);
+            this.Controls.Add(this.BTSettings);
+            this.Controls.Add(this.PnMain);
             this.Controls.Add(this.LbFileDecrypt);
             this.Controls.Add(this.BtClose);
             this.Controls.Add(this.LbTitle);
@@ -250,7 +321,10 @@
             this.TpFIleType.ResumeLayout(false);
             this.TpFileEncrypt.ResumeLayout(false);
             this.TpFileDecrypt.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.TpFileBackup.ResumeLayout(false);
+            this.PnBody.ResumeLayout(false);
+            this.PnMain.ResumeLayout(false);
+            this.PnBotton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -271,9 +345,15 @@
         private System.Windows.Forms.ToolTip tip;
         private System.Windows.Forms.TabPage TpFileDecrypt;
         private System.Windows.Forms.Label LbFileDecrypt;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PnBody;
         private Partial.FileEncryptPartial fileEncryptPartial1;
         private Partial.FileDecryptPartial fileDecryptPartial1;
         private Partial.FileTypePartial fileTypePartial1;
+        private System.Windows.Forms.NotifyIcon NiMain;
+        private System.Windows.Forms.Panel PnMain;
+        private System.Windows.Forms.Panel PnBotton;
+        private System.Windows.Forms.Label LbAppVersion;
+        private System.Windows.Forms.Button BTSettings;
+        private Partial.FileBackupPartial fileBackupPartial1;
     }
 }
