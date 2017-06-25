@@ -8,7 +8,7 @@ namespace Y.FileQueryEngine.Win32.Structures
     /// Lowest Valid USN(64bits), Max USN(64bits), Maximum Size(64bits) and Allocation Delta(64bits).
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    internal struct USN_JOURNAL_DATA
+    public struct USN_JOURNAL_DATA
     {
         public UInt64 UsnJournalID;
         public Int64 FirstUsn;

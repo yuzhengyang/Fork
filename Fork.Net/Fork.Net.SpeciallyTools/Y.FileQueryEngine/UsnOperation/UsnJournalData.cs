@@ -4,7 +4,7 @@ using Y.FileQueryEngine.Win32.Structures;
 
 namespace Y.FileQueryEngine.UsnOperation
 {
-    internal class UsnJournalData
+    public class UsnJournalData
     {
         public DriveInfo Drive { get; private set; }
         public UInt64 UsnJournalID { get; private set; }

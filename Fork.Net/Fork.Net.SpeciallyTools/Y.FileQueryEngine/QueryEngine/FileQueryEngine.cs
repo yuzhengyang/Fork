@@ -11,7 +11,7 @@ namespace Y.FileQueryEngine.QueryEngine
         /// <summary>
         /// When its values is 1407374883553285(0x5000000000005L), it means this file/folder is under drive root
         /// </summary>
-        protected const UInt64 ROOT_FILE_REFERENCE_NUMBER = 0x5000000000005L;
+        public const UInt64 ROOT_FILE_REFERENCE_NUMBER = 0x5000000000005L;
 
         protected static readonly string excludeFolders = string.Join("|",
             new string[]
@@ -49,22 +49,31 @@ namespace Y.FileQueryEngine.QueryEngine
             return DriveInfo.GetDrives()
                 .Where(d => d.IsReady && d.DriveFormat.ToUpper() == "NTFS");
         }
-
-        public static List<string> GetAllFiles(DriveInfo drive)
+        /// <summary>
+        /// 查询磁盘的所有文件
+        /// </summary>
+        /// <param name="drive"></param>
+        /// <returns></returns>
+        public static List<UsnEntry> GetAllFiles(DriveInfo drive)
         {
-            List<string> result = new List<string>();
             var usnOperator = new UsnOperator(drive);
-            var usnEntries = usnOperator.GetEntries().Where(e => !excludeFolders.Contains(e.FileName.ToUpper()));
-            var folders = usnEntries.Where(e => e.IsFolder).ToArray();
-            List<FrnFilePath> paths = GetFolderPath(folders, drive);
-            var range = usnEntries.Join(
-               paths,
-               usn => usn.ParentFileReferenceNumber,
-               path => path.FileReferenceNumber,
-               (usn, path) => string.Concat(path.Path + "\\" + usn.FileName));
-            result.AddRange(range);
-            return result;
+            return usnOperator.GetEntries().Where(e => !excludeFolders.Contains(e.FileName.ToUpper())).ToList();
         }
+        public static bool FileIsExist(string drive, long usn)
+        {
+            var d = DriveInfo.GetDrives().FirstOrDefault(x => x.Name == drive);
+            if (d != null)
+            {
+                var usnOperator = new UsnOperator(d);
+                return usnOperator.UsnIsExist(usn);
+            }
+            return false;
+        }
+        /// <summary>
+        /// 查询磁盘的所有文件
+        /// </summary>
+        /// <param name="drive"></param>
+        /// <returns></returns>
         public static List<FileAndDirectoryEntry> GetAllFileEntrys(DriveInfo drive)
         {
             List<FileAndDirectoryEntry> result = new List<FileAndDirectoryEntry>();

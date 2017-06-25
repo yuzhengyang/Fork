@@ -88,7 +88,8 @@
     <Compile Include="Commons\R.cs" />
     <Compile Include="DatabaseEngine\Mapping.cs" />
     <Compile Include="DatabaseEngine\Muse.cs" />
-    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="DatabaseEngine\SuperDb.cs" />
+    <Compile Include="Models\Drives.cs" />
     <Compile Include="Models\Files.cs" />
     <Compile Include="Partial\FileBackupPartial.cs">
       <SubType>UserControl</SubType>
@@ -171,6 +172,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Helpers\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>

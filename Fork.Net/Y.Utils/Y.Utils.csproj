@@ -54,6 +54,7 @@
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="DelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProgressEventArgs.cs" />
+    <Compile Include="IOUtils\DriveUtils\DriveTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageModel.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />

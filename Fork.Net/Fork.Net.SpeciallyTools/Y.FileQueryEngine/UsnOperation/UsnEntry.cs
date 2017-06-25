@@ -9,8 +9,8 @@ namespace Y.FileQueryEngine.UsnOperation
     /// </summary>
     public class UsnEntry
     {
-        public UInt32 RecordLength { get; private set; }
-        public UInt64 FileReferenceNumber { get; private set; }
+        public uint RecordLength { get; private set; }
+        public ulong FileReferenceNumber { get; private set; }
 
         /// <summary>
         /// Gets the parent file reference number.
@@ -19,12 +19,12 @@ namespace Y.FileQueryEngine.UsnOperation
         /// <value>
         /// The parent file reference number.
         /// </value>
-        public UInt64 ParentFileReferenceNumber { get; private set; }
-        public Int64 Usn { get; private set; }
-        public UInt32 Reason { get; private set; }
-        public UInt32 FileAttributes { get; private set; }
-        public Int32 FileNameLength { get; private set; }
-        public Int32 FileNameOffset { get; private set; }
+        public ulong ParentFileReferenceNumber { get; private set; }
+        public long Usn { get; private set; }
+        public uint Reason { get; private set; }
+        public uint FileAttributes { get; private set; }
+        public int FileNameLength { get; private set; }
+        public int FileNameOffset { get; private set; }
         public string FileName { get; private set; }
         public bool IsFolder
         {

@@ -30,7 +30,6 @@ namespace Oreo.FileMan.Commons
             public static string App = Application.ExecutablePath;
             //public static string Settings = Paths.Root + "\\Settings.ini";//应用配置信息目录
             public static string Frisbee = Paths.App + "\\Frisbee.ini";
-            public static string Db = Paths.App + "db.sqlite";
         }
     }
 }

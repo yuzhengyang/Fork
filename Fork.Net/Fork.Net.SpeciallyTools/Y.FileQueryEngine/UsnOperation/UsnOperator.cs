@@ -9,8 +9,10 @@ using Y.FileQueryEngine.Win32.Constants;
 
 namespace Y.FileQueryEngine.UsnOperation
 {
-    internal class UsnOperator : IDisposable
+    public class UsnOperator : IDisposable
     {
+        public delegate void GetEntriesHandler(DriveInfo drive, List<UsnEntry> data);
+
         protected USN_JOURNAL_DATA ntfsUsnJournalData;
 
         public DriveInfo Drive
@@ -141,7 +143,104 @@ namespace Y.FileQueryEngine.UsnOperation
 
             return result;
         }
+        public void GetEntries(long usn, GetEntriesHandler handler, int count)
+        {
+            List<UsnEntry> result = new List<UsnEntry>();
+            UsnErrorCode usnErrorCode = this.QueryUSNJournal();
+            if (usnErrorCode == UsnErrorCode.SUCCESS)
+            {
+                MFT_ENUM_DATA mftEnumData = new MFT_ENUM_DATA();
+                mftEnumData.StartFileReferenceNumber = 0;
+                mftEnumData.LowUsn = usn;
+                mftEnumData.HighUsn = this.ntfsUsnJournalData.NextUsn;
+                int sizeMftEnumData = Marshal.SizeOf(mftEnumData);
+                IntPtr ptrMftEnumData = GetHeapGlobalPtr(sizeMftEnumData);
+                Marshal.StructureToPtr(mftEnumData, ptrMftEnumData, true);
+                int ptrDataSize = sizeof(UInt64) + 10000;
+                IntPtr ptrData = GetHeapGlobalPtr(ptrDataSize);
+                uint outBytesCount;
 
+                while (false != Win32Api.DeviceIoControl(
+                    this.DriveRootHandle,
+                    UsnControlCode.FSCTL_ENUM_USN_DATA,
+                    ptrMftEnumData,
+                    sizeMftEnumData,
+                    ptrData,
+                    ptrDataSize,
+                    out outBytesCount,
+                    IntPtr.Zero))
+                {
+
+                    IntPtr ptrUsnRecord = new IntPtr(ptrData.ToInt32() + sizeof(Int64));
+
+                    while (outBytesCount > 60)
+                    {
+                        var usnRecord = new USN_RECORD_V2(ptrUsnRecord);
+                        result.Add(new UsnEntry(usnRecord));
+                        ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + usnRecord.RecordLength);
+                        outBytesCount -= usnRecord.RecordLength;
+
+                        if (result.Count >= count)
+                        {
+                            handler?.Invoke(Drive, result);
+                            result = new List<UsnEntry>();
+                        }
+                    }
+                    Marshal.WriteInt64(ptrMftEnumData, Marshal.ReadInt64(ptrData, 0));
+                }
+
+                Marshal.FreeHGlobal(ptrData);
+                Marshal.FreeHGlobal(ptrMftEnumData);
+            }
+            handler?.Invoke(Drive, result);
+        }
+
+        public bool UsnIsExist(long usn)
+        {
+            bool rs = false;
+            UsnErrorCode usnErrorCode = QueryUSNJournal();
+            if (ntfsUsnJournalData.NextUsn < usn) return rs;
+
+            if (usnErrorCode == UsnErrorCode.SUCCESS)
+            {
+                MFT_ENUM_DATA mftEnumData = new MFT_ENUM_DATA();
+                mftEnumData.StartFileReferenceNumber = 0;
+                mftEnumData.LowUsn = usn;
+                mftEnumData.HighUsn = usn;
+                int sizeMftEnumData = Marshal.SizeOf(mftEnumData);
+                IntPtr ptrMftEnumData = GetHeapGlobalPtr(sizeMftEnumData);
+                Marshal.StructureToPtr(mftEnumData, ptrMftEnumData, true);
+                int ptrDataSize = sizeof(UInt64) + 10000;
+                IntPtr ptrData = GetHeapGlobalPtr(ptrDataSize);
+                uint outBytesCount;
+
+                while (false != Win32Api.DeviceIoControl(
+                    this.DriveRootHandle,
+                    UsnControlCode.FSCTL_ENUM_USN_DATA,
+                    ptrMftEnumData,
+                    sizeMftEnumData,
+                    ptrData,
+                    ptrDataSize,
+                    out outBytesCount,
+                    IntPtr.Zero))
+                {
+                    IntPtr ptrUsnRecord = new IntPtr(ptrData.ToInt32() + sizeof(Int64));
+
+                    while (outBytesCount > 60)
+                    {
+                        var usnRecord = new USN_RECORD_V2(ptrUsnRecord);
+                        ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + usnRecord.RecordLength);
+                        outBytesCount -= usnRecord.RecordLength;
+                        rs = true;
+                    }
+                    Marshal.WriteInt64(ptrMftEnumData, Marshal.ReadInt64(ptrData, 0));
+                }
+
+                Marshal.FreeHGlobal(ptrData);
+                Marshal.FreeHGlobal(ptrMftEnumData);
+            }
+            return rs;
+        }
         private static IntPtr GetHeapGlobalPtr(int size)
         {
             IntPtr buffer = Marshal.AllocHGlobal(size);

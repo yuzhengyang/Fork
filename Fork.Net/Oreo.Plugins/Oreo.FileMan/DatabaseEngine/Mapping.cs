@@ -17,4 +17,11 @@ namespace Oreo.FileMan.DatabaseEngine
             this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
         }
     }
+    public class DrivesMap : EntityTypeConfiguration<Drives>
+    {
+        public DrivesMap()
+        {
+            this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
+        }
+    }
 }

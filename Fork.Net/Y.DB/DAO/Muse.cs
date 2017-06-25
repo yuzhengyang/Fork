@@ -17,7 +17,7 @@ namespace Y.DB.DAO
             db = new DbTable();
         }
 
-        public bool Add<T>(T EntityObj, bool isSave = true) where T : class
+        public int Add<T>(T EntityObj, bool isSave = true) where T : class
         {
             try
             {
@@ -28,9 +28,18 @@ namespace Y.DB.DAO
                 }
             }
             catch (Exception e) { }
-            return false;
+            return 0;
         }
-        public bool Del<T>(T EntityObj, bool isSave) where T : class
+        public int Adds<T>(IEnumerable<T> EntityObjs) where T : class
+        {
+            try
+            {
+                db.Set<T>().AddRange(EntityObjs);
+                return Save();
+            }
+            catch (Exception e) { return 0; }
+        }
+        public int Del<T>(T EntityObj, bool isSave) where T : class
         {
             try
             {
@@ -39,12 +48,21 @@ namespace Y.DB.DAO
                 {
                     return Save();
                 }
-                return false;
             }
             catch (Exception e) { }
-            return false;
+            return 0;
         }
-        public bool Update<T>(T EntityObj, bool isSave) where T : class
+        public int Dels<T>(IEnumerable<T> EntityObjs) where T : class
+        {
+            try
+            {
+                this.db.Set<T>().RemoveRange(EntityObjs);
+                return Save();
+            }
+            catch (Exception e) { }
+            return 0;
+        }
+        public int Update<T>(T EntityObj, bool isSave) where T : class
         {
             try
             {
@@ -53,14 +71,13 @@ namespace Y.DB.DAO
                 {
                     return Save();
                 }
-                return false;
             }
             catch (Exception e) { }
-            return false;
+            return 0;
         }
-        public bool Save()
+        public int Save()
         {
-            return db.SaveChanges() > 0;
+            return db.SaveChanges();
         }
 
         public T Get<T>(Expression<Func<T, bool>> expression, string[] include) where T : class
@@ -146,15 +163,15 @@ namespace Y.DB.DAO
         {
             return db.Set<T>();
         }
-        public void Dispose()
-        {
-            db.Dispose();
-        }
         public IEnumerable<T> ExecuteSqlCom<T, U>(string sql, U paramObjs)
             where U : class
             where T : class
         {
             return db.Set<T>().SqlQuery(sql, paramObjs);
+        }
+        public void Dispose()
+        {
+            db.Dispose();
         }
     }
 }

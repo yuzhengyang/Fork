@@ -355,11 +355,11 @@
             // LbFileCount
             // 
             this.LbFileCount.ForeColor = System.Drawing.Color.Gray;
-            this.LbFileCount.Location = new System.Drawing.Point(297, 7);
+            this.LbFileCount.Location = new System.Drawing.Point(250, 7);
             this.LbFileCount.Name = "LbFileCount";
-            this.LbFileCount.Size = new System.Drawing.Size(152, 14);
+            this.LbFileCount.Size = new System.Drawing.Size(199, 14);
             this.LbFileCount.TabIndex = 60;
-            this.LbFileCount.Text = "已整理/总文件";
+            this.LbFileCount.Text = "暂无新增项目";
             this.LbFileCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
@@ -377,7 +377,7 @@
             this.label1.ForeColor = System.Drawing.Color.Gray;
             this.label1.Location = new System.Drawing.Point(14, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 14);
+            this.label1.Size = new System.Drawing.Size(230, 14);
             this.label1.TabIndex = 61;
             this.label1.Text = "搜索";
             // 
