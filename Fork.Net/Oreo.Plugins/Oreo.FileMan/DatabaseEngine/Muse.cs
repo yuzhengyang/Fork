@@ -9,17 +9,17 @@ namespace Oreo.FileMan.DatabaseEngine
 {
     class Muse : IDisposable
     {
-        SuperDb db;
+        public SuperDb Context;
         public Muse()
         {
-            db = new SuperDb();
+            Context = new SuperDb();
         }
 
         public int Add<T>(T EntityObj, bool isSave = true) where T : class
         {
             try
             {
-                this.db.Set<T>().Add(EntityObj);
+                this.Context.Set<T>().Add(EntityObj);
                 if (isSave)
                 {
                     return Save();
@@ -32,7 +32,7 @@ namespace Oreo.FileMan.DatabaseEngine
         {
             try
             {
-                db.Set<T>().AddRange(EntityObjs);
+                Context.Set<T>().AddRange(EntityObjs);
                 return Save();
             }
             catch (Exception e)
@@ -44,7 +44,7 @@ namespace Oreo.FileMan.DatabaseEngine
         {
             try
             {
-                this.db.Set<T>().Remove(EntityObj);
+                this.Context.Set<T>().Remove(EntityObj);
                 if (isSave)
                 {
                     return Save();
@@ -57,7 +57,7 @@ namespace Oreo.FileMan.DatabaseEngine
         {
             try
             {
-                this.db.Set<T>().RemoveRange(EntityObjs);
+                this.Context.Set<T>().RemoveRange(EntityObjs);
                 return Save();
             }
             catch (Exception e) { }
@@ -67,7 +67,7 @@ namespace Oreo.FileMan.DatabaseEngine
         {
             try
             {
-                this.db.Entry(EntityObj).State = EntityState.Modified;
+                this.Context.Entry(EntityObj).State = EntityState.Modified;
                 if (isSave)
                 {
                     return Save();
@@ -78,7 +78,7 @@ namespace Oreo.FileMan.DatabaseEngine
         }
         public int Save()
         {
-            return db.SaveChanges();
+            return Context.SaveChanges();
         }
 
         public T Get<T>(Expression<Func<T, bool>> expression, string[] include) where T : class
@@ -91,7 +91,7 @@ namespace Oreo.FileMan.DatabaseEngine
                     if (query != null)
                         return query.FirstOrDefault(expression);
                 }
-                return this.db.Set<T>().FirstOrDefault(expression);
+                return this.Context.Set<T>().FirstOrDefault(expression);
             }
             catch (Exception e)
             {
@@ -113,7 +113,7 @@ namespace Oreo.FileMan.DatabaseEngine
             {
                 throw;
             }
-            return db.Set<T>().Where(expression).ToList();
+            return Context.Set<T>().Where(expression).ToList();
         }
         public IEnumerable<T> GetAll<T>(string[] include, bool track) where T : class
         {
@@ -127,8 +127,8 @@ namespace Oreo.FileMan.DatabaseEngine
                         return query.AsNoTracking().ToList();
             }
             if (!track)
-                db.Set<T>().AsNoTracking().ToList();
-            return db.Set<T>().ToList();
+                Context.Set<T>().AsNoTracking().ToList();
+            return Context.Set<T>().ToList();
         }
         private DbQuery<T> GetInclude<T>(string[] include) where T : class
         {
@@ -136,7 +136,7 @@ namespace Oreo.FileMan.DatabaseEngine
             foreach (var item in include)
             {
                 if (searchCondition == null)
-                    searchCondition = this.db.Set<T>().Include(item);
+                    searchCondition = this.Context.Set<T>().Include(item);
                 else
                     searchCondition = searchCondition.Include(item);
             }
@@ -153,7 +153,7 @@ namespace Oreo.FileMan.DatabaseEngine
                     if (query != null)
                         return query.Any(expression);
                 }
-                return this.db.Set<T>().Any(expression);
+                return this.Context.Set<T>().Any(expression);
             }
             catch (Exception e)
             {
@@ -162,17 +162,17 @@ namespace Oreo.FileMan.DatabaseEngine
         }
         public DbSet<T> Do<T>() where T : class
         {
-            return db.Set<T>();
+            return Context.Set<T>();
         }
         public IEnumerable<T> ExecuteSqlCom<T, U>(string sql, U paramObjs)
             where U : class
             where T : class
         {
-            return db.Set<T>().SqlQuery(sql, paramObjs);
+            return Context.Set<T>().SqlQuery(sql, paramObjs);
         }
         public void Dispose()
         {
-            db.Dispose();
+            Context.Dispose();
         }
     }
 }

@@ -13,22 +13,23 @@ using Y.FileQueryEngine.UsnOperation;
 using System.IO;
 using Y.Utils.IOUtils.DriveUtils;
 using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
+using Y.Utils.AppUtils;
 
 namespace Oreo.FileMan.Partial
 {
     public partial class FileTypePartial : UserControl
     {
-        int GetTypeFileCountInterval = 60 * 1000;
-        int GetTypeFileCountDetailInterval = 1000;
-        int GetFileToDatabaseInterval = 60 * 1000;
+        int GetFileToDatabaseInterval = 60 * 60 * 1000;
+        int WaitingInterval = 1000;
 
         int NewFileCount = 0;
 
-        string[] TypeVideo = new string[] { ".mp4", ".rmvb", ".wma" };
-        string[] TypeDoc = new string[] { ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".txt" };
-        string[] TypePicture = new string[] { ".jpg", ".bmp", ".png", ".icon", ".ico" };
-        string[] TypeMusic = new string[] { ".mp3", ".wma" };
-        string[] TypeSetup = new string[] { ".apk", ".msi" };
+        string[] TypeVideo = new string[] { ".mp4", ".rmvb", ".mkv" };
+        string[] TypeDoc = new string[] { ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx" };
+        string[] TypePicture = new string[] { ".jpg", ".bmp", ".png", ".psd" };
+        string[] TypeMusic = new string[] { ".mp3", ".wav" };
+        string[] TypeSetup = new string[] { ".apk", ".msi", "setup.exe" };
         string[] TypeZip = new string[] { ".zip", ".rar", ".iso" };
         public FileTypePartial()
         {
@@ -37,7 +38,14 @@ namespace Oreo.FileMan.Partial
 
         private void FileTypePartial_Load(object sender, EventArgs e)
         {
-            TaskOfGetFileToDatabase();//获取磁盘所有文件到文件索引数据库
+            if (PermissionTool.IsAdmin())
+            {
+                TaskOfGetFileToDatabase();//获取磁盘所有文件到文件索引数据库
+            }
+            else
+            {
+                LbFileCount.Text = "该功能需在管理员权限下运行";
+            }
         }
 
         private void TaskOfGetFileToDatabase()
@@ -52,6 +60,7 @@ namespace Oreo.FileMan.Partial
                 }
             });
         }
+        [Obsolete]
         private void GetFileToDatabase()
         {
             var drives = FileQueryEngine.GetReadyNtfsDrives().OrderByDescending(x => x.Name);
@@ -131,13 +140,6 @@ namespace Oreo.FileMan.Partial
         }
         private void GetFileToDatabase2()
         {
-            using (var db = new Muse())
-            {
-                var a = db.Get(x=>x.);
-                //var a = db.Database.SqlQuery<Drives>("delete from drives where name = 'C:\\'", new SqlParameter("@name", @"C:\"));
-
-            }
-
             var drives = FileQueryEngine.GetReadyNtfsDrives().OrderByDescending(x => x.Name);
             if (ListTool.HasElements(drives))
             {
@@ -154,11 +156,7 @@ namespace Oreo.FileMan.Partial
                         var ds = db.Get<Drives>(x => x.Name == drive.Name, null);
                         if ((ds == null) || (ds != null && ds.LastFormatTime != dt1.ToString()))
                         {
-                            var fs = db.Gets<Files>(x => x.Drive == drive.Name, null);
-                            if (ListTool.HasElements(fs))
-                            {
-                                //db.Dels(fs);
-                            }
+                            var deleteSql = db.Context.Database.ExecuteSqlCommand("DELETE FROM files WHERE drive = @p0;", drive.Name);
 
                             if (ds == null)
                             {
@@ -213,37 +211,36 @@ namespace Oreo.FileMan.Partial
         {
             //视频
             UISearchFileWaiting(LbVideoCount);
-            Thread.Sleep(GetTypeFileCountDetailInterval);
+            Thread.Sleep(WaitingInterval);
             int ctv = GetTypeFileCount(TypeVideo);
             UISetFileCount(LbVideoCount, ctv);
             //文档
             UISearchFileWaiting(LbDocCount);
-            Thread.Sleep(GetTypeFileCountDetailInterval);
+            Thread.Sleep(WaitingInterval);
             int ctd = GetTypeFileCount(TypeDoc);
             UISetFileCount(LbDocCount, ctd);
             //图片
             UISearchFileWaiting(LbPictureCount);
-            Thread.Sleep(GetTypeFileCountDetailInterval);
+            Thread.Sleep(WaitingInterval);
             int ctp = GetTypeFileCount(TypePicture);
             UISetFileCount(LbPictureCount, ctp);
             //音乐
             UISearchFileWaiting(LbMusicCount);
-            Thread.Sleep(GetTypeFileCountDetailInterval);
+            Thread.Sleep(WaitingInterval);
             int ctm = GetTypeFileCount(TypeMusic);
             UISetFileCount(LbMusicCount, ctm);
             //安装包
             UISearchFileWaiting(LbSetupCount);
-            Thread.Sleep(GetTypeFileCountDetailInterval);
+            Thread.Sleep(WaitingInterval);
             int cts = GetTypeFileCount(TypeSetup);
             UISetFileCount(LbSetupCount, cts);
             //压缩包
             UISearchFileWaiting(LbZipCount);
-            Thread.Sleep(GetTypeFileCountDetailInterval);
+            Thread.Sleep(WaitingInterval);
             int ctz = GetTypeFileCount(TypeZip);
             UISetFileCount(LbZipCount, ctz);
 
             UISearchFileWaiting(LbZipCount, false);
-            Thread.Sleep(GetTypeFileCountInterval);
         }
         private int GetTypeFileCount(string[] type)
         {

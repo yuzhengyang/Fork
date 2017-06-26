@@ -17,8 +17,8 @@ namespace Oreo.FileMan.Views
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            LbAppVersion.Text = string.Format("当前版本：{0}", Application.ProductVersion);
         }
-
 
         #region 选项卡切换
         private void LbFileType_Click(object sender, EventArgs e)
@@ -54,8 +54,9 @@ namespace Oreo.FileMan.Views
             now.ForeColor = Color.White;
         }
         #endregion
+
         /// <summary>
-        /// 设置
+        /// 打开设置
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -64,13 +65,41 @@ namespace Oreo.FileMan.Views
             new SettingsForm().ShowDialog();
         }
         /// <summary>
-        /// 退出
+        /// 隐藏主界面
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BtClose_Click(object sender, EventArgs e)
         {
-            BeginInvoke(new Action(() => { Close(); }));
+            Hide();
+        }
+        /// <summary>
+        /// 显示主界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmsNiMainShow_Click(object sender, EventArgs e)
+        {
+            Show();
+        }
+        /// <summary>
+        /// 退出程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmsNiMainExit_Click(object sender, EventArgs e)
+        {
+            NiMain.Visible = false;
+            Close();
+        }
+        /// <summary>
+        /// 显示主界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NiMain_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
         }
     }
 }

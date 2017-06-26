@@ -38,6 +38,7 @@
             this.TpFileDecrypt = new System.Windows.Forms.TabPage();
             this.fileDecryptPartial1 = new Oreo.FileMan.Partial.FileDecryptPartial();
             this.TpFileBackup = new System.Windows.Forms.TabPage();
+            this.fileBackupPartial1 = new Oreo.FileMan.Partial.FileBackupPartial();
             this.LbFileType = new System.Windows.Forms.Label();
             this.LbFileBackup = new System.Windows.Forms.Label();
             this.LbFileEncrypt = new System.Windows.Forms.Label();
@@ -49,16 +50,20 @@
             this.LbFileDecrypt = new System.Windows.Forms.Label();
             this.PnBody = new System.Windows.Forms.Panel();
             this.NiMain = new System.Windows.Forms.NotifyIcon(this.components);
+            this.CmsNiMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CmsNiMainShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.CmsNiMainExit = new System.Windows.Forms.ToolStripMenuItem();
             this.PnMain = new System.Windows.Forms.Panel();
             this.PnBotton = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.fileBackupPartial1 = new Oreo.FileMan.Partial.FileBackupPartial();
             this.tabControl1.SuspendLayout();
             this.TpFIleType.SuspendLayout();
             this.TpFileEncrypt.SuspendLayout();
             this.TpFileDecrypt.SuspendLayout();
             this.TpFileBackup.SuspendLayout();
             this.PnBody.SuspendLayout();
+            this.CmsNiMain.SuspendLayout();
             this.PnMain.SuspendLayout();
             this.PnBotton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -145,6 +150,14 @@
             this.TpFileBackup.Text = "文件备份";
             this.TpFileBackup.UseVisualStyleBackColor = true;
             // 
+            // fileBackupPartial1
+            // 
+            this.fileBackupPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileBackupPartial1.Location = new System.Drawing.Point(3, 3);
+            this.fileBackupPartial1.Name = "fileBackupPartial1";
+            this.fileBackupPartial1.Size = new System.Drawing.Size(646, 326);
+            this.fileBackupPartial1.TabIndex = 0;
+            // 
             // LbFileType
             // 
             this.LbFileType.AutoSize = true;
@@ -188,9 +201,9 @@
             this.LbTitle.ForeColor = System.Drawing.Color.White;
             this.LbTitle.Location = new System.Drawing.Point(69, 22);
             this.LbTitle.Name = "LbTitle";
-            this.LbTitle.Size = new System.Drawing.Size(88, 25);
+            this.LbTitle.Size = new System.Drawing.Size(107, 25);
             this.LbTitle.TabIndex = 18;
-            this.LbTitle.Text = "文件管理";
+            this.LbTitle.Text = "文件管理器";
             // 
             // BtClose
             // 
@@ -214,7 +227,7 @@
             this.LbAppVersion.Name = "LbAppVersion";
             this.LbAppVersion.Size = new System.Drawing.Size(140, 19);
             this.LbAppVersion.TabIndex = 0;
-            this.LbAppVersion.Text = "当前版本：10.10.10.10";
+            this.LbAppVersion.Text = "当前版本：99.99.99.99";
             this.LbAppVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tip.SetToolTip(this.LbAppVersion, "当前软件版本");
             // 
@@ -256,9 +269,39 @@
             // 
             // NiMain
             // 
+            this.NiMain.ContextMenuStrip = this.CmsNiMain;
             this.NiMain.Icon = ((System.Drawing.Icon)(resources.GetObject("NiMain.Icon")));
-            this.NiMain.Text = "notifyIcon1";
+            this.NiMain.Text = "文件管理器";
             this.NiMain.Visible = true;
+            this.NiMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NiMain_MouseDoubleClick);
+            // 
+            // CmsNiMain
+            // 
+            this.CmsNiMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmsNiMainShow,
+            this.toolStripSeparator1,
+            this.CmsNiMainExit});
+            this.CmsNiMain.Name = "CmsNiMain";
+            this.CmsNiMain.Size = new System.Drawing.Size(137, 54);
+            // 
+            // CmsNiMainShow
+            // 
+            this.CmsNiMainShow.Name = "CmsNiMainShow";
+            this.CmsNiMainShow.Size = new System.Drawing.Size(136, 22);
+            this.CmsNiMainShow.Text = "显示主界面";
+            this.CmsNiMainShow.Click += new System.EventHandler(this.CmsNiMainShow_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+            // 
+            // CmsNiMainExit
+            // 
+            this.CmsNiMainExit.Name = "CmsNiMainExit";
+            this.CmsNiMainExit.Size = new System.Drawing.Size(136, 22);
+            this.CmsNiMainExit.Text = "退出";
+            this.CmsNiMainExit.Click += new System.EventHandler(this.CmsNiMainExit_Click);
             // 
             // PnMain
             // 
@@ -289,14 +332,6 @@
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
-            // fileBackupPartial1
-            // 
-            this.fileBackupPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileBackupPartial1.Location = new System.Drawing.Point(3, 3);
-            this.fileBackupPartial1.Name = "fileBackupPartial1";
-            this.fileBackupPartial1.Size = new System.Drawing.Size(646, 326);
-            this.fileBackupPartial1.TabIndex = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -323,6 +358,7 @@
             this.TpFileDecrypt.ResumeLayout(false);
             this.TpFileBackup.ResumeLayout(false);
             this.PnBody.ResumeLayout(false);
+            this.CmsNiMain.ResumeLayout(false);
             this.PnMain.ResumeLayout(false);
             this.PnBotton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -355,5 +391,9 @@
         private System.Windows.Forms.Label LbAppVersion;
         private System.Windows.Forms.Button BTSettings;
         private Partial.FileBackupPartial fileBackupPartial1;
+        private System.Windows.Forms.ContextMenuStrip CmsNiMain;
+        private System.Windows.Forms.ToolStripMenuItem CmsNiMainShow;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem CmsNiMainExit;
     }
 }

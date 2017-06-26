@@ -10,12 +10,23 @@ namespace Y.Utils.AppUtils
 {
     public class PermissionTool
     {
+        /// <summary>
+        /// 当前登录用户是否为管理员
+        /// 百万次执行时间：26947、28705、28244 ms
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete]
         public static bool IsAdministrator()
         {
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
+        /// <summary>
+        /// 当前登录用户是否为管理员
+        /// 百万次执行时间：8063、9097、9755 ms
+        /// </summary>
+        /// <returns></returns>
         public static bool IsAdmin()
         {
             const int SECURITY_BUILTIN_DOMAIN_RID = 0x20;

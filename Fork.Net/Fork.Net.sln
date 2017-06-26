@@ -57,6 +57,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fork.Net.SpeciallyTools", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Y.FileQueryEngine", "Fork.Net.SpeciallyTools\Y.FileQueryEngine\Y.FileQueryEngine.csproj", "{497F570C-8398-458D-970C-DFA3DD9FE746}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oreo.FaultLog", "Oreo.Plugins\Oreo.FaultLog\Oreo.FaultLog.csproj", "{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -233,6 +235,14 @@ Global
 		{497F570C-8398-458D-970C-DFA3DD9FE746}.Release|Any CPU.Build.0 = Release|Any CPU
 		{497F570C-8398-458D-970C-DFA3DD9FE746}.Release|x86.ActiveCfg = Release|Any CPU
 		{497F570C-8398-458D-970C-DFA3DD9FE746}.Release|x86.Build.0 = Release|Any CPU
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}.Debug|x86.Build.0 = Debug|Any CPU
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}.Release|x86.ActiveCfg = Release|Any CPU
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -258,5 +268,6 @@ Global
 		{9B9BF25E-0ECD-4923-9546-4FDAEF685092} = {A89FC45A-A907-4487-8719-114530A62684}
 		{E1897235-0E04-420D-B6D5-29BEA14DA1FD} = {A89FC45A-A907-4487-8719-114530A62684}
 		{497F570C-8398-458D-970C-DFA3DD9FE746} = {FA0F1046-E0E8-4057-B4B4-CD551844A29B}
+		{90C5C3EC-FE0F-46CA-9388-17E9C8AD7B6C} = {E53B3662-A5FD-4D4C-AFF6-1DC9FF24EA16}
 	EndGlobalSection
 EndGlobal
