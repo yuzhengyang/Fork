@@ -91,28 +91,28 @@
     <Compile Include="DatabaseEngine\SuperDb.cs" />
     <Compile Include="Models\Drives.cs" />
     <Compile Include="Models\Files.cs" />
-    <Compile Include="Partial\FileBackupPartial.cs">
+    <Compile Include="Partials\FileBackupPartial.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Partial\FileBackupPartial.Designer.cs">
+    <Compile Include="Partials\FileBackupPartial.Designer.cs">
       <DependentUpon>FileBackupPartial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Partial\FileDecryptPartial.cs">
+    <Compile Include="Partials\FileDecryptPartial.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Partial\FileDecryptPartial.Designer.cs">
+    <Compile Include="Partials\FileDecryptPartial.Designer.cs">
       <DependentUpon>FileDecryptPartial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Partial\FileEncryptPartial.cs">
+    <Compile Include="Partials\FileEncryptPartial.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Partial\FileEncryptPartial.Designer.cs">
+    <Compile Include="Partials\FileEncryptPartial.Designer.cs">
       <DependentUpon>FileEncryptPartial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Partial\FileTypePartial.cs">
+    <Compile Include="Partials\FileTypePartial.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Partial\FileTypePartial.Designer.cs">
+    <Compile Include="Partials\FileTypePartial.Designer.cs">
       <DependentUpon>FileTypePartial.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -129,16 +129,16 @@
     <Compile Include="Views\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Partial\FileBackupPartial.resx">
+    <EmbeddedResource Include="Partials\FileBackupPartial.resx">
       <DependentUpon>FileBackupPartial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Partial\FileDecryptPartial.resx">
+    <EmbeddedResource Include="Partials\FileDecryptPartial.resx">
       <DependentUpon>FileDecryptPartial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Partial\FileEncryptPartial.resx">
+    <EmbeddedResource Include="Partials\FileEncryptPartial.resx">
       <DependentUpon>FileEncryptPartial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Partial\FileTypePartial.resx">
+    <EmbeddedResource Include="Partials\FileTypePartial.resx">
       <DependentUpon>FileTypePartial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

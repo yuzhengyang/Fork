@@ -16,5 +16,10 @@ namespace Oreo.FaultLog.Views
         {
             InitializeComponent();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            LbAppVersion.Text = string.Format("当前版本：{0}", Application.ProductVersion);
+        }
     }
 }
