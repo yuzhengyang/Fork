@@ -14,9 +14,9 @@ namespace Oreo.FileMan.DatabaseEngine
 {
     public class SuperDb : DbContext
     {
-        public SuperDb()
-            : base(@"DefaultConnection")
+        public SuperDb() : base(@"DefaultConnection")
         {
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<SuperDb, Configuration>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,10 +27,13 @@ namespace Oreo.FileMan.DatabaseEngine
             Database.SetInitializer(new MyDbInitializer(Database.Connection.ConnectionString, modelBuilder));
         }
 
-        public class MyDbInitializer : SqliteDropCreateDatabaseWhenModelChanges<SuperDb>//SqliteDropCreateDatabaseAlways
+        public class MyDbInitializer : SqliteCreateDatabaseIfNotExists<SuperDb>//SqliteDropCreateDatabaseAlways
         {
             public MyDbInitializer(string connectionString, DbModelBuilder modelBuilder)
-                : base(modelBuilder) { }
+                : base(modelBuilder)
+            {
+                //Database.SetInitializer(new MigrateDatabaseToLatestVersion<SuperDb, Configuration>());
+            }
 
             protected override void Seed(SuperDb context)
             {

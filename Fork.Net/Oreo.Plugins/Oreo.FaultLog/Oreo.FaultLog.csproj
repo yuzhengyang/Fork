@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Oreo.FaultLog</RootNamespace>
     <AssemblyName>Oreo.FaultLog</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -75,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseEngine\Configuration.cs" />
     <Compile Include="DatabaseEngine\Mapping.cs" />
     <Compile Include="DatabaseEngine\Muse.cs" />
     <Compile Include="DatabaseEngine\SuperDb.cs" />
@@ -85,6 +89,12 @@
     <Compile Include="Partials\FaultLogInputPartial.Designer.cs">
       <DependentUpon>FaultLogInputPartial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Partials\FaultLogModifyPartial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Partials\FaultLogModifyPartial.Designer.cs">
+      <DependentUpon>FaultLogModifyPartial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MainForm.cs">
@@ -93,8 +103,17 @@
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModifyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModifyForm.Designer.cs">
+      <DependentUpon>ModifyForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Partials\FaultLogInputPartial.resx">
       <DependentUpon>FaultLogInputPartial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Partials\FaultLogModifyPartial.resx">
+      <DependentUpon>FaultLogModifyPartial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -104,9 +123,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModifyForm.resx">
+      <DependentUpon>ModifyForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />

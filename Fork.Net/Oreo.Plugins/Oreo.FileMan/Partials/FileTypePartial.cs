@@ -146,8 +146,8 @@ namespace Oreo.FileMan.Partials
                 foreach (var drive in drives)
                 {
                     NewFileCount = 0;
-                    //if (drive.Name.Contains("C")) continue;//测试时跳过C盘
-                    //if (drive.Name.Contains("D")) continue;//测试时跳过D盘
+                    if (drive.Name.Contains("C")) continue;//测试时跳过C盘
+                    if (drive.Name.Contains("D")) continue;//测试时跳过D盘
 
                     using (var db = new Muse())
                     {

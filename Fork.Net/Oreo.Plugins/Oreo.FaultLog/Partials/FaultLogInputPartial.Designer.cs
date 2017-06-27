@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtToday = new System.Windows.Forms.Button();
             this.BtSearch = new System.Windows.Forms.Button();
             this.TbAddress = new System.Windows.Forms.TextBox();
             this.TbPhone = new System.Windows.Forms.TextBox();
@@ -60,7 +61,7 @@
             this.DgvDataProblem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvDataSolution = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvDataPostscript = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BtToday = new System.Windows.Forms.Button();
+            this.DgvDataId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -134,6 +135,7 @@
             this.DgvData.AllowUserToAddRows = false;
             this.DgvData.AllowUserToDeleteRows = false;
             this.DgvData.AllowUserToResizeRows = false;
+            this.DgvData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgvData.BackgroundColor = System.Drawing.Color.White;
             this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -146,24 +148,29 @@
             this.DgvDataSystem,
             this.DgvDataProblem,
             this.DgvDataSolution,
-            this.DgvDataPostscript});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvData.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DgvDataPostscript,
+            this.DgvDataId});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvData.DefaultCellStyle = dataGridViewCellStyle1;
             this.DgvData.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.DgvData.Location = new System.Drawing.Point(0, 194);
             this.DgvData.Name = "DgvData";
             this.DgvData.ReadOnly = true;
             this.DgvData.RowHeadersVisible = false;
-            this.DgvData.RowTemplate.Height = 23;
+            this.DgvData.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DgvData.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(2);
+            this.DgvData.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvData.RowTemplate.Height = 50;
             this.DgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvData.Size = new System.Drawing.Size(700, 206);
             this.DgvData.TabIndex = 31;
+            this.DgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvData_CellDoubleClick);
             // 
             // panel1
             // 
@@ -180,6 +187,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(677, 37);
             this.panel1.TabIndex = 32;
+            // 
+            // BtToday
+            // 
+            this.BtToday.Location = new System.Drawing.Point(601, 7);
+            this.BtToday.Name = "BtToday";
+            this.BtToday.Size = new System.Drawing.Size(55, 23);
+            this.BtToday.TabIndex = 27;
+            this.BtToday.Text = "Today";
+            this.BtToday.UseVisualStyleBackColor = true;
+            this.BtToday.Click += new System.EventHandler(this.BtToday_Click);
             // 
             // BtSearch
             // 
@@ -263,7 +280,6 @@
             // 
             // CbSystem
             // 
-            this.CbSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbSystem.FormattingEnabled = true;
             this.CbSystem.Items.AddRange(new object[] {
             "xp",
@@ -357,6 +373,7 @@
             this.DgvDataSystem.Name = "DgvDataSystem";
             this.DgvDataSystem.ReadOnly = true;
             this.DgvDataSystem.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DgvDataSystem.Width = 50;
             // 
             // DgvDataProblem
             // 
@@ -364,6 +381,7 @@
             this.DgvDataProblem.Name = "DgvDataProblem";
             this.DgvDataProblem.ReadOnly = true;
             this.DgvDataProblem.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DgvDataProblem.Width = 200;
             // 
             // DgvDataSolution
             // 
@@ -371,6 +389,7 @@
             this.DgvDataSolution.Name = "DgvDataSolution";
             this.DgvDataSolution.ReadOnly = true;
             this.DgvDataSolution.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DgvDataSolution.Width = 200;
             // 
             // DgvDataPostscript
             // 
@@ -378,16 +397,14 @@
             this.DgvDataPostscript.Name = "DgvDataPostscript";
             this.DgvDataPostscript.ReadOnly = true;
             this.DgvDataPostscript.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DgvDataPostscript.Width = 150;
             // 
-            // BtToday
+            // DgvDataId
             // 
-            this.BtToday.Location = new System.Drawing.Point(601, 7);
-            this.BtToday.Name = "BtToday";
-            this.BtToday.Size = new System.Drawing.Size(55, 23);
-            this.BtToday.TabIndex = 27;
-            this.BtToday.Text = "Today";
-            this.BtToday.UseVisualStyleBackColor = true;
-            this.BtToday.Click += new System.EventHandler(this.BtToday_Click);
+            this.DgvDataId.HeaderText = "Id";
+            this.DgvDataId.Name = "DgvDataId";
+            this.DgvDataId.ReadOnly = true;
+            this.DgvDataId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FaultLogInputPartial
             // 
@@ -431,6 +448,7 @@
         private System.Windows.Forms.Button BtAdd;
         private System.Windows.Forms.CheckBox CbIsFinish;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button BtToday;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvDataNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvDataCreateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvDataFinishTime;
@@ -441,6 +459,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvDataProblem;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvDataSolution;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvDataPostscript;
-        private System.Windows.Forms.Button BtToday;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DgvDataId;
     }
 }

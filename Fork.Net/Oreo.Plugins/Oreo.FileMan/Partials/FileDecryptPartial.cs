@@ -132,5 +132,15 @@ namespace Oreo.FileMan.Partials
                 DgvFileDecryptList.Rows[index].Cells["CoFileDecryptStatus"].Value = status;
             }));
         }
+        void UIEnableButton(bool enable)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                BtFileDecrypt.Enabled = enable;
+                BtFileDecryptAdd.Enabled = enable;
+                BtFileDecryptAdds.Enabled = enable;
+                BtFileDecryptClear.Enabled = enable;
+            }));
+        }
     }
 }

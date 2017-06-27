@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.PnMain = new System.Windows.Forms.Panel();
-            this.faultLogInputPartial1 = new Oreo.FaultLog.Partials.FaultLogInputPartial();
             this.PnBottom = new System.Windows.Forms.Panel();
             this.LbAppVersion = new System.Windows.Forms.Label();
             this.LbAppTitle = new System.Windows.Forms.Label();
+            this.BtClose = new System.Windows.Forms.Button();
+            this.BtMin = new System.Windows.Forms.Button();
+            this.faultLogInputPartial1 = new Oreo.FaultLog.Partials.FaultLogInputPartial();
             this.PnMain.SuspendLayout();
             this.PnBottom.SuspendLayout();
             this.SuspendLayout();
@@ -47,15 +49,6 @@
             this.PnMain.Size = new System.Drawing.Size(700, 427);
             this.PnMain.TabIndex = 5;
             // 
-            // faultLogInputPartial1
-            // 
-            this.faultLogInputPartial1.BackColor = System.Drawing.Color.White;
-            this.faultLogInputPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.faultLogInputPartial1.Location = new System.Drawing.Point(0, 0);
-            this.faultLogInputPartial1.Name = "faultLogInputPartial1";
-            this.faultLogInputPartial1.Size = new System.Drawing.Size(700, 400);
-            this.faultLogInputPartial1.TabIndex = 7;
-            // 
             // PnBottom
             // 
             this.PnBottom.Controls.Add(this.LbAppVersion);
@@ -68,7 +61,7 @@
             // LbAppVersion
             // 
             this.LbAppVersion.ForeColor = System.Drawing.Color.White;
-            this.LbAppVersion.Location = new System.Drawing.Point(450, 4);
+            this.LbAppVersion.Location = new System.Drawing.Point(553, 4);
             this.LbAppVersion.Name = "LbAppVersion";
             this.LbAppVersion.Size = new System.Drawing.Size(140, 19);
             this.LbAppVersion.TabIndex = 0;
@@ -87,12 +80,49 @@
             this.LbAppTitle.Text = "Logggg";
             this.LbAppTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // BtClose
+            // 
+            this.BtClose.FlatAppearance.BorderSize = 0;
+            this.BtClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtClose.ForeColor = System.Drawing.Color.White;
+            this.BtClose.Location = new System.Drawing.Point(667, 9);
+            this.BtClose.Name = "BtClose";
+            this.BtClose.Size = new System.Drawing.Size(26, 23);
+            this.BtClose.TabIndex = 6;
+            this.BtClose.Text = "X";
+            this.BtClose.UseVisualStyleBackColor = true;
+            this.BtClose.Click += new System.EventHandler(this.BtClose_Click);
+            // 
+            // BtMin
+            // 
+            this.BtMin.FlatAppearance.BorderSize = 0;
+            this.BtMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtMin.ForeColor = System.Drawing.Color.White;
+            this.BtMin.Location = new System.Drawing.Point(639, 9);
+            this.BtMin.Name = "BtMin";
+            this.BtMin.Size = new System.Drawing.Size(26, 23);
+            this.BtMin.TabIndex = 7;
+            this.BtMin.Text = "-";
+            this.BtMin.UseVisualStyleBackColor = true;
+            this.BtMin.Click += new System.EventHandler(this.BtMin_Click);
+            // 
+            // faultLogInputPartial1
+            // 
+            this.faultLogInputPartial1.BackColor = System.Drawing.Color.White;
+            this.faultLogInputPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.faultLogInputPartial1.Location = new System.Drawing.Point(0, 0);
+            this.faultLogInputPartial1.Name = "faultLogInputPartial1";
+            this.faultLogInputPartial1.Size = new System.Drawing.Size(700, 400);
+            this.faultLogInputPartial1.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Salmon;
             this.ClientSize = new System.Drawing.Size(700, 485);
+            this.Controls.Add(this.BtMin);
+            this.Controls.Add(this.BtClose);
             this.Controls.Add(this.LbAppTitle);
             this.Controls.Add(this.PnMain);
             this.Name = "MainForm";
@@ -112,5 +142,7 @@
         private Partials.FaultLogInputPartial faultLogInputPartial1;
         private System.Windows.Forms.Label LbAppVersion;
         private System.Windows.Forms.Label LbAppTitle;
+        private System.Windows.Forms.Button BtClose;
+        private System.Windows.Forms.Button BtMin;
     }
 }

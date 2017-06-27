@@ -10,6 +10,7 @@ using Oreo.FaultLog.DatabaseEngine;
 using Oreo.FaultLog.Models;
 using Y.Utils.DataUtils.Collections;
 using System.Threading.Tasks;
+using Oreo.FaultLog.Views;
 
 namespace Oreo.FaultLog.Partials
 {
@@ -34,7 +35,9 @@ namespace Oreo.FaultLog.Partials
             {
                 using (var db = new Muse())
                 {
-                    var fls = db.Do<FaultLogs>().SqlQuery("SELECT * FROM faultlogs WHERE createtime LIKE @p0", DateTime.Now.ToString("yyyy-MM-dd") + "%");
+                    var first = db.Get<FaultLogs>(x => x.Id > 0, null);
+
+                    List<FaultLogs> fls = db.Do<FaultLogs>().SqlQuery("SELECT * FROM faultlogs WHERE createtime LIKE @p0", DateTime.Now.ToString("yyyy-MM-dd") + "%").ToList();
                     if (ListTool.HasElements(fls))
                     {
                         foreach (var f in fls)
@@ -102,6 +105,13 @@ namespace Oreo.FaultLog.Partials
                 System = CbSystem.Text,
                 CreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
             };
+
+            TbIp.Text = "";
+            TbPhone.Text = "";
+            TbAddress.Text = "";
+            TbProblem.Text = "";
+            TbSolution.Text = "";
+            TbPostscript.Text = "";
             DgvData.Rows.Clear();
 
             Task.Factory.StartNew(() =>
@@ -129,7 +139,27 @@ namespace Oreo.FaultLog.Partials
                 UIAddButton(true);
             });
         }
-
+        private void DgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                //int id = (int)DgvData.Rows[e.RowIndex].Cells["DgvDataId"].Value;
+                //MessageBox.Show(id.ToString());
+                try
+                {
+                    int id = (int)DgvData.Rows[e.RowIndex].Cells["DgvDataId"].Value;
+                    if (new ModifyForm(id).ShowDialog() == DialogResult.OK)
+                    {
+                        using (var db = new Muse())
+                        {
+                            FaultLogs f = db.Get<FaultLogs>(x => x.Id == id, null);
+                            if (f != null) UIRefreshRow(e.RowIndex, f);
+                        }
+                    }
+                }
+                catch (Exception ex) { }
+            }
+        }
 
         void UIAddRow(FaultLogs f)
         {
@@ -145,9 +175,40 @@ namespace Oreo.FaultLog.Partials
                     f.System,
                     f.Problem,
                     f.Solution,
-                    f.Postscript
+                    f.Postscript,
+                    f.Id
                 });
             }));
+        }
+        void UIRefreshRow(int row, FaultLogs f)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                DgvData.Rows[row].SetValues(new object[] {
+                    DgvData.Rows.Count+1,
+                    f.CreateTime,
+                    f.FinishTime,
+                    f.Ip,
+                    f.Phone,
+                    f.Address,
+                    f.System,
+                    f.Problem,
+                    f.Solution,
+                    f.Postscript,
+                    f.Id
+                });
+            }));
+            //            DgvData.Rows[row].Cells["DgvDataNo
+            // DgvData.Rows[row].Cells["DgvDataCreateTime
+            //DgvData.Rows[row].Cells["DgvDataFinishTime
+            //DgvData.Rows[row].Cells["DgvDataIp
+            //DgvData.Rows[row].Cells["DgvDataPhone
+            //DgvData.Rows[row].Cells["DgvDataAddress
+            //DgvData.Rows[row].Cells["DgvDataSystem
+            //DgvData.Rows[row].Cells["DgvDataProblem
+            //DgvData.Rows[row].Cells["DgvDataSolution
+            //DgvData.Rows[row].Cells["DgvDataPostscript
+            //DgvData.Rows[row].Cells["DgvDataId
         }
         void UIAddButton(bool enable)
         {

@@ -41,6 +41,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.BtDelFolder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFile)).BeginInit();
             this.SuspendLayout();
@@ -157,10 +158,21 @@
             this.button2.Text = "设置备份目录";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // BtDelFolder
+            // 
+            this.BtDelFolder.Location = new System.Drawing.Point(99, 6);
+            this.BtDelFolder.Name = "BtDelFolder";
+            this.BtDelFolder.Size = new System.Drawing.Size(75, 23);
+            this.BtDelFolder.TabIndex = 6;
+            this.BtDelFolder.Text = "删除目录";
+            this.BtDelFolder.UseVisualStyleBackColor = true;
+            this.BtDelFolder.Click += new System.EventHandler(this.BtDelFolder_Click);
+            // 
             // FileBackupPartial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtDelFolder);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
@@ -191,5 +203,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtDelFolder;
     }
 }
