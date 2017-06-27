@@ -1,7 +1,11 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.6.27
+//      desc:       文件目录工具类
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,8 +15,16 @@ using Y.Utils.DataUtils.Collections;
 
 namespace Y.Utils.IOUtils.PathUtils
 {
+    /// <summary>
+    /// 文件目录工具类
+    /// </summary>
     public class DirTool
     {
+        /// <summary>
+        /// 创建文件目录
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static bool Create(string path)
         {
             if (Directory.Exists(path))
@@ -27,6 +39,11 @@ namespace Y.Utils.IOUtils.PathUtils
                 }
             return false;
         }
+        /// <summary>
+        /// 获取目录的父目录
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string Parent(string path)
         {
             try
@@ -36,12 +53,22 @@ namespace Y.Utils.IOUtils.PathUtils
             catch (Exception e) { }
             return null;
         }
+        /// <summary>
+        /// 获取目录下的目录（一层）
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static List<string> GetPath(string path)
         {
             if (Directory.Exists(path))
                 try { return Directory.EnumerateDirectories(path).ToList(); } catch (Exception e) { }
             return null;
         }
+        /// <summary>
+        /// 获取目录下所有目录（递归）
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static List<string> GetAllPath(string path)
         {
             List<string> result = GetPath(path);
@@ -59,6 +86,11 @@ namespace Y.Utils.IOUtils.PathUtils
             }
             return null;
         }
+        /// <summary>
+        /// 判断目录是否为磁盘
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static bool IsDriver(string path)
         {
             if (path != null && path.Length >= 2)
@@ -85,6 +117,11 @@ namespace Y.Utils.IOUtils.PathUtils
             }
             return result;
         }
+        /// <summary>
+        /// 连接多个string构成目录
+        /// </summary>
+        /// <param name="paths"></param>
+        /// <returns></returns>
         public static string Combine(params string[] paths)
         {
             if (ListTool.HasElements(paths))
@@ -109,6 +146,30 @@ namespace Y.Utils.IOUtils.PathUtils
                 }
             }
             return "";
+        }
+        /// <summary>
+        /// 路径包含关系
+        /// </summary>
+        /// <param name="path1"></param>
+        /// <param name="path2"></param>
+        /// <returns>
+        /// -1：不存在包含关系
+        /// 0：两个目录相同
+        /// 1：path1 包含 path2（path1 大）
+        /// 2：path2 包含 path1（path2 大）
+        /// </returns>
+        public static int Include(string path1, string path2)
+        {
+            if (path1 == path2) return 0;//两个目录相同
+
+            string p1 = Combine(path1 + "\\");
+            string p2 = Combine(path2 + "\\");
+
+            if (p1 == p2) return 0;//两个目录相同（防止路径后有带\或不带\的情况）
+            if (p1.Length > p2.Length && p1.Contains(p2)) return 1;//path1 包含 path2（path1 大）
+            if (p2.Length > p1.Length && p2.Contains(p1)) return 2;//path2 包含 path1（path2 大）
+
+            return -1;//不存在包含关系
         }
     }
 }

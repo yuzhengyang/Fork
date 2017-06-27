@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Oreo.FileMan.Models
 {
-    public class Backups
+    public class BackupPaths
     {
         public int Id { get; set; }
-        public string FileName { get; set; }
-        public string FullFileName { get; set; }
+        public string  Name { get; set; }
+        public string  Path { get; set; }
+        
     }
 }

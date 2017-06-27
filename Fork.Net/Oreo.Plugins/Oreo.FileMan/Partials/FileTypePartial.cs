@@ -147,7 +147,8 @@ namespace Oreo.FileMan.Partials
                 {
                     NewFileCount = 0;
                     if (drive.Name.Contains("C")) continue;//测试时跳过C盘
-                    if (drive.Name.Contains("D")) continue;//测试时跳过D盘
+                    //if (drive.Name.Contains("D")) continue;//测试时跳过D盘
+                    if (drive.Name.Contains("F")) continue;//测试时跳过F盘
 
                     using (var db = new Muse())
                     {
@@ -173,7 +174,7 @@ namespace Oreo.FileMan.Partials
                         long currentUsn = 0;
                         if (db.Any<Files>(x => x.Drive == drive.Name, null))
                         {
-                            currentUsn = db.Do<Files>().Where(x => x.Drive == drive.Name).Max(x => x.Usn) + 1;
+                            currentUsn = db.Do<Files>().Where(x => x.Drive == drive.Name).Max(x => x.Usn);
                         }
                         //从上次Usn记录开始读取
                         var usnOperator = new UsnOperator(drive);

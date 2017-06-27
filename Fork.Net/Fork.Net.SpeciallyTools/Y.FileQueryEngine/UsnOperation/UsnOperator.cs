@@ -145,6 +145,7 @@ namespace Y.FileQueryEngine.UsnOperation
         }
         public void GetEntries(long usn, GetEntriesHandler handler, int count)
         {
+            bool usnjump = usn > 0;
             List<UsnEntry> result = new List<UsnEntry>();
             UsnErrorCode usnErrorCode = this.QueryUSNJournal();
             if (usnErrorCode == UsnErrorCode.SUCCESS)
@@ -176,7 +177,9 @@ namespace Y.FileQueryEngine.UsnOperation
                     while (outBytesCount > 60)
                     {
                         var usnRecord = new USN_RECORD_V2(ptrUsnRecord);
-                        result.Add(new UsnEntry(usnRecord));
+
+                        if (usnjump) usnjump = false; else result.Add(new UsnEntry(usnRecord));
+
                         ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + usnRecord.RecordLength);
                         outBytesCount -= usnRecord.RecordLength;
 

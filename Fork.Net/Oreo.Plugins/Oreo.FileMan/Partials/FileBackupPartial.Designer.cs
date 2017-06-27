@@ -31,7 +31,7 @@
             this.DgvPath = new System.Windows.Forms.DataGridView();
             this.DgvPathName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvPathSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BtAddFolder = new System.Windows.Forms.Button();
+            this.BtAddPath = new System.Windows.Forms.Button();
             this.DgvFile = new System.Windows.Forms.DataGridView();
             this.DgvFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFilePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,7 +41,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.BtDelFolder = new System.Windows.Forms.Button();
+            this.BtDelPath = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFile)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +49,7 @@
             // DgvPath
             // 
             this.DgvPath.AllowUserToAddRows = false;
+            this.DgvPath.AllowUserToDeleteRows = false;
             this.DgvPath.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvPath.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DgvPathName,
@@ -60,6 +61,7 @@
             this.DgvPath.RowTemplate.Height = 23;
             this.DgvPath.Size = new System.Drawing.Size(214, 249);
             this.DgvPath.TabIndex = 0;
+            this.DgvPath.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPath_CellDoubleClick);
             // 
             // DgvPathName
             // 
@@ -67,27 +69,30 @@
             this.DgvPathName.HeaderText = "文件夹";
             this.DgvPathName.Name = "DgvPathName";
             this.DgvPathName.ReadOnly = true;
+            this.DgvPathName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // DgvPathSize
             // 
             this.DgvPathSize.HeaderText = "大小";
             this.DgvPathSize.Name = "DgvPathSize";
             this.DgvPathSize.ReadOnly = true;
+            this.DgvPathSize.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.DgvPathSize.Width = 60;
             // 
-            // BtAddFolder
+            // BtAddPath
             // 
-            this.BtAddFolder.Location = new System.Drawing.Point(7, 6);
-            this.BtAddFolder.Name = "BtAddFolder";
-            this.BtAddFolder.Size = new System.Drawing.Size(75, 23);
-            this.BtAddFolder.TabIndex = 1;
-            this.BtAddFolder.Text = "添加目录";
-            this.BtAddFolder.UseVisualStyleBackColor = true;
-            this.BtAddFolder.Click += new System.EventHandler(this.BtAddFolder_Click);
+            this.BtAddPath.Location = new System.Drawing.Point(7, 6);
+            this.BtAddPath.Name = "BtAddPath";
+            this.BtAddPath.Size = new System.Drawing.Size(75, 23);
+            this.BtAddPath.TabIndex = 1;
+            this.BtAddPath.Text = "添加目录";
+            this.BtAddPath.UseVisualStyleBackColor = true;
+            this.BtAddPath.Click += new System.EventHandler(this.BtAddPath_Click);
             // 
             // DgvFile
             // 
             this.DgvFile.AllowUserToAddRows = false;
+            this.DgvFile.AllowUserToDeleteRows = false;
             this.DgvFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvFile.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DgvFileName,
@@ -108,30 +113,35 @@
             this.DgvFileName.HeaderText = "文件名";
             this.DgvFileName.Name = "DgvFileName";
             this.DgvFileName.ReadOnly = true;
+            this.DgvFileName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // DgvFilePath
             // 
             this.DgvFilePath.HeaderText = "路径";
             this.DgvFilePath.Name = "DgvFilePath";
             this.DgvFilePath.ReadOnly = true;
+            this.DgvFilePath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // DgvFileSize
             // 
             this.DgvFileSize.HeaderText = "大小";
             this.DgvFileSize.Name = "DgvFileSize";
             this.DgvFileSize.ReadOnly = true;
+            this.DgvFileSize.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // DgvFileVersionHistory
             // 
             this.DgvFileVersionHistory.HeaderText = "历史版本";
             this.DgvFileVersionHistory.Name = "DgvFileVersionHistory";
             this.DgvFileVersionHistory.ReadOnly = true;
+            this.DgvFileVersionHistory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // DgvFileLastBackupTime
             // 
             this.DgvFileLastBackupTime.HeaderText = "最后备份时间";
             this.DgvFileLastBackupTime.Name = "DgvFileLastBackupTime";
             this.DgvFileLastBackupTime.ReadOnly = true;
+            this.DgvFileLastBackupTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // button1
             // 
@@ -158,29 +168,30 @@
             this.button2.Text = "设置备份目录";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // BtDelFolder
+            // BtDelPath
             // 
-            this.BtDelFolder.Location = new System.Drawing.Point(99, 6);
-            this.BtDelFolder.Name = "BtDelFolder";
-            this.BtDelFolder.Size = new System.Drawing.Size(75, 23);
-            this.BtDelFolder.TabIndex = 6;
-            this.BtDelFolder.Text = "删除目录";
-            this.BtDelFolder.UseVisualStyleBackColor = true;
-            this.BtDelFolder.Click += new System.EventHandler(this.BtDelFolder_Click);
+            this.BtDelPath.Location = new System.Drawing.Point(99, 6);
+            this.BtDelPath.Name = "BtDelPath";
+            this.BtDelPath.Size = new System.Drawing.Size(75, 23);
+            this.BtDelPath.TabIndex = 6;
+            this.BtDelPath.Text = "删除目录";
+            this.BtDelPath.UseVisualStyleBackColor = true;
+            this.BtDelPath.Click += new System.EventHandler(this.BtDelPath_Click);
             // 
             // FileBackupPartial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BtDelFolder);
+            this.Controls.Add(this.BtDelPath);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.DgvFile);
-            this.Controls.Add(this.BtAddFolder);
+            this.Controls.Add(this.BtAddPath);
             this.Controls.Add(this.DgvPath);
             this.Name = "FileBackupPartial";
             this.Size = new System.Drawing.Size(646, 326);
+            this.Load += new System.EventHandler(this.FileBackupPartial_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvPath)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFile)).EndInit();
             this.ResumeLayout(false);
@@ -191,18 +202,18 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DgvPath;
-        private System.Windows.Forms.Button BtAddFolder;
+        private System.Windows.Forms.Button BtAddPath;
+        private System.Windows.Forms.DataGridView DgvFile;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtDelPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvPathName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvPathSize;
-        private System.Windows.Forms.DataGridView DgvFile;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFilePath;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileVersionHistory;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileLastBackupTime;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button BtDelFolder;
     }
 }

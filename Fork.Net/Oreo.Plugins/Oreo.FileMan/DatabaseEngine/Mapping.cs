@@ -24,4 +24,18 @@ namespace Oreo.FileMan.DatabaseEngine
             this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
         }
     }
+    public class BackupPathsMap : EntityTypeConfiguration<BackupPaths>
+    {
+        public BackupPathsMap()
+        {
+            this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
+        }
+    }
+    public class BackupFilesMap : EntityTypeConfiguration<BackupFiles>
+    {
+        public BackupFilesMap()
+        {
+            this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
+        }
+    }
 }
