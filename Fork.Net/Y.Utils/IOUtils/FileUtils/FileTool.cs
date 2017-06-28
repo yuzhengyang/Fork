@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.3.29 - 2017.6.20
+//      date:       2017.3.29 - 2017.6.29
 //      desc:       文件操作工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -21,6 +21,16 @@ namespace Y.Utils.IOUtils.FileUtils
     /// </summary>
     public class FileTool
     {
+        /// <summary>
+        /// 判断字符串是文件路径
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static bool IsFile(string s)
+        {
+            if (File.Exists(s)) return true;
+            return false;
+        }
         /// <summary>
         /// 获取文件（单层目录）
         /// </summary>

@@ -14,6 +14,7 @@ using Y.Utils.DataUtils.UnitConvertUtils;
 using Y.Utils.IOUtils.PathUtils;
 using Oreo.FileMan.Models;
 using Oreo.FileMan.DatabaseEngine;
+using Y.Utils.IOUtils.FileManUtils;
 
 namespace Oreo.FileMan.Partials
 {
@@ -29,7 +30,7 @@ namespace Oreo.FileMan.Partials
         }
         private void FileBackupPartial_Load(object sender, EventArgs e)
         {
-            Watcher. += WatcherChangedEvent;
+            Watcher.eventHandler += WatcherChangedEvent;
             //读取要备份的文件路径列表
             Task.Factory.StartNew(() =>
             {
@@ -53,36 +54,39 @@ namespace Oreo.FileMan.Partials
             dialog.Description = "请选择要备份的文件夹";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string selPath = dialog.SelectedPath;//格式化选中的目录
-                List<BackupPaths> clashPath = Paths.Where(x => x.Path.Contains(selPath + "\\") || (selPath + "\\").Contains(x.Path)).ToList();//查询冲突项
+                string selPath = dialog.SelectedPath;//获取选中的目录 
+                string path = DirTool.Combine(selPath, "\\");//格式化选中的目录
+                string name = Path.GetFileName(selPath);//获取目录名称
+
+                List<BackupPaths> clashPath = Paths.Where(x => x.Path.Contains(path) || path.Contains(x.Path)).ToList();//查询冲突项
                 if (ListTool.HasElements(clashPath))
                 {
                     string cp = "";
                     clashPath.ForEach(x => cp += (x.Path + "；"));
                     //存在重合目录
-                    MessageBox.Show(string.Format("您当前选择路径：{0}，与之前选择的目录：{1}，存在嵌套包含关系，请先从备份目录中移除，然后重新添加。", selPath, cp));
+                    MessageBox.Show(string.Format("您当前选择路径：{0}，与之前选择的目录：{1}，存在嵌套包含关系，请先从备份目录中移除，然后重新添加。", path, cp));
                 }
                 else
                 {
                     long size = 0;//目录下的文件大小
                     int row = DgvPath.Rows.Count;//当前目录列表总数
-                    BackupPaths bp = new BackupPaths() { Name = Path.GetFileName(selPath), Path = selPath + "\\", };
+                    BackupPaths bp = new BackupPaths() { Name = name, Path = path, };
                     Paths.Add(bp);//添加到列表
-                    UIDgvPathAdd(Path.GetFileName(selPath));//添加到列表UI
+                    UIDgvPathAdd(name);//添加到列表UI
 
                     UIEnableButton(false);
                     Task.Factory.StartNew(() =>
                     {
                         using (var db = new Muse())
                         {
-                            if (!db.Do<BackupPaths>().Any(x => x.Path == (selPath + "\\"))) db.Add(bp);//添加到数据库
-                            List<string> files = FileTool.GetAllFile(selPath);
+                            if (!db.Do<BackupPaths>().Any(x => x.Path == path)) db.Add(bp);//添加到数据库
+                            List<string> files = FileTool.GetAllFile(path);
                             if (ListTool.HasElements(files))
                             {
                                 foreach (var f in files)
                                 {
                                     size += FileTool.Size(f);
-                                    UIDgvPathUpdate(row, Path.GetFileName(selPath), ByteConvertTool.Fmt(size));//更新目录文件大小
+                                    UIDgvPathUpdate(row, name, ByteConvertTool.Fmt(size));//更新目录文件大小
                                 }
                             }
                         }
@@ -139,9 +143,13 @@ namespace Oreo.FileMan.Partials
         {
             Watcher.Stop();
         }
-        private void WatcherChangedEvent(object sender, FileSystemEventArgs e)
+        private void WatcherChangedEvent(object sender, FileWatcherEventArgs e)
         {
-            UIDgvFileAdd(e.Name, e.FullPath, "Changed");
+            if (Paths.Any(x => e.FullPath.Contains(x.Path)))
+            {
+                //FileTool.IsFile(e.FullPath)
+                UIDgvFileAdd(e.Name, e.FullPath, e.ChangeType.ToString());
+            }
         }
 
         /// <summary>
