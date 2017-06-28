@@ -19,21 +19,26 @@ namespace Oreo.FileMan.Partials
 {
     public partial class FileBackupPartial : UserControl
     {
-        List<BackupPaths> BackupPath = new List<BackupPaths>();
+        FileWatcher Watcher = new FileWatcher();
+        string FileManBackup = @"D:\FileManBackup\";
+        List<BackupPaths> Paths = new List<BackupPaths>();
+
         public FileBackupPartial()
         {
             InitializeComponent();
         }
         private void FileBackupPartial_Load(object sender, EventArgs e)
         {
+            Watcher. += WatcherChangedEvent;
+            //读取要备份的文件路径列表
             Task.Factory.StartNew(() =>
             {
                 using (var db = new Muse())
                 {
-                    BackupPath = db.GetAll<BackupPaths>(null, false).ToList();
-                    if (ListTool.HasElements(BackupPath))
+                    Paths = db.GetAll<BackupPaths>(null, false).ToList();
+                    if (ListTool.HasElements(Paths))
                     {
-                        foreach (var b in BackupPath)
+                        foreach (var b in Paths)
                         {
                             UIDgvPathAdd(b.Name);
                         }
@@ -41,7 +46,7 @@ namespace Oreo.FileMan.Partials
                 }
             });
         }
-        #region 目录操作
+
         private void BtAddPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -49,7 +54,7 @@ namespace Oreo.FileMan.Partials
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 string selPath = dialog.SelectedPath;//格式化选中的目录
-                List<BackupPaths> clashPath = BackupPath.Where(x => x.Path.Contains(selPath + "\\") || (selPath + "\\").Contains(x.Path)).ToList();//查询冲突项
+                List<BackupPaths> clashPath = Paths.Where(x => x.Path.Contains(selPath + "\\") || (selPath + "\\").Contains(x.Path)).ToList();//查询冲突项
                 if (ListTool.HasElements(clashPath))
                 {
                     string cp = "";
@@ -62,7 +67,7 @@ namespace Oreo.FileMan.Partials
                     long size = 0;//目录下的文件大小
                     int row = DgvPath.Rows.Count;//当前目录列表总数
                     BackupPaths bp = new BackupPaths() { Name = Path.GetFileName(selPath), Path = selPath + "\\", };
-                    BackupPath.Add(bp);//添加到列表
+                    Paths.Add(bp);//添加到列表
                     UIDgvPathAdd(Path.GetFileName(selPath));//添加到列表UI
 
                     UIEnableButton(false);
@@ -91,14 +96,14 @@ namespace Oreo.FileMan.Partials
             if (DgvPath.CurrentRow != null)
             {
                 int row = DgvPath.CurrentRow.Index;
-                string path = BackupPath[row].Path;
+                string path = Paths[row].Path;
                 if (row >= 0)
                 {
                     using (var db = new Muse())
                     {
                         BackupPaths bp = db.Get<BackupPaths>(x => x.Path == path, null);
                         if (bp != null) db.Del(bp, true);
-                        BackupPath.RemoveAt(row);
+                        Paths.RemoveAt(row);
                     }
                     UIDgvPathDel(row);
                 }
@@ -108,7 +113,7 @@ namespace Oreo.FileMan.Partials
         {
             if (e.RowIndex >= 0)
             {
-                string path = BackupPath[e.RowIndex].Path;
+                string path = Paths[e.RowIndex].Path;
                 UIEnableButton(false);
                 DgvFile.Rows.Clear();
                 Task.Factory.StartNew(() =>
@@ -125,7 +130,19 @@ namespace Oreo.FileMan.Partials
                 });
             }
         }
-        #endregion
+
+        private void BtStart_Click(object sender, EventArgs e)
+        {
+            Watcher.Start();
+        }
+        private void BtStop_Click(object sender, EventArgs e)
+        {
+            Watcher.Stop();
+        }
+        private void WatcherChangedEvent(object sender, FileSystemEventArgs e)
+        {
+            UIDgvFileAdd(e.Name, e.FullPath, "Changed");
+        }
 
         /// <summary>
         /// 停用或启用所有按钮
@@ -138,7 +155,6 @@ namespace Oreo.FileMan.Partials
                 BtAddPath.Enabled = enable;
             }));
         }
-        #region 路径列表UI操作
         /// <summary>
         /// 添加到路径列表
         /// </summary>
@@ -173,8 +189,12 @@ namespace Oreo.FileMan.Partials
                 DgvPath.Rows[row].SetValues(new object[] { Path.GetFileName(path), size });
             }));
         }
-        #endregion
-        #region 文件列表UI操作
+        /// <summary>
+        /// 添加文件到列表
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="path"></param>
+        /// <param name="size"></param>
         void UIDgvFileAdd(string file, string path, string size)
         {
             BeginInvoke(new Action(() =>
@@ -182,8 +202,5 @@ namespace Oreo.FileMan.Partials
                 DgvFile.Rows.Add(new object[] { file, path, size });
             }));
         }
-        #endregion
-
-
     }
 }

@@ -8,7 +8,7 @@ using Y.Utils.IOUtils.FileUtils;
 
 namespace Oreo.FileMan.Models
 {
-    public class Files
+    public class UsnFiles
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,5 +17,6 @@ namespace Oreo.FileMan.Models
         public string ParentNumber { get; set; }
         public string Drive { get; set; }
         public long Usn { get; set; }
+        public string  CreateTime { get; set; }
     }
 }

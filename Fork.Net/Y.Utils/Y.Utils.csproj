@@ -55,9 +55,11 @@
     <Compile Include="DelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProgressEventArgs.cs" />
     <Compile Include="IOUtils\DriveUtils\DriveTool.cs" />
+    <Compile Include="IOUtils\FileManUtils\FileWatcherEventArgs.cs" />
     <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageModel.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />
+    <Compile Include="IOUtils\FileManUtils\FileWatcher.cs" />
     <Compile Include="IOUtils\TxtUtils\ConfigTool.cs" />
     <Compile Include="NetUtils\NetManUtils\NetConnectionInfo.cs" />
     <Compile Include="NetUtils\NetManUtils\NetFlowService.cs" />
@@ -147,6 +149,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

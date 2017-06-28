@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace Oreo.FileMan.DatabaseEngine
 {
-    public class FilesMap : EntityTypeConfiguration<Files>
+    public class UsnFilesMap : EntityTypeConfiguration<UsnFiles>
     {
-        public FilesMap()
+        public UsnFilesMap()
         {
             this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
         }
     }
-    public class DrivesMap : EntityTypeConfiguration<Drives>
+    public class UsnDrivesMap : EntityTypeConfiguration<UsnDrives>
     {
-        public DrivesMap()
+        public UsnDrivesMap()
         {
             this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
         }
@@ -34,6 +34,13 @@ namespace Oreo.FileMan.DatabaseEngine
     public class BackupFilesMap : EntityTypeConfiguration<BackupFiles>
     {
         public BackupFilesMap()
+        {
+            this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
+        }
+    }
+    public class WatcherFilesMap : EntityTypeConfiguration<WatcherFiles>
+    {
+        public WatcherFilesMap()
         {
             this.Property(o => o.Id).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
         }

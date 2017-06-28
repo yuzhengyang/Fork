@@ -23,13 +23,7 @@ namespace Oreo.FaultLog.Partials
 
         private void FaultLogInputPartial_Load(object sender, EventArgs e)
         {
-            TbIp.Text = "";
-            TbPhone.Text = "";
-            TbAddress.Text = "";
-            TbProblem.Text = "";
-            TbSolution.Text = "";
-            TbPostscript.Text = "";
-            DgvData.Rows.Clear();
+            UICleanInput();
 
             Task.Factory.StartNew(() =>
             {
@@ -106,13 +100,7 @@ namespace Oreo.FaultLog.Partials
                 CreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
             };
 
-            TbIp.Text = "";
-            TbPhone.Text = "";
-            TbAddress.Text = "";
-            TbProblem.Text = "";
-            TbSolution.Text = "";
-            TbPostscript.Text = "";
-            DgvData.Rows.Clear();
+            UICleanInput();
 
             Task.Factory.StartNew(() =>
             {
@@ -217,7 +205,21 @@ namespace Oreo.FaultLog.Partials
                 BtAdd.Enabled = enable;
             }));
         }
-
+        void UICleanInput()
+        {
+            BeginInvoke(new Action(() =>
+            {
+                TbIp.Text = "";
+                TbPhone.Text = "";
+                TbAddress.Text = "";
+                TbProblem.Text = "";
+                TbSolution.Text = "";
+                TbPostscript.Text = "";
+                CbIsFinish.Checked = false;
+                CbSystem.Text = "";
+                DgvData.Rows.Clear();
+            }));
+        }
 
     }
 }

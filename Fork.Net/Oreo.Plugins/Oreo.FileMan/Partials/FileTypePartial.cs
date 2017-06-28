@@ -15,6 +15,7 @@ using Y.Utils.IOUtils.DriveUtils;
 using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
 using Y.Utils.AppUtils;
+using Y.Utils.DataUtils.DateTimeUtils;
 
 namespace Oreo.FileMan.Partials
 {
@@ -75,15 +76,15 @@ namespace Oreo.FileMan.Partials
                         {
                             //检测磁盘是否格式化，如果格式化则清空USN记录
                             DateTime dt1 = DriveTool.GetLastFormatTime(drive.Name);
-                            var ds = db.Get<Drives>(x => x.Name == drive.Name, null);
+                            var ds = db.Get<UsnDrives>(x => x.Name == drive.Name, null);
                             if ((ds == null) || (ds != null && ds.LastFormatTime != dt1.ToString()))
                             {
-                                var fs = db.Gets<Files>(x => x.Drive == drive.Name, null);
+                                var fs = db.Gets<UsnFiles>(x => x.Drive == drive.Name, null);
                                 if (ListTool.HasElements(fs)) db.Dels(fs);
 
                                 if (ds == null)
                                 {
-                                    db.Add(new Drives() { Name = drive.Name, LastFormatTime = dt1.ToString() });
+                                    db.Add(new UsnDrives() { Name = drive.Name, LastFormatTime = dt1.ToString() });
                                 }
                                 else
                                 {
@@ -93,9 +94,9 @@ namespace Oreo.FileMan.Partials
                             }
 
                             //查询上次读取到的位置并读取USN
-                            if (db.Any<Files>(x => x.Drive == drive.Name, null))
+                            if (db.Any<UsnFiles>(x => x.Drive == drive.Name, null))
                             {
-                                long currentUsn = db.Do<Files>().Where(x => x.Drive == drive.Name).Max(x => x.Usn);
+                                long currentUsn = db.Do<UsnFiles>().Where(x => x.Drive == drive.Name).Max(x => x.Usn);
                                 usnList = usnList.Where(x => x.Usn > currentUsn).ToList();
                             }
                             //将记录存储到数据库中
@@ -121,7 +122,7 @@ namespace Oreo.FileMan.Partials
                                     //    temp = new List<Files>();
                                     //    Thread.Sleep(100);
                                     //}
-                                    db.Add(new Files()
+                                    db.Add(new UsnFiles()
                                     {
                                         Name = usnList[i].FileName,
                                         IsFolder = usnList[i].IsFolder,
@@ -148,20 +149,20 @@ namespace Oreo.FileMan.Partials
                     NewFileCount = 0;
                     if (drive.Name.Contains("C")) continue;//测试时跳过C盘
                     //if (drive.Name.Contains("D")) continue;//测试时跳过D盘
-                    if (drive.Name.Contains("F")) continue;//测试时跳过F盘
+                    //if (drive.Name.Contains("F")) continue;//测试时跳过F盘
 
                     using (var db = new Muse())
                     {
                         //检测磁盘是否格式化，如果格式化则清空USN记录
                         DateTime dt1 = DriveTool.GetLastFormatTime(drive.Name);
-                        var ds = db.Get<Drives>(x => x.Name == drive.Name, null);
+                        var ds = db.Get<UsnDrives>(x => x.Name == drive.Name, null);
                         if ((ds == null) || (ds != null && ds.LastFormatTime != dt1.ToString()))
                         {
-                            var deleteSql = db.Context.Database.ExecuteSqlCommand("DELETE FROM files WHERE drive = @p0;", drive.Name);
+                            var deleteSql = db.Context.Database.ExecuteSqlCommand("DELETE FROM usnfiles WHERE drive = @p0;", drive.Name);
 
                             if (ds == null)
                             {
-                                db.Add(new Drives() { Name = drive.Name, LastFormatTime = dt1.ToString() });
+                                db.Add(new UsnDrives() { Name = drive.Name, LastFormatTime = dt1.ToString() });
                             }
                             else
                             {
@@ -172,9 +173,9 @@ namespace Oreo.FileMan.Partials
 
                         //查询上次读取到的位置
                         long currentUsn = 0;
-                        if (db.Any<Files>(x => x.Drive == drive.Name, null))
+                        if (db.Any<UsnFiles>(x => x.Drive == drive.Name, null))
                         {
-                            currentUsn = db.Do<Files>().Where(x => x.Drive == drive.Name).Max(x => x.Usn);
+                            currentUsn = db.Do<UsnFiles>().Where(x => x.Drive == drive.Name).Max(x => x.Usn);
                         }
                         //从上次Usn记录开始读取
                         var usnOperator = new UsnOperator(drive);
@@ -185,12 +186,12 @@ namespace Oreo.FileMan.Partials
         }
         private void GetFileToDatabaseEvent(DriveInfo drive, List<UsnEntry> data)
         {
-            List<Files> temp = new List<Files>();
+            List<UsnFiles> temp = new List<UsnFiles>();
             if (ListTool.HasElements(data))
             {
                 for (int i = 0; i < data.Count; i++)
                 {
-                    temp.Add(new Files()
+                    temp.Add(new UsnFiles()
                     {
                         Name = data[i].FileName,
                         IsFolder = data[i].IsFolder,
@@ -198,6 +199,7 @@ namespace Oreo.FileMan.Partials
                         ParentNumber = data[i].ParentFileReferenceNumber.ToString(),
                         Drive = drive.Name,
                         Usn = data[i].Usn,
+                        CreateTime = DateTimeConvert.ToStandardString(DateTime.Now)
                     });
                     NewFileCount++;
                 }
@@ -254,7 +256,7 @@ namespace Oreo.FileMan.Partials
                     {
                         foreach (var t in type)
                         {
-                            var count = db.Do<Files>().Count(x => !x.IsFolder && x.Name.EndsWith(t));
+                            var count = db.Do<UsnFiles>().Count(x => !x.IsFolder && x.Name.EndsWith(t));
                             result += count;
                             //foreach (var l in list)
                             //{

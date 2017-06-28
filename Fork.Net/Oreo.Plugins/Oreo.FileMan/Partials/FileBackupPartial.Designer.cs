@@ -38,10 +38,9 @@
             this.DgvFileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFileVersionHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFileLastBackupTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtStart = new System.Windows.Forms.Button();
             this.BtDelPath = new System.Windows.Forms.Button();
+            this.BtStop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFile)).BeginInit();
             this.SuspendLayout();
@@ -143,30 +142,15 @@
             this.DgvFileLastBackupTime.ReadOnly = true;
             this.DgvFileLastBackupTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // button1
+            // BtStart
             // 
-            this.button1.Location = new System.Drawing.Point(562, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(356, 297);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(281, 21);
-            this.textBox1.TabIndex = 4;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(252, 295);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "设置备份目录";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtStart.Location = new System.Drawing.Point(481, 6);
+            this.BtStart.Name = "BtStart";
+            this.BtStart.Size = new System.Drawing.Size(75, 23);
+            this.BtStart.TabIndex = 3;
+            this.BtStart.Text = "启动";
+            this.BtStart.UseVisualStyleBackColor = true;
+            this.BtStart.Click += new System.EventHandler(this.BtStart_Click);
             // 
             // BtDelPath
             // 
@@ -178,14 +162,23 @@
             this.BtDelPath.UseVisualStyleBackColor = true;
             this.BtDelPath.Click += new System.EventHandler(this.BtDelPath_Click);
             // 
+            // BtStop
+            // 
+            this.BtStop.Location = new System.Drawing.Point(562, 6);
+            this.BtStop.Name = "BtStop";
+            this.BtStop.Size = new System.Drawing.Size(75, 23);
+            this.BtStop.TabIndex = 7;
+            this.BtStop.Text = "停止";
+            this.BtStop.UseVisualStyleBackColor = true;
+            this.BtStop.Click += new System.EventHandler(this.BtStop_Click);
+            // 
             // FileBackupPartial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtStop);
             this.Controls.Add(this.BtDelPath);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtStart);
             this.Controls.Add(this.DgvFile);
             this.Controls.Add(this.BtAddPath);
             this.Controls.Add(this.DgvPath);
@@ -195,7 +188,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DgvPath)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFile)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -204,9 +196,7 @@
         private System.Windows.Forms.DataGridView DgvPath;
         private System.Windows.Forms.Button BtAddPath;
         private System.Windows.Forms.DataGridView DgvFile;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtStart;
         private System.Windows.Forms.Button BtDelPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvPathName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvPathSize;
@@ -215,5 +205,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileVersionHistory;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileLastBackupTime;
+        private System.Windows.Forms.Button BtStop;
     }
 }
