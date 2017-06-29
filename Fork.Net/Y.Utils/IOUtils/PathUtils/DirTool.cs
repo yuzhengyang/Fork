@@ -174,5 +174,25 @@ namespace Y.Utils.IOUtils.PathUtils
 
             return -1;//不存在包含关系
         }
+        public static string GetPathName(string s)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(s))
+            {
+                char[] c = s.ToArray();
+                for (int i = c.Length - 1; i >= 0; i--)
+                {
+                    if (c[i] != '\\') { sb.Append(c[i]); }
+                    else { if (sb.Length > 0) break; }
+                }
+                char[] mirror = sb.ToString().ToArray();
+                sb.Clear();
+                for (int i = mirror.Length - 1; i >= 0; i--)
+                {
+                    sb.Append(mirror[i]);
+                }
+            }
+            return sb.ToString();
+        }
     }
 }

@@ -199,7 +199,7 @@ namespace Oreo.FileMan.Partials
                         ParentNumber = data[i].ParentFileReferenceNumber.ToString(),
                         Drive = drive.Name,
                         Usn = data[i].Usn,
-                        CreateTime = DateTimeConvert.ToStandardString(DateTime.Now)
+                        CreateTime = DateTimeConvert.StandardString(DateTime.Now)
                     });
                     NewFileCount++;
                 }

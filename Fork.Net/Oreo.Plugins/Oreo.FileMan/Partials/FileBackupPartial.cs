@@ -24,7 +24,7 @@ namespace Oreo.FileMan.Partials
     public partial class FileBackupPartial : UserControl
     {
         FileWatcher Watcher = new FileWatcher();
-        string FileManBackup = @"G:\FileManBackup\";
+        string FileManBackup = @"F:\FileManBackup\";
         List<BackupPaths> Paths = new List<BackupPaths>();
         List<string> BackupFiles = new List<string>();
         DispatcherTimer Timer = new DispatcherTimer();
@@ -50,7 +50,7 @@ namespace Oreo.FileMan.Partials
                     {
                         foreach (var b in Paths)
                         {
-                            UIDgvPathAdd(b.Name);
+                            UIDgvPathAdd(DirTool.GetPathName(b.Path));
                         }
                     }
                 }
@@ -65,7 +65,7 @@ namespace Oreo.FileMan.Partials
             {
                 string selPath = dialog.SelectedPath;//获取选中的目录 
                 string path = DirTool.Combine(selPath, "\\");//格式化选中的目录
-                string name = Path.GetFileName(selPath);//获取目录名称
+                string name = DirTool.GetPathName(selPath);//获取目录名称
 
                 List<BackupPaths> clashPath = Paths.Where(x => x.Path.Contains(path) || path.Contains(x.Path)).ToList();//查询冲突项
                 if (ListTool.HasElements(clashPath))
@@ -77,25 +77,30 @@ namespace Oreo.FileMan.Partials
                 }
                 else
                 {
-                    long size = 0;//目录下的文件大小
-                    int row = DgvPath.Rows.Count;//当前目录列表总数
-                    BackupPaths bp = new BackupPaths() { Name = name, Path = path, };
-                    Paths.Add(bp);//添加到列表
-                    UIDgvPathAdd(name);//添加到列表UI
-
                     UIEnableButton(false);
                     Task.Factory.StartNew(() =>
                     {
                         using (var db = new Muse())
                         {
-                            if (!db.Do<BackupPaths>().Any(x => x.Path == path)) db.Add(bp);//添加到数据库
-                            List<string> files = FileTool.GetAllFile(path);
-                            if (ListTool.HasElements(files))
+                            if (!db.Do<BackupPaths>().Any(x => x.Path == path))
                             {
-                                foreach (var f in files)
+                                int row = DgvPath.Rows.Count;//当前目录列表总数 
+                                BackupPaths bp = new BackupPaths() { Path = path, Alias = Guid.NewGuid().ToString() };
+                                if (db.Add(bp) > 0)
                                 {
-                                    size += FileTool.Size(f);
-                                    UIDgvPathUpdate(row, name, ByteConvertTool.Fmt(size));//更新目录文件大小
+                                    Paths.Add(bp);//添加到列表
+                                    UIDgvPathAdd(name);//添加到列表UI
+
+                                    long size = 0;//目录下的文件大小
+                                    List<string> files = FileTool.GetAllFile(path);
+                                    if (ListTool.HasElements(files))
+                                    {
+                                        foreach (var f in files)
+                                        {
+                                            size += FileTool.Size(f);
+                                            UIDgvPathUpdate(row, name, ByteConvertTool.Fmt(size));//更新目录文件大小
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -171,9 +176,9 @@ namespace Oreo.FileMan.Partials
             {
                 while (!IsDisposed)
                 {
-                    if (Watcher.IsStart)
+                    if (ListTool.HasElements(BackupFiles))
                     {
-                        //获取要备份的文件列表
+                        //获取要备份的文件列表并复制样本
                         List<string> temp;
                         lock (BackupFiles)
                         {
@@ -181,28 +186,34 @@ namespace Oreo.FileMan.Partials
                             BackupFiles = new List<string>();
                         }
 
-                        if (ListTool.HasElements(temp))
+                        foreach (var t in temp)
                         {
-                            foreach (var t in temp)
+                            if (File.Exists(t))
                             {
-                                if (File.Exists(t) && DirTool.Create(FileManBackup))
+                                string filepath = DirTool.GetFilePath(t);
+                                BackupPaths path = Paths.FirstOrDefault(x => filepath.Contains(x.Path));
+                                if (path != null)
                                 {
+                                    string pathname = path.Path;
+                                    string pathalias = path.Alias;
+                                    string pathfile = t.Substring(pathname.Length, t.Length - pathname.Length);
+                                    string fileext = DateTimeConvert.CompactString(DateTime.Now);
+                                    string fullpath = DirTool.Combine(FileManBackup, pathalias, pathfile + "." + fileext);
                                     try
                                     {
-                                        string filename = Guid.NewGuid().ToString();
-                                        File.Copy(t, DirTool.Combine(FileManBackup, filename), true);
-                                        using (var db = new Muse())
+                                        if (DirTool.Create(DirTool.GetFilePath(fullpath)))
                                         {
-                                            db.Add(new BackupFiles()
+                                            File.Copy(t, fullpath, true);
+                                            using (var db = new Muse())
                                             {
-                                                Name = Path.GetFileName(t),
-                                                Path = Path.GetDirectoryName(t),
-                                                FullPath = t,
-                                                BackupName = filename,
-                                                BackupFullPath = DirTool.Combine(FileManBackup, filename),
-                                                Size = FileTool.Size(t),
-                                                UpdateTime = DateTimeConvert.ToStandardString(DateTime.Now),
-                                            });
+                                                db.Add(new BackupFiles()
+                                                {
+                                                    FullPath = t,
+                                                    BackupFullPath = fullpath,
+                                                    Size = FileTool.Size(t),
+                                                    UpdateTime = DateTimeConvert.StandardString(DateTime.Now),
+                                                });
+                                            }
                                         }
                                     }
                                     catch (Exception e) { }

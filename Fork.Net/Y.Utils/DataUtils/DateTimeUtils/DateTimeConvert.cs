@@ -23,9 +23,18 @@ namespace Y.Utils.DataUtils.DateTimeUtils
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public static string ToStandardString(DateTime dt)
+        public static string StandardString(DateTime dt)
         {
             return dt.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+        /// <summary>
+        /// yyyyMMddHHmmss
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string CompactString(DateTime dt)
+        {
+            return dt.ToString("yyyyMMddHHmmss");
         }
     }
 }
