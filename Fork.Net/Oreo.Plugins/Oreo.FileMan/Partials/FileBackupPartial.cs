@@ -15,14 +15,20 @@ using Y.Utils.IOUtils.PathUtils;
 using Oreo.FileMan.Models;
 using Oreo.FileMan.DatabaseEngine;
 using Y.Utils.IOUtils.FileManUtils;
+using System.Windows.Threading;
+using System.Threading;
+using Y.Utils.DataUtils.DateTimeUtils;
 
 namespace Oreo.FileMan.Partials
 {
     public partial class FileBackupPartial : UserControl
     {
         FileWatcher Watcher = new FileWatcher();
-        string FileManBackup = @"D:\FileManBackup\";
+        string FileManBackup = @"G:\FileManBackup\";
         List<BackupPaths> Paths = new List<BackupPaths>();
+        List<string> BackupFiles = new List<string>();
+        DispatcherTimer Timer = new DispatcherTimer();
+        int BACK_UP_INTERVAL = 5 * 1000;
 
         public FileBackupPartial()
         {
@@ -31,6 +37,9 @@ namespace Oreo.FileMan.Partials
         private void FileBackupPartial_Load(object sender, EventArgs e)
         {
             Watcher.eventHandler += WatcherChangedEvent;
+            Watcher.Start();
+            BackupFileTask();
+
             //读取要备份的文件路径列表
             Task.Factory.StartNew(() =>
             {
@@ -147,9 +156,63 @@ namespace Oreo.FileMan.Partials
         {
             if (Paths.Any(x => e.FullPath.Contains(x.Path)))
             {
-                //FileTool.IsFile(e.FullPath)
-                UIDgvFileAdd(e.Name, e.FullPath, e.ChangeType.ToString());
+                //变动的是文件且文件存在
+                if (FileTool.IsFile(e.FullPath))
+                {
+                    //添加到备份列表
+                    if (!BackupFiles.Contains(e.FullPath)) BackupFiles.Add(e.FullPath);
+                    UIDgvFileAdd(e.Name, e.FullPath, e.ChangeType.ToString());
+                }
             }
+        }
+        private void BackupFileTask()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                while (!IsDisposed)
+                {
+                    if (Watcher.IsStart)
+                    {
+                        //获取要备份的文件列表
+                        List<string> temp;
+                        lock (BackupFiles)
+                        {
+                            temp = BackupFiles;
+                            BackupFiles = new List<string>();
+                        }
+
+                        if (ListTool.HasElements(temp))
+                        {
+                            foreach (var t in temp)
+                            {
+                                if (File.Exists(t) && DirTool.Create(FileManBackup))
+                                {
+                                    try
+                                    {
+                                        string filename = Guid.NewGuid().ToString();
+                                        File.Copy(t, DirTool.Combine(FileManBackup, filename), true);
+                                        using (var db = new Muse())
+                                        {
+                                            db.Add(new BackupFiles()
+                                            {
+                                                Name = Path.GetFileName(t),
+                                                Path = Path.GetDirectoryName(t),
+                                                FullPath = t,
+                                                BackupName = filename,
+                                                BackupFullPath = DirTool.Combine(FileManBackup, filename),
+                                                Size = FileTool.Size(t),
+                                                UpdateTime = DateTimeConvert.ToStandardString(DateTime.Now),
+                                            });
+                                        }
+                                    }
+                                    catch (Exception e) { }
+                                }
+                            }
+                        }
+                    }
+                    Thread.Sleep(BACK_UP_INTERVAL);
+                }
+            });
         }
 
         /// <summary>

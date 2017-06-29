@@ -18,7 +18,7 @@ namespace Y.Utils.IOUtils.FileManUtils
     /// <summary>
     /// 文件更改通知
     /// </summary>
-    public class FileWatcher
+    public class FileWatcher : IDisposable
     {
         /// <summary>
         /// 接受文件监控信息的事件委托
@@ -31,7 +31,7 @@ namespace Y.Utils.IOUtils.FileManUtils
         /// </summary>
         public FileWatcherEventHandler eventHandler;
 
-        private bool _IsStart = false;
+        private bool _IsStart = false, _IsDisposed = false;
         private List<FileSystemWatcher> Watchers = new List<FileSystemWatcher>();
 
         /// <summary>
@@ -54,6 +54,7 @@ namespace Y.Utils.IOUtils.FileManUtils
                     fsw.Changed += ChangedEvent;//更改文件或目录
                     fsw.Deleted += DeletedEvent;//删除文件或目录
                     fsw.Renamed += RenamedEvent;//重命名文件或目录
+                    fsw.Error += ErrorEvent;
                     fsw.IncludeSubdirectories = true;
                     fsw.NotifyFilter = (NotifyFilters)383;
                     Watchers.Add(fsw);
@@ -65,12 +66,15 @@ namespace Y.Utils.IOUtils.FileManUtils
         /// </summary>
         public void Start()
         {
-            _IsStart = true;
-            if (ListTool.HasElements(Watchers))
+            if (!_IsDisposed)
             {
-                foreach (var w in Watchers)
+                _IsStart = true;
+                if (ListTool.HasElements(Watchers))
                 {
-                    w.EnableRaisingEvents = true;
+                    foreach (var w in Watchers)
+                    {
+                        w.EnableRaisingEvents = true;
+                    }
                 }
             }
         }
@@ -79,15 +83,19 @@ namespace Y.Utils.IOUtils.FileManUtils
         /// </summary>
         public void Stop()
         {
-            _IsStart = false;
-            if (ListTool.HasElements(Watchers))
+            if (!_IsDisposed)
             {
-                foreach (var w in Watchers)
+                _IsStart = false;
+                if (ListTool.HasElements(Watchers))
                 {
-                    w.EnableRaisingEvents = false;
+                    foreach (var w in Watchers)
+                    {
+                        w.EnableRaisingEvents = false;
+                    }
                 }
             }
         }
+
 
 
 
@@ -113,6 +121,26 @@ namespace Y.Utils.IOUtils.FileManUtils
         private void RenamedEvent(object sender, RenamedEventArgs e)
         {
             eventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), e.OldFullPath, e.OldName));
+        }
+        private void ErrorEvent(object sender, ErrorEventArgs e)
+        {
+        }
+
+        public void Dispose()
+        {
+            if (!_IsDisposed)
+            {
+                _IsStart = false;
+                _IsDisposed = true;
+                if (ListTool.HasElements(Watchers))
+                {
+                    foreach (var w in Watchers)
+                    {
+                        w.EnableRaisingEvents = false;
+                        w.Dispose();
+                    }
+                }
+            }
         }
     }
 }

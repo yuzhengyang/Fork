@@ -98,6 +98,8 @@ namespace Oreo.FaultLog.Partials
                 Postscript = TbPostscript.Text,
                 System = CbSystem.Text,
                 CreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                IsFinish = CbIsFinish.Checked,
+                FinishTime = CbIsFinish.Checked ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : "",
             };
 
             UICleanInput();
@@ -107,12 +109,6 @@ namespace Oreo.FaultLog.Partials
                 UIAddButton(false);
                 using (var db = new Muse())
                 {
-                    if (CbIsFinish.Checked)
-                    {
-                        fl.IsFinish = true;
-                        fl.FinishTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    }
-
                     db.Add(fl);
 
                     var fls = db.Do<FaultLogs>().SqlQuery("SELECT * FROM faultlogs WHERE createtime LIKE @p0", DateTime.Now.ToString("yyyy-MM-dd") + "%");

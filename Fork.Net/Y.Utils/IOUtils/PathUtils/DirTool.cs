@@ -21,10 +21,13 @@ namespace Y.Utils.IOUtils.PathUtils
     public class DirTool
     {
         /// <summary>
-        /// 创建文件目录
+        /// 创建文件目录（文件不存在则创建）
         /// </summary>
         /// <param name="path"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// 如果文件已存在，返回true
+        /// 如果文件不存在，则创建文件，成功返回true，失败返回false
+        /// </returns>
         public static bool Create(string path)
         {
             if (Directory.Exists(path))

@@ -55,12 +55,13 @@ namespace Oreo.FaultLog.Partials
                     fl.Problem = TbProblem.Text;
                     fl.Solution = TbSolution.Text;
                     fl.System = CbSystem.Text;
+                  
                     if (CbIsFinish.Checked && !fl.IsFinish)
                     {
                         fl.IsFinish = true;
                         fl.FinishTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     }
-                    else
+                    if (!CbIsFinish.Checked && fl.IsFinish)
                     {
                         fl.IsFinish = false;
                         fl.FinishTime = "";
