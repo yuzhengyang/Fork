@@ -38,29 +38,65 @@ namespace Y.Utils.IOUtils.FileManUtils
         /// 当前运行状态
         /// </summary>
         public bool IsStart { get { return _IsStart; } }
-        /// <summary>
-        /// 初始化文件监测
-        /// </summary>
+
+
         public FileWatcher()
         {
-            DriveInfo[] drives = DriveInfo.GetDrives().Where(x => x.IsReady && (x.DriveType == DriveType.Fixed || x.DriveType == DriveType.Removable)).ToArray();
-            if (ListTool.HasElements(drives))
+            //DriveInfo[] drives = DriveInfo.GetDrives().Where(x => x.IsReady && (x.DriveType == DriveType.Fixed || x.DriveType == DriveType.Removable)).ToArray();
+            //if (ListTool.HasElements(drives))
+            //{
+            //    foreach (var d in drives)
+            //    {
+            //        //if (d.Name.Contains("C")) continue;
+            //        FileSystemWatcher fsw = new FileSystemWatcher(d.Name);
+            //        fsw.Created += CreatedEvent;//创建文件或目录
+            //        fsw.Changed += ChangedEvent;//更改文件或目录
+            //        fsw.Deleted += DeletedEvent;//删除文件或目录
+            //        fsw.Renamed += RenamedEvent;//重命名文件或目录
+            //        fsw.Error += ErrorEvent;
+            //        fsw.IncludeSubdirectories = true;
+            //        fsw.NotifyFilter = (NotifyFilters)383;
+            //        Watchers.Add(fsw);
+            //    }
+            //}
+        }
+        public FileWatcher(string[] paths)
+        {
+            if (ListTool.HasElements(paths))
             {
-                foreach (var d in drives)
+                foreach (var p in paths)
                 {
-                    //if (d.Name.Contains("C")) continue;
-                    FileSystemWatcher fsw = new FileSystemWatcher(d.Name);
-                    fsw.Created += CreatedEvent;//创建文件或目录
-                    fsw.Changed += ChangedEvent;//更改文件或目录
-                    fsw.Deleted += DeletedEvent;//删除文件或目录
-                    fsw.Renamed += RenamedEvent;//重命名文件或目录
-                    fsw.Error += ErrorEvent;
-                    fsw.IncludeSubdirectories = true;
-                    fsw.NotifyFilter = (NotifyFilters)383;
-                    Watchers.Add(fsw);
+                    Add(p);
                 }
             }
         }
+
+        public void Add(string path, bool start = false)
+        {
+            FileSystemWatcher fsw = new FileSystemWatcher(path);
+            fsw.Created += CreatedEvent;//创建文件或目录
+            fsw.Changed += ChangedEvent;//更改文件或目录
+            fsw.Deleted += DeletedEvent;//删除文件或目录
+            fsw.Renamed += RenamedEvent;//重命名文件或目录
+            fsw.Error += ErrorEvent;
+            fsw.IncludeSubdirectories = true;
+            fsw.NotifyFilter = (NotifyFilters)383;
+            if (start) fsw.EnableRaisingEvents = start;
+            Watchers.Add(fsw);
+        }
+        public void Remove(string path)
+        {
+            for (int i = Watchers.Count - 1; i >= 0; i--)
+            {
+                if (Watchers[i].Path == path)
+                {
+                    Watchers[i].EnableRaisingEvents = false;
+                    Watchers[i].Dispose();
+                    Watchers.RemoveAt(i);
+                }
+            }
+        }
+
         /// <summary>
         /// 启动文件监测
         /// </summary>

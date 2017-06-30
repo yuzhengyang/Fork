@@ -24,7 +24,7 @@ namespace Oreo.FileMan.Partials
     public partial class FileBackupPartial : UserControl
     {
         FileWatcher Watcher = new FileWatcher();
-        string FileManBackup = @"F:\FileManBackup\";
+        string FileManBackup = @"G:\FileManBackup\";
         List<BackupPaths> Paths = new List<BackupPaths>();
         List<string> BackupFiles = new List<string>();
         DispatcherTimer Timer = new DispatcherTimer();
@@ -37,7 +37,6 @@ namespace Oreo.FileMan.Partials
         private void FileBackupPartial_Load(object sender, EventArgs e)
         {
             Watcher.eventHandler += WatcherChangedEvent;
-            Watcher.Start();
             BackupFileTask();
 
             //读取要备份的文件路径列表
@@ -48,9 +47,10 @@ namespace Oreo.FileMan.Partials
                     Paths = db.GetAll<BackupPaths>(null, false).ToList();
                     if (ListTool.HasElements(Paths))
                     {
-                        foreach (var b in Paths)
+                        foreach (var p in Paths)
                         {
-                            UIDgvPathAdd(DirTool.GetPathName(b.Path));
+                            Watcher.Add(p.Path, true);
+                            UIDgvPathAdd(DirTool.GetPathName(p.Path));
                         }
                     }
                 }
@@ -89,6 +89,7 @@ namespace Oreo.FileMan.Partials
                                 if (db.Add(bp) > 0)
                                 {
                                     Paths.Add(bp);//添加到列表
+                                    Watcher.Add(bp.Path, true);//添加到监听
                                     UIDgvPathAdd(name);//添加到列表UI
 
                                     long size = 0;//目录下的文件大小
@@ -147,15 +148,6 @@ namespace Oreo.FileMan.Partials
                     UIEnableButton(true);
                 });
             }
-        }
-
-        private void BtStart_Click(object sender, EventArgs e)
-        {
-            Watcher.Start();
-        }
-        private void BtStop_Click(object sender, EventArgs e)
-        {
-            Watcher.Stop();
         }
         private void WatcherChangedEvent(object sender, FileWatcherEventArgs e)
         {

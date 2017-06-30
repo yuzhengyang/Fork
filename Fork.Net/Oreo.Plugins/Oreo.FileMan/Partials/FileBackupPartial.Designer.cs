@@ -38,9 +38,7 @@
             this.DgvFileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFileVersionHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFileLastBackupTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BtStart = new System.Windows.Forms.Button();
             this.BtDelPath = new System.Windows.Forms.Button();
-            this.BtStop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFile)).BeginInit();
             this.SuspendLayout();
@@ -142,16 +140,6 @@
             this.DgvFileLastBackupTime.ReadOnly = true;
             this.DgvFileLastBackupTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // BtStart
-            // 
-            this.BtStart.Location = new System.Drawing.Point(481, 6);
-            this.BtStart.Name = "BtStart";
-            this.BtStart.Size = new System.Drawing.Size(75, 23);
-            this.BtStart.TabIndex = 3;
-            this.BtStart.Text = "启动";
-            this.BtStart.UseVisualStyleBackColor = true;
-            this.BtStart.Click += new System.EventHandler(this.BtStart_Click);
-            // 
             // BtDelPath
             // 
             this.BtDelPath.Location = new System.Drawing.Point(99, 6);
@@ -162,23 +150,11 @@
             this.BtDelPath.UseVisualStyleBackColor = true;
             this.BtDelPath.Click += new System.EventHandler(this.BtDelPath_Click);
             // 
-            // BtStop
-            // 
-            this.BtStop.Location = new System.Drawing.Point(562, 6);
-            this.BtStop.Name = "BtStop";
-            this.BtStop.Size = new System.Drawing.Size(75, 23);
-            this.BtStop.TabIndex = 7;
-            this.BtStop.Text = "停止";
-            this.BtStop.UseVisualStyleBackColor = true;
-            this.BtStop.Click += new System.EventHandler(this.BtStop_Click);
-            // 
             // FileBackupPartial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BtStop);
             this.Controls.Add(this.BtDelPath);
-            this.Controls.Add(this.BtStart);
             this.Controls.Add(this.DgvFile);
             this.Controls.Add(this.BtAddPath);
             this.Controls.Add(this.DgvPath);
@@ -196,7 +172,6 @@
         private System.Windows.Forms.DataGridView DgvPath;
         private System.Windows.Forms.Button BtAddPath;
         private System.Windows.Forms.DataGridView DgvFile;
-        private System.Windows.Forms.Button BtStart;
         private System.Windows.Forms.Button BtDelPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvPathName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvPathSize;
@@ -205,6 +180,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileVersionHistory;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgvFileLastBackupTime;
-        private System.Windows.Forms.Button BtStop;
     }
 }
