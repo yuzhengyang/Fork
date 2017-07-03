@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Y.Skin.YoForm.NoTitle;
 
 namespace Oreo.FileMan.Views
 {
-    public partial class SettingsForm : Form
+    public partial class SettingsForm : NoTitleForm
     {
         public SettingsForm()
         {

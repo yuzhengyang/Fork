@@ -1,9 +1,11 @@
-﻿using Oreo.FileMan.Views;
+﻿using Oreo.FileMan.Commons;
+using Oreo.FileMan.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Y.Utils.AppUtils;
 
 namespace Oreo.FileMan
 {
@@ -15,9 +17,13 @@ namespace Oreo.FileMan
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            if (AppUnique.IsUnique("Oreo.FileMan"))
+            {
+                R.Services.FBS.Start();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm());
+            }
         }
     }
 }

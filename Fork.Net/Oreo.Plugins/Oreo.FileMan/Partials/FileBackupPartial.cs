@@ -18,43 +18,25 @@ using Y.Utils.IOUtils.FileManUtils;
 using System.Windows.Threading;
 using System.Threading;
 using Y.Utils.DataUtils.DateTimeUtils;
+using Oreo.FileMan.Commons;
 
 namespace Oreo.FileMan.Partials
 {
     public partial class FileBackupPartial : UserControl
     {
-        FileWatcher Watcher = new FileWatcher();
-        string FileManBackup = @"G:\FileManBackup\";
-        List<BackupPaths> Paths = new List<BackupPaths>();
-        List<string> BackupFiles = new List<string>();
-        DispatcherTimer Timer = new DispatcherTimer();
-        int BACK_UP_INTERVAL = 5 * 1000;
-
         public FileBackupPartial()
         {
             InitializeComponent();
         }
         private void FileBackupPartial_Load(object sender, EventArgs e)
         {
-            Watcher.eventHandler += WatcherChangedEvent;
-            BackupFileTask();
-
-            //读取要备份的文件路径列表
-            Task.Factory.StartNew(() =>
+            if (ListTool.HasElements(R.Services.FBS.Paths))
             {
-                using (var db = new Muse())
+                foreach(var p in R.Services.FBS.Paths)
                 {
-                    Paths = db.GetAll<BackupPaths>(null, false).ToList();
-                    if (ListTool.HasElements(Paths))
-                    {
-                        foreach (var p in Paths)
-                        {
-                            Watcher.Add(p.Path, true);
-                            UIDgvPathAdd(DirTool.GetPathName(p.Path));
-                        }
-                    }
+                    UIDgvPathAdd(DirTool.GetPathName(p.Path));
                 }
-            });
+            } 
         }
 
         private void BtAddPath_Click(object sender, EventArgs e)
@@ -67,7 +49,7 @@ namespace Oreo.FileMan.Partials
                 string path = DirTool.Combine(selPath, "\\");//格式化选中的目录
                 string name = DirTool.GetPathName(selPath);//获取目录名称
 
-                List<BackupPaths> clashPath = Paths.Where(x => x.Path.Contains(path) || path.Contains(x.Path)).ToList();//查询冲突项
+                List<BackupPaths> clashPath = R.Services.FBS.Paths.Where(x => x.Path.Contains(path) || path.Contains(x.Path)).ToList();//查询冲突项
                 if (ListTool.HasElements(clashPath))
                 {
                     string cp = "";
@@ -88,8 +70,8 @@ namespace Oreo.FileMan.Partials
                                 BackupPaths bp = new BackupPaths() { Path = path, Alias = Guid.NewGuid().ToString() };
                                 if (db.Add(bp) > 0)
                                 {
-                                    Paths.Add(bp);//添加到列表
-                                    Watcher.Add(bp.Path, true);//添加到监听
+                                    R.Services.FBS.Paths.Add(bp);//添加到列表
+                                    R.Services.FBS.Watcher.AddPath(bp.Path);//添加到监听
                                     UIDgvPathAdd(name);//添加到列表UI
 
                                     long size = 0;//目录下的文件大小
@@ -115,14 +97,14 @@ namespace Oreo.FileMan.Partials
             if (DgvPath.CurrentRow != null)
             {
                 int row = DgvPath.CurrentRow.Index;
-                string path = Paths[row].Path;
+                string path = R.Services.FBS.Paths[row].Path;
                 if (row >= 0)
                 {
                     using (var db = new Muse())
                     {
                         BackupPaths bp = db.Get<BackupPaths>(x => x.Path == path, null);
                         if (bp != null) db.Del(bp, true);
-                        Paths.RemoveAt(row);
+                        R.Services.FBS.Paths.RemoveAt(row);
                     }
                     UIDgvPathDel(row);
                 }
@@ -132,7 +114,7 @@ namespace Oreo.FileMan.Partials
         {
             if (e.RowIndex >= 0)
             {
-                string path = Paths[e.RowIndex].Path;
+                string path = R.Services.FBS.Paths[e.RowIndex].Path;
                 UIEnableButton(false);
                 DgvFile.Rows.Clear();
                 Task.Factory.StartNew(() =>
@@ -149,74 +131,7 @@ namespace Oreo.FileMan.Partials
                 });
             }
         }
-        private void WatcherChangedEvent(object sender, FileWatcherEventArgs e)
-        {
-            if (Paths.Any(x => e.FullPath.Contains(x.Path)))
-            {
-                //变动的是文件且文件存在
-                if (FileTool.IsFile(e.FullPath))
-                {
-                    //添加到备份列表
-                    if (!BackupFiles.Contains(e.FullPath)) BackupFiles.Add(e.FullPath);
-                    UIDgvFileAdd(e.Name, e.FullPath, e.ChangeType.ToString());
-                }
-            }
-        }
-        private void BackupFileTask()
-        {
-            Task.Factory.StartNew(() =>
-            {
-                while (!IsDisposed)
-                {
-                    if (ListTool.HasElements(BackupFiles))
-                    {
-                        //获取要备份的文件列表并复制样本
-                        List<string> temp;
-                        lock (BackupFiles)
-                        {
-                            temp = BackupFiles;
-                            BackupFiles = new List<string>();
-                        }
 
-                        foreach (var t in temp)
-                        {
-                            if (File.Exists(t))
-                            {
-                                string filepath = DirTool.GetFilePath(t);
-                                BackupPaths path = Paths.FirstOrDefault(x => filepath.Contains(x.Path));
-                                if (path != null)
-                                {
-                                    string pathname = path.Path;
-                                    string pathalias = path.Alias;
-                                    string pathfile = t.Substring(pathname.Length, t.Length - pathname.Length);
-                                    string fileext = DateTimeConvert.CompactString(DateTime.Now);
-                                    string fullpath = DirTool.Combine(FileManBackup, pathalias, pathfile + "." + fileext);
-                                    try
-                                    {
-                                        if (DirTool.Create(DirTool.GetFilePath(fullpath)))
-                                        {
-                                            File.Copy(t, fullpath, true);
-                                            using (var db = new Muse())
-                                            {
-                                                db.Add(new BackupFiles()
-                                                {
-                                                    FullPath = t,
-                                                    BackupFullPath = fullpath,
-                                                    Size = FileTool.Size(t),
-                                                    UpdateTime = DateTimeConvert.StandardString(DateTime.Now),
-                                                });
-                                            }
-                                        }
-                                    }
-                                    catch (Exception e) { }
-                                }
-                            }
-                        }
-                    }
-                    Thread.Sleep(BACK_UP_INTERVAL);
-                }
-            });
-        }
 
         /// <summary>
         /// 停用或启用所有按钮

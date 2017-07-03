@@ -56,7 +56,7 @@
             this.DgvPath.ReadOnly = true;
             this.DgvPath.RowHeadersVisible = false;
             this.DgvPath.RowTemplate.Height = 23;
-            this.DgvPath.Size = new System.Drawing.Size(214, 249);
+            this.DgvPath.Size = new System.Drawing.Size(214, 275);
             this.DgvPath.TabIndex = 0;
             this.DgvPath.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPath_CellDoubleClick);
             // 
@@ -102,7 +102,7 @@
             this.DgvFile.ReadOnly = true;
             this.DgvFile.RowHeadersVisible = false;
             this.DgvFile.RowTemplate.Height = 23;
-            this.DgvFile.Size = new System.Drawing.Size(385, 249);
+            this.DgvFile.Size = new System.Drawing.Size(385, 275);
             this.DgvFile.TabIndex = 2;
             // 
             // DgvFileName

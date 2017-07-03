@@ -7,10 +7,13 @@
 //************************************************************************
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Y.Utils.DataUtils.Collections;
 
 namespace Y.Utils.IOUtils.FileManUtils
@@ -18,7 +21,7 @@ namespace Y.Utils.IOUtils.FileManUtils
     /// <summary>
     /// 文件更改通知
     /// </summary>
-    public class FileWatcher : IDisposable
+    public class FileWatcher
     {
         /// <summary>
         /// 接受文件监控信息的事件委托
@@ -31,47 +34,113 @@ namespace Y.Utils.IOUtils.FileManUtils
         /// </summary>
         public FileWatcherEventHandler eventHandler;
 
-        private bool _IsStart = false, _IsDisposed = false;
-        private List<FileSystemWatcher> Watchers = new List<FileSystemWatcher>();
+        private int Interval = 10 * 1000;
+        private bool _IsWatching = false;
+        private ConcurrentDictionary<string, FileSystemWatcher> Watchers = new ConcurrentDictionary<string, FileSystemWatcher>();
 
         /// <summary>
-        /// 当前运行状态
+        /// 文件更改监控已启动
         /// </summary>
-        public bool IsStart { get { return _IsStart; } }
+        public bool IsWatching { get { return _IsWatching; } }
 
-
-        public FileWatcher()
-        {
-            //DriveInfo[] drives = DriveInfo.GetDrives().Where(x => x.IsReady && (x.DriveType == DriveType.Fixed || x.DriveType == DriveType.Removable)).ToArray();
-            //if (ListTool.HasElements(drives))
-            //{
-            //    foreach (var d in drives)
-            //    {
-            //        //if (d.Name.Contains("C")) continue;
-            //        FileSystemWatcher fsw = new FileSystemWatcher(d.Name);
-            //        fsw.Created += CreatedEvent;//创建文件或目录
-            //        fsw.Changed += ChangedEvent;//更改文件或目录
-            //        fsw.Deleted += DeletedEvent;//删除文件或目录
-            //        fsw.Renamed += RenamedEvent;//重命名文件或目录
-            //        fsw.Error += ErrorEvent;
-            //        fsw.IncludeSubdirectories = true;
-            //        fsw.NotifyFilter = (NotifyFilters)383;
-            //        Watchers.Add(fsw);
-            //    }
-            //}
-        }
+        /// <summary>
+        /// 创建文件监控类
+        /// </summary>
+        /// <param name="paths"></param>
         public FileWatcher(string[] paths)
         {
             if (ListTool.HasElements(paths))
             {
                 foreach (var p in paths)
                 {
-                    Add(p);
+                    if (Directory.Exists(p) && !Watchers.ContainsKey(p))
+                        Watchers.TryAdd(p, null);
                 }
             }
         }
 
-        public void Add(string path, bool start = false)
+        public bool AddPath(string path)
+        {
+            if (Directory.Exists(path) && !Watchers.ContainsKey(path))
+                return Watchers.TryAdd(path, null);
+            return false;
+        }
+        public bool DelPath(string path)
+        {
+            if (Watchers.ContainsKey(path))
+            {
+                FileSystemWatcher temp;
+                if (Watchers.TryRemove(path, out temp) && temp != null)
+                {
+                    temp.EnableRaisingEvents = false;
+                    temp.Dispose();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 启动文件监测
+        /// </summary>
+        public void Start()
+        {
+            if (!_IsWatching)
+            {
+                _IsWatching = true;
+                Task.Factory.StartNew(() =>
+                {
+                    while (_IsWatching)
+                    {
+                        foreach (var item in Watchers)
+                        {
+                            if (item.Value == null)
+                            {
+                                if (Directory.Exists(item.Key))
+                                {
+                                    Watchers.TryUpdate(item.Key, CreateWatcher(item.Key), null);
+                                }
+                            }
+                            else
+                            {
+                                if (!Directory.Exists(item.Key))
+                                {
+                                    item.Value.EnableRaisingEvents = false;
+                                    item.Value.Dispose();
+                                    Watchers.TryUpdate(item.Key, null, item.Value);
+                                }
+                            }
+                        }
+
+                        Thread.Sleep(Interval);
+                    }
+                    _IsWatching = false;
+                });
+            }
+        }
+        /// <summary>
+        /// 停止文件监测
+        /// </summary>
+        public void Stop()
+        {
+            _IsWatching = false;
+            foreach (var item in Watchers.Keys)
+            {
+                if (Watchers.ContainsKey(item))
+                {
+                    if (Watchers[item] != null) Watchers[item].EnableRaisingEvents = false;
+
+                    FileSystemWatcher temp;
+                    if (Watchers.TryRemove(item, out temp) && temp != null)
+                    {
+                        temp.EnableRaisingEvents = false;
+                        temp.Dispose();
+                    }
+                }
+            }
+        }
+
+        private FileSystemWatcher CreateWatcher(string path)
         {
             FileSystemWatcher fsw = new FileSystemWatcher(path);
             fsw.Created += CreatedEvent;//创建文件或目录
@@ -81,67 +150,9 @@ namespace Y.Utils.IOUtils.FileManUtils
             fsw.Error += ErrorEvent;
             fsw.IncludeSubdirectories = true;
             fsw.NotifyFilter = (NotifyFilters)383;
-            if (start) fsw.EnableRaisingEvents = start;
-            Watchers.Add(fsw);
+            fsw.EnableRaisingEvents = true;
+            return fsw;
         }
-        public void Remove(string path)
-        {
-            for (int i = Watchers.Count - 1; i >= 0; i--)
-            {
-                if (Watchers[i].Path == path)
-                {
-                    Watchers[i].EnableRaisingEvents = false;
-                    Watchers[i].Dispose();
-                    Watchers.RemoveAt(i);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 启动文件监测
-        /// </summary>
-        public void Start()
-        {
-            if (!_IsDisposed)
-            {
-                _IsStart = true;
-                if (ListTool.HasElements(Watchers))
-                {
-                    foreach (var w in Watchers)
-                    {
-                        w.EnableRaisingEvents = true;
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// 停止文件监测
-        /// </summary>
-        public void Stop()
-        {
-            if (!_IsDisposed)
-            {
-                _IsStart = false;
-                if (ListTool.HasElements(Watchers))
-                {
-                    foreach (var w in Watchers)
-                    {
-                        w.EnableRaisingEvents = false;
-                    }
-                }
-            }
-        }
-
-
-
-
-        private void DriveMonitor()
-        {
-            //监测磁盘的插入拔出
-
-        }
-
-
         private void CreatedEvent(object sender, FileSystemEventArgs e)
         {
             eventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), null, null));
@@ -159,24 +170,6 @@ namespace Y.Utils.IOUtils.FileManUtils
             eventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), e.OldFullPath, e.OldName));
         }
         private void ErrorEvent(object sender, ErrorEventArgs e)
-        {
-        }
-
-        public void Dispose()
-        {
-            if (!_IsDisposed)
-            {
-                _IsStart = false;
-                _IsDisposed = true;
-                if (ListTool.HasElements(Watchers))
-                {
-                    foreach (var w in Watchers)
-                    {
-                        w.EnableRaisingEvents = false;
-                        w.Dispose();
-                    }
-                }
-            }
-        }
+        { }
     }
 }
