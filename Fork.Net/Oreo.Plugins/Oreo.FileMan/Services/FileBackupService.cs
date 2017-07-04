@@ -34,8 +34,12 @@ namespace Oreo.FileMan.Services
                 Watcher.eventHandler += WatcherChangedEvent;
                 Watcher.Start();//启动文件变动监听
 
-                Task.Factory.StartNew(() => { ReadBackupPaths(); });//读取备份文件夹列表
-                Task.Factory.StartNew(() => { BackupFileTask(); });//开始定时备份文件任务
+                Task.Factory.StartNew(() =>
+                {
+                    ReadBackupPaths();//读取备份文件夹列表
+                    //常规检查备份
+                    BackupFileTask();//开始定时备份任务
+                });
             }
         }
         public void Stop()
@@ -113,6 +117,16 @@ namespace Oreo.FileMan.Services
                     {
                         Watcher.AddPath(p.Path);
                     }
+                }
+            }
+        }
+        public void DefaultBackupFileTask()
+        {
+            if (ListTool.HasElements(Paths))
+            {
+                foreach (var p in Paths)
+                {
+
                 }
             }
         }
