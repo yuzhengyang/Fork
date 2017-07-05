@@ -143,16 +143,15 @@ namespace Y.FileQueryEngine.UsnOperation
 
             return result;
         }
-        public void GetEntries(long usn, GetEntriesHandler handler, int count)
+        public void GetEntries(long usn, ulong fileNumber, GetEntriesHandler handler, int count)
         {
-            bool usnjump = usn > 0;
             List<UsnEntry> result = new List<UsnEntry>();
             UsnErrorCode usnErrorCode = this.QueryUSNJournal();
             if (usnErrorCode == UsnErrorCode.SUCCESS)
             {
                 MFT_ENUM_DATA mftEnumData = new MFT_ENUM_DATA();
-                mftEnumData.StartFileReferenceNumber = 0;
-                mftEnumData.LowUsn = usn;
+                mftEnumData.StartFileReferenceNumber = fileNumber;
+                mftEnumData.LowUsn = 0;
                 mftEnumData.HighUsn = this.ntfsUsnJournalData.NextUsn;
                 int sizeMftEnumData = Marshal.SizeOf(mftEnumData);
                 IntPtr ptrMftEnumData = GetHeapGlobalPtr(sizeMftEnumData);
@@ -171,16 +170,20 @@ namespace Y.FileQueryEngine.UsnOperation
                     out outBytesCount,
                     IntPtr.Zero))
                 {
-
-                    IntPtr ptrUsnRecord = new IntPtr(ptrData.ToInt32() + sizeof(Int64));
+                    long purvalue = ptrData.ToInt64() + sizeof(long);
+                    IntPtr ptrUsnRecord = new IntPtr(purvalue);
 
                     while (outBytesCount > 60)
                     {
                         var usnRecord = new USN_RECORD_V2(ptrUsnRecord);
 
-                        if (usnjump) usnjump = false; else result.Add(new UsnEntry(usnRecord));
+                        UsnEntry rec = new UsnEntry(usnRecord);
+                        if (rec.FileReferenceNumber > fileNumber || rec.Usn > usn)
+                        {
+                            result.Add(rec);
+                        }
 
-                        ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + usnRecord.RecordLength);
+                        ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt64() + usnRecord.RecordLength);
                         outBytesCount -= usnRecord.RecordLength;
 
                         if (result.Count >= count)

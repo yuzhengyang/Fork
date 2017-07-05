@@ -32,11 +32,11 @@ namespace Oreo.FileMan.Partials
         {
             if (ListTool.HasElements(R.Services.FBS.Paths))
             {
-                foreach(var p in R.Services.FBS.Paths)
+                foreach (var p in R.Services.FBS.Paths)
                 {
                     UIDgvPathAdd(DirTool.GetPathName(p.Path));
                 }
-            } 
+            }
         }
 
         private void BtAddPath_Click(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace Oreo.FileMan.Partials
                                 if (db.Add(bp) > 0)
                                 {
                                     R.Services.FBS.Paths.Add(bp);//添加到列表
-                                    R.Services.FBS.Watcher.AddPath(bp.Path);//添加到监听
+                                    R.Services.FBS.AddToWatcherPath(bp.Path);//添加到监听
                                     UIDgvPathAdd(name);//添加到列表UI
 
                                     long size = 0;//目录下的文件大小

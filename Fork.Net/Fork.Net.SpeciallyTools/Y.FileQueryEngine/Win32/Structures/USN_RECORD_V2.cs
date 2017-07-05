@@ -42,7 +42,7 @@ namespace Y.FileQueryEngine.Win32.Structures
             this.FileAttributes = (UInt32)Marshal.ReadInt32(usnRecordPtr, FA_OFFSET);
             this.FileNameLength = Marshal.ReadInt16(usnRecordPtr, FNL_OFFSET);
             this.FileNameOffset = Marshal.ReadInt16(usnRecordPtr, FN_OFFSET);
-            this.FileName = Marshal.PtrToStringUni(new IntPtr(usnRecordPtr.ToInt32() + this.FileNameOffset), this.FileNameLength / sizeof(char));
+            this.FileName = Marshal.PtrToStringUni(new IntPtr(usnRecordPtr.ToInt64() + this.FileNameOffset), this.FileNameLength / sizeof(char));
         }
     }
 }

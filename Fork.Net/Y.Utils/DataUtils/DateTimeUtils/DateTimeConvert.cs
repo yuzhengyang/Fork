@@ -36,5 +36,14 @@ namespace Y.Utils.DataUtils.DateTimeUtils
         {
             return dt.ToString("yyyyMMddHHmmss");
         }
+        /// <summary>
+        /// yyyy-MM-dd HH:mm:ss.fff
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string DetailString(DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+        }
     }
 }

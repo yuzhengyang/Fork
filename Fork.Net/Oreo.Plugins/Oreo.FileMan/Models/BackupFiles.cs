@@ -24,5 +24,9 @@ namespace Oreo.FileMan.Models
         /// 备份时间
         /// </summary>
         public string BackupTime { get; set; }
+        /// <summary>
+        /// 最后修改时间
+        /// </summary>
+        public string LastWriteTime { get; set; }
     }
 }

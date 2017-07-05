@@ -32,7 +32,7 @@ namespace Y.Utils.IOUtils.FileManUtils
         /// <summary>
         /// 获取文件监控信息
         /// </summary>
-        public FileWatcherEventHandler eventHandler;
+        public FileWatcherEventHandler EventHandler;
 
         private int Interval = 10 * 1000;
         private bool _IsWatching = false;
@@ -155,19 +155,19 @@ namespace Y.Utils.IOUtils.FileManUtils
         }
         private void CreatedEvent(object sender, FileSystemEventArgs e)
         {
-            eventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), null, null));
+            EventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), null, null));
         }
         private void ChangedEvent(object sender, FileSystemEventArgs e)
         {
-            eventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), null, null));
+            EventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), null, null));
         }
         private void DeletedEvent(object sender, FileSystemEventArgs e)
         {
-            eventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), null, null));
+            EventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), null, null));
         }
         private void RenamedEvent(object sender, RenamedEventArgs e)
         {
-            eventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), e.OldFullPath, e.OldName));
+            EventHandler?.Invoke(sender, new FileWatcherEventArgs(e.ChangeType, e.FullPath, Path.GetFileName(e.FullPath), e.OldFullPath, e.OldName));
         }
         private void ErrorEvent(object sender, ErrorEventArgs e)
         { }

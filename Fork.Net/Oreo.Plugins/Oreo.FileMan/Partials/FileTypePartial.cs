@@ -16,6 +16,7 @@ using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
 using Y.Utils.AppUtils;
 using Y.Utils.DataUtils.DateTimeUtils;
+using Y.Utils.DataUtils.StringUtils;
 
 namespace Oreo.FileMan.Partials
 {
@@ -61,93 +62,15 @@ namespace Oreo.FileMan.Partials
                 }
             });
         }
-        [Obsolete]
-        private void GetFileToDatabase()
-        {
-            var drives = FileQueryEngine.GetReadyNtfsDrives().OrderByDescending(x => x.Name);
-            if (ListTool.HasElements(drives))
-            {
-                foreach (var drive in drives)
-                {
-                    var usnList = FileQueryEngine.GetAllFiles(drive);
-                    if (ListTool.HasElements(usnList))
-                    {
-                        using (var db = new Muse())
-                        {
-                            //检测磁盘是否格式化，如果格式化则清空USN记录
-                            DateTime dt1 = DriveTool.GetLastFormatTime(drive.Name);
-                            var ds = db.Get<UsnDrives>(x => x.Name == drive.Name, null);
-                            if ((ds == null) || (ds != null && ds.LastFormatTime != dt1.ToString()))
-                            {
-                                var fs = db.Gets<UsnFiles>(x => x.Drive == drive.Name, null);
-                                if (ListTool.HasElements(fs)) db.Dels(fs);
-
-                                if (ds == null)
-                                {
-                                    db.Add(new UsnDrives() { Name = drive.Name, LastFormatTime = dt1.ToString() });
-                                }
-                                else
-                                {
-                                    ds.LastFormatTime = dt1.ToString();
-                                    db.Update(ds, true);
-                                }
-                            }
-
-                            //查询上次读取到的位置并读取USN
-                            if (db.Any<UsnFiles>(x => x.Drive == drive.Name, null))
-                            {
-                                long currentUsn = db.Do<UsnFiles>().Where(x => x.Drive == drive.Name).Max(x => x.Usn);
-                                usnList = usnList.Where(x => x.Usn > currentUsn).ToList();
-                            }
-                            //将记录存储到数据库中
-                            if (ListTool.HasElements(usnList))
-                            {
-                                //List<Files> temp = new List<Files>();
-                                for (int i = 0; i < usnList.Count; i++)
-                                {
-                                    UISetFileCount(i + 1, usnList.Count());
-
-                                    //temp.Add(new Files()
-                                    //{
-                                    //    Name = usnList[i].FileName,
-                                    //    IsFolder = usnList[i].IsFolder,
-                                    //    Number = usnList[i].FileReferenceNumber.ToString(),
-                                    //    ParentNumber = usnList[i].ParentFileReferenceNumber.ToString(),
-                                    //    Drive = drive.Name,
-                                    //    Usn = usnList[i].Usn,
-                                    //});
-                                    //if (temp.Count > 100)
-                                    //{
-                                    //    db.Adds(temp);
-                                    //    temp = new List<Files>();
-                                    //    Thread.Sleep(100);
-                                    //}
-                                    db.Add(new UsnFiles()
-                                    {
-                                        Name = usnList[i].FileName,
-                                        IsFolder = usnList[i].IsFolder,
-                                        Number = usnList[i].FileReferenceNumber.ToString(),
-                                        ParentNumber = usnList[i].ParentFileReferenceNumber.ToString(),
-                                        Drive = drive.Name,
-                                        Usn = usnList[i].Usn,
-                                    });
-                                }
-                                //db.Adds(temp);
-                            }
-                        }
-                    }
-                }
-            }
-        }
         private void GetFileToDatabase2()
         {
-            var drives = FileQueryEngine.GetReadyNtfsDrives().OrderByDescending(x => x.Name);
+            var drives = FileQueryEngine.GetReadyNtfsDrives().OrderBy(x => x.Name);
             if (ListTool.HasElements(drives))
             {
                 foreach (var drive in drives)
                 {
                     NewFileCount = 0;
-                    if (drive.Name.Contains("C")) continue;//测试时跳过C盘
+                    if (!drive.Name.Contains("E")) continue;//测试只读取D盘
                     //if (drive.Name.Contains("D")) continue;//测试时跳过D盘
                     //if (drive.Name.Contains("F")) continue;//测试时跳过F盘
 
@@ -172,14 +95,23 @@ namespace Oreo.FileMan.Partials
                         }
 
                         //查询上次读取到的位置
-                        long currentUsn = 0;
+                        ulong filenumber = 0;
+                        long usn = 0;
                         if (db.Any<UsnFiles>(x => x.Drive == drive.Name, null))
                         {
-                            currentUsn = db.Do<UsnFiles>().Where(x => x.Drive == drive.Name).Max(x => x.Usn);
+                            int lastId = db.Do<UsnFiles>().Where(x => x.Drive == drive.Name).Max(x => x.Id);
+                            UsnFiles lastRec = db.Get<UsnFiles>(x => x.Id == lastId, null);
+
+                            usn = lastRec.Usn;
+                            filenumber = NumberStringTool.ToUlong(lastRec.Number);
+
+                            //usn = db.Do<UsnFiles>().Where(x => x.Drive == drive.Name).Max(x => x.Usn);
+                            //string filenumberstr = db.Do<UsnFiles>().Where(x => x.Drive == drive.Name).Max(x => x.Number);
+                            //filenumber = NumberStringTool.ToUlong(filenumberstr);
                         }
-                        //从上次Usn记录开始读取
+                        //从上次FileNumber记录开始读取
                         var usnOperator = new UsnOperator(drive);
-                        usnOperator.GetEntries(currentUsn, GetFileToDatabaseEvent, 1000);
+                        usnOperator.GetEntries(usn, filenumber, GetFileToDatabaseEvent, 1000);
                     }
                 }
             }
@@ -195,11 +127,11 @@ namespace Oreo.FileMan.Partials
                     {
                         Name = data[i].FileName,
                         IsFolder = data[i].IsFolder,
-                        Number = data[i].FileReferenceNumber.ToString(),
-                        ParentNumber = data[i].ParentFileReferenceNumber.ToString(),
+                        Number = NumberStringTool.ToString(data[i].FileReferenceNumber),
+                        ParentNumber = NumberStringTool.ToString(data[i].ParentFileReferenceNumber),
                         Drive = drive.Name,
                         Usn = data[i].Usn,
-                        CreateTime = DateTimeConvert.StandardString(DateTime.Now)
+                        CreateTime = DateTimeConvert.DetailString(DateTime.Now)
                     });
                     NewFileCount++;
                 }
