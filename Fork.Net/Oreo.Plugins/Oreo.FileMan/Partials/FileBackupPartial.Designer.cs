@@ -39,15 +39,15 @@
             this.DgvPathSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtAddPath = new System.Windows.Forms.Button();
             this.DgvFile = new System.Windows.Forms.DataGridView();
-            this.BtDelPath = new System.Windows.Forms.Button();
-            this.TmReadPaths = new System.Windows.Forms.Timer(this.components);
-            this.LbStatus = new System.Windows.Forms.Label();
-            this.TmStatus = new System.Windows.Forms.Timer(this.components);
             this.DgvFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFileVersionHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFileLastBackupTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvFilePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtDelPath = new System.Windows.Forms.Button();
+            this.TmReadPaths = new System.Windows.Forms.Timer(this.components);
+            this.LbStatus = new System.Windows.Forms.Label();
+            this.TmStatus = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DgvPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFile)).BeginInit();
             this.SuspendLayout();
@@ -144,36 +144,7 @@
             this.DgvFile.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvFile.Size = new System.Drawing.Size(443, 291);
             this.DgvFile.TabIndex = 2;
-            // 
-            // BtDelPath
-            // 
-            this.BtDelPath.Location = new System.Drawing.Point(119, 3);
-            this.BtDelPath.Name = "BtDelPath";
-            this.BtDelPath.Size = new System.Drawing.Size(75, 23);
-            this.BtDelPath.TabIndex = 6;
-            this.BtDelPath.Text = "删除目录";
-            this.BtDelPath.UseVisualStyleBackColor = true;
-            this.BtDelPath.Click += new System.EventHandler(this.BtDelPath_Click);
-            // 
-            // TmReadPaths
-            // 
-            this.TmReadPaths.Interval = 1000;
-            this.TmReadPaths.Tick += new System.EventHandler(this.TmReadPaths_Tick);
-            // 
-            // LbStatus
-            // 
-            this.LbStatus.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LbStatus.Location = new System.Drawing.Point(365, 6);
-            this.LbStatus.Name = "LbStatus";
-            this.LbStatus.Size = new System.Drawing.Size(266, 16);
-            this.LbStatus.TabIndex = 7;
-            this.LbStatus.Text = "文件备份已开启：已备份 - 个文件";
-            this.LbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // TmStatus
-            // 
-            this.TmStatus.Interval = 1000;
-            this.TmStatus.Tick += new System.EventHandler(this.TmStatus_Tick);
+            this.DgvFile.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFile_CellDoubleClick);
             // 
             // DgvFileName
             // 
@@ -215,6 +186,36 @@
             this.DgvFilePath.Name = "DgvFilePath";
             this.DgvFilePath.ReadOnly = true;
             this.DgvFilePath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // BtDelPath
+            // 
+            this.BtDelPath.Location = new System.Drawing.Point(119, 3);
+            this.BtDelPath.Name = "BtDelPath";
+            this.BtDelPath.Size = new System.Drawing.Size(75, 23);
+            this.BtDelPath.TabIndex = 6;
+            this.BtDelPath.Text = "删除目录";
+            this.BtDelPath.UseVisualStyleBackColor = true;
+            this.BtDelPath.Click += new System.EventHandler(this.BtDelPath_Click);
+            // 
+            // TmReadPaths
+            // 
+            this.TmReadPaths.Interval = 1000;
+            this.TmReadPaths.Tick += new System.EventHandler(this.TmReadPaths_Tick);
+            // 
+            // LbStatus
+            // 
+            this.LbStatus.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LbStatus.Location = new System.Drawing.Point(365, 6);
+            this.LbStatus.Name = "LbStatus";
+            this.LbStatus.Size = new System.Drawing.Size(266, 16);
+            this.LbStatus.TabIndex = 7;
+            this.LbStatus.Text = "文件备份已开启：已备份 - 个文件";
+            this.LbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // TmStatus
+            // 
+            this.TmStatus.Interval = 1000;
+            this.TmStatus.Tick += new System.EventHandler(this.TmStatus_Tick);
             // 
             // FileBackupPartial
             // 

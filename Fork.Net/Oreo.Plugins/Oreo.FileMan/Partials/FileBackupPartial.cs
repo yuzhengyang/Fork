@@ -19,6 +19,7 @@ using System.Windows.Threading;
 using System.Threading;
 using Y.Utils.DataUtils.DateTimeUtils;
 using Oreo.FileMan.Commons;
+using Oreo.FileMan.Views;
 
 namespace Oreo.FileMan.Partials
 {
@@ -98,6 +99,14 @@ namespace Oreo.FileMan.Partials
         private void DgvPath_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             ShowFileDetails(e.RowIndex);
+        }
+        private void DgvFile_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                string filepath = DgvFile.Rows[e.RowIndex].Cells["DgvFilePath"].Value.ToString();
+                new FileRestoreForm(filepath).ShowDialog();
+            }
         }
         /// <summary>
         /// 读取备份文件目录
@@ -259,6 +268,7 @@ namespace Oreo.FileMan.Partials
                 DgvFile.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             }));
         }
+
         #endregion
 
 
