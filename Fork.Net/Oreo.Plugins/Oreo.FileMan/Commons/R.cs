@@ -37,5 +37,15 @@ namespace Oreo.FileMan.Commons
         {
             public static FileBackupService FBS = new FileBackupService();
         }
+
+        public static class Settings
+        {
+            public static class FileBackup
+            {
+                public static string FileManBackup = @"D:\temp\FileManBackup\";//文件备份目录
+                public static int BACK_UP_INTERVAL = 5 * 1000;//备份文件间隔
+                public static int BACK_UP_COUNT = 5;//备份文件版本个数
+            }
+        }
     }
 }

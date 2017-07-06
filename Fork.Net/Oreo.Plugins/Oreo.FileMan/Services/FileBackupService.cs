@@ -1,4 +1,5 @@
-﻿using Oreo.FileMan.DatabaseEngine;
+﻿using Oreo.FileMan.Commons;
+using Oreo.FileMan.DatabaseEngine;
 using Oreo.FileMan.Models;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,15 @@ namespace Oreo.FileMan.Services
 {
     public class FileBackupService
     {
-        private FileWatcher Watcher = new FileWatcher(null);
-        public string FileManBackup = @"D:\temp\FileManBackup\";
-        public List<BackupPaths> Paths = new List<BackupPaths>();
+        public List<BackupPaths> Paths = new List<BackupPaths>();//要备份的文件夹
+        private FileWatcher Watcher = new FileWatcher(null);//文件监视器
+        private List<string> BackupFiles = new List<string>();//当前要备份的文件任务
 
-        List<string> BackupFiles = new List<string>();
-        int BACK_UP_INTERVAL = 5 * 1000;
-        int BACK_UP_COUNT = 5;
-        bool IsStart = false;
+        public bool IsStart = false;
+        public bool StatusOfReadBackupPaths = false;
+
+        public int FileCount { get { return _FileCount; } }
+        private int _FileCount = 0;
 
         public void Start()
         {
@@ -36,7 +38,9 @@ namespace Oreo.FileMan.Services
 
                 Task.Factory.StartNew(() =>
                 {
+                    ReadBackupFileCount();//读取备份文件总数
                     ReadBackupPaths();//读取备份文件夹列表
+                    StatusOfReadBackupPaths = true;
 
                     if (ListTool.HasElements(Paths))
                     {
@@ -96,20 +100,32 @@ namespace Oreo.FileMan.Services
                                 string pathalias = path.Alias;
                                 string pathfile = t.Substring(pathname.Length, t.Length - pathname.Length);
                                 string fileext = DateTimeConvert.CompactString(DateTime.Now);
-                                string fullpath = DirTool.Combine(FileManBackup, pathalias, pathfile + "." + fileext);
+                                string fullpath = DirTool.Combine(R.Settings.FileBackup.FileManBackup, pathalias, pathfile + "." + fileext);
 
                                 //删除冗余
                                 DeleteExcess(t);
                                 //备份文件
                                 BackupFile(t, fullpath);
+                                _FileCount++;
                             }
                         }
                     }
                 }
-                Thread.Sleep(BACK_UP_INTERVAL);
+                Thread.Sleep(R.Settings.FileBackup.BACK_UP_INTERVAL);
             }
         }
 
+        /// <summary>
+        /// 读取备份文件总数
+        /// </summary>
+        private void ReadBackupFileCount()
+        {
+            //统计备份文件总数
+            using (var db = new Muse())
+            {
+                _FileCount = db.Do<BackupFiles>().Count();
+            }
+        }
         /// <summary>
         /// 读取备份文件夹列表
         /// </summary>
@@ -187,12 +203,12 @@ namespace Oreo.FileMan.Services
             using (var db = new Muse())
             {
                 int count = db.Do<BackupFiles>().Count(x => x.FullPath == path);
-                if (count >= BACK_UP_COUNT)
+                if (count >= R.Settings.FileBackup.BACK_UP_COUNT)
                 {
                     var fs = db.Gets<BackupFiles>(x => x.FullPath == path, null).OrderBy(x => x.Id).ToList();
                     if (ListTool.HasElements(fs))
                     {
-                        for (int i = 0; i <= count - BACK_UP_COUNT; i++)
+                        for (int i = 0; i <= count - R.Settings.FileBackup.BACK_UP_COUNT; i++)
                         {
                             try
                             {

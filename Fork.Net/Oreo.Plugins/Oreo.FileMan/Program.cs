@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Y.Utils.AppUtils;
+using Y.Utils.IOUtils.LogUtils;
 
 namespace Oreo.FileMan
 {
@@ -19,7 +20,12 @@ namespace Oreo.FileMan
         {
             if (AppUnique.IsUnique("Oreo.FileMan"))
             {
+                R.Log = new Log(true, "Oreo.FileMan.Log");
+                Log.AllocConsole();
+
                 R.Services.FBS.Start();
+
+                R.Log.i("App is Runing...");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new MainForm());

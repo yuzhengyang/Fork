@@ -30,15 +30,12 @@ namespace Oreo.FileMan.Partials
         }
         private void FileBackupPartial_Load(object sender, EventArgs e)
         {
-            if (ListTool.HasElements(R.Services.FBS.Paths))
-            {
-                foreach (var p in R.Services.FBS.Paths)
-                {
-                    UIDgvPathAdd(DirTool.GetPathName(p.Path));
-                }
-            }
+            UIEnableButton(false);
+            TmReadPaths.Enabled = true;
+            TmStatus.Enabled = true;
         }
 
+        #region Event
         private void BtAddPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -66,24 +63,12 @@ namespace Oreo.FileMan.Partials
                         {
                             if (!db.Do<BackupPaths>().Any(x => x.Path == path))
                             {
-                                int row = DgvPath.Rows.Count;//当前目录列表总数 
                                 BackupPaths bp = new BackupPaths() { Path = path, Alias = Guid.NewGuid().ToString() };
                                 if (db.Add(bp) > 0)
                                 {
                                     R.Services.FBS.Paths.Add(bp);//添加到列表
                                     R.Services.FBS.AddToWatcherPath(bp.Path);//添加到监听
-                                    UIDgvPathAdd(name);//添加到列表UI
-
-                                    long size = 0;//目录下的文件大小
-                                    List<string> files = FileTool.GetAllFile(path);
-                                    if (ListTool.HasElements(files))
-                                    {
-                                        foreach (var f in files)
-                                        {
-                                            size += FileTool.Size(f);
-                                            UIDgvPathUpdate(row, name, ByteConvertTool.Fmt(size));//更新目录文件大小
-                                        }
-                                    }
+                                    UIDgvPathAdd(name, null);//添加到列表UI
                                 }
                             }
                         }
@@ -110,29 +95,110 @@ namespace Oreo.FileMan.Partials
                 }
             }
         }
-        private void DgvPath_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvPath_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            ShowFileDetails(e.RowIndex);
+        }
+        /// <summary>
+        /// 读取备份文件目录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TmReadPaths_Tick(object sender, EventArgs e)
+        {
+            if (R.Services.FBS.StatusOfReadBackupPaths)
             {
-                string path = R.Services.FBS.Paths[e.RowIndex].Path;
-                UIEnableButton(false);
-                DgvFile.Rows.Clear();
+                TmReadPaths.Enabled = false;
                 Task.Factory.StartNew(() =>
                 {
-                    List<string> files = FileTool.GetAllFile(path);
-                    if (ListTool.HasElements(files))
+                    if (ListTool.HasElements(R.Services.FBS.Paths))
                     {
-                        foreach (var file in files)
+                        foreach (var p in R.Services.FBS.Paths)
                         {
-                            UIDgvFileAdd(Path.GetFileName(file), file, FileTool.SizeFormat(file));
+                            using (var db = new Muse())
+                            {
+                                long size = db.Do<BackupFiles>().Where(x => x.FullPath.Contains(p.Path)).Sum(x => x.Size);
+                                string name = DirTool.GetPathName(p.Path);//获取目录名称
+                                UIDgvPathAdd(name, ByteConvertTool.Fmt(size));//添加到列表UI
+                            }
                         }
                     }
                     UIEnableButton(true);
                 });
             }
         }
+        private void TmStatus_Tick(object sender, EventArgs e)
+        {
+            LbStatus.Text = R.Services.FBS.IsStart ?
+                string.Format("文件备份已开启：已备份 {0} 个文件", R.Services.FBS.FileCount) : "文件监控已关闭";
+            LbStatus.ForeColor = R.Services.FBS.IsStart ? Color.Green : Color.Red;
+        }
+        #endregion
 
+        #region Function
+        void ShowFileDetails(int row)
+        {
+            if (row >= 0)
+            {
+                string path = R.Services.FBS.Paths[row].Path;
+                UIEnableButton(false);
+                DgvFile.Rows.Clear();
+                Task.Factory.StartNew(() =>
+                {
+                    using (var db = new Muse())
+                    {
+                        db.Context.Database.Log = (sql) =>
+                        {
+                            R.Log.i(sql);
+                        };
+                        try
+                        {
+                            var result = db.Do<BackupFiles>().
+                                Where(x => x.FullPath.Contains(path)).
+                                GroupBy(x => new { x.FullPath }).
+                                Select(x => new
+                                {
+                                    Path = x.Max(o => o.FullPath),
+                                    BackPath = x.Max(o => o.BackupFullPath),
+                                    Count = x.Count(),
+                                    Time = x.Max(o => o.LastWriteTime),
+                                }).ToList();
 
+                            if (ListTool.HasElements(result))
+                            {
+                                foreach (var item in result)
+                                {
+                                    //BackupFiles bkfile = bkfiles.FirstOrDefault(x => x.FullPath == file);
+                                    //int versioncount = bkfiles.Count(x => x.FullPath == file);
+                                    //string lastwritetime = bkfile != null ? bkfile.LastWriteTime : "-";
+                                    string versiondesc = "第 " + item.Count + " 版";
+                                    UIDgvFileAdd(Path.GetFileName(item.Path), item.Path, FileTool.SizeFormat(item.BackPath), versiondesc, item.Time);
+                                }
+                            }
+                        }
+                        catch (Exception e) { }
+
+                        //List<BackupFiles> bkfiles = db.Gets<BackupFiles>(x => x.FullPath.Contains(path), null).ToList();
+                        //List<string> files = FileTool.GetAllFile(path);
+                        //if (ListTool.HasElements(files))
+                        //{
+                        //    foreach (var file in files)
+                        //    {
+                        //        BackupFiles bkfile = bkfiles.FirstOrDefault(x => x.FullPath == file);
+                        //        int versioncount = bkfiles.Count(x => x.FullPath == file);
+                        //        string versiondesc = "第 " + versioncount + " 版";
+                        //        string lastwritetime = bkfile != null ? bkfile.LastWriteTime : "-";
+                        //        UIDgvFileAdd(Path.GetFileName(file), file, FileTool.SizeFormat(file), versiondesc, lastwritetime);
+                        //    }
+                        //}
+                    }
+                    UIEnableButton(true);
+                });
+            }
+        }
+        #endregion
+
+        #region UI
         /// <summary>
         /// 停用或启用所有按钮
         /// </summary>
@@ -142,17 +208,18 @@ namespace Oreo.FileMan.Partials
             BeginInvoke(new Action(() =>
             {
                 BtAddPath.Enabled = enable;
+                BtDelPath.Enabled = enable;
             }));
         }
         /// <summary>
         /// 添加到路径列表
         /// </summary>
         /// <param name="path"></param>
-        void UIDgvPathAdd(string name)
+        void UIDgvPathAdd(string name, string size)
         {
             BeginInvoke(new Action(() =>
             {
-                DgvPath.Rows.Add(new object[] { name, "-" });
+                DgvPath.Rows.Add(new object[] { name, size ?? "-" });
             }));
         }
         /// <summary>
@@ -184,12 +251,16 @@ namespace Oreo.FileMan.Partials
         /// <param name="file"></param>
         /// <param name="path"></param>
         /// <param name="size"></param>
-        void UIDgvFileAdd(string file, string path, string size)
+        void UIDgvFileAdd(string file, string path, string size, string version, string lasttime)
         {
             BeginInvoke(new Action(() =>
             {
-                DgvFile.Rows.Add(new object[] { file, path, size });
+                DgvFile.Rows.Add(new object[] { file, size, version, lasttime, path });
+                DgvFile.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             }));
         }
+        #endregion
+
+
     }
 }

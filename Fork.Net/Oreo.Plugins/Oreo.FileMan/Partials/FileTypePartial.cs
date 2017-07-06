@@ -56,13 +56,13 @@ namespace Oreo.FileMan.Partials
             {
                 while (!IsDisposed)
                 {
-                    GetFileToDatabase2();
+                    GetFileToDatabase();
                     GetTypeFileCount();
                     Thread.Sleep(GetFileToDatabaseInterval);
                 }
             });
         }
-        private void GetFileToDatabase2()
+        private void GetFileToDatabase()
         {
             var drives = FileQueryEngine.GetReadyNtfsDrives().OrderBy(x => x.Name);
             if (ListTool.HasElements(drives))
@@ -70,7 +70,7 @@ namespace Oreo.FileMan.Partials
                 foreach (var drive in drives)
                 {
                     NewFileCount = 0;
-                    if (!drive.Name.Contains("E")) continue;//测试只读取D盘
+                    if (!drive.Name.Contains("J")) continue;//测试只读取D盘
                     //if (drive.Name.Contains("D")) continue;//测试时跳过D盘
                     //if (drive.Name.Contains("F")) continue;//测试时跳过F盘
 
@@ -94,7 +94,7 @@ namespace Oreo.FileMan.Partials
                             }
                         }
 
-                        //查询上次读取到的位置
+                        //查询上次读取到的位置（最后一条记录）
                         ulong filenumber = 0;
                         long usn = 0;
                         if (db.Any<UsnFiles>(x => x.Drive == drive.Name, null))

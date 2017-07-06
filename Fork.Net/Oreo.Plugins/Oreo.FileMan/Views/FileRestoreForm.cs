@@ -11,14 +11,14 @@ using Y.Skin.YoForm.NoTitle;
 
 namespace Oreo.FileMan.Views
 {
-    public partial class SettingsForm : NoTitleForm
+    public partial class FileRestoreForm : NoTitleForm
     {
-        public SettingsForm()
+        public FileRestoreForm()
         {
             InitializeComponent();
         }
 
-        private void SettingsForm_Load(object sender, EventArgs e)
+        private void FileRestoreForm_Load(object sender, EventArgs e)
         {
 
         }

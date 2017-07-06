@@ -1,7 +1,10 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.7.6
+//      desc:       日志功能
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 
 //R.Log.IsWriteFile = true;
 //R.Log.LogLevel = LogLevel.Warning | LogLevel.Debug;
@@ -30,15 +33,27 @@ namespace Y.Utils.IOUtils.LogUtils
     public class Log
     {
         //输出的 Log 格式
-        const string LogFormat = "{0}  {1}  {2}";
-        const string TimeFormat = "HH:mm:ss.fff";
+        const string LOG_FORMAT = "{0}  {1}  {2}";
+        const string TIME_FORMAT = "HH:mm:ss.fff";
+        const string LOG_PATH = "Log";
 
         private object LogFileLock = new object();//写日志文件锁
 
         private bool IsWriteFile = false;//是否写日志文件
-        public string LogPath = "Log";
+        public string LogPath = LOG_PATH;
         public LogLevel LogLevel = LogLevel.All;//日志输出等级
 
+        public Log()
+        { }
+        public Log(bool isWrite, string logPath = LOG_PATH, LogLevel level = LogLevel.All)
+        {
+            if (isWrite && !string.IsNullOrWhiteSpace(logPath))
+            {
+                LogPath = logPath.Trim();
+                IsWriteFile = true;
+                LogLevel = level;
+            }
+        }
         public bool SetWriteFile(bool isWrite, string logPath)
         {
             if (isWrite && !string.IsNullOrWhiteSpace(logPath))
@@ -85,7 +100,7 @@ namespace Y.Utils.IOUtils.LogUtils
         private void Write(LogType type, string message)
         {
             Console.ForegroundColor = GetColor(type);
-            Console.WriteLine(LogFormat, DateTime.Now.ToString(TimeFormat), type.ToString(), message);
+            Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
             if (IsWriteFile) WriteFile(type, message);
         }
 
@@ -101,7 +116,7 @@ namespace Y.Utils.IOUtils.LogUtils
                     //创建日志目录
                     DirTool.Create(logPath);
                     //写出日志
-                    TxtTool.Append(file, string.Format(LogFormat, DateTime.Now.ToString(TimeFormat), type.ToString(), message));
+                    TxtTool.Append(file, string.Format(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message));
                 }
             }
         }
