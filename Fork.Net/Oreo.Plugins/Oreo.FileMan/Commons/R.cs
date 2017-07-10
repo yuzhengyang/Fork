@@ -16,8 +16,11 @@ namespace Oreo.FileMan.Commons
         internal static DateTime StartTime = DateTime.Now;
         internal static string MachineName = Environment.MachineName;
         internal static Module Module = Assembly.GetExecutingAssembly().GetModules()[0];
-        internal static Log Log { get; set; }
+        public static string DbConnString = "DefaultConnection";
         internal static string AesKey = "12345678901234567890123456789012";
+
+        internal static Log Log { get; set; }
+
 
         public static class Paths
         {
@@ -43,7 +46,7 @@ namespace Oreo.FileMan.Commons
             public static class FileBackup
             {
                 public static string FileManBackup = @"D:\temp\FileManBackup\";//文件备份目录
-                public static int BACK_UP_INTERVAL = 5 * 1000;//备份文件间隔
+                public static int BACK_UP_INTERVAL = 60 * 1000;//备份文件间隔
                 public static int BACK_UP_COUNT = 10;//备份文件版本个数
             }
         }

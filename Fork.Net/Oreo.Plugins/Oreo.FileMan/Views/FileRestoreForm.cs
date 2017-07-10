@@ -1,4 +1,5 @@
-﻿using Oreo.FileMan.DatabaseEngine;
+﻿using Oreo.FileMan.Commons;
+using Oreo.FileMan.DatabaseEngine;
 using Oreo.FileMan.Models;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,17 @@ namespace Oreo.FileMan.Views
         {
             if (DgvFiles.CurrentRow != null && DgvFiles.CurrentRow.Index >= 0)
             {
-                var file = Files[DgvFiles.CurrentRow.Index];
+                BackupFiles file = Files[DgvFiles.CurrentRow.Index];
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);//设置默认目录
+                sfd.FileName = Path.GetFileName(file.FullPath);//设置默认文件名
+                sfd.Filter = "还原文件|*" + Path.GetExtension(file.FullPath);//设置默认文件类型
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    string from = file.BackupFullPath;
+                    string to = sfd.FileName;
+                    File.Copy(from, to, true);
+                }
             }
         }
 
@@ -78,7 +89,15 @@ namespace Oreo.FileMan.Views
                 {
                     string from = file.BackupFullPath;
                     string to = file.FullPath;
-                    File.Copy(from, to, true);
+                    string topath = DirTool.GetFilePath(to);
+                    if (DirTool.Create(topath))
+                    {
+                        File.Copy(from, to, true);
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Format("路径：{0} 不存在，请还原到其他路径。", topath), "路径不存在");
+                    }
                 }
             }
         }

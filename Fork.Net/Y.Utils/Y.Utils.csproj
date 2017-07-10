@@ -52,9 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="DataUtils\RandomUtils\RandomTool.cs" />
     <Compile Include="DataUtils\StringUtils\NumberStringTool.cs" />
     <Compile Include="DelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProgressEventArgs.cs" />
+    <Compile Include="DrawUtils\ColorUtils\ColorPalette.cs" />
+    <Compile Include="DrawUtils\ColorUtils\ColorStyle.cs" />
+    <Compile Include="DrawUtils\ColorUtils\ColorTool.cs" />
     <Compile Include="IOUtils\DriveUtils\DriveTool.cs" />
     <Compile Include="IOUtils\FileManUtils\FileWatcherEventArgs.cs" />
     <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />

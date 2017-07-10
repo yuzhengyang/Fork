@@ -88,25 +88,36 @@ namespace Oreo.FileMan.Services
                         BackupFiles = new List<string>();
                     }
 
-                    foreach (var t in temp)
+                    using (var db = new Muse())
                     {
-                        if (File.Exists(t))
+                        foreach (var t in temp)
                         {
-                            string filepath = DirTool.GetFilePath(t);
-                            BackupPaths path = Paths.FirstOrDefault(x => filepath.Contains(x.Path));
-                            if (path != null)
+                            //要备份的文件存在
+                            if (File.Exists(t))
                             {
-                                string pathname = path.Path;
-                                string pathalias = path.Alias;
-                                string pathfile = t.Substring(pathname.Length, t.Length - pathname.Length);
-                                string fileext = DateTimeConvert.CompactString(DateTime.Now);
-                                string fullpath = DirTool.Combine(R.Settings.FileBackup.FileManBackup, pathalias, pathfile + "." + fileext);
+                                //文件属于要备份的文件目录
+                                string filepath = DirTool.GetFilePath(t);
+                                BackupPaths path = Paths.FirstOrDefault(x => filepath.Contains(x.Path));
+                                if (path != null)
+                                {
+                                    //文件的MD5码以前没有备份过
+                                    string md5 = FileTool.GetMD5(t);
+                                    bool isback = db.Any<BackupFiles>(x => x.FullPath == t && x.Md5 == md5, null);
+                                    if (!isback)
+                                    {
+                                        string pathname = path.Path;//备份文件夹路径
+                                        string pathalias = path.Alias;//备份文件夹别名
+                                        string pathfile = t.Substring(pathname.Length, t.Length - pathname.Length);//截取备份文件子目录（相对备份文件夹）
+                                        string fileext = "." + DateTimeConvert.CompactString(DateTime.Now) + Path.GetExtension(t);//设置后缀
+                                        string fullpath = DirTool.Combine(R.Settings.FileBackup.FileManBackup, pathalias, pathfile + fileext);//组合路径
 
-                                //删除冗余
-                                DeleteExcess(t);
-                                //备份文件
-                                BackupFile(t, fullpath);
-                                _FileCount++;
+                                        //删除冗余
+                                        DeleteExcess(t);
+                                        //备份文件
+                                        BackupFile(t, fullpath, md5);
+                                        _FileCount++;
+                                    }
+                                }
                             }
                         }
                     }
@@ -226,7 +237,7 @@ namespace Oreo.FileMan.Services
         /// </summary>
         /// <param name="path"></param>
         /// <param name="newpath"></param>
-        private void BackupFile(string path, string newpath)
+        private void BackupFile(string path, string newpath, string md5)
         {
             using (var db = new Muse())
             {
@@ -243,6 +254,7 @@ namespace Oreo.FileMan.Services
                             Size = FileTool.Size(path),
                             BackupTime = DateTimeConvert.StandardString(DateTime.Now),
                             LastWriteTime = lastwritetime,
+                            Md5 = md5,
                         });
                     }
                 }

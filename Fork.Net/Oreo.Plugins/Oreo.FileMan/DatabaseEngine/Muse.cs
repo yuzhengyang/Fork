@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oreo.FileMan.Commons;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -12,7 +13,7 @@ namespace Oreo.FileMan.DatabaseEngine
         public SuperDb Context;
         public Muse()
         {
-            Context = new SuperDb();
+            Context = new SuperDb(R.DbConnString);
         }
 
         public int Add<T>(T EntityObj, bool isSave = true) where T : class

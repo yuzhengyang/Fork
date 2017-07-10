@@ -14,7 +14,7 @@ namespace Oreo.FileMan.DatabaseEngine
 {
     public class SuperDb : DbContext
     {
-        public SuperDb() : base(@"DefaultConnection")
+        public SuperDb(string connectionString) : base(connectionString)
         {
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<SuperDb, Configuration>());
         }

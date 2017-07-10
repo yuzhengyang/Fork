@@ -156,10 +156,10 @@ namespace Oreo.FileMan.Partials
                 {
                     using (var db = new Muse())
                     {
-                        db.Context.Database.Log = (sql) =>
-                        {
-                            R.Log.i(sql);
-                        };
+                        //db.Context.Database.Log = (sql) =>
+                        //{
+                        //    R.Log.i(sql);
+                        //};
                         try
                         {
                             var result = db.Do<BackupFiles>().
@@ -171,7 +171,7 @@ namespace Oreo.FileMan.Partials
                                     BackPath = x.Max(o => o.BackupFullPath),
                                     Count = x.Count(),
                                     Time = x.Max(o => o.LastWriteTime),
-                                }).ToList();
+                                }).OrderByDescending(x=>x.Time).ToList();
 
                             if (ListTool.HasElements(result))
                             {

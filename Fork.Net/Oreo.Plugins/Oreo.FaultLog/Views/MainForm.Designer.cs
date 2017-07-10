@@ -119,8 +119,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Salmon;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(247)))), ((int)(((byte)(161)))));
             this.ClientSize = new System.Drawing.Size(700, 485);
+            this.Colorful = true;
             this.Controls.Add(this.BtMin);
             this.Controls.Add(this.BtClose);
             this.Controls.Add(this.LbAppTitle);

@@ -28,5 +28,9 @@ namespace Oreo.FileMan.Models
         /// 最后修改时间
         /// </summary>
         public string LastWriteTime { get; set; }
+        /// <summary>
+        /// Md5
+        /// </summary>
+        public string Md5 { get; set; }
     }
 }

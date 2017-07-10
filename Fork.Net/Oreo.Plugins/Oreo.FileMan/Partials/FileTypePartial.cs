@@ -17,6 +17,7 @@ using System.Data.Entity.Infrastructure;
 using Y.Utils.AppUtils;
 using Y.Utils.DataUtils.DateTimeUtils;
 using Y.Utils.DataUtils.StringUtils;
+using Oreo.FileMan.Commons;
 
 namespace Oreo.FileMan.Partials
 {
@@ -70,7 +71,7 @@ namespace Oreo.FileMan.Partials
                 foreach (var drive in drives)
                 {
                     NewFileCount = 0;
-                    if (!drive.Name.Contains("J")) continue;//测试只读取D盘
+                    //if (!drive.Name.Contains("J")) continue;//测试只读取D盘
                     //if (drive.Name.Contains("D")) continue;//测试时跳过D盘
                     //if (drive.Name.Contains("F")) continue;//测试时跳过F盘
 

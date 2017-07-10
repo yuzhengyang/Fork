@@ -98,7 +98,6 @@
     <Compile Include="Models\BackupPaths.cs" />
     <Compile Include="Models\UsnDrives.cs" />
     <Compile Include="Models\UsnFiles.cs" />
-    <Compile Include="Models\WatcherFiles.cs" />
     <Compile Include="Partials\FileBackupPartial.cs">
       <SubType>UserControl</SubType>
     </Compile>
