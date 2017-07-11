@@ -191,15 +191,6 @@ namespace Oreo.FileMan.Partials
                         {
                             var count = db.Do<UsnFiles>().Count(x => !x.IsFolder && x.Name.EndsWith(t));
                             result += count;
-                            //foreach (var l in list)
-                            //{
-                            //    bool flag = FileQueryEngine.FileIsExist(l.Drive, l.Usn);
-                            //    if (flag) { result++; }
-                            //    else
-                            //    {
-                            //        db.Del(l, true);
-                            //    }
-                            //}
                         }
                     }
                 }
@@ -207,7 +198,63 @@ namespace Oreo.FileMan.Partials
             catch (Exception e) { }
             return result;
         }
+        /// <summary>
+        /// 搜索文件（分类文件自动后缀搜索）
+        /// </summary>
+        private void SearchFile()
+        {
+        }
 
+        #region Event事件操作
+        private void LbSearch_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+        private void BtBack_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpType");
+        }
+
+        private void IbVideo_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+
+        private void IbDoc_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+
+        private void IbImage_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+
+        private void IbMusic_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+
+        private void IbSetup_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+
+        private void IbZip_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+
+        private void IbLike_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+
+        private void IbDown_Click(object sender, EventArgs e)
+        {
+            TcFile.SelectTab("TpDetail");
+        }
+        #endregion
 
         #region UI操作
         /// <summary>
@@ -258,5 +305,7 @@ namespace Oreo.FileMan.Partials
             }));
         }
         #endregion
+
+
     }
 }

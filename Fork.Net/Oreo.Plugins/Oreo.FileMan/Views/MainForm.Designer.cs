@@ -152,6 +152,7 @@
             // 
             // fileBackupPartial1
             // 
+            this.fileBackupPartial1.BackColor = System.Drawing.Color.White;
             this.fileBackupPartial1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileBackupPartial1.Location = new System.Drawing.Point(3, 3);
             this.fileBackupPartial1.Name = "fileBackupPartial1";
@@ -161,6 +162,7 @@
             // LbFileType
             // 
             this.LbFileType.AutoSize = true;
+            this.LbFileType.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LbFileType.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbFileType.ForeColor = System.Drawing.Color.White;
             this.LbFileType.Location = new System.Drawing.Point(365, 42);
@@ -173,6 +175,7 @@
             // LbFileBackup
             // 
             this.LbFileBackup.AutoSize = true;
+            this.LbFileBackup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LbFileBackup.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbFileBackup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(161)))), ((int)(((byte)(213)))));
             this.LbFileBackup.Location = new System.Drawing.Point(586, 42);
@@ -185,6 +188,7 @@
             // LbFileEncrypt
             // 
             this.LbFileEncrypt.AutoSize = true;
+            this.LbFileEncrypt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LbFileEncrypt.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbFileEncrypt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(161)))), ((int)(((byte)(213)))));
             this.LbFileEncrypt.Location = new System.Drawing.Point(447, 42);
@@ -249,6 +253,7 @@
             // LbFileDecrypt
             // 
             this.LbFileDecrypt.AutoSize = true;
+            this.LbFileDecrypt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LbFileDecrypt.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LbFileDecrypt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(161)))), ((int)(((byte)(213)))));
             this.LbFileDecrypt.Location = new System.Drawing.Point(493, 42);

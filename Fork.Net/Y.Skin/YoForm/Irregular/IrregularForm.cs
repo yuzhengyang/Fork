@@ -26,10 +26,11 @@ namespace Y.Skin.YoForm.Irregular
             if (!DesignMode)
             {
                 Opacity = 0;
-                Skin = new IrregularFormSkin(this);//创建皮肤层 
+                Skin = new IrregularFormSkin(this);//创建皮肤层
                 BackgroundImage = null;//去除控件层背景
                 Skin.Show();//显示皮肤层 
                 AnimateShow();
+                if (ContextMenuStrip != null) Skin.ContextMenuStrip = ContextMenuStrip;//设置右键菜单
             }
         }
 
