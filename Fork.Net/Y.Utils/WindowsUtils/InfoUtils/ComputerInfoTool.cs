@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.3.29 - 2017.7.12
+//      date:       2017.3.29 - 2017.7.13
 //      desc:       计算机信息
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Management;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
+using Y.Utils.NetUtils.NetInfoUtils;
 
 namespace Y.Utils.WindowsUtils.InfoUtils
 {
@@ -19,53 +20,40 @@ namespace Y.Utils.WindowsUtils.InfoUtils
     public static class ComputerInfoTool
     {
         const string UNKNOW = "unknow";
+
         /// <summary>
-        /// CPU 序列号
+        /// CPU 信息
+        /// 【序列号、型号】
         /// </summary>
         /// <returns></returns>
-        public static string CPUID()
-        {
-            ManagementClass mc = null;
-            ManagementObjectCollection moc = null;
-            string ProcessorId = "";
-            try
-            {
-                mc = new ManagementClass("Win32_Processor");
-                moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
-                {
-                    ProcessorId = mo.Properties["ProcessorId"].Value.ToString();
-                }
-                return ProcessorId;
-            }
-            catch (Exception e)
-            {
-                return UNKNOW;
-            }
-            finally
-            {
-                if (moc != null) moc.Dispose();
-                if (mc != null) mc.Dispose();
-            }
-        }
-        /// <summary>
-        /// CPU 型号
-        /// </summary>
-        /// <returns></returns>
-        public static string CPUModel()
+        public static Tuple<string, string> CpuInfo()
         {
             try
             {
-                string result = "";
+                Tuple<string, string> result = null;
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from  Win32_Processor");
                 foreach (ManagementObject item in searcher.Get())
                 {
-                    result = item["Name"].ToString();
+                    result = new Tuple<string, string>(
+                        item["ProcessorId"].ToString().Trim(),
+                        item["Name"].ToString().Trim());
+                    break;
                 }
                 return result;
             }
-            catch
-            { return UNKNOW; }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// 网卡信息
+        /// 【名称、描述、物理地址（Mac）、Ip地址、网关地址】
+        /// </summary>
+        /// <returns></returns>
+        public static List<Tuple<string, string, string, string, string>> NetworkCardInfo()
+        {
+            return NetCardInfoTool.GetNetworkCardInfo();
         }
         /// <summary>
         /// 显卡型号
@@ -79,7 +67,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from  Win32_VideoController");
                 foreach (ManagementObject item in searcher.Get())
                 {
-                    rs.Add(item["Name"].ToString());
+                    rs.Add(item["Name"].ToString().Trim());
                 }
                 return rs;
             }
@@ -97,7 +85,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from  Win32_SoundDevice");
                 foreach (ManagementObject item in searcher.Get())
                 {
-                    rs.Add(item["Name"].ToString());
+                    rs.Add(item["Name"].ToString().Trim());
                 }
                 return rs;
             }
@@ -118,6 +106,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                 foreach (ManagementObject mo in moc)
                 {
                     ulong.TryParse(mo["TotalPhysicalMemory"].ToString(), out size);
+                    break;
                 }
             }
             catch { }
@@ -137,73 +126,117 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                 foreach (ManagementObject mo in moc)
                 {
                     ulong.TryParse(mo["FreePhysicalMemory"].ToString(), out size);
+                    break;
                 }
             }
             catch { }
             return size;
         }
         /// <summary>
-        /// 硬盘型号
+        /// 硬盘信息
+        /// 【序列号、型号】
         /// </summary>
         /// <returns></returns>
-        public static List<string> HardDiskModel()
+        public static List<Tuple<string, string>> HardDiskInfo()
         {
+            List<Tuple<string, string>> result = new List<Tuple<string, string>>();
             try
             {
-                List<string> rs = new List<string>();
                 ManagementClass mc = new ManagementClass("Win32_DiskDrive");
                 ManagementObjectCollection moc = mc.GetInstances();
                 foreach (ManagementObject mo in moc)
                 {
-                    rs.Add(mo.Properties["Model"].Value.ToString() + "--" + mo.Properties["SerialNumber"].Value.ToString());
-                    //result = (string);
-                    //if (!result.ToLower().Contains("usb"))
-                    //    return result;
-                }
-                return rs;
-            }
-            catch { return null; }
-        }
-        #region 获取硬盘ID
-        public static string GetHDiskID(string hdModel)
-        {
-            try
-            {
-                string result = "";
-                ManagementClass mc = new ManagementClass("Win32_DiskDrive");
-                ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
-                {
-                    if (mo.Properties["Model"].Value.ToString().Contains(hdModel))
-                    {
-                        result = (string)mo.Properties["SerialNumber"].Value;
-                    }
-                }
-                return result.Trim();
-            }
-            catch
-            { return UNKNOW; }
-        }
-        #endregion
-        #region 获取操作系统
-        public static string GetOS()
-        {
-            try
-            {
-                string result = "";
-                ManagementObjectSearcher MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-                foreach (ManagementObject MyObject in MySearcher.Get())
-                {
-                    result = MyObject["Caption"].ToString();
+                    result.Add(new Tuple<string, string>(
+                        mo.Properties["SerialNumber"].Value.ToString().Trim(),
+                        mo.Properties["Model"].Value.ToString().Trim()));
                 }
                 return result;
             }
+            catch (Exception e)
+            {
+                return result;
+            }
+        }
+        /// <summary>
+        /// 计算机名
+        /// </summary>
+        /// <returns></returns>
+        public static string MachineName()
+        {
+            try
+            {
+                return Environment.MachineName;
+            }
             catch
             { return UNKNOW; }
         }
-        #endregion
-        #region 获取系统类型
-        public static string GetSystemType()
+        /// <summary>
+        /// 主板信息
+        /// 【制造商、型号、序列号】
+        /// </summary>
+        /// <returns></returns>
+        public static Tuple<string, string, string> BoardInfo()
+        {
+            try
+            {
+                Tuple<string, string, string> result = null;
+                ManagementObjectSearcher MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+                foreach (ManagementObject MyObject in MySearcher.Get())
+                {
+                    result = new Tuple<string, string, string>(
+                        MyObject["Manufacturer"].ToString().Trim(),
+                        MyObject["Product"].ToString().Trim(),
+                        MyObject["SerialNumber"].ToString().Trim());
+                    break;
+                }
+                return result;
+            }
+            catch (Exception e)
+            { return null; }
+        }
+        /// <summary>
+        /// 操作系统信息
+        /// 【系统名称、系统路劲、安装时间】
+        /// </summary>
+        /// <returns></returns>
+        public static Tuple<string, string, DateTime> OsInfo()
+        {
+            try
+            {
+                Tuple<string, string, DateTime> result = null;
+                ManagementObjectSearcher MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+                foreach (ManagementObject MyObject in MySearcher.Get())
+                {
+                    string caption = MyObject["Caption"].ToString().Trim();
+                    string windowsdirectory = MyObject["WindowsDirectory"].ToString().Trim();
+                    string installdate = MyObject["InstallDate"].ToString().Trim();
+                    DateTime dtinstalldate = DateTime.MinValue;
+
+                    if (installdate.Length >= 14)
+                    {
+                        installdate = installdate.Substring(0, 14);
+                        installdate = installdate.Insert(12, ":");
+                        installdate = installdate.Insert(10, ":");
+                        installdate = installdate.Insert(8, " ");
+                        installdate = installdate.Insert(6, "-");
+                        installdate = installdate.Insert(4, "-");
+                        DateTime.TryParse(installdate, out dtinstalldate);
+                    }
+
+                    result = new Tuple<string, string, DateTime>(
+                        caption, windowsdirectory, dtinstalldate);
+                    break;
+                }
+                return result;
+            }
+            catch (Exception e)
+            { return null; }
+        }
+        /// <summary>
+        /// 系统类型
+        /// </summary>
+        /// <returns></returns>
+        public static string SystemType()
         {
             try
             {
@@ -212,40 +245,26 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                 ManagementObjectCollection moc = mc.GetInstances();
                 foreach (ManagementObject mo in moc)
                 {
-
                     result = mo["SystemType"].ToString();
-
                 }
                 return result;
             }
             catch
             { return UNKNOW; }
         }
-        #endregion
-        #region 获取系统安装日期
-        public static string GetSystemInstallDate()
+        /// <summary>
+        /// 当前用户名
+        /// </summary>
+        /// <returns></returns>
+        public static string UserName()
         {
-            try
-            {
-                string result = "";
-                ManagementObjectSearcher MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-                foreach (ManagementObject MyObject in MySearcher.Get())
-                {
-                    result = MyObject["InstallDate"].ToString().Substring(0, 14);
-                    result = result.Insert(12, ":");
-                    result = result.Insert(10, ":");
-                    result = result.Insert(8, " ");
-                    result = result.Insert(6, "-");
-                    result = result.Insert(4, "-");
-                }
-                return result;
-            }
-            catch
-            { return UNKNOW; }
+            return Environment.UserName;
         }
-        #endregion
-        #region 获取登陆用户名
-        public static string GetLoginUserName()
+        /// <summary>
+        /// 当前用户名
+        /// </summary>
+        /// <returns></returns>
+        public static string UserName2()
         {
             try
             {
@@ -261,22 +280,12 @@ namespace Y.Utils.WindowsUtils.InfoUtils
             catch
             { return UNKNOW; }
         }
-        #endregion
-        #region 获取计算机名
-        public static string GetComputerName()
-        {
-            try
-            {
-                string result = "";
-                result = System.Environment.GetEnvironmentVariable("ComputerName");
-                return result;
-            }
-            catch
-            { return UNKNOW; }
-        }
-        #endregion
         #region 获取所有用户名
-        public static List<string> GetSysUserNames()
+        /// <summary>
+        /// 所有用户名称
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> UserNames()
         {
             int EntriesRead;
             int TotalEntries;
@@ -305,69 +314,61 @@ namespace Y.Utils.WindowsUtils.InfoUtils
             public string Username;
         }
         [DllImport("Netapi32.dll ")]
-        extern static int NetUserEnum([MarshalAs(UnmanagedType.LPWStr)]
-        string servername,
-                int level,
-                int filter,
-                out IntPtr bufptr,
-                int prefmaxlen,
-                out int entriesread,
-                out int totalentries,
-                out int resume_handle);
+        extern static int NetUserEnum([MarshalAs(UnmanagedType.LPWStr)] string servername, int level, int filter, out IntPtr bufptr, int prefmaxlen, out int entriesread, out int totalentries, out int resume_handle);
 
         [DllImport("Netapi32.dll ")]
         extern static int NetApiBufferFree(IntPtr Buffer);
         #endregion
-        #region 获取主板制造商
-        public static string GetBoardManufacturer()
+
+        /// <summary>
+        /// 域名
+        /// </summary>
+        /// <returns></returns>
+        public static string UserDomainName()
         {
             try
             {
-                string result = "";
-                ManagementObjectSearcher MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                foreach (ManagementObject MyObject in MySearcher.Get())
-                {
-                    result = MyObject["Manufacturer"].ToString();
-                }
-                return result;
+                return Environment.UserDomainName;
             }
             catch
             { return UNKNOW; }
         }
-        #endregion
-        #region 获取主板型号
-        public static string GetBoardProduct()
+        /// <summary>
+        /// 系统启动后的毫秒数
+        /// </summary>
+        /// <returns></returns>
+        public static int TickCount()
+        {
+            return Environment.TickCount;
+        }
+        /// <summary>
+        /// 处理器数
+        /// </summary>
+        /// <returns></returns>
+        public static int ProcessorCount()
+        {
+            return Environment.ProcessorCount;
+        }
+        /// <summary>
+        /// 平台标识和版本号
+        /// </summary>
+        /// <returns></returns>
+        public static string OSVersion()
         {
             try
             {
-                string result = "";
-                ManagementObjectSearcher MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                foreach (ManagementObject MyObject in MySearcher.Get())
-                {
-                    result = MyObject["Product"].ToString();
-                }
-                return result;
+                return Environment.OSVersion.ToString();
             }
             catch
             { return UNKNOW; }
         }
-        #endregion
-        #region 获取主板序列号
-        public static string GetBoardSerialNumber()
+        /// <summary>
+        /// 64位操作系统
+        /// </summary>
+        /// <returns></returns>
+        public static bool Is64BitOperatingSystem()
         {
-            try
-            {
-                string result = "";
-                ManagementObjectSearcher MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                foreach (ManagementObject MyObject in MySearcher.Get())
-                {
-                    result = MyObject["SerialNumber"].ToString();
-                }
-                return result;
-            }
-            catch
-            { return UNKNOW; }
+            return Environment.Is64BitOperatingSystem;
         }
-        #endregion
     }
 }

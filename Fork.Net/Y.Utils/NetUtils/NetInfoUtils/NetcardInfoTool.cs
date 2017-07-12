@@ -1,4 +1,11 @@
-﻿using System;
+﻿//************************************************************************
+//      https://github.com/yuzhengyang
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.7.12
+//      desc:       网卡信息工具类
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,7 +21,7 @@ namespace Y.Utils.NetUtils.NetInfoUtils
     {
         /// <summary>
         /// 获取网卡信息
-        /// 名称，描述，物理地址（Mac），Ip地址，网关地址
+        /// 【名称、描述、物理地址（Mac）、Ip地址、网关地址】
         /// </summary>
         /// <returns></returns>
         public static List<Tuple<string, string, string, string, string>> GetNetworkCardInfo()
@@ -34,7 +41,7 @@ namespace Y.Utils.NetUtils.NetInfoUtils
                             item.GetIPProperties().UnicastAddresses[1].Address.ToString() : null;
                         string _gateway = item.GetIPProperties().GatewayAddresses.Count >= 1 ?
                             item.GetIPProperties().GatewayAddresses[0].Address.ToString() : null;
-                        result.Add(new Tuple<string, string, string, string, string>(_name, _desc, _mac, _ip, _gateway));
+                        result.Add(new Tuple<string, string, string, string, string>(_name.Trim(), _desc.Trim(), _mac.Trim(), _ip.Trim(), _gateway.Trim()));
                     }
                 }
                 return result;
