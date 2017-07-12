@@ -80,17 +80,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ChineseCalendarForm.cs">
@@ -99,11 +92,23 @@
     <Compile Include="Views\ChineseCalendarForm.Designer.cs">
       <DependentUpon>ChineseCalendarForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestComputerInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TestComputerInfoForm.Designer.cs">
+      <DependentUpon>TestComputerInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\TestInputForm.cs">
       <SubType>Form</SubType>
@@ -123,9 +128,6 @@
     <Compile Include="Views\TestWebForm.Designer.cs">
       <DependentUpon>TestWebForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -139,8 +141,14 @@
     <EmbeddedResource Include="Views\ChineseCalendarForm.resx">
       <DependentUpon>ChineseCalendarForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TestComputerInfoForm.resx">
+      <DependentUpon>TestComputerInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TestInputForm.resx">
       <DependentUpon>TestInputForm.cs</DependentUpon>

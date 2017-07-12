@@ -80,5 +80,22 @@ namespace Y.Skin.YoForm.Irregular
                 }
             });
         }
+        /// <summary>
+        /// 窗体显示状态
+        /// </summary>
+        /// <param name="value"></param>
+        public void Visibility(bool value)
+        {
+            if (value)
+            {
+                Show();
+                Skin.Show();
+            }
+            else
+            {
+                Hide();
+                Skin.Hide();
+            }
+        }
     }
 }

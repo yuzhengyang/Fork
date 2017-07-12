@@ -1,6 +1,6 @@
-﻿namespace Y.Skin.YoForm.Irregular
+﻿namespace Y.Test.Views
 {
-    partial class IrregularFormSkin
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -30,16 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // IrregularFormSkin
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.ClientSize = new System.Drawing.Size(120, 279);
             this.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Name = "IrregularFormSkin";
-            this.Text = "IrregularFormSkin";
+            this.Name = "Form1";
+            this.Text = "Form1";
             this.ResumeLayout(false);
 
         }

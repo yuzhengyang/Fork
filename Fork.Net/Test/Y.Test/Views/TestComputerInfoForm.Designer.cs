@@ -1,6 +1,6 @@
-﻿namespace Y.Skin.YoForm.Irregular
+﻿namespace Y.Test.Views
 {
-    partial class IrregularFormSkin
+    partial class TestComputerInfoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,22 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // IrregularFormSkin
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(13, 13);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.Size = new System.Drawing.Size(560, 400);
+            this.textBox1.TabIndex = 0;
+            // 
+            // TestComputerInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Name = "IrregularFormSkin";
-            this.Text = "IrregularFormSkin";
+            this.ClientSize = new System.Drawing.Size(585, 425);
+            this.Controls.Add(this.textBox1);
+            this.Name = "TestComputerInfoForm";
+            this.Text = "TestComputerInfoForm";
+            this.Load += new System.EventHandler(this.TestComputerInfoForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
