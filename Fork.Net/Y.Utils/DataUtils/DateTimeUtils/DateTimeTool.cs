@@ -35,5 +35,19 @@ namespace Y.Utils.DataUtils.DateTimeUtils
             Second = (int)second % 60;
             return new Tuple<int, int>(Minute, Second);
         }
+        public static Tuple<long, long, long> ToHMS(long ms)
+        {
+            long Hour = ms / 1000 / 60 / 60;
+            long Minute = ms / 1000 / 60 % 60;
+            long Second = ms / 1000 % 60;
+            return new Tuple<long, long, long>(Hour, Minute, Second);
+        }
+        public static Tuple<int, int, int> ToHMS(int ms)
+        {
+            int Hour = ms / 1000 / 60 / 60;
+            int Minute = ms / 1000 / 60 % 60;
+            int Second = ms / 1000 % 60;
+            return new Tuple<int, int, int>(Hour, Minute, Second);
+        }
     }
 }

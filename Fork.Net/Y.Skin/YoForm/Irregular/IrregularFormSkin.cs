@@ -23,7 +23,7 @@ namespace Y.Skin.YoForm.Irregular
             Icon = main.Icon;//设置图标
             TopMost = main.TopMost;
             FormBorderStyle = FormBorderStyle.None;//设置无边框的窗口样式
-            ShowInTaskbar = true;//使控件层显示到任务栏
+            ShowInTaskbar = main.InTaskbar;//使控件层显示到任务栏
             BackgroundImage = Main.BackgroundImage;//将控件层背景图应用到皮肤层
             BackgroundImageLayout = ImageLayout.Stretch;//自动拉伸背景图以适应窗口
             Size = Main.Size;//统一大小
@@ -129,7 +129,7 @@ namespace Y.Skin.YoForm.Irregular
         /// <param name="e"></param>
         private void Frm_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Main.SkinMovable)
+            if (Main.Movable)
             {
                 int xOffset;
                 int yOffset;
@@ -151,7 +151,7 @@ namespace Y.Skin.YoForm.Irregular
         /// <param name="e"></param>
         private void Frm_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Main.SkinMovable)
+            if (Main.Movable)
             {
                 //将调用此事件的窗口保存下
                 Form frm = (Form)sender;
@@ -181,7 +181,7 @@ namespace Y.Skin.YoForm.Irregular
         /// <param name="e"></param>
         private void Frm_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Main.SkinMovable)
+            if (Main.Movable)
             {
                 // 修改鼠标状态isMouseDown的值
                 // 确保只有鼠标左键按下并移动时，才移动窗体
@@ -223,6 +223,11 @@ namespace Y.Skin.YoForm.Irregular
             base.OnMouseMove(e);
             FormStyleAPI.ReleaseCapture();
             FormStyleAPI.SendMessage(Handle, FormStyleAPI.WM_NCLBUTTONDOWN, FormStyleAPI.HTCAPTION, 0);
+        }
+
+        private void IrregularFormSkin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

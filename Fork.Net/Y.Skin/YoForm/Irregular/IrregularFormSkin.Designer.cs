@@ -40,6 +40,7 @@
             this.MinimumSize = new System.Drawing.Size(1, 1);
             this.Name = "IrregularFormSkin";
             this.Text = "IrregularFormSkin";
+            this.Load += new System.EventHandler(this.IrregularFormSkin_Load);
             this.ResumeLayout(false);
 
         }

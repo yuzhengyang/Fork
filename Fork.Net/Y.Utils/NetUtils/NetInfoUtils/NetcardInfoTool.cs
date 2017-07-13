@@ -34,14 +34,14 @@ namespace Y.Utils.NetUtils.NetInfoUtils
                 {
                     if (item.NetworkInterfaceType == NetworkInterfaceType.Ethernet || item.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
                     {
-                        string _name = item.Name;
-                        string _desc = item.Description;
+                        string _name = item.Name.Trim();
+                        string _desc = item.Description.Trim();
                         string _mac = item.GetPhysicalAddress().ToString();
                         string _ip = item.GetIPProperties().UnicastAddresses.Count >= 2 ?
                             item.GetIPProperties().UnicastAddresses[1].Address.ToString() : null;
                         string _gateway = item.GetIPProperties().GatewayAddresses.Count >= 1 ?
                             item.GetIPProperties().GatewayAddresses[0].Address.ToString() : null;
-                        result.Add(new Tuple<string, string, string, string, string>(_name.Trim(), _desc.Trim(), _mac.Trim(), _ip.Trim(), _gateway.Trim()));
+                        result.Add(new Tuple<string, string, string, string, string>(_name, _desc, _mac, _ip, _gateway));
                     }
                 }
                 return result;

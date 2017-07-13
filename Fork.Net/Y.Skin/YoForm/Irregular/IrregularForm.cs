@@ -35,18 +35,33 @@ namespace Y.Skin.YoForm.Irregular
         }
 
         #region 属性
-        private bool _skinmobile = true;
+        private bool _Moveable = true;
         [Category("Skin")]
         [Description("窗体是否可以移动")]
         [DefaultValue(typeof(bool), "true")]
-        public bool SkinMovable
+        public bool Movable
         {
-            get { return _skinmobile; }
+            get { return _Moveable; }
             set
             {
-                if (_skinmobile != value)
+                if (_Moveable != value)
                 {
-                    _skinmobile = value;
+                    _Moveable = value;
+                }
+            }
+        }
+        private bool _InTaskbar = true;
+        [Category("Skin")]
+        [Description("窗体是否显示到任务栏")]
+        [DefaultValue(typeof(bool), "true")]
+        public bool InTaskbar
+        {
+            get { return _InTaskbar; }
+            set
+            {
+                if (_InTaskbar != value)
+                {
+                    _InTaskbar = value;
                 }
             }
         }

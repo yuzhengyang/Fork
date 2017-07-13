@@ -30,7 +30,7 @@ namespace Y.Test.Views
 
             Tuple<string, string> cpuinfo = ComputerInfoTool.CpuInfo();
             Print("CPU 序列号 " + cpuinfo.Item1 + " 型号 " + cpuinfo.Item2);
-            Print("显卡信息： " + string.Join(",", ComputerInfoTool.GraphicsCardModel()));
+            Print("显卡信息： " + string.Join(",", ComputerInfoTool.GraphicsCardInfo()));
             Print("声卡信息： " + string.Join(",", ComputerInfoTool.SoundCardModel()));
             Print("内存： " + ComputerInfoTool.AvailablePhysicalMemory() + " / " + ComputerInfoTool.TotalPhysicalMemory());
             List<Tuple<string, string>> harddiskinfo = ComputerInfoTool.HardDiskInfo();

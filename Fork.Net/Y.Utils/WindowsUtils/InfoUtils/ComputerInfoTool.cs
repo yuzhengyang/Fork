@@ -57,17 +57,22 @@ namespace Y.Utils.WindowsUtils.InfoUtils
         }
         /// <summary>
         /// 显卡型号
+        /// 【型号、RAM】
         /// </summary>
         /// <returns></returns>
-        public static List<string> GraphicsCardModel()
+        public static List<Tuple<string, ulong>> GraphicsCardInfo()
         {
             try
             {
-                List<string> rs = new List<string>();
+                List<Tuple<string, ulong>> rs = new List<Tuple<string, ulong>>();
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from  Win32_VideoController");
                 foreach (ManagementObject item in searcher.Get())
                 {
-                    rs.Add(item["Name"].ToString().Trim());
+                    string name = item["Name"].ToString().Trim();
+                    string ram = item["AdapterRAM"].ToString().Trim();
+                    ulong ramnumber;
+                    ulong.TryParse(ram, out ramnumber);
+                    rs.Add(new Tuple<string, ulong>(name, ramnumber));
                 }
                 return rs;
             }

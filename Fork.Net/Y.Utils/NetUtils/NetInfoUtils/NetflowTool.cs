@@ -77,10 +77,11 @@ namespace Y.Utils.NetUtils.NetInfoUtils
             }
             return false;
         }
-        public bool Start()
+        public bool Start(int interval = 1000)
         {
             if (Init() && !DataMonitorSwitch)
             {
+                DataCounterInterval = interval;
                 DataMonitorSwitch = true;
 
                 Task.Factory.StartNew(() =>
@@ -139,6 +140,9 @@ namespace Y.Utils.NetUtils.NetInfoUtils
                 dc?.Close();
             }
         }
+        /// <summary>
+        /// 终结器
+        /// </summary>
         ~NetFlowTool()
         {
             Stop();
