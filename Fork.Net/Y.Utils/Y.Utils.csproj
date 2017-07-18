@@ -86,6 +86,8 @@
     <Compile Include="IOUtils\PathUtils\DirTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileCodeTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileTool.cs" />
+    <Compile Include="SoftwareUtils\SoftwareModel.cs" />
+    <Compile Include="SoftwareUtils\SoftwareTool.cs" />
     <Compile Include="WindowsUtils\APIUtils\FormStyleAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ClipboardTool.cs" />

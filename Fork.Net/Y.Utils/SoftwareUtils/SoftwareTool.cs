@@ -7,9 +7,8 @@ using System.Linq;
 using System.Text;
 using Y.Utils.DataUtils.Collections;
 
-namespace Y.Utils.WindowsUtils.InfoUtils
+namespace Y.Utils.SoftwareUtils
 {
-    [Obsolete]
     public class SoftwareTool
     {
         /// <summary>
