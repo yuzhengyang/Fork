@@ -18,7 +18,7 @@ namespace Y.Utils.SoftwareUtils
         /// <returns></returns>
         public static bool ExistControl(string name)
         {
-            if (GetControlList().Contains(name))
+            if (GetControlList().Any(x => x.Name == name))
                 return true;
             return false;
         }
@@ -35,18 +35,18 @@ namespace Y.Utils.SoftwareUtils
             }
             return flag;
         }
-        public static List<string> GetControlList()
+        public static List<SoftwareInfo> GetControlList()
         {
-            List<string> result = new List<string>();
+            List<SoftwareInfo> result = new List<SoftwareInfo>();
             result.AddRange(GetControlList(Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")));
             result.AddRange(GetControlList(Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall")));
             result.AddRange(GetControlList(Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")));
             result.AddRange(GetControlList(Registry.CurrentUser.OpenSubKey("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall")));
             return result;
         }
-        private static List<string> GetControlList(RegistryKey key)
+        private static List<SoftwareInfo> GetControlList(RegistryKey key)
         {
-            List<string> result = new List<string>();
+            List<SoftwareInfo> result = new List<SoftwareInfo>();
             try
             {
                 if (key != null)//如果系统禁止访问则返回null
@@ -57,12 +57,28 @@ namespace Y.Utils.SoftwareUtils
                         RegistryKey SubKey = key.OpenSubKey(SubKeyName);
                         if (SubKey != null)
                         {
-                            String SoftwareName = SubKey.GetValue("DisplayName", "Nothing").ToString();
-                            //如果没有取到，则不存入动态数组
-                            if (SoftwareName != "Nothing")
+
+                            string name = SubKey.GetValue("DisplayName", "").ToString();
+                            string pub = SubKey.GetValue("Publisher", "").ToString();
+                            string version = SubKey.GetValue("DisplayVersion", "").ToString();
+                            string datestr = SubKey.GetValue("InstallDate", "").ToString();
+                            string sizestr = SubKey.GetValue("EstimatedSize", "").ToString();
+                            string helpurl = SubKey.GetValue("HelpLink", "").ToString();
+                            string abouturl = SubKey.GetValue("URLInfoAbout", "").ToString();
+                            DateTime date;
+                            DateTime.TryParseExact(datestr, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
+                            int size = 0;
+                            int.TryParse(sizestr, out size);
+                            result.Add(new SoftwareInfo()
                             {
-                                result.Add(SoftwareName.Trim());
-                            }
+                                Name = name,
+                                Publisher = pub,
+                                Version = version,
+                                InstallDate = date,
+                                EstimatedSize = size,
+                                HelpLink = helpurl,
+                                URLInfoAbout = abouturl,
+                            });
                         }
                         SubKey?.Close();
                     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Y.Utils.SoftwareUtils
 {
-    public class SoftwareModel
+    public class SoftwareInfo
     {
         public string Name { get; set; }
         public string Version { get; set; }

@@ -33,18 +33,19 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 13);
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(560, 400);
+            this.textBox1.Size = new System.Drawing.Size(835, 453);
             this.textBox1.TabIndex = 0;
             // 
             // TestComputerInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 425);
+            this.ClientSize = new System.Drawing.Size(835, 453);
             this.Controls.Add(this.textBox1);
             this.Name = "TestComputerInfoForm";
             this.Text = "TestComputerInfoForm";

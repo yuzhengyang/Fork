@@ -7,6 +7,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Y.Utils.DataUtils.Collections;
+using Y.Utils.DataUtils.UnitConvertUtils;
+using Y.Utils.SoftwareUtils;
 using Y.Utils.WindowsUtils.InfoUtils;
 
 namespace Y.Test.Views
@@ -19,6 +22,17 @@ namespace Y.Test.Views
         }
         private void TestComputerInfoForm_Load(object sender, EventArgs e)
         {
+            var softwareinfos = Utils.SoftwareUtils.SoftwareTool.GetControlList();
+            if (ListTool.HasElements(softwareinfos))
+            {
+                softwareinfos.ForEach(x =>
+                {
+                    if (x.Name != "")
+                        Print(string.Format("{0} / 【{1}】 / {2} / {3} 【{4}】",
+                            x.Name, x.InstallDate, x.Publisher, x.Version,
+                            ByteConvertTool.Fmt(x.EstimatedSize * 1024)));
+                });
+            }
         }
         private void Print(string s)
         {
@@ -56,41 +70,5 @@ namespace Y.Test.Views
             Print("主板 制造商 " + boardinfo.Item1 + " 型号 " + boardinfo.Item2 + " 序列号 " + boardinfo.Item3);
         }
 
-        private void GetSoftInfo()
-        {
-            string temp = null, tempType = null;
-            object displayName = null, uninstallString = null, releaseType = null;
-            RegistryKey currentKey = null;
-            int softNum = 0;
-            RegistryKey pregkey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");//获取指定路径下的键
-            try
-            {
-                foreach (string item in pregkey.GetSubKeyNames())               //循环所有子键
-                {
-                    currentKey = pregkey.OpenSubKey(item);
-                    displayName = currentKey.GetValue("DisplayName");           //获取显示名称
-                    uninstallString = currentKey.GetValue("UninstallString");   //获取卸载字符串路径
-                    releaseType = currentKey.GetValue("ReleaseType");           //发行类型,值是Security Update为安全更新,Update为更新
-                    bool isSecurityUpdate = false;
-                    if (releaseType != null)
-                    {
-                        tempType = releaseType.ToString();
-                        if (tempType == "Security Update" || tempType == "Update")
-                            isSecurityUpdate = true;
-                    }
-                    if (!isSecurityUpdate && displayName != null && uninstallString != null)
-                    {
-                        softNum++;
-                        temp += displayName.ToString() + Environment.NewLine;
-                    }
-                }
-            }
-            catch (Exception E)
-            {
-                MessageBox.Show(E.Message.ToString());
-            }
-            richTextBox1.Text = "您本机安装了" + softNum.ToString() + "个" + Environment.NewLine + temp;
-            pregkey.Close();
-        }
     }
 }
