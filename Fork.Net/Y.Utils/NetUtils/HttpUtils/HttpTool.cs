@@ -100,7 +100,6 @@ namespace Y.Utils.NetUtils.HttpUtils
         {
             string rs = null;
             ServicePointManager.DefaultConnectionLimit = 300;
-            System.GC.Collect();
             CookieContainer cookieContainer = new CookieContainer();
             // 设置提交的相关参数
             HttpWebRequest request = null;
@@ -196,6 +195,55 @@ namespace Y.Utils.NetUtils.HttpUtils
                 }
             }
             return rs;
+        }
+        public static T PostJson<T>(string url, string param, string encoding = "utf-8")
+        {
+            ServicePointManager.DefaultConnectionLimit = 300;
+            CookieContainer cookieContainer = new CookieContainer();
+            // 设置提交的相关参数
+            HttpWebRequest request = null;
+            HttpWebResponse SendSMSResponse = null;
+            Stream dataStream = null;
+            StreamReader SendSMSResponseStream = null;
+            try
+            {
+                Encoding myEncoding = Encoding.GetEncoding(encoding);
+                request = WebRequest.Create(url) as HttpWebRequest;
+                request.Method = "POST";
+                request.KeepAlive = false;
+                request.ServicePoint.ConnectionLimit = 300;
+                request.AllowAutoRedirect = true;
+                request.Timeout = 10000;
+                request.ReadWriteTimeout = 10000;
+                request.ContentType = "application/json";
+                request.Accept = "application/xml";
+                request.Headers.Add("X-Auth-Token", HttpUtility.UrlEncode("OpenStack"));
+                string strContent = param;
+                byte[] bytes = myEncoding.GetBytes(strContent);
+                request.Proxy = null;
+                request.CookieContainer = cookieContainer;
+                using (dataStream = request.GetRequestStream())
+                {
+                    dataStream.Write(bytes, 0, bytes.Length);
+                }
+                SendSMSResponse = (HttpWebResponse)request.GetResponse();
+                if (SendSMSResponse.StatusCode != HttpStatusCode.RequestTimeout)
+                {
+                    SendSMSResponseStream = new StreamReader(SendSMSResponse.GetResponseStream(), Encoding.GetEncoding("utf-8"));
+                    string response = SendSMSResponseStream.ReadToEnd();
+                    T result = JsonConvert.DeserializeObject<T>(response);
+                    return result;
+                }
+            }
+            catch (Exception e) { }
+            finally
+            {
+                if (dataStream != null) dataStream.Close();
+                if (SendSMSResponseStream != null) SendSMSResponseStream.Close();
+                if (SendSMSResponse != null) SendSMSResponse.Close();
+                if (request != null) request.Abort();
+            }
+            return default(T);
         }
 
         /// <summary>

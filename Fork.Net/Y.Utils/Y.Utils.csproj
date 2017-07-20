@@ -88,6 +88,8 @@
     <Compile Include="IOUtils\FileUtils\FileTool.cs" />
     <Compile Include="SoftwareUtils\SoftwareInfo.cs" />
     <Compile Include="SoftwareUtils\SoftwareTool.cs" />
+    <Compile Include="TaskServiceUtils\TaskServiceDaddy.cs" />
+    <Compile Include="TaskServiceUtils\TestTaskService.cs" />
     <Compile Include="WindowsUtils\APIUtils\FormStyleAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ClipboardTool.cs" />
