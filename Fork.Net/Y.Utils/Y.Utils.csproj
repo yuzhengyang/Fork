@@ -139,7 +139,6 @@
     <Compile Include="DataUtils\DateTimeUtils\UnixTimeTool.cs" />
     <Compile Include="IOUtils\ImageUtils\ScreenCapture.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ShortcutTool.cs" />
-    <Compile Include="WindowsUtils\InfoUtils\SoftwareTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\TaskSchedulerTool.cs" />
     <Compile Include="WindowsUtils\ProcessUtils\ProcessInfoTool.cs" />
     <Compile Include="WindowsUtils\ProcessUtils\ProcessTool.cs" />
