@@ -56,6 +56,7 @@
     <Compile Include="DataUtils\StringUtils\NumberStringTool.cs" />
     <Compile Include="DelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProgressEventArgs.cs" />
+    <Compile Include="DllUtils\DllInvokeTool.cs" />
     <Compile Include="DrawUtils\ColorUtils\ColorPalette.cs" />
     <Compile Include="DrawUtils\ColorUtils\ColorStyle.cs" />
     <Compile Include="DrawUtils\ColorUtils\ColorTool.cs" />

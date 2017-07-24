@@ -1,13 +1,24 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.7.24
+//      desc:       日期转换周
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using System;
 
 namespace Y.Utils.DataUtils.DateTimeUtils
 {
+    /// <summary>
+    /// 日期转换周
+    /// </summary>
     public class WeekDayTool
     {
+        /// <summary>
+        /// 显示日期为周几
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static string ToWeekDay(DateTime date)
         {
             string result = "";
