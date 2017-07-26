@@ -81,8 +81,11 @@ namespace Y.Skin.YoForm.NoTitle
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            FormStyleAPI.ReleaseCapture();
-            FormStyleAPI.SendMessage(Handle, FormStyleAPI.WM_NCLBUTTONDOWN, FormStyleAPI.HTCAPTION, 0);
+            if (e.Button == MouseButtons.Left)
+            {
+                FormStyleAPI.ReleaseCapture();
+                FormStyleAPI.SendMessage(Handle, FormStyleAPI.WM_NCLBUTTONDOWN, FormStyleAPI.HTCAPTION, 0);
+            }
         }
         /// <summary>
         /// 设置窗口边框
