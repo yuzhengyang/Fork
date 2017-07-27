@@ -49,6 +49,18 @@
     <Compile Include="YoButton\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="YoForm\CustomTitle\DarkTitleHorizontalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YoForm\CustomTitle\DarkTitleHorizontalForm.Designer.cs">
+      <DependentUpon>DarkTitleHorizontalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YoForm\CustomTitle\DarkTitleVerticalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YoForm\CustomTitle\DarkTitleVerticalForm.Designer.cs">
+      <DependentUpon>DarkTitleVerticalForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="YoForm\Irregular\IrregularForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +72,12 @@
     </Compile>
     <Compile Include="YoForm\Irregular\IrregularFormSkin.Designer.cs">
       <DependentUpon>IrregularFormSkin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YoForm\CustomTitle\DarkTitleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YoForm\CustomTitle\DarkTitleForm.Designer.cs">
+      <DependentUpon>DarkTitleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="YoForm\NoTitle\NoTitleForm.cs">
       <SubType>Form</SubType>
@@ -108,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="YoForm\Irregular\IrregularFormSkin.resx">
       <DependentUpon>IrregularFormSkin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YoForm\CustomTitle\DarkTitleForm.resx">
+      <DependentUpon>DarkTitleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="YoForm\NoTitle\NoTitleForm.resx">
       <DependentUpon>NoTitleForm.cs</DependentUpon>
