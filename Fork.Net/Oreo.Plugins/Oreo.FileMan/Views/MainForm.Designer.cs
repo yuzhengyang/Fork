@@ -31,15 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.TpFIleType = new System.Windows.Forms.TabPage();
-            this.fileTypePartial1 = new Oreo.FileMan.Partials.FileTypePartial();
             this.TpFileEncrypt = new System.Windows.Forms.TabPage();
             this.fileEncryptPartial1 = new Oreo.FileMan.Partials.FileEncryptPartial();
             this.TpFileDecrypt = new System.Windows.Forms.TabPage();
             this.fileDecryptPartial1 = new Oreo.FileMan.Partials.FileDecryptPartial();
             this.TpFileBackup = new System.Windows.Forms.TabPage();
             this.fileBackupPartial1 = new Oreo.FileMan.Partials.FileBackupPartial();
-            this.LbFileType = new System.Windows.Forms.Label();
             this.LbFileBackup = new System.Windows.Forms.Label();
             this.LbFileEncrypt = new System.Windows.Forms.Label();
             this.LbTitle = new System.Windows.Forms.Label();
@@ -58,7 +55,6 @@
             this.PnBotton = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
-            this.TpFIleType.SuspendLayout();
             this.TpFileEncrypt.SuspendLayout();
             this.TpFileDecrypt.SuspendLayout();
             this.TpFileBackup.SuspendLayout();
@@ -71,7 +67,6 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.TpFIleType);
             this.tabControl1.Controls.Add(this.TpFileEncrypt);
             this.tabControl1.Controls.Add(this.TpFileDecrypt);
             this.tabControl1.Controls.Add(this.TpFileBackup);
@@ -80,26 +75,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(660, 358);
             this.tabControl1.TabIndex = 13;
-            // 
-            // TpFIleType
-            // 
-            this.TpFIleType.Controls.Add(this.fileTypePartial1);
-            this.TpFIleType.Location = new System.Drawing.Point(4, 22);
-            this.TpFIleType.Name = "TpFIleType";
-            this.TpFIleType.Padding = new System.Windows.Forms.Padding(3);
-            this.TpFIleType.Size = new System.Drawing.Size(652, 332);
-            this.TpFIleType.TabIndex = 0;
-            this.TpFIleType.Text = "文件分类";
-            this.TpFIleType.UseVisualStyleBackColor = true;
-            // 
-            // fileTypePartial1
-            // 
-            this.fileTypePartial1.BackColor = System.Drawing.Color.White;
-            this.fileTypePartial1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileTypePartial1.Location = new System.Drawing.Point(3, 3);
-            this.fileTypePartial1.Name = "fileTypePartial1";
-            this.fileTypePartial1.Size = new System.Drawing.Size(646, 326);
-            this.fileTypePartial1.TabIndex = 0;
             // 
             // TpFileEncrypt
             // 
@@ -158,19 +133,6 @@
             this.fileBackupPartial1.Name = "fileBackupPartial1";
             this.fileBackupPartial1.Size = new System.Drawing.Size(646, 326);
             this.fileBackupPartial1.TabIndex = 0;
-            // 
-            // LbFileType
-            // 
-            this.LbFileType.AutoSize = true;
-            this.LbFileType.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LbFileType.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LbFileType.ForeColor = System.Drawing.Color.White;
-            this.LbFileType.Location = new System.Drawing.Point(365, 42);
-            this.LbFileType.Name = "LbFileType";
-            this.LbFileType.Size = new System.Drawing.Size(52, 27);
-            this.LbFileType.TabIndex = 14;
-            this.LbFileType.Text = "分类";
-            this.LbFileType.Click += new System.EventHandler(this.LbFileType_Click);
             // 
             // LbFileBackup
             // 
@@ -351,14 +313,12 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LbFileBackup);
             this.Controls.Add(this.LbFileEncrypt);
-            this.Controls.Add(this.LbFileType);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
-            this.TpFIleType.ResumeLayout(false);
             this.TpFileEncrypt.ResumeLayout(false);
             this.TpFileDecrypt.ResumeLayout(false);
             this.TpFileBackup.ResumeLayout(false);
@@ -374,8 +334,6 @@
 
         #endregion
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage TpFIleType;
-        private System.Windows.Forms.Label LbFileType;
         private System.Windows.Forms.Label LbFileBackup;
         private System.Windows.Forms.Label LbFileEncrypt;
         private System.Windows.Forms.TabPage TpFileEncrypt;
@@ -389,7 +347,6 @@
         private System.Windows.Forms.Panel PnBody;
         private Partials.FileEncryptPartial fileEncryptPartial1;
         private Partials.FileDecryptPartial fileDecryptPartial1;
-        private Partials.FileTypePartial fileTypePartial1;
         private System.Windows.Forms.NotifyIcon NiMain;
         private System.Windows.Forms.Panel PnMain;
         private System.Windows.Forms.Panel PnBotton;

@@ -46,7 +46,6 @@ namespace Oreo.FileMan.Views
         }
         void ChangeTabColor(Label now)
         {
-            LbFileType.ForeColor = TabLabelColor;
             LbFileEncrypt.ForeColor = TabLabelColor;
             LbFileDecrypt.ForeColor = TabLabelColor;
             LbFileBackup.ForeColor = TabLabelColor;
