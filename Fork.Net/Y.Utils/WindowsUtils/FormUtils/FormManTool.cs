@@ -24,12 +24,18 @@ namespace Y.Utils.WindowsUtils.FormUtils
         public List<Form> AllForms { get { return _AllForms; } }
         private List<Form> _AllForms = new List<Form>();
 
+
+        public bool Add<T>(T value) where T : Form
+        { 
+            _AllForms.Add(value);
+            return true;
+        }
         /// <summary>
-        /// 获取窗体对象
+        /// 获取唯一窗体对象
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T Get<T>() where T : Form, new()
+        public T GetUnique<T>() where T : Form, new()
         {
             if (UniqueForms.ContainsKey(typeof(T)))
             {
@@ -53,13 +59,19 @@ namespace Y.Utils.WindowsUtils.FormUtils
 
             // 未能返回正确的窗体，则创建新窗体（使用默认new方法）
             T form = new T();
-            if (UniqueForms.TryAdd(typeof(T), form))
-            {
-                // 添加到字典成功后，返回当前窗体对象
-                _AllForms.Add(form);
-                return form;
-            }
+            if (AddUnique(form)) return form;
             return null;
+        }
+        private bool AddUnique<T>(T value) where T : Form, new()
+        {
+            if (!UniqueForms.ContainsKey(typeof(T)))
+            {
+                if (UniqueForms.TryAdd(typeof(T), value))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
