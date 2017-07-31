@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="DataUtils\Collections\FormDictionaryTool.cs" />
     <Compile Include="DataUtils\RandomUtils\RandomTool.cs" />
     <Compile Include="DataUtils\StringUtils\NumberStringTool.cs" />
     <Compile Include="DelegateUtils\ProgressDelegate.cs" />
