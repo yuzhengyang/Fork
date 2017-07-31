@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Y.Utils.DataUtils.Collections;
+using Y.Utils.WindowsUtils.FormUtils;
 
 namespace Y.Test.Commons
 {
     public static class R
     {
-        public static FormDictionaryTool FD = new FormDictionaryTool();
+        public static FormManTool Forms = new FormManTool();
 
-        public static void Test()
-        {
-            FD.Get();
-        }
     }
 }
