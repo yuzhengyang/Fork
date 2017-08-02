@@ -19,12 +19,17 @@ namespace Y.Test.Views
 
         private void ChineseCalendarForm_Click(object sender, EventArgs e)
         {
-            R.Forms.Get<ChineseCalendarForm>().Show();
+            R.Forms.GetUnique<ChineseCalendarForm>().Show();
         }
 
         private void TestComputerInfoForm_Click(object sender, EventArgs e)
         {
-            R.Forms.Get<TestComputerInfoForm>().Show();
+            R.Forms.GetUnique<TestComputerInfoForm>().Show();
+        }
+
+        private void TestUpdateForm_Click(object sender, EventArgs e)
+        {
+            R.Forms.GetUnique<TestUpdateForm>().Show();
         }
     }
 }

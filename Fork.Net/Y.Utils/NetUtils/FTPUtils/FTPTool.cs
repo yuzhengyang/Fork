@@ -100,7 +100,7 @@ namespace Y.Utils.NetUtils.FTPUtils
                 {
                     using (Stream responseStream = response.GetResponseStream())
                     {
-                        using (FileStream fs = new FileStream(localFile, FileMode.CreateNew))
+                        using (FileStream fs = new FileStream(localFile, FileMode.Create))
                         {
                             byte[] buffer = new byte[1024 * 1024];
                             int read = 0;

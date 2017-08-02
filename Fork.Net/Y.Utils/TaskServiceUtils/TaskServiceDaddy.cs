@@ -9,6 +9,20 @@ namespace Y.Utils.TaskServiceUtils
 {
     public abstract class TaskServiceDaddy
     {
+        private DateTime StartTime, LastRunTime;
+
+        /// <summary>
+        /// 通过运行时间判断是否运行
+        /// </summary>
+        public bool IsRun
+        {
+            get
+            {
+                if (LastRunTime.AddSeconds(Interval + 1000) > DateTime.Now)
+                    return true;
+                return false;
+            }
+        }
         /// <summary>
         /// 已启动
         /// </summary>
@@ -44,6 +58,7 @@ namespace Y.Utils.TaskServiceUtils
         /// </summary>
         public virtual void Start()
         {
+            StartTime = DateTime.Now;
             if (!IsDestroy)
                 Task.Factory.StartNew(() =>
                 {
@@ -53,6 +68,7 @@ namespace Y.Utils.TaskServiceUtils
                         BeforeTODO();
                         do
                         {
+                            LastRunTime = DateTime.Now;
                             TODO();
                             Thread.Sleep(Interval);
 

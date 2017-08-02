@@ -30,6 +30,7 @@
         {
             this.ChineseCalendarForm = new System.Windows.Forms.Button();
             this.TestComputerInfoForm = new System.Windows.Forms.Button();
+            this.TestUpdateForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ChineseCalendarForm
@@ -52,11 +53,22 @@
             this.TestComputerInfoForm.UseVisualStyleBackColor = true;
             this.TestComputerInfoForm.Click += new System.EventHandler(this.TestComputerInfoForm_Click);
             // 
+            // TestUpdateForm
+            // 
+            this.TestUpdateForm.Location = new System.Drawing.Point(70, 206);
+            this.TestUpdateForm.Name = "TestUpdateForm";
+            this.TestUpdateForm.Size = new System.Drawing.Size(262, 23);
+            this.TestUpdateForm.TabIndex = 2;
+            this.TestUpdateForm.Text = "TestUpdateForm";
+            this.TestUpdateForm.UseVisualStyleBackColor = true;
+            this.TestUpdateForm.Click += new System.EventHandler(this.TestUpdateForm_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 427);
+            this.Controls.Add(this.TestUpdateForm);
             this.Controls.Add(this.TestComputerInfoForm);
             this.Controls.Add(this.ChineseCalendarForm);
             this.Name = "MainForm";
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.Button ChineseCalendarForm;
         private System.Windows.Forms.Button TestComputerInfoForm;
+        private System.Windows.Forms.Button TestUpdateForm;
     }
 }
