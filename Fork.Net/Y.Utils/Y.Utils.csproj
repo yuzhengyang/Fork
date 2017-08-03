@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppUtils\AppLaunchTool.cs" />
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="UpdateUtils\AppUpdateInfo.cs" />
     <Compile Include="UpdateUtils\AppUpdateTool.cs" />

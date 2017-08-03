@@ -120,7 +120,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// -11; //要解包的文件不存在
         /// -12;//要解包的目标文件夹已存在
         /// -20;// 文件类型不匹配
-        /// -404;//未知错误，操作失败
+        /// -99;//未知错误，操作失败
         /// </returns>
         public static int Unpack(string srcFile, string dstPath, ProgressDelegate.ProgressHandler progress = null, object sender = null, bool overwrite = true)
         {
@@ -197,7 +197,7 @@ namespace Y.Utils.IOUtils.FileUtils
                 }
                 catch (Exception e) { }
             }
-            return -404;//未知错误，操作失败
+            return -99;//未知错误，操作失败
         }
 
 

@@ -37,11 +37,11 @@ namespace Y.Utils.UpdateUtils
         /// <param name="releaseprogress">释放进度回调</param>
         /// <param name="releasesender">释放进度事件数据</param>
         /// <returns>
-        /// -10;//无最新版本，停止操作
-        /// -20;//请求服务器最新版本失败
-        /// -30;//新版本号格式不正确，解析失败
-        /// -40;//文件下载失败
-        /// -50;//文件释放失败
+        /// -10000;//无最新版本，停止操作
+        /// -20000;//请求服务器最新版本失败
+        /// -30000;//新版本号格式不正确，解析失败
+        /// -40000;//文件下载失败
+        /// -50000;//文件释放失败
         /// </returns>
         public int Update(string name, Version version, string url, string path, Dictionary<string, string> dictionary,
             ProgressDelegate.ProgressHandler downprogress = null, object downsender = null,
@@ -54,7 +54,7 @@ namespace Y.Utils.UpdateUtils
             if (info != null)
             {
                 Version newVersion = GerVersion(info.Version);
-                if (newVersion == null) return -30;//新版本号格式不正确，解析失败
+                if (newVersion == null) return -30000;//新版本号格式不正确，解析失败
 
                 if (newVersion > version)
                 {
@@ -66,29 +66,30 @@ namespace Y.Utils.UpdateUtils
                         //格式化释放文件目录
                         string releasepath = AppDirTool.Get(info.ReleasePath, dictionary);
                         //释放文件
-                        if (FilePackageTool.Unpack(downfile, releasepath, releaseprogress, releasesender) > 0)
+                        int unpackCode = 0;
+                        if ((unpackCode = FilePackageTool.Unpack(downfile, releasepath, releaseprogress, releasesender)) > 0)
                         {
                             stopwatch.Stop();
                             return (int)stopwatch.Elapsed.TotalSeconds;
                         }
                         else
                         {
-                            return -50;//文件释放失败
+                            return -50000 + unpackCode;//文件释放失败
                         }
                     }
                     else
                     {
-                        return -40;//文件下载失败
+                        return -40000;//文件下载失败
                     }
                 }
                 else
                 {
-                    return -10;//无最新版本，停止操作
+                    return -10000;//无最新版本，停止操作
                 }
             }
             else
             {
-                return -20;//请求服务器最新版本失败
+                return -20000;//请求服务器最新版本失败
             }
         }
         private Version GerVersion(string s)

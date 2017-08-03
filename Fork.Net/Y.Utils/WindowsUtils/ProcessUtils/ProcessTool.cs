@@ -64,6 +64,24 @@ namespace Y.Utils.WindowsUtils.ProcessUtils
             }
         }
 
+        public static bool Start(string file, string args = "")
+        {
+            try
+            {
+                if (File.Exists(file))
+                {
+                    Process p = new Process();
+                    p.StartInfo.FileName = file;
+                    p.StartInfo.Arguments = "";
+                    p.StartInfo.UseShellExecute = true;
+                    p.Start();
+                    p.WaitForInputIdle(3000);
+                    return true;
+                }
+            }
+            catch (Exception ex) { }
+            return false;
+        }
         public static void Starts(string[] files)
         {
             if (ListTool.HasElements(files))

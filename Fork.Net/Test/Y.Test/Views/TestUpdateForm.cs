@@ -5,12 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Y.Test.Commons;
-using Y.Utils.AppUtils.UpdateUtils;
 using Y.Utils.DataUtils.JsonUtils;
 using Y.Utils.DelegateUtils;
+using Y.Utils.IOUtils.FileUtils;
 using Y.Utils.IOUtils.TxtUtils;
+using Y.Utils.UpdateUtils;
 
 namespace Y.Test.Views
 {
@@ -23,22 +25,27 @@ namespace Y.Test.Views
 
         private void TestUpdateForm_Load(object sender, EventArgs e)
         {
-
+            FilePackageTool.Pack(@"D:\Temp\AppUpdate\Temp\6.0.0.2版本打包", @"D:\FTP\AppUpdateBag\Oreo.NetMan[6.0.0.2].updatebag");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AppUpdateTool aut = new AppUpdateTool();
-            aut.Update("Oreo.NetMan", new Version(Application.ProductVersion),
-                "http://localhost:20001/Update/Get?name=lalala",
-                R.Paths.Temp, R.Paths.Relative,
-                UIDownProgress, null, UIUnpackProgress, null);
+            Task.Factory.StartNew(() =>
+            {
+                AppUpdateTool aut = new AppUpdateTool();
+                int updateCode = aut.Update("Oreo.NetMan", new Version(Application.ProductVersion),
+                    "http://localhost:20001/Update/Get?name=lalala",
+                    R.Paths.Temp, R.Paths.Relative,
+                    UIDownProgress, null, UIUnpackProgress, null);
+                UIUpdateCode(updateCode);
+            });
         }
         private void UIDownProgress(object sender, ProgressEventArgs e)
         {
             BeginInvoke(new Action(() =>
             {
                 progressBar1.Value = (int)(e.Current * 100 / e.Total);
+                label1.Text = string.Format("{0} / {1}", e.Current, e.Total);
             }));
         }
         private void UIUnpackProgress(object sender, ProgressEventArgs e)
@@ -46,6 +53,14 @@ namespace Y.Test.Views
             BeginInvoke(new Action(() =>
             {
                 progressBar2.Value = (int)(e.Current * 100 / e.Total);
+                label2.Text = string.Format("{0} / {1}", e.Current, e.Total);
+            }));
+        }
+        private void UIUpdateCode(int code)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                label3.Text = code.ToString();
             }));
         }
     }
