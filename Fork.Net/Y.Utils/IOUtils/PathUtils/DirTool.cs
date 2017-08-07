@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.3.29 - 2017.6.27
+//      date:       2017.3.29 - 2017.8.7
 //      desc:       文件目录工具类
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Y.Utils.DataUtils.Collections;
+using Y.Utils.DataUtils.StringUtils;
 
 namespace Y.Utils.IOUtils.PathUtils
 {
@@ -49,12 +50,20 @@ namespace Y.Utils.IOUtils.PathUtils
         /// <returns></returns>
         public static string Parent(string path)
         {
-            try
+            string p = path;
+            if (!string.IsNullOrWhiteSpace(p))
             {
-                return Directory.GetParent(path).ToString();
+                while (p.EndsWith("\\")) p = p.Substring(0, p.Length - 1);
+                if (StringTool.SubStringCount(p, "\\") >= 1)
+                {
+                    try
+                    {
+                        return Directory.GetParent(p).ToString();
+                    }
+                    catch (Exception e) { }
+                }
             }
-            catch (Exception e) { }
-            return null;
+            return p;
         }
         /// <summary>
         /// 获取目录下的目录（一层）

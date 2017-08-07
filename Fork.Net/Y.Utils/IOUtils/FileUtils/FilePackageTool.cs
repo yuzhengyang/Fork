@@ -40,6 +40,7 @@ namespace Y.Utils.IOUtils.FileUtils
         /// -11;//要打包的路径不存在
         /// -12;//打包后的目标文件已存在
         /// -13;//要打包的路径中没有文件
+        /// -14;//输出文件夹不存在
         /// -404;//未知错误，操作失败
         /// </returns>
         public static int Pack(string srcPath, string dstFile, ProgressDelegate.ProgressHandler progress = null, object sender = null, bool overwrite = true)
@@ -47,6 +48,7 @@ namespace Y.Utils.IOUtils.FileUtils
             DateTime beginTime = DateTime.Now;
             if (!Directory.Exists(srcPath)) return -11;//要打包的路径不存在
             if (File.Exists(dstFile) && !overwrite) return -12;//打包后的目标文件已存在
+            if (!DirTool.Create(DirTool.GetFilePath(dstFile))) return -14;//输出文件夹不存在
 
             List<string> tempfiles = FileTool.GetAllFile(srcPath);
             List<FilePackageModel> files = CreateFilePackageModel(tempfiles, srcPath);
