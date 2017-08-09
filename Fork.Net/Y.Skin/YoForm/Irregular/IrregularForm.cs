@@ -4,6 +4,7 @@
 //############################################################
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -111,6 +112,11 @@ namespace Y.Skin.YoForm.Irregular
                 Hide();
                 Skin.Hide();
             }
+        }
+        public void SetBackground(Image img)
+        {
+            Skin.BackgroundImage = img;
+            Skin.SetBits();
         }
     }
 }
