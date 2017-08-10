@@ -78,6 +78,37 @@ namespace Y.Utils.NetUtils.HttpUtils
             { }
             return result;
         }
+        public static T Post<T>(string url, string param, string encoding = "utf-8")
+        {
+            try
+            {
+                Encoding myEncoding = Encoding.GetEncoding(encoding);
+                byte[] byteArray = myEncoding.GetBytes(param); //转化
+                HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(new Uri(url));
+                webReq.Method = "POST";
+                webReq.ContentType = "application/x-www-form-urlencoded";
+                webReq.ContentLength = byteArray.Length;
+                using (Stream newStream = webReq.GetRequestStream())
+                {
+                    newStream.Write(byteArray, 0, byteArray.Length);//写入参数
+                    newStream.Close();
+                    using (HttpWebResponse response = (HttpWebResponse)webReq.GetResponse())
+                    {
+                        using (StreamReader sr = new StreamReader(response.GetResponseStream(), myEncoding))
+                        {
+                            string txt = sr.ReadToEnd();
+                            if (!string.IsNullOrWhiteSpace(txt))
+                            {
+                                T result = JsonConvert.DeserializeObject<T>(txt);
+                                return result;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { }
+            return default(T);
+        }
         //public static string PostJson(string url, string param)
         //{
         //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);

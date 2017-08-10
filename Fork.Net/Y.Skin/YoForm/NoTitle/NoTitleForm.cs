@@ -146,6 +146,43 @@ namespace Y.Skin.YoForm.NoTitle
             //Graphics g = CreateGraphics();
             //g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(0, 0, Width, Height));
         }
-
+        /// <summary>
+        /// 设置控件是否可用
+        /// </summary>
+        /// <param name="ctrl"></param>
+        /// <param name="enable"></param>
+        public void UIEnable(Control ctrl, bool enable = true)
+        {
+            try
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    ctrl.Enabled = enable;
+                }));
+            }
+            catch (Exception e) { }
+        }
+        public void UIVisible(Control ctrl, bool enable = true)
+        {
+            try
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    ctrl.Visible = enable;
+                }));
+            }
+            catch (Exception e) { }
+        }
+        public void UIClose()
+        {
+            try
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    Close();
+                }));
+            }
+            catch (Exception e) { }
+        }
     }
 }
