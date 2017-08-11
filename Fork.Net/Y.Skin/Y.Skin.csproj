@@ -110,7 +110,9 @@
       <DependentUpon>FlexiblePanel.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="YoTextBox\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Y.Utils\Y.Utils.csproj">
       <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>

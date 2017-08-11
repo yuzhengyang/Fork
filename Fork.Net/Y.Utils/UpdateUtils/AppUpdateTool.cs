@@ -35,12 +35,12 @@ namespace Y.Utils.UpdateUtils
         /// -10;//请求版本失败
         /// -20;//没有更新的版本
         /// </returns>
-        public int GetNewVersion(string url, string name, Version version, out AppUpdateInfo info)
+        public int GetNewVersion(string url, Version version, out AppUpdateInfo info)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            info = HttpTool.Get<AppUpdateInfo>(string.Format("{0}?name={1}", url, name));
+            info = HttpTool.Get<AppUpdateInfo>(url);
             if (info != null)
             {
                 Version newVersion = FormatVersion(info.Version);

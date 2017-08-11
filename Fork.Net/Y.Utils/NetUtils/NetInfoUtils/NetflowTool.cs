@@ -39,7 +39,7 @@ namespace Y.Utils.NetUtils.NetInfoUtils
 
         private List<PerformanceCounter> UploadCounter, DownloadCounter;//上行、下行流量计数器
         private int DataCounterInterval = 1000;//数据流量计数器计数周期
-        private bool DataMonitorSwitch = false;
+        private bool IsStart = false;
 
         public delegate void MonitorEvent(NetFlowTool n);
         public MonitorEvent DataMonitorEvent;
@@ -79,14 +79,14 @@ namespace Y.Utils.NetUtils.NetInfoUtils
         }
         public bool Start(int interval = 1000)
         {
-            if (Init() && !DataMonitorSwitch)
+            if (Init() && !IsStart)
             {
                 DataCounterInterval = interval;
-                DataMonitorSwitch = true;
+                IsStart = true;
 
                 Task.Factory.StartNew(() =>
                 {
-                    while (DataMonitorSwitch)
+                    while (IsStart)
                     {
                         DataMonitorEvent?.Invoke(this);
                         try
@@ -117,27 +117,33 @@ namespace Y.Utils.NetUtils.NetInfoUtils
         }
         public void Restart()
         {
-            foreach (var uc in UploadCounter)
+            if (IsStart)
             {
-                uc?.Close();
-            }
-            foreach (var dc in DownloadCounter)
-            {
-                dc?.Close();
+                foreach (var uc in UploadCounter)
+                {
+                    uc?.Close();
+                }
+                foreach (var dc in DownloadCounter)
+                {
+                    dc?.Close();
+                }
             }
 
             Init();
         }
         public void Stop()
         {
-            DataMonitorSwitch = false;
-            foreach (var uc in UploadCounter)
+            if (IsStart)
             {
-                uc?.Close();
-            }
-            foreach (var dc in DownloadCounter)
-            {
-                dc?.Close();
+                IsStart = false;
+                foreach (var uc in UploadCounter)
+                {
+                    uc?.Close();
+                }
+                foreach (var dc in DownloadCounter)
+                {
+                    dc?.Close();
+                }
             }
         }
         /// <summary>

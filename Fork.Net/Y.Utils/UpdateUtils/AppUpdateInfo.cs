@@ -26,6 +26,10 @@ namespace Y.Utils.UpdateUtils
         /// </summary>
         public string Version { get; set; }
         /// <summary>
+        /// 必要更新
+        /// </summary>
+        public bool Necessary { get; set; }
+        /// <summary>
         /// 新版本描述（Readme）
         /// </summary>
         public string Desc { get; set; }

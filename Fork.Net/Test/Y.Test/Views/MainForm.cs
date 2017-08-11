@@ -31,5 +31,10 @@ namespace Y.Test.Views
         {
             R.Forms.GetUnique<TestUpdateForm>().Show();
         }
+
+        private void TestPackForm_Click(object sender, EventArgs e)
+        {
+            R.Forms.GetUnique<TestPackForm>().Show();
+        }
     }
 }

@@ -83,7 +83,8 @@ namespace Y.Utils.IOUtils.FileUtils
                         //循环写入文件
                         files.ForEach(x =>
                         {
-                            using (FileStream fsRead = new FileStream(DirTool.Combine(srcPath, x.Path, x.Name), FileMode.Open))
+                            //读取文件（可访问被打开的exe文件）
+                            using (FileStream fsRead = new FileStream(DirTool.Combine(srcPath, x.Path, x.Name), FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                             {
                                 int readCount = 0;
                                 byte[] buffer = new byte[FileBuffer];
@@ -157,27 +158,36 @@ namespace Y.Utils.IOUtils.FileUtils
                             {
                                 if (DirTool.Create(DirTool.Combine(dstPath, x.Path)))
                                 {
-                                    using (FileStream fsWrite = new FileStream(DirTool.Combine(dstPath, x.Path, x.Name), FileMode.Create))
+                                    try
                                     {
-                                        long size = x.Size;
-                                        int readCount = 0;
-                                        byte[] buffer = new byte[FileBuffer];
+                                        using (FileStream fsWrite = new FileStream(DirTool.Combine(dstPath, x.Path, x.Name), FileMode.Create))
+                                        {
+                                            long size = x.Size;
+                                            int readCount = 0;
+                                            byte[] buffer = new byte[FileBuffer];
 
-                                        while (size > FileBuffer)
-                                        {
-                                            readCount = fsRead.Read(buffer, 0, buffer.Length);
-                                            fsWrite.Write(buffer, 0, readCount);
-                                            size -= readCount;
-                                            current += readCount;
-                                            progress?.Invoke(sender, new ProgressEventArgs(current, allfilesize));
+                                            while (size > FileBuffer)
+                                            {
+                                                readCount = fsRead.Read(buffer, 0, buffer.Length);
+                                                fsWrite.Write(buffer, 0, readCount);
+                                                size -= readCount;
+                                                current += readCount;
+                                                progress?.Invoke(sender, new ProgressEventArgs(current, allfilesize));
+                                            }
+                                            if (size <= FileBuffer)
+                                            {
+                                                readCount = fsRead.Read(buffer, 0, (int)size);
+                                                fsWrite.Write(buffer, 0, readCount);
+                                                current += readCount;
+                                                progress?.Invoke(sender, new ProgressEventArgs(current, allfilesize));
+                                            }
                                         }
-                                        if (size <= FileBuffer)
-                                        {
-                                            readCount = fsRead.Read(buffer, 0, (int)size);
-                                            fsWrite.Write(buffer, 0, readCount);
-                                            current += readCount;
-                                            progress?.Invoke(sender, new ProgressEventArgs(current, allfilesize));
-                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        fsRead.Seek(x.Size, SeekOrigin.Current);
+                                        current += x.Size;
+                                        progress?.Invoke(sender, new ProgressEventArgs(current, allfilesize));
                                     }
                                 }
                             });
