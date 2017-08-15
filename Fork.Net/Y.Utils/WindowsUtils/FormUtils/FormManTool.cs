@@ -8,9 +8,11 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Y.Utils.DataUtils.Collections;
 
 namespace Y.Utils.WindowsUtils.FormUtils
 {
@@ -19,15 +21,18 @@ namespace Y.Utils.WindowsUtils.FormUtils
     /// </summary>
     public class FormManTool
     {
+        public Color? BackColor = null;
+
         protected ConcurrentDictionary<Type, Form> UniqueForms = new ConcurrentDictionary<Type, Form>();
 
         public List<Form> AllForms { get { return _AllForms; } }
         private List<Form> _AllForms = new List<Form>();
 
 
-        public bool Add<T>(T value) where T : Form
-        { 
-            _AllForms.Add(value);
+        public bool Add<T>(T form) where T : Form
+        {
+            if (BackColor != null) form.BackColor = (Color)BackColor;
+            _AllForms.Add(form);
             return true;
         }
         /// <summary>
@@ -59,6 +64,7 @@ namespace Y.Utils.WindowsUtils.FormUtils
 
             // 未能返回正确的窗体，则创建新窗体（使用默认new方法）
             T form = new T();
+            if (BackColor != null) form.BackColor = (Color)BackColor;
             if (AddUnique(form)) return form;
             return null;
         }
@@ -72,6 +78,21 @@ namespace Y.Utils.WindowsUtils.FormUtils
                 }
             }
             return false;
+        }
+        /// <summary>
+        /// 设置所有窗体的背景色
+        /// </summary>
+        /// <param name="c"></param>
+        public void SetAllBackColor(Color c)
+        {
+            if (ListTool.HasElements(AllForms))
+            {
+                foreach (var form in AllForms)
+                {
+                    if (form != null && !form.IsDisposed)
+                        form.BackColor = c;
+                }
+            }
         }
     }
 }
