@@ -1,13 +1,14 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.3.29 - 2017.8.3
+//      date:       2017.3.29 - 2017.8.16
 //      desc:       字符串工具类
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using Y.Utils.DataUtils.Collections;
 
 namespace Y.Utils.DataUtils.StringUtils
@@ -63,6 +64,25 @@ namespace Y.Utils.DataUtils.StringUtils
                 return (s.Length - sReplaced.Length) / sub.Length;
             }
             return 0;
+        }
+        /// <summary>
+        /// 根据通配符验证字符串
+        /// </summary>
+        /// <param name="s">字符串</param>
+        /// <param name="pattern">通配符：%和_</param>
+        /// <returns></returns>
+        public static bool IsMatch(string s, string pattern)
+        {
+            try
+            {
+                //key = key.Replace("%", @"[\s\S]*").Replace("_", @"[\s\S]");
+                pattern = pattern.Replace("%", ".*").Replace("_", ".");
+                return Regex.IsMatch(s, pattern);
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

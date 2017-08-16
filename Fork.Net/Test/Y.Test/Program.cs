@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Y.Test.Commons;
@@ -20,15 +21,6 @@ namespace Y.Test
         [STAThread]
         static void Main()
         {
-            //string param = string.Format("id={0}&text={1}", "123123123", "123123123");
-            ////string rs = HttpTool.Post("http://localhost:20001/Data/Post", param);
-            //WebAPIMessageModel rs = HttpTool.Post<WebAPIMessageModel>("http://localhost:20001/Data/Post", param);
-
-            //var a = DirTool.Parent(@"D:\Temp\流量测试\");
-            //var b = DirTool.Parent(@"D:\Temp");
-            //var c = DirTool.Parent(@"D:\");
-            //var d = DirTool.Parent(@"\\\\");
-            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
