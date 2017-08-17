@@ -1,7 +1,10 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.8.17
+//      desc:       日期时间工具
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using System;
 using System.Collections.Generic;
 using System.Text;

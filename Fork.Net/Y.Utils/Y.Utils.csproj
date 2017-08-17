@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AppUtils\AppLaunchTool.cs" />
     <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\DateTool.cs" />
     <Compile Include="UpdateUtils\AppUpdateInfo.cs" />
     <Compile Include="UpdateUtils\AppUpdateTool.cs" />
     <Compile Include="DataUtils\RandomUtils\RandomTool.cs" />
