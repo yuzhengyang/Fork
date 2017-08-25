@@ -14,6 +14,7 @@ namespace Y.Skin.YoForm.Irregular
     public partial class IrregularForm : Form
     {
         private IrregularFormSkin Skin;
+        public  Point MouseLocation { get { return Skin.MouseLocation; } }
         public IrregularForm()
         {
             InitializeComponent();
@@ -26,12 +27,12 @@ namespace Y.Skin.YoForm.Irregular
         {
             if (!DesignMode)
             {
-                Opacity = 0;
                 Skin = new IrregularFormSkin(this);//创建皮肤层
                 BackgroundImage = null;//去除控件层背景
-                Skin.Show();//显示皮肤层 
-                AnimateShow();
-                if (ContextMenuStrip != null) Skin.ContextMenuStrip = ContextMenuStrip;//设置右键菜单
+                Skin.Show();//显示皮肤层
+
+                //设置右键菜单
+                if (ContextMenuStrip != null) Skin.ContextMenuStrip = ContextMenuStrip;
             }
         }
 
@@ -81,21 +82,6 @@ namespace Y.Skin.YoForm.Irregular
             base.AutoScaleMode = AutoScaleMode.None;
         }
         #endregion
-        private void AnimateShow()
-        {
-            Task.Factory.StartNew(() =>
-            {
-                for (int i = 0; i <= 10; i++)
-                {
-                    BeginInvoke(new Action(() =>
-                    {
-                        Opacity = i / 10.0;
-                        Skin.SetBits();
-                    }));
-                    Thread.Sleep(25);
-                }
-            });
-        }
         /// <summary>
         /// 窗体显示状态
         /// </summary>

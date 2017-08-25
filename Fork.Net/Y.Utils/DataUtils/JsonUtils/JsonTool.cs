@@ -1,7 +1,10 @@
-﻿//############################################################
+﻿//************************************************************************
 //      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+//      author:     yuzhengyang
+//      date:       2017.3.29 - 2017.8.24
+//      desc:       Json转换工具类（需要Newtonsoft.Json支持）
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using Newtonsoft.Json;
 using System;
 using Y.Utils.IOUtils.TxtUtils;

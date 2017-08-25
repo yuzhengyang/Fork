@@ -4,6 +4,7 @@
 //############################################################
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -32,27 +33,6 @@ namespace Y.Utils.NetUtils.HttpUtils
             catch (Exception e) { }
             return result;
         }
-        public static T Get<T>(string url, string encoding = "utf-8")
-        {
-            try
-            {
-                Encoding myEncoding = Encoding.GetEncoding(encoding);
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                req.Method = "GET";
-                using (WebResponse wr = req.GetResponse())
-                {
-                    //在这里对接收到的页面内容进行处理
-                    string response = new StreamReader(wr.GetResponseStream(), myEncoding).ReadToEnd();
-                    if (!StringTool.IsNullOrWhiteSpace(response))
-                    {
-                        T result = JsonConvert.DeserializeObject<T>(response);
-                        return result;
-                    }
-                }
-            }
-            catch (Exception e) { }
-            return default(T);
-        }
         public static string Post(string url, string param, string encoding = "utf-8")
         {
             string result = string.Empty;
@@ -77,6 +57,27 @@ namespace Y.Utils.NetUtils.HttpUtils
             catch (Exception ex)
             { }
             return result;
+        }
+        public static T Get<T>(string url, string encoding = "utf-8")
+        {
+            try
+            {
+                Encoding myEncoding = Encoding.GetEncoding(encoding);
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                req.Method = "GET";
+                using (WebResponse wr = req.GetResponse())
+                {
+                    //在这里对接收到的页面内容进行处理
+                    string response = new StreamReader(wr.GetResponseStream(), myEncoding).ReadToEnd();
+                    if (!StringTool.IsNullOrWhiteSpace(response))
+                    {
+                        T result = JsonConvert.DeserializeObject<T>(response);
+                        return result;
+                    }
+                }
+            }
+            catch (Exception e) { }
+            return default(T);
         }
         public static T Post<T>(string url, string param, string encoding = "utf-8")
         {
@@ -109,24 +110,106 @@ namespace Y.Utils.NetUtils.HttpUtils
             catch (Exception ex) { }
             return default(T);
         }
-        //public static string PostJson(string url, string param)
-        //{
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        //    request.Method = "POST";
-        //    request.ContentType = "application/json";
-        //    request.ContentLength = Encoding.UTF8.GetByteCount(param);
-        //    Stream myRequestStream = request.GetRequestStream();
-        //    StreamWriter myStreamWriter = new StreamWriter(myRequestStream, Encoding.GetEncoding("gb2312"));
-        //    myStreamWriter.Write(param);
-        //    myStreamWriter.Close();
-        //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        //    Stream myResponseStream = response.GetResponseStream();
-        //    StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-        //    string retString = myStreamReader.ReadToEnd();
-        //    myStreamReader.Close();
-        //    myResponseStream.Close();
-        //    return retString;
-        //}
+        /// <summary>
+        /// Http Get（返回值：>=0正常，-100编码异常，-200创建web请求异常，-300网络异常，-400返回内容为空）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="what"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static int Get<T>(string url, out T what, string encoding = "utf-8")
+        {
+            DateTime beginTime = DateTime.Now;
+            what = default(T);
+            //设置编码
+            Encoding myEncoding;
+            try { myEncoding = Encoding.GetEncoding(encoding); } catch { return -100; }//编码异常
+
+            //创建web请求
+            HttpWebRequest req;
+            try
+            {
+                req = (HttpWebRequest)WebRequest.Create(url);
+                req.Method = "GET";
+            }
+            catch { return -200; }//创建web请求异常
+
+            //请求数据
+            string txt;
+            try
+            {
+                using (WebResponse wr = req.GetResponse())
+                {
+                    txt = new StreamReader(wr.GetResponseStream(), myEncoding).ReadToEnd();
+                }
+            }
+            catch { return -300; }//网络异常
+
+            //转换模型
+            if (StringTool.IsNullOrWhiteSpace(txt))
+            {
+                return -400;//返回内容为空
+            }
+            else
+            {
+                what = JsonConvert.DeserializeObject<T>(txt);
+                return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
+            }
+        }
+        public static int Post<T>(string url, string param, out T what, string encoding = "utf-8")
+        {
+            DateTime beginTime = DateTime.Now;
+            what = default(T);
+            //设置编码
+            Encoding myEncoding;
+            try { myEncoding = Encoding.GetEncoding(encoding); } catch { return -100; }//编码异常
+
+            //创建web请求
+            HttpWebRequest webReq;
+            byte[] byteArray;
+            try
+            {
+                byteArray = myEncoding.GetBytes(param); //转化参数
+                webReq = (HttpWebRequest)WebRequest.Create(new Uri(url));
+                webReq.Method = "POST";
+                webReq.ContentType = "application/x-www-form-urlencoded";
+                webReq.ContentLength = byteArray.Length;
+            }
+            catch { return -200; }//创建web请求异常
+
+            //请求数据
+            string txt;
+            try
+            {
+                using (Stream newStream = webReq.GetRequestStream())
+                {
+                    newStream.Write(byteArray, 0, byteArray.Length);//写入参数
+                    newStream.Close();
+                    using (HttpWebResponse response = (HttpWebResponse)webReq.GetResponse())
+                    {
+                        using (StreamReader sr = new StreamReader(response.GetResponseStream(), myEncoding))
+                        {
+                            txt = sr.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            catch { return -300; }//网络异常
+
+            //转换模型
+            if (StringTool.IsNullOrWhiteSpace(txt))
+            {
+                return -400;//返回内容为空
+            }
+            else
+            {
+                what = JsonConvert.DeserializeObject<T>(txt);
+                return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
+            }
+        }
+
+        [Obsolete]
         public static string PostJson(string url, string param)
         {
             string rs = null;
@@ -227,6 +310,7 @@ namespace Y.Utils.NetUtils.HttpUtils
             }
             return rs;
         }
+        [Obsolete]
         public static T PostJson<T>(string url, string param, string encoding = "utf-8")
         {
             ServicePointManager.DefaultConnectionLimit = 300;

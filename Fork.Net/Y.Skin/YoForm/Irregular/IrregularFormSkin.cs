@@ -13,6 +13,8 @@ namespace Y.Skin.YoForm.Irregular
 {
     partial class IrregularFormSkin : Form
     {
+        private Point _MouseLocation;
+        internal Point MouseLocation { get { return _MouseLocation; } }
         private IrregularForm Main;
         public IrregularFormSkin(IrregularForm main)
         {
@@ -32,7 +34,10 @@ namespace Y.Skin.YoForm.Irregular
             SetBits();//绘制半透明不规则皮肤
             Location = new Point(Main.Location.X, Main.Location.Y);//统一控件层和皮肤层的位置
         }
+        private void IrregularFormSkin_Load(object sender, EventArgs e)
+        {
 
+        }
         #region 减少闪烁
         private void SetStyles()
         {
@@ -63,7 +68,7 @@ namespace Y.Skin.YoForm.Irregular
             {
                 //绘制绘图层背景
                 Bitmap bitmap = new Bitmap(BackgroundImage, base.Width, base.Height);
-                if (!Bitmap.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Bitmap.IsAlphaPixelFormat(bitmap.PixelFormat))
+                if (!Image.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Image.IsAlphaPixelFormat(bitmap.PixelFormat))
                     throw new ApplicationException("图片必须是32位带Alhpa通道的图片。");
                 IntPtr oldBits = IntPtr.Zero;
                 IntPtr screenDC = FormStyleAPI.GetDC(IntPtr.Zero);
@@ -221,16 +226,12 @@ namespace Y.Skin.YoForm.Irregular
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+            _MouseLocation = e.Location;
             if (e.Button == MouseButtons.Left)
             {
                 FormStyleAPI.ReleaseCapture();
                 FormStyleAPI.SendMessage(Handle, FormStyleAPI.WM_NCLBUTTONDOWN, FormStyleAPI.HTCAPTION, 0);
             }
-        }
-
-        private void IrregularFormSkin_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
