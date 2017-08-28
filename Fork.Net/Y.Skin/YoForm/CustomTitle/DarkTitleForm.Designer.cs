@@ -141,7 +141,7 @@
             // 
             // PBHeadIcon
             // 
-            this.PBHeadIcon.BackColor = System.Drawing.Color.White;
+            this.PBHeadIcon.BackColor = System.Drawing.Color.Transparent;
             this.PBHeadIcon.Location = new System.Drawing.Point(10, 10);
             this.PBHeadIcon.Name = "PBHeadIcon";
             this.PBHeadIcon.Size = new System.Drawing.Size(32, 32);
