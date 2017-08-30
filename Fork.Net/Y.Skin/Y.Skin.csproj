@@ -49,6 +49,12 @@
     <Compile Include="YoButton\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="YoControl\UserControlPlus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="YoControl\UserControlPlus.Designer.cs">
+      <DependentUpon>UserControlPlus.cs</DependentUpon>
+    </Compile>
     <Compile Include="YoForm\CustomTitle\DarkTitleHorizontalForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
   <ItemGroup>
     <EmbeddedResource Include="YoButton\ImageButton.resx">
       <DependentUpon>ImageButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YoControl\UserControlPlus.resx">
+      <DependentUpon>UserControlPlus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="YoForm\Irregular\IrregularForm.resx">
       <DependentUpon>IrregularForm.cs</DependentUpon>
