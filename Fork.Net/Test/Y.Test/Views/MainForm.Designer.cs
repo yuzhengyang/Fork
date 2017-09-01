@@ -32,6 +32,7 @@
             this.TestComputerInfoForm = new System.Windows.Forms.Button();
             this.TestUpdateForm = new System.Windows.Forms.Button();
             this.TestPackForm = new System.Windows.Forms.Button();
+            this.TestIconGroupForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ChineseCalendarForm
@@ -74,11 +75,22 @@
             this.TestPackForm.UseVisualStyleBackColor = true;
             this.TestPackForm.Click += new System.EventHandler(this.TestPackForm_Click);
             // 
+            // TestIconGroupForm
+            // 
+            this.TestIconGroupForm.Location = new System.Drawing.Point(70, 322);
+            this.TestIconGroupForm.Name = "TestIconGroupForm";
+            this.TestIconGroupForm.Size = new System.Drawing.Size(262, 23);
+            this.TestIconGroupForm.TabIndex = 4;
+            this.TestIconGroupForm.Text = "TestIconGroupForm";
+            this.TestIconGroupForm.UseVisualStyleBackColor = true;
+            this.TestIconGroupForm.Click += new System.EventHandler(this.TestIconGroupForm_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 427);
+            this.Controls.Add(this.TestIconGroupForm);
             this.Controls.Add(this.TestPackForm);
             this.Controls.Add(this.TestUpdateForm);
             this.Controls.Add(this.TestComputerInfoForm);
@@ -95,5 +107,6 @@
         private System.Windows.Forms.Button TestComputerInfoForm;
         private System.Windows.Forms.Button TestUpdateForm;
         private System.Windows.Forms.Button TestPackForm;
+        private System.Windows.Forms.Button TestIconGroupForm;
     }
 }

@@ -36,5 +36,10 @@ namespace Y.Test.Views
         {
             R.Forms.GetUnique<TestPackForm>().Show();
         }
+
+        private void TestIconGroupForm_Click(object sender, EventArgs e)
+        {
+            R.Forms.GetUnique<TestIconGroupForm>().Show();
+        }
     }
 }

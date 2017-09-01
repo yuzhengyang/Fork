@@ -112,6 +112,12 @@
     <Compile Include="Views\TestComputerInfoForm.Designer.cs">
       <DependentUpon>TestComputerInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TestIconGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TestIconGroupForm.Designer.cs">
+      <DependentUpon>TestIconGroupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TestInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     <EmbeddedResource Include="Views\TestComputerInfoForm.resx">
       <DependentUpon>TestComputerInfoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\TestIconGroupForm.resx">
+      <DependentUpon>TestIconGroupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\TestInputForm.resx">
       <DependentUpon>TestInputForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -225,6 +234,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\IconGroup\icongroup_01.png" />
+    <Content Include="Images\Temp\temp_01.png" />
+    <Content Include="Images\Temp\temp_02.png" />
+    <Content Include="Images\Temp\temp_03.png" />
     <None Include="FodyWeavers.xml" />
     <Content Include="Images\BackgroundImages\Rainbow.png" />
   </ItemGroup>
