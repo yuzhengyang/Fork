@@ -136,6 +136,12 @@
     <Compile Include="Views\TestPackForm.Designer.cs">
       <DependentUpon>TestPackForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TestShadowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TestShadowForm.Designer.cs">
+      <DependentUpon>TestShadowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TestSimpleTitle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TestPackForm.resx">
       <DependentUpon>TestPackForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TestShadowForm.resx">
+      <DependentUpon>TestShadowForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TestSimpleTitle.resx">
       <DependentUpon>TestSimpleTitle.cs</DependentUpon>

@@ -33,11 +33,12 @@
             this.TestUpdateForm = new System.Windows.Forms.Button();
             this.TestPackForm = new System.Windows.Forms.Button();
             this.TestIconGroupForm = new System.Windows.Forms.Button();
+            this.TestShadowForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ChineseCalendarForm
             // 
-            this.ChineseCalendarForm.Location = new System.Drawing.Point(70, 80);
+            this.ChineseCalendarForm.Location = new System.Drawing.Point(12, 12);
             this.ChineseCalendarForm.Name = "ChineseCalendarForm";
             this.ChineseCalendarForm.Size = new System.Drawing.Size(262, 23);
             this.ChineseCalendarForm.TabIndex = 0;
@@ -47,7 +48,7 @@
             // 
             // TestComputerInfoForm
             // 
-            this.TestComputerInfoForm.Location = new System.Drawing.Point(70, 149);
+            this.TestComputerInfoForm.Location = new System.Drawing.Point(12, 41);
             this.TestComputerInfoForm.Name = "TestComputerInfoForm";
             this.TestComputerInfoForm.Size = new System.Drawing.Size(262, 23);
             this.TestComputerInfoForm.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             // TestUpdateForm
             // 
-            this.TestUpdateForm.Location = new System.Drawing.Point(70, 206);
+            this.TestUpdateForm.Location = new System.Drawing.Point(12, 70);
             this.TestUpdateForm.Name = "TestUpdateForm";
             this.TestUpdateForm.Size = new System.Drawing.Size(262, 23);
             this.TestUpdateForm.TabIndex = 2;
@@ -67,7 +68,7 @@
             // 
             // TestPackForm
             // 
-            this.TestPackForm.Location = new System.Drawing.Point(70, 267);
+            this.TestPackForm.Location = new System.Drawing.Point(12, 99);
             this.TestPackForm.Name = "TestPackForm";
             this.TestPackForm.Size = new System.Drawing.Size(262, 23);
             this.TestPackForm.TabIndex = 3;
@@ -77,7 +78,7 @@
             // 
             // TestIconGroupForm
             // 
-            this.TestIconGroupForm.Location = new System.Drawing.Point(70, 322);
+            this.TestIconGroupForm.Location = new System.Drawing.Point(12, 128);
             this.TestIconGroupForm.Name = "TestIconGroupForm";
             this.TestIconGroupForm.Size = new System.Drawing.Size(262, 23);
             this.TestIconGroupForm.TabIndex = 4;
@@ -85,11 +86,22 @@
             this.TestIconGroupForm.UseVisualStyleBackColor = true;
             this.TestIconGroupForm.Click += new System.EventHandler(this.TestIconGroupForm_Click);
             // 
+            // TestShadowForm
+            // 
+            this.TestShadowForm.Location = new System.Drawing.Point(12, 157);
+            this.TestShadowForm.Name = "TestShadowForm";
+            this.TestShadowForm.Size = new System.Drawing.Size(262, 23);
+            this.TestShadowForm.TabIndex = 5;
+            this.TestShadowForm.Text = "TestShadowForm";
+            this.TestShadowForm.UseVisualStyleBackColor = true;
+            this.TestShadowForm.Click += new System.EventHandler(this.TestShadowForm_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 427);
+            this.Controls.Add(this.TestShadowForm);
             this.Controls.Add(this.TestIconGroupForm);
             this.Controls.Add(this.TestPackForm);
             this.Controls.Add(this.TestUpdateForm);
@@ -108,5 +120,6 @@
         private System.Windows.Forms.Button TestUpdateForm;
         private System.Windows.Forms.Button TestPackForm;
         private System.Windows.Forms.Button TestIconGroupForm;
+        private System.Windows.Forms.Button TestShadowForm;
     }
 }
