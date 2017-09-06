@@ -91,6 +91,18 @@
     <Compile Include="YoForm\NoTitle\NoTitleForm.Designer.cs">
       <DependentUpon>NoTitleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="YoForm\Shadow\ShadowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YoForm\Shadow\ShadowForm.Designer.cs">
+      <DependentUpon>ShadowForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YoForm\Shadow\ShadowFormSkin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YoForm\Shadow\ShadowFormSkin.Designer.cs">
+      <DependentUpon>ShadowFormSkin.cs</DependentUpon>
+    </Compile>
     <Compile Include="YoForm\Toast\ToastForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +155,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="YoForm\NoTitle\NoTitleForm.resx">
       <DependentUpon>NoTitleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YoForm\Shadow\ShadowForm.resx">
+      <DependentUpon>ShadowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YoForm\Shadow\ShadowFormSkin.resx">
+      <DependentUpon>ShadowFormSkin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="YoForm\Toast\ToastForm.resx">
       <DependentUpon>ToastForm.cs</DependentUpon>
