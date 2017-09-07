@@ -46,5 +46,9 @@ namespace Y.Test.Views
         {
             R.Forms.GetUnique<TestShadowForm>().Show();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+        }
     }
 }
