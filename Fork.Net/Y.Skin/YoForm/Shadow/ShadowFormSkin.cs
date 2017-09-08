@@ -26,16 +26,16 @@ namespace Y.Skin.YoForm.Shadow
             Icon = main.Icon;//设置图标
             TopMost = main.TopMost;
             FormBorderStyle = FormBorderStyle.None;//设置无边框的窗口样式
-            ShowInTaskbar = false;//使控件层显示到任务栏
+            ShowInTaskbar = true;//显示阴影层到任务栏（win10可显示缩略图）
             Size = Main.Size;//统一大小
             Width += (Main.ShadowWidth * 2);
             Height += (Main.ShadowWidth * 2);
             Main.Owner = this;//设置控件层的拥有皮肤层
+            DrawShadow();
             //SetBits();//绘制半透明不规则皮肤
         }
         private void ShadowFormSkin_Load(object sender, EventArgs e)
         {
-            DrawShadow();
         }
         #region 减少闪烁
         private void SetStyles()
@@ -77,7 +77,6 @@ namespace Y.Skin.YoForm.Shadow
                 for (int i = 0; i < Main.ShadowWidth; i++)
                 {
                     p.Color = Color.FromArgb((255 / 10 / Main.ShadowWidth) * i, c);
-                    //g.DrawRectangle(p, new Rectangle(i, i, Width - (2 * i) - 1, Height - (2 * i) - 1));
                     DrawRoundRectangle(g, p, new Rectangle(i, i, Width - (2 * i) - 1, Height - (2 * i) - 1), Main.ShadowWidth - i);
                 }
                 SetBits(bitmap);

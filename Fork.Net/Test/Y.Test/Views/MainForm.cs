@@ -50,5 +50,10 @@ namespace Y.Test.Views
         private void MainForm_Load(object sender, EventArgs e)
         {
         }
+
+        private void TestIrrForm_Click(object sender, EventArgs e)
+        {
+            R.Forms.GetUnique<TestIrrForm>().Show();
+        }
     }
 }

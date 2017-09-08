@@ -34,6 +34,7 @@
             this.TestPackForm = new System.Windows.Forms.Button();
             this.TestIconGroupForm = new System.Windows.Forms.Button();
             this.TestShadowForm = new System.Windows.Forms.Button();
+            this.TestIrrForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ChineseCalendarForm
@@ -96,11 +97,22 @@
             this.TestShadowForm.UseVisualStyleBackColor = true;
             this.TestShadowForm.Click += new System.EventHandler(this.TestShadowForm_Click);
             // 
+            // TestIrrForm
+            // 
+            this.TestIrrForm.Location = new System.Drawing.Point(12, 186);
+            this.TestIrrForm.Name = "TestIrrForm";
+            this.TestIrrForm.Size = new System.Drawing.Size(262, 23);
+            this.TestIrrForm.TabIndex = 6;
+            this.TestIrrForm.Text = "TestIrrForm";
+            this.TestIrrForm.UseVisualStyleBackColor = true;
+            this.TestIrrForm.Click += new System.EventHandler(this.TestIrrForm_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 427);
+            this.Controls.Add(this.TestIrrForm);
             this.Controls.Add(this.TestShadowForm);
             this.Controls.Add(this.TestIconGroupForm);
             this.Controls.Add(this.TestPackForm);
@@ -122,5 +134,6 @@
         private System.Windows.Forms.Button TestPackForm;
         private System.Windows.Forms.Button TestIconGroupForm;
         private System.Windows.Forms.Button TestShadowForm;
+        private System.Windows.Forms.Button TestIrrForm;
     }
 }

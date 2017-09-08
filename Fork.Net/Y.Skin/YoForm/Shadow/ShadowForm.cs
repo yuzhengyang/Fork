@@ -26,6 +26,7 @@ namespace Y.Skin.YoForm.Shadow
             InitializeComponent();
             //SetStyles();//减少闪烁
             FormBorderStyle = FormBorderStyle.None;//设置无边框的窗口样式
+            ShowInTaskbar = false;
         }
         private void IrregularForm_Load(object sender, EventArgs e)
         {
