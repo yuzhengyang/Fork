@@ -55,6 +55,12 @@
     <Compile Include="YoControl\UserControlPlus.Designer.cs">
       <DependentUpon>UserControlPlus.cs</DependentUpon>
     </Compile>
+    <Compile Include="YoForm\CustomTitle\DarkTitleShadowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YoForm\CustomTitle\DarkTitleShadowForm.Designer.cs">
+      <DependentUpon>DarkTitleShadowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="YoForm\CustomTitle\DarkTitleHorizontalForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="YoControl\UserControlPlus.resx">
       <DependentUpon>UserControlPlus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YoForm\CustomTitle\DarkTitleShadowForm.resx">
+      <DependentUpon>DarkTitleShadowForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="YoForm\Irregular\IrregularForm.resx">
       <DependentUpon>IrregularForm.cs</DependentUpon>

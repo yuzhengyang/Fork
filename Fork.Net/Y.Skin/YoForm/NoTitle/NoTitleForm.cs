@@ -10,6 +10,10 @@ namespace Y.Skin.YoForm.NoTitle
 {
     public partial class NoTitleForm : Form
     {
+        Label BorderTop = new Label();
+        Label BorderBottom = new Label();
+        Label BorderLeft = new Label();
+        Label BorderRight = new Label();
         #region 属性
         //窗体边框粗细
         private int _Border = 1;
@@ -94,7 +98,6 @@ namespace Y.Skin.YoForm.NoTitle
         {
             if (_Border > 0)
             {
-                Label BorderTop = new Label();
                 BorderTop.BackColor = _BorderColor;
                 BorderTop.Width = Width;
                 BorderTop.Height = _Border;
@@ -103,7 +106,6 @@ namespace Y.Skin.YoForm.NoTitle
                 BorderTop.Top = 0;
                 BorderTop.Left = 0;
 
-                Label BorderBottom = new Label();
                 BorderBottom.BackColor = _BorderColor;
                 BorderBottom.Width = Width;
                 BorderBottom.Height = _Border;
@@ -112,7 +114,6 @@ namespace Y.Skin.YoForm.NoTitle
                 BorderBottom.Top = Height - _Border;
                 BorderBottom.Left = 0;
 
-                Label BorderLeft = new Label();
                 BorderLeft.BackColor = _BorderColor;
                 BorderLeft.Width = _Border;
                 BorderLeft.Height = Height;
@@ -121,7 +122,6 @@ namespace Y.Skin.YoForm.NoTitle
                 BorderLeft.Top = 0;
                 BorderLeft.Left = 0;
 
-                Label BorderRight = new Label();
                 BorderRight.BackColor = _BorderColor;
                 BorderRight.Width = _Border;
                 BorderRight.Height = Height;

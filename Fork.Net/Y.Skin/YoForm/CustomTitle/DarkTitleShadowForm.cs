@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Y.Skin.YoForm.NoTitle;
+using Y.Skin.YoForm.Shadow;
 using Y.Utils.WindowsUtils.APIUtils;
 
 namespace Y.Skin.YoForm.CustomTitle
 {
-    public partial class DarkTitleForm : NoTitleForm
+    public partial class DarkTitleShadowForm : ShadowForm
     {
-        private int HeadHeight = 52;
-        public DarkTitleForm()
+        public DarkTitleShadowForm()
         {
             InitializeComponent();
         }
@@ -42,7 +42,7 @@ namespace Y.Skin.YoForm.CustomTitle
         /// <param name="e"></param>
         private void BTFormMinBox_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            UIMin();
         }
         /// <summary>
         /// 最大化及还原
@@ -51,10 +51,7 @@ namespace Y.Skin.YoForm.CustomTitle
         /// <param name="e"></param>
         private void BTFormMaxBox_Click(object sender, EventArgs e)
         {
-            if (WindowState != FormWindowState.Maximized)
-                WindowState = FormWindowState.Maximized;
-            else
-                WindowState = FormWindowState.Normal;
+            UIMax();
         }
         /// <summary>
         /// 关闭
@@ -63,26 +60,12 @@ namespace Y.Skin.YoForm.CustomTitle
         /// <param name="e"></param>
         private void BTFormCloseBox_Click(object sender, EventArgs e)
         {
-            Close();
+            UIClose();
         }
 
-        private void DarkTitleForm_SizeChanged(object sender, EventArgs e)
+        private void DarkTitleShadowForm_SizeChanged(object sender, EventArgs e)
         {
-            SetBorder();
-            PNHead.Height = HeadHeight;
-        }
-
-        private void DarkTitleForm_MaximumSizeChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LBHeadTitle_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void LBHeadTitle_DoubleClick(object sender, EventArgs e)
-        {
+            DrawShadow();
         }
     }
 }

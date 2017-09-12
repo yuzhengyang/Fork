@@ -1,6 +1,6 @@
 ﻿namespace Y.Skin.YoForm.CustomTitle
 {
-    partial class DarkTitleForm
+    partial class DarkTitleShadowForm
     {
         /// <summary>
         /// Required designer variable.
@@ -75,8 +75,6 @@
             this.LBHeadTitle.TabIndex = 0;
             this.LBHeadTitle.Text = "DarkTitleForm";
             this.LBHeadTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LBHeadTitle.Click += new System.EventHandler(this.LBHeadTitle_Click);
-            this.LBHeadTitle.DoubleClick += new System.EventHandler(this.LBHeadTitle_DoubleClick);
             this.LBHeadTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LBHeadTitle_MouseMove);
             // 
             // PNHeadButton
@@ -150,18 +148,17 @@
             this.PBHeadIcon.TabIndex = 0;
             this.PBHeadIcon.TabStop = false;
             // 
-            // DarkTitleForm
+            // DarkTitleShadowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
             this.ClientSize = new System.Drawing.Size(1370, 772);
             this.Controls.Add(this.PNHead);
-            this.Name = "DarkTitleForm";
+            this.Name = "DarkTitleShadowForm";
             this.Text = "DarkTitleForm";
-            this.MaximumSizeChanged += new System.EventHandler(this.DarkTitleForm_MaximumSizeChanged);
             this.Load += new System.EventHandler(this.DarkTitleForm_Load);
-            this.SizeChanged += new System.EventHandler(this.DarkTitleForm_SizeChanged);
+            this.SizeChanged += new System.EventHandler(this.DarkTitleShadowForm_SizeChanged);
             this.PNHead.ResumeLayout(false);
             this.PNHeadTitle.ResumeLayout(false);
             this.PNHeadButton.ResumeLayout(false);
@@ -178,9 +175,9 @@
         private System.Windows.Forms.Panel PNHeadIcon;
         private System.Windows.Forms.Panel PNHeadTitle;
         private System.Windows.Forms.PictureBox PBHeadIcon;
+        private System.Windows.Forms.Button BTFormMinBox;
+        private System.Windows.Forms.Button BTFormMaxBox;
+        private System.Windows.Forms.Button BTFormCloseBox;
         public System.Windows.Forms.Label LBHeadTitle;
-        public System.Windows.Forms.Button BTFormMinBox;
-        public System.Windows.Forms.Button BTFormMaxBox;
-        public System.Windows.Forms.Button BTFormCloseBox;
     }
 }

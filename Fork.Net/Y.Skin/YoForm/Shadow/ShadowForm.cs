@@ -87,5 +87,100 @@ namespace Y.Skin.YoForm.Shadow
                 Skin.DrawShadow();
             }
         }
+        /// <summary>
+        /// 控件可用
+        /// </summary>
+        /// <param name="ctrl"></param>
+        /// <param name="enable"></param>
+        public void UIEnable(Control ctrl, bool enable = true)
+        {
+            Invoke(new Action(() =>
+            {
+                ctrl.Enabled = enable;
+            }));
+        }
+        /// <summary>
+        /// 控件显示
+        /// </summary>
+        /// <param name="ctrl"></param>
+        /// <param name="enable"></param>
+        public void UIVisible(Control ctrl, bool enable = true)
+        {
+            Invoke(new Action(() =>
+             {
+                 ctrl.Visible = enable;
+             }));
+        }
+        /// <summary>
+        /// UICLose
+        /// </summary>
+        public void UIClose()
+        {
+            Invoke(new Action(() =>
+            {
+                Close();
+                Skin.Close();
+            }));
+        }
+        /// <summary>
+        /// 最小化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void UIMin()
+        {
+            Invoke(new Action(() =>
+            {
+                WindowState = FormWindowState.Minimized;
+                Skin.WindowState = FormWindowState.Minimized;
+            }));
+        }
+        /// <summary>
+        /// 最大化及还原
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void UIMax()
+        {
+            Invoke(new Action(() =>
+            {
+                if (WindowState != FormWindowState.Maximized)
+                {
+                    WindowState = FormWindowState.Maximized;
+                    Skin.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    WindowState = FormWindowState.Normal;
+                    Skin.WindowState = FormWindowState.Normal;
+                }
+            }));
+        }
+        public void UIShow()
+        {
+            Invoke(new Action(() =>
+            {
+                Show();
+                Skin.Show();
+            }));
+        }
+        public void UIHide()
+        {
+            Invoke(new Action(() =>
+            {
+                Hide();
+                Skin.Hide();
+            }));
+        }
+        public void DrawShadow()
+        {
+            if (Skin != null)
+            {
+                Invoke(new Action(() =>
+                {
+                    Skin.DrawShadow();
+                }));
+            }
+        }
     }
 }

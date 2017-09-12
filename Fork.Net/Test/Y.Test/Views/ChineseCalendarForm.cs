@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Y.Skin.YoForm.CustomTitle;
 
 namespace Y.Test.Views
 {
-    public partial class ChineseCalendarForm : Form
+    public partial class ChineseCalendarForm : DarkTitleShadowForm
     {
         public ChineseCalendarForm()
         {
