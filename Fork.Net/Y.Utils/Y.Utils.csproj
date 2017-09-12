@@ -150,6 +150,7 @@
     <Compile Include="WindowsUtils\InfoUtils\TaskSchedulerTool.cs" />
     <Compile Include="WindowsUtils\ProcessUtils\ProcessInfoTool.cs" />
     <Compile Include="WindowsUtils\ProcessUtils\ProcessTool.cs" />
+    <Compile Include="YUtils\YUtilsAuth.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">

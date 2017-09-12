@@ -96,7 +96,7 @@ namespace Y.Utils.IOUtils.FileUtils
                         foreach (var pattern in patterns)
                         {
                             List<string> temp = GetFile(path, pattern);
-                            if (!ListTool.IsNullOrEmpty(temp)) result.AddRange(temp);
+                            if (ListTool.HasElements(temp)) result.AddRange(temp);
                         }
                     }
                     else

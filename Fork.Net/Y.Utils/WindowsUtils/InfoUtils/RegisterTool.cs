@@ -15,7 +15,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
     /// </summary>
     public class RegisterTool
     {
-        [Obsolete]
+        [Obsolete("SetValue",true)]
         public static bool Write(string key, string name, string value)
         {
             try
@@ -31,7 +31,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                 return false;
             }
         }
-        [Obsolete]
+        [Obsolete("GetValue", true)]
         public static string Read(string key, string name)
         {
             try
@@ -45,7 +45,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
             catch (Exception e) { }
             return null;
         }
-        [Obsolete]
+        [Obsolete("DeleteValue", true)]
         public static bool Delete(string key, string name)
         {
             try
