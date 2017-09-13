@@ -35,6 +35,7 @@
             this.TestIconGroupForm = new System.Windows.Forms.Button();
             this.TestShadowForm = new System.Windows.Forms.Button();
             this.TestIrrForm = new System.Windows.Forms.Button();
+            this.BTCheckYUtils = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ChineseCalendarForm
@@ -107,11 +108,22 @@
             this.TestIrrForm.UseVisualStyleBackColor = true;
             this.TestIrrForm.Click += new System.EventHandler(this.TestIrrForm_Click);
             // 
+            // BTCheckYUtils
+            // 
+            this.BTCheckYUtils.Location = new System.Drawing.Point(465, 12);
+            this.BTCheckYUtils.Name = "BTCheckYUtils";
+            this.BTCheckYUtils.Size = new System.Drawing.Size(75, 23);
+            this.BTCheckYUtils.TabIndex = 7;
+            this.BTCheckYUtils.Text = "检查工具类";
+            this.BTCheckYUtils.UseVisualStyleBackColor = true;
+            this.BTCheckYUtils.Click += new System.EventHandler(this.BTCheckYUtils_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 427);
+            this.Controls.Add(this.BTCheckYUtils);
             this.Controls.Add(this.TestIrrForm);
             this.Controls.Add(this.TestShadowForm);
             this.Controls.Add(this.TestIconGroupForm);
@@ -120,6 +132,7 @@
             this.Controls.Add(this.TestComputerInfoForm);
             this.Controls.Add(this.ChineseCalendarForm);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
@@ -135,5 +148,6 @@
         private System.Windows.Forms.Button TestIconGroupForm;
         private System.Windows.Forms.Button TestShadowForm;
         private System.Windows.Forms.Button TestIrrForm;
+        private System.Windows.Forms.Button BTCheckYUtils;
     }
 }

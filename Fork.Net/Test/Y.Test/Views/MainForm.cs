@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Y.Test.Commons;
+using Y.Utils.DataUtils.Collections;
 
 namespace Y.Test.Views
 {
@@ -16,7 +17,10 @@ namespace Y.Test.Views
         {
             InitializeComponent();
         }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
 
+        }
         private void ChineseCalendarForm_Click(object sender, EventArgs e)
         {
             R.Forms.GetUnique<ChineseCalendarForm>().Show();
@@ -47,13 +51,18 @@ namespace Y.Test.Views
             R.Forms.GetUnique<TestShadowForm>().Show();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-        }
-
         private void TestIrrForm_Click(object sender, EventArgs e)
         {
             R.Forms.GetUnique<TestIrrForm>().Show();
+        }
+
+        private void BTCheckYUtils_Click(object sender, EventArgs e)
+        {
+            List<string> a = new List<string>();
+            for (int i = 0; i < 5; i++)
+            {
+                ListTool.HasElements(a);
+            }
         }
     }
 }
