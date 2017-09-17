@@ -26,7 +26,7 @@ namespace Y.Utils.DataUtils.Collections
         [Obsolete("Please Use HasElements(list)", false)]
         public static bool IsNullOrEmpty<T>(IEnumerable<T> list)
         {
-            YUtilsAuth.Start();
+            YUtilsAuth.Check();
             if (list != null && list.Count() > 0)
                 return false;
             return true;
