@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commons\R.cs" />
+    <Compile Include="Models\UpdateModel.cs" />
     <Compile Include="Models\WebAPIMessageModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
