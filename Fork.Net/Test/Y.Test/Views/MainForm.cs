@@ -64,5 +64,10 @@ namespace Y.Test.Views
                 ListTool.HasElements(a);
             }
         }
+
+        private void TestCrossForm_Click(object sender, EventArgs e)
+        {
+            R.Forms.GetUnique<TestCrossForm>().Show();
+        }
     }
 }

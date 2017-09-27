@@ -113,6 +113,12 @@
     <Compile Include="Views\TestComputerInfoForm.Designer.cs">
       <DependentUpon>TestComputerInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TestCrossForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TestCrossForm.Designer.cs">
+      <DependentUpon>TestCrossForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TestIconGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TestComputerInfoForm.resx">
       <DependentUpon>TestComputerInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TestCrossForm.resx">
+      <DependentUpon>TestCrossForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TestIconGroupForm.resx">
       <DependentUpon>TestIconGroupForm.cs</DependentUpon>
