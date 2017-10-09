@@ -107,16 +107,6 @@
     <None Include="FodyWeavers.xml" />
     <Content Include="Images\Icons\app.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Y.Skin\Y.Skin.csproj">
-      <Project>{e9a97673-3e27-4a49-90bc-8806411a2f57}</Project>
-      <Name>Y.Skin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Y.Utils\Y.Utils.csproj">
-      <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>
-      <Name>Y.Utils</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Fody.2.0.0\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\..\packages\Fody.2.0.0\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
