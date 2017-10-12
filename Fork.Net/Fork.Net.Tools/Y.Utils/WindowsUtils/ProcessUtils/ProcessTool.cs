@@ -43,10 +43,13 @@ namespace Y.Utils.WindowsUtils.ProcessUtils
             try
             {
                 Process[] processes = Process.GetProcessesByName(name);
-                foreach (Process p in processes)
+                if (ListTool.HasElements(processes))
                 {
-                    p.Kill();
-                    p.Close();
+                    foreach (Process p in processes)
+                    {
+                        p.Kill();
+                        p.Close();
+                    }
                 }
             }
             catch (Exception e) { }

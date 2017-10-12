@@ -259,6 +259,16 @@
     <None Include="FodyWeavers.xml" />
     <Content Include="Images\BackgroundImages\Rainbow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Fork.Net.Tools\Y.Skin\Y.Skin.csproj">
+      <Project>{e9a97673-3e27-4a49-90bc-8806411a2f57}</Project>
+      <Name>Y.Skin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fork.Net.Tools\Y.Utils\Y.Utils.csproj">
+      <Project>{5b8eeec7-aeb5-407d-9dc1-1c59e53f78d5}</Project>
+      <Name>Y.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

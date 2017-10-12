@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppLaunchTool.cs" />
+    <Compile Include="AppUtils\AppSettleTool.cs" />
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTool.cs" />
     <Compile Include="IOUtils\ImageUtils\ImageSpliter.cs" />

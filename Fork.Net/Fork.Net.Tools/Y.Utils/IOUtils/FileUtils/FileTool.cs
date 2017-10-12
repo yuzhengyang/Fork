@@ -253,5 +253,22 @@ namespace Y.Utils.IOUtils.FileUtils
             }
             return result;
         }
+        public static bool Copy(string sourceFileName, string destFileName, bool overwrite)
+        {
+            if (File.Exists(sourceFileName))
+            {
+                string destPath = DirTool.GetFilePath(destFileName);
+                if (DirTool.Create(destPath))
+                {
+                    try
+                    {
+                        File.Copy(sourceFileName, destFileName, overwrite);
+                        return true;
+                    }
+                    catch { }
+                }
+            }
+            return false;
+        }
     }
 }
