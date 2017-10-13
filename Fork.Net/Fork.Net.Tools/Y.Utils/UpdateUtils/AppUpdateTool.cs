@@ -16,6 +16,7 @@ using Y.Utils.IOUtils.FileUtils;
 using Y.Utils.IOUtils.PathUtils;
 using Y.Utils.NetUtils.FTPUtils;
 using Y.Utils.NetUtils.HttpUtils;
+using Y.Utils.VersionUtils;
 
 namespace Y.Utils.UpdateUtils
 {
@@ -28,7 +29,6 @@ namespace Y.Utils.UpdateUtils
         /// 获取新版本
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="name"></param>
         /// <param name="version"></param>
         /// <param name="info"></param>
         /// <returns>
@@ -43,7 +43,7 @@ namespace Y.Utils.UpdateUtils
             info = HttpTool.Get<AppUpdateInfo>(url);
             if (info != null)
             {
-                Version newVersion = FormatVersion(info.Version);
+                Version newVersion = VersionTool.Format(info.Version);
                 if (newVersion != null && newVersion > version)
                 {
                     stopwatch.Stop();
@@ -109,22 +109,28 @@ namespace Y.Utils.UpdateUtils
                 return -10000;//没有新版本
             }
         }
-        private Version FormatVersion(string s)
-        {
-            //解析最新版本号
-            Version version = null;
-            try
-            {
-                version = new Version(s);
-            }
-            catch (Exception e) { }
-            return version;
-        }
         private string Download(string file, AppUpdateInfo info, ProgressDelegate.ProgressHandler progress = null, object sender = null)
         {
-            FtpTool ftp = new FtpTool(info.FtpIp, info.FtpAccount, info.FtpPassword);
-            if (ftp.Download(info.FtpFile, file, progress, sender))
-                return file;
+            if (info != null)
+            {
+                switch (info.DownloadMode)
+                {
+                    case 0://http 下载
+                        {
+                            if (HttpTool.Download(info.HttpUrl, file, progress, sender))
+                                return file;
+                        }
+                        break;
+
+                    case 1://ftp 下载  
+                        {
+                            FtpTool ftp = new FtpTool(info.FtpIp, info.FtpAccount, info.FtpPassword);
+                            if (ftp.Download(info.FtpFile, file, progress, sender))
+                                return file;
+                        }
+                        break;
+                }
+            }
             return null;
         }
     }

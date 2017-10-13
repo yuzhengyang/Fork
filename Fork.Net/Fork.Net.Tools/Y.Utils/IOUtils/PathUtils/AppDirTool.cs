@@ -16,7 +16,7 @@ namespace Y.Utils.IOUtils.PathUtils
             {
                 foreach (var dic in dictionary)
                 {
-                    if (path.Contains(dic.Key))
+                    if (dic.Key != null && dic.Value != null && path.Contains(dic.Key))
                     {
                         result = path.Replace(dic.Key, dic.Value);
                         break;
