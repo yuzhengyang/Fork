@@ -9,8 +9,10 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Web;
+using Y.Utils.DataUtils.GuidUtils;
 using Y.Utils.DataUtils.StringUtils;
 using Y.Utils.DelegateUtils;
+using Y.Utils.IOUtils.PathUtils;
 
 namespace Y.Utils.NetUtils.HttpUtils
 {
@@ -370,15 +372,14 @@ namespace Y.Utils.NetUtils.HttpUtils
         /// <returns></returns>
         public static bool Download(string url, string file, ProgressDelegate.ProgressHandler progress = null, object sender = null)
         {
-            string tempPath = Path.GetDirectoryName(file) + @"\temp";
-            Directory.CreateDirectory(tempPath);  //创建临时文件目录
-            string tempFile = tempPath + @"\" + Path.GetFileName(file) + ".temp"; //临时文件
-            if (File.Exists(tempFile))
-            {
-                File.Delete(tempFile);    //存在则删除
-            }
             try
             {
+                string path = Path.GetDirectoryName(file);
+                DirTool.Create(path);  //创建文件目录
+
+                string tempFile = DirTool.Combine(path, GuidTool.Short() + ".temp"); //临时文件
+                if (File.Exists(tempFile)) File.Delete(tempFile);    //存在则删除
+
                 FileStream fs = new FileStream(tempFile, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
                 // 设置参数
                 HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
@@ -400,8 +401,8 @@ namespace Y.Utils.NetUtils.HttpUtils
                 //stream.Close();
                 fs.Close();
                 responseStream.Close();
-                File.Delete(file);
-                File.Move(tempFile, file);
+                File.Delete(file);//删除原始文件
+                File.Move(tempFile, file);//下载的临时文件重命名
                 return true;
             }
             catch (Exception ex)

@@ -54,6 +54,7 @@
     <Compile Include="AppUtils\AppSettleTool.cs" />
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTool.cs" />
+    <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />
     <Compile Include="IOUtils\ImageUtils\ImageSpliter.cs" />
     <Compile Include="UpdateUtils\AppUpdateInfo.cs" />
     <Compile Include="UpdateUtils\AppUpdateTool.cs" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

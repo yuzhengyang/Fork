@@ -15,30 +15,11 @@ namespace Y.Utils.AppUtils
     /// </summary>
     public class StartupTool
     {
-        [Obsolete]
-        public static string RegeditRunKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
 
-        public static string regAll = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-        public static string regCurrent = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run";
-        public static string commonStartup = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartup);
-        public static string startup = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-        [Obsolete]
-        public static bool Regedit(string appName, string appFile, bool start = true)
-        {
-            if (start)
-            {
-                //添加启动注册表
-                if (RegisterTool.Write(RegeditRunKey, appName, appFile))
-                    return true;
-            }
-            else
-            {
-                //删除启动注册表
-                if (RegisterTool.Delete(RegeditRunKey, appName))
-                    return true;
-            }
-            return false;
-        }
+        private static string regAll = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+        private static string regCurrent = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run";
+        private static string commonStartup = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartup);
+        private static string startup = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
         public static bool Register(string name, string file, bool start = true, bool allUser = true)
         {
             if (start)
