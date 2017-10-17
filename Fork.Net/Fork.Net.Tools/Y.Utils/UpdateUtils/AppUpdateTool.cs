@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Y.Utils.DataUtils.GuidUtils;
 using Y.Utils.DelegateUtils;
 using Y.Utils.IOUtils.FileUtils;
 using Y.Utils.IOUtils.PathUtils;
@@ -80,16 +81,17 @@ namespace Y.Utils.UpdateUtils
             //请求最新版本信息
             if (info != null)
             {
-                string file = DirTool.Combine(tempPath, info.Name + info.Version);
+                string file = DirTool.Combine(tempPath, GuidTool.Short() + "-" + info.Version);
                 //准备更新（下载） 
                 string downfile = Download(file, info, downProgress, downSender);
                 if (!string.IsNullOrWhiteSpace(downfile) && File.Exists(downfile))
                 {
                     //格式化释放文件目录（相对路径转换为绝对路径）
                     string releasepath = AppDirTool.Get(info.ReleasePath, dictionary);
-                    //释放文件
-                    int unpackCode = 0;
-                    if ((unpackCode = FilePackageTool.Unpack(downfile, releasepath, releaseProgress, releaseSender)) > 0)
+                    //释放文件，释放完成后删除临时文件
+                    int unpackCode = FilePackageTool.Unpack(downfile, releasepath, releaseProgress, releaseSender);
+                    File.Delete(file);
+                    if (unpackCode > 0)
                     {
                         stopwatch.Stop();
                         return (int)stopwatch.Elapsed.TotalSeconds;
