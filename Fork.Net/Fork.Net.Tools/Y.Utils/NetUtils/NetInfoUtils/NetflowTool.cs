@@ -77,6 +77,11 @@ namespace Y.Utils.NetUtils.NetInfoUtils
             }
             return false;
         }
+        /// <summary>
+        /// 启动流量监测
+        /// </summary>
+        /// <param name="interval"></param>
+        /// <returns></returns>
         public bool Start(int interval = 1000)
         {
             if (Init() && !IsStart)
@@ -115,6 +120,9 @@ namespace Y.Utils.NetUtils.NetInfoUtils
             }
             return false;
         }
+        /// <summary>
+        /// 重启流量计数器
+        /// </summary>
         public void Restart()
         {
             if (IsStart)
@@ -131,6 +139,19 @@ namespace Y.Utils.NetUtils.NetInfoUtils
 
             Init();
         }
+        /// <summary>
+        /// 重置流量表数
+        /// </summary>
+        public void Reset()
+        {
+            _UploadData = 0;
+            _UploadDataCount = 0;
+            _DownloadData = 0;
+            _DownloadDataCount = 0;
+        }
+        /// <summary>
+        /// 停止流量监测
+        /// </summary>
         public void Stop()
         {
             if (IsStart)

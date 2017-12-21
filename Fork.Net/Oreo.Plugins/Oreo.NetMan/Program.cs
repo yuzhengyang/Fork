@@ -10,6 +10,7 @@ namespace Oreo.NetMan
 {
     static class Program
     {
+        static AppUnique AppUnique = new AppUnique();
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

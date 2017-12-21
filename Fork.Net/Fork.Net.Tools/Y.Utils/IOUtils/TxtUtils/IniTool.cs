@@ -399,7 +399,14 @@ namespace Y.Utils.IOUtils.TxtUtils
         {
             string flag = GetStringValue(iniFile, section, key, "0");
             int result = 0;
-            int.TryParse(flag,out result);
+            int.TryParse(flag, out result);
+            return result;
+        }
+        public static long GetLongValue(string iniFile, string section, string key)
+        {
+            string flag = GetStringValue(iniFile, section, key, "0");
+            long result = 0;
+            long.TryParse(flag, out result);
             return result;
         }
 

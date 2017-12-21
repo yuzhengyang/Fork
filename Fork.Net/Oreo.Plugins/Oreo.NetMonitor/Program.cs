@@ -17,13 +17,10 @@ namespace Oreo.NetMonitor
         [STAThread]
         static void Main()
         {
-            if (AppUnique.IsUnique("Oreo.NetMonitor"))
-            {
-                P.Init();
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new FloatForm());
-            }
+            P.Init();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new FloatForm());
         }
     }
 }

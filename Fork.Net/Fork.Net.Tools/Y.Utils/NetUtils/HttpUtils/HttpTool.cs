@@ -396,6 +396,11 @@ namespace Y.Utils.NetUtils.HttpUtils
                 {
                     fs.Write(buffer, 0, readCount);
                     current += readCount;
+                    if (filesize <= 0 || filesize < current)
+                    {
+                        if (current > 0) filesize = current;
+                        else filesize = 1;
+                    }
                     progress?.Invoke(sender, new ProgressEventArgs(current, filesize));
                 }
                 //stream.Close();

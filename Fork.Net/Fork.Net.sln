@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oreo.FilePackage", "Oreo.Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.YeahWeb", "Azylee.Utils\Azylee.YeahWeb\Azylee.YeahWeb.csproj", "{CCF7A654-B442-4DB1-BB3B-0F8014C3237F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oreo.VersionPackage", "Oreo.Plugins\Oreo.VersionPackage\Oreo.VersionPackage.csproj", "{EE2AE6AE-500B-47F1-8798-7429F02E92D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -271,6 +273,14 @@ Global
 		{CCF7A654-B442-4DB1-BB3B-0F8014C3237F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCF7A654-B442-4DB1-BB3B-0F8014C3237F}.Release|x86.ActiveCfg = Release|Any CPU
 		{CCF7A654-B442-4DB1-BB3B-0F8014C3237F}.Release|x86.Build.0 = Release|Any CPU
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -300,6 +310,7 @@ Global
 		{0DFAC9FC-9D48-4DCF-AE72-8FB1CA70A06E} = {F222E566-DA0C-443C-BB9F-80536F02DB36}
 		{1500F997-4261-4999-A6F1-0EBB34E9854F} = {E53B3662-A5FD-4D4C-AFF6-1DC9FF24EA16}
 		{CCF7A654-B442-4DB1-BB3B-0F8014C3237F} = {C34A95B5-5F83-46E3-868A-56BDDA2D0B87}
+		{EE2AE6AE-500B-47F1-8798-7429F02E92D9} = {E53B3662-A5FD-4D4C-AFF6-1DC9FF24EA16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5436696D-5F55-490A-AB40-050B54BE2AB4}

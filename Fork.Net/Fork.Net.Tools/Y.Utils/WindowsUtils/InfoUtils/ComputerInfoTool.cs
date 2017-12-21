@@ -7,6 +7,7 @@
 //************************************************************************
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Management;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
@@ -215,7 +216,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                     string caption = MyObject["Caption"].ToString().Trim();
                     string windowsdirectory = MyObject["WindowsDirectory"].ToString().Trim();
                     string installdate = MyObject["InstallDate"].ToString().Trim();
-                    DateTime dtinstalldate = DateTime.MinValue;
+                    DateTime dtinstalldate = DateTime.Parse("2001-10-25");//设置初始值为WindowsXP发布日期
 
                     if (installdate.Length >= 14)
                     {
@@ -227,6 +228,7 @@ namespace Y.Utils.WindowsUtils.InfoUtils
                         installdate = installdate.Insert(4, "-");
                         DateTime.TryParse(installdate, out dtinstalldate);
                     }
+                    if (dtinstalldate.Year < 2001) dtinstalldate = DateTime.Parse("2001-10-25");
 
                     result = new Tuple<string, string, DateTime>(
                         caption, windowsdirectory, dtinstalldate);
@@ -374,6 +376,26 @@ namespace Y.Utils.WindowsUtils.InfoUtils
         public static bool Is64BitOperatingSystem()
         {
             return Environment.Is64BitOperatingSystem;
+        }
+        /// <summary>
+        /// 获取系统盘总容量
+        /// </summary>
+        /// <returns></returns>
+        public static long GetSystemDriveTotalSize()
+        {
+            try
+            {
+                DriveInfo Drive = new DriveInfo("C");//系统盘驱动器
+                var osinfo = ComputerInfoTool.OsInfo();
+                if (osinfo != null)
+                {
+                    string drive = osinfo.Item2.Substring(0, 1);
+                    Drive = new DriveInfo(drive);
+                }
+                return Drive.TotalSize;
+            }
+            catch { }
+            return 0;
         }
     }
 }
