@@ -99,6 +99,35 @@ namespace Y.Utils.WindowsUtils.InfoUtils
             { return null; }
         }
         /// <summary>
+        /// 内存型号
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> RAMModel()
+        {
+            List<string> rs = new List<string>();
+            try
+            {
+                ManagementClass mc = new ManagementClass("Win32_PhysicalMemory");
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    //string temp = "";
+                    //foreach (PropertyData m in mo.Properties)
+                    //{
+                    //    try
+                    //    {
+                    //        temp += m.Name.ToString() + " : " + m.Value.ToString() + "&&&&";
+                    //    }
+                    //    catch { }
+                    //}
+                    //rs.Add(temp);
+                    try { rs.Add(mo["Manufacturer"].ToString().Trim() + " " + mo["PartNumber"].ToString().Trim()); } catch { }
+                }
+            }
+            catch (Exception ex) { }
+            return rs;
+        }
+        /// <summary>
         /// 物理内存
         /// </summary>
         /// <returns></returns>

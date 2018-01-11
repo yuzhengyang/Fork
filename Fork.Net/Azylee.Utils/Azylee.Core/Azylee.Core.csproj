@@ -39,15 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Collections\ListTool.cs" />
-    <Compile Include="Data\String\StringTool.cs" />
-    <Compile Include="Diagnostics\ProcessTool.cs" />
-    <Compile Include="IO\Dir\DirTool.cs" />
+    <Compile Include="DataUtils\CollectionUtils\ListTool.cs" />
+    <Compile Include="DataUtils\StringUtils\StringTool.cs" />
+    <Compile Include="ProcessUtils\ProcessTool.cs" />
+    <Compile Include="IOUtils\DirUtils\DirTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readme.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="IO\Path\" />
+    <Folder Include="IOUtils\PathUtils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

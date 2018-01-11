@@ -11,6 +11,7 @@ using Y.Test.Views;
 using Y.Utils.IOUtils.FileUtils;
 using Y.Utils.IOUtils.PathUtils;
 using Y.Utils.NetUtils.HttpUtils;
+using Y.Utils.WindowsUtils.InfoUtils;
 
 namespace Y.Test
 {
@@ -22,6 +23,7 @@ namespace Y.Test
         [STAThread]
         static void Main()
         {
+            var list = ComputerInfoTool.RAMModel();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
