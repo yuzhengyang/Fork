@@ -32,15 +32,18 @@ namespace Azylee.WinformSkin.UserWidgets.PageWidgets
         #region 初始化和修改参数
         public void Init(PageDataProvider provider, int pageIndex, int dataCount, int pageSize)
         {
-            if (!IsInit)
+            if (!DesignMode)
             {
-                Provider += provider;
+                if (!IsInit)
+                {
+                    Provider += provider;
 
-                PageIndex = pageIndex;
-                PageSize = pageSize;
-                DataCount = dataCount;
-                PageTotal = DataCount % pageSize == 0 ? DataCount / pageSize : (DataCount / pageSize) + 1;
-                IsInit = true;
+                    PageIndex = pageIndex;
+                    PageSize = pageSize;
+                    DataCount = dataCount;
+                    PageTotal = DataCount % pageSize == 0 ? DataCount / pageSize : (DataCount / pageSize) + 1;
+                    IsInit = true;
+                }
             }
         }
         public void Init(PageDataProvider provider, int pageIndex, int pageSize)
@@ -53,15 +56,21 @@ namespace Azylee.WinformSkin.UserWidgets.PageWidgets
         /// <param name="dataCount"></param>
         public void SetDataCount(int dataCount)
         {
-            DataCount = dataCount;
-            PageTotal = DataCount % PageSize == 0 ? DataCount / PageSize : (DataCount / PageSize) + 1;
-            if (!ParentForm.IsDisposed)
+            if (!DesignMode)
             {
-                ParentForm.Invoke(new Action(() =>
+                DataCount = dataCount;
+                PageTotal = DataCount % PageSize == 0 ? DataCount / PageSize : (DataCount / PageSize) + 1;
+                if (PageIndex > PageTotal) PageIndex = 1;
+                if (PageTotal == 0) PageTotal = 1;
+
+                if (!ParentForm.IsDisposed)
                 {
-                    //调整控件展示界面（第几页，共几页）
-                    LBPageDesc.Text = string.Format("第 {0} 页，共 {1} 页", PageIndex, PageTotal);
-                }));
+                    ParentForm.Invoke(new Action(() =>
+                    {
+                        //调整控件展示界面（第几页，共几页）
+                        LBPageDesc.Text = string.Format("第 {0} 页，共 {1} 页", PageIndex, PageTotal);
+                    }));
+                }
             }
         }
         #endregion
@@ -72,16 +81,30 @@ namespace Azylee.WinformSkin.UserWidgets.PageWidgets
         /// </summary>
         public void ReadFirstPage()
         {
-            PageIndex = 1;
-            QueryPageData(new PageDataProviderArgs(PageIndex, PageSize));
+            if (!DesignMode)
+            {
+                PageIndex = 1;
+                QueryPageData(new PageDataProviderArgs(PageIndex, PageSize));
+            }
         }
         /// <summary>
         /// 加载默认页（或刷新）
         /// </summary>
         public void ReadDefaultPage()
         {
-            PageIndex = PageIndex >= 1 ? PageIndex : 1;
-            QueryPageData(new PageDataProviderArgs(PageIndex, PageSize));
+            if (!DesignMode)
+            {
+                PageIndex = PageIndex >= 1 ? PageIndex : 1;
+                QueryPageData(new PageDataProviderArgs(PageIndex, PageSize));
+            }
+        }
+        public void Clear()
+        {
+            PageIndex = 1;
+            Invoke(new Action(() =>
+            {
+                LBPageDesc.Text = "第 1 页，共 1 页";
+            }));
         }
         #endregion
 

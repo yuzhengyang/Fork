@@ -190,10 +190,10 @@
         private System.Windows.Forms.Panel BigIconFormPNHeadIcon;
         public System.Windows.Forms.PictureBox BigIconFormPBHeadIcon;
         public System.Windows.Forms.Panel BigIconFormPNContainer;
-        private System.Windows.Forms.Button BigIconFormBTFormMinBox;
-        private System.Windows.Forms.Button BigIconFormBTFormMaxBox;
-        private System.Windows.Forms.Button BigIconFormBTFormCloseBox;
         public System.Windows.Forms.Panel BigIconFormPNHead;
         public System.Windows.Forms.Panel BigIconFormPNHeadButton;
+        public System.Windows.Forms.Button BigIconFormBTFormMinBox;
+        public System.Windows.Forms.Button BigIconFormBTFormMaxBox;
+        public System.Windows.Forms.Button BigIconFormBTFormCloseBox;
     }
 }

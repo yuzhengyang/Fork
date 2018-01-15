@@ -40,6 +40,19 @@ namespace Azylee.WinformSkin.FormUI.CustomTitle
             }
         }
         #endregion
+        #region UI界面调整方法
+        public void UIMax()
+        {
+            Invoke(new Action(() =>
+            {
+                if (WindowState != FormWindowState.Maximized)
+                {
+                    MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+                    WindowState = FormWindowState.Maximized;
+                }
+            }));
+        }
+        #endregion
         #region 窗口操作：拖动、边框、最小化、最大化、还原、双击标题栏最大化、拖动标题栏还原、关闭
         /// <summary>
         /// 拖动窗口移动
