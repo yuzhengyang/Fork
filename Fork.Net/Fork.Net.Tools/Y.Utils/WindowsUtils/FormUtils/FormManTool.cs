@@ -9,12 +9,10 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Y.Utils.DataUtils.Collections;
 
-namespace Y.Utils.WindowsUtils.FormUtils
+namespace Azylee.FormMan.ManagerUtils
 {
     /// <summary>
     /// 窗体管理器

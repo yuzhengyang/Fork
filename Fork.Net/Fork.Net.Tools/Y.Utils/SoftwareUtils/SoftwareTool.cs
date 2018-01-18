@@ -65,8 +65,10 @@ namespace Y.Utils.SoftwareUtils
                             string sizestr = SubKey.GetValue("EstimatedSize", "").ToString();
                             string helpurl = SubKey.GetValue("HelpLink", "").ToString();
                             string abouturl = SubKey.GetValue("URLInfoAbout", "").ToString();
-                            DateTime date;
+                            DateTime date = DateTime.Parse("2001-10-25");//设置初始值为WindowsXP发布日期
                             DateTime.TryParseExact(datestr, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
+                            if (date.Year < 2001) date = DateTime.Parse("2001-10-25");
+
                             int size = 0;
                             int.TryParse(sizestr, out size);
                             result.Add(new SoftwareInfo()
