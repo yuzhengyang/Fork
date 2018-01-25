@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,15 +40,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppUtils\AppLaunchTool.cs" />
+    <Compile Include="AppUtils\AppSettleTool.cs" />
+    <Compile Include="AppUtils\AppUnique.cs" />
+    <Compile Include="AppUtils\PermissionTool.cs" />
+    <Compile Include="AppUtils\StartupTool.cs" />
     <Compile Include="DataUtils\CollectionUtils\ListTool.cs" />
+    <Compile Include="DataUtils\EncryptUtils\AesTool.cs" />
+    <Compile Include="DataUtils\EncryptUtils\DesTool.cs" />
+    <Compile Include="DataUtils\EncryptUtils\MD5Tool.cs" />
+    <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />
     <Compile Include="DataUtils\StringUtils\StringTool.cs" />
+    <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
+    <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressDelegate.cs" />
+    <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressEventArgs.cs" />
+    <Compile Include="IOUtils\FileUtils\FileCodeTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FileEncryptTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FilePackageModel.cs" />
+    <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FileTool.cs" />
+    <Compile Include="IOUtils\PathUtils\AppDirTool.cs" />
+    <Compile Include="IOUtils\TxtUtils\ConfigTool.cs" />
+    <Compile Include="IOUtils\TxtUtils\IniTool.cs" />
+    <Compile Include="IOUtils\TxtUtils\TxtTool.cs" />
+    <Compile Include="IOUtils\TxtUtils\XmlTool.cs" />
+    <Compile Include="LogUtils\Log.cs" />
+    <Compile Include="LogUtils\LogLevel.cs" />
+    <Compile Include="LogUtils\LogType.cs" />
     <Compile Include="ProcessUtils\ProcessTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readme.cs" />
+    <Compile Include="VersionUtils\VersionTool.cs" />
+    <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
+    <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />
+    <Compile Include="WindowsUtils\RegisterUtils\RegisterTool.cs" />
+    <Compile Include="WindowsUtils\ShortcutUtils\ShortcutTool.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="IOUtils\PathUtils\" />
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
