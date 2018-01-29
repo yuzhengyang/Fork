@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -17,6 +18,18 @@ namespace Azylee.Core.VersionUtils
             }
             catch (Exception e) { }
             return version;
+        }
+        public static Version GetVersion(string appFile)
+        {
+            try
+            {
+                FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(appFile);
+                return Format(fileVersionInfo.FileVersion);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

@@ -46,6 +46,10 @@
     <Compile Include="UpdateUtils\AppUpdateTool.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Azylee.Core.Plus\Azylee.Core.Plus.csproj">
+      <Project>{915ae524-7efd-4ecc-b731-de1d1f5558f0}</Project>
+      <Name>Azylee.Core.Plus</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Azylee.Core\Azylee.Core.csproj">
       <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
       <Name>Azylee.Core</Name>

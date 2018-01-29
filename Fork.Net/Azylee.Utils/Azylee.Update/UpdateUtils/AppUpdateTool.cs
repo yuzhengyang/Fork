@@ -10,6 +10,7 @@ using Azylee.Core.DelegateUtils.ProcessDelegateUtils;
 using Azylee.Core.IOUtils.DirUtils;
 using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.PathUtils;
+using Azylee.Core.Plus.DataUtils.JsonUtils;
 using Azylee.Core.VersionUtils;
 using Azylee.YeahWeb.FTPUtils;
 using Azylee.YeahWeb.HttpUtils;
@@ -25,6 +26,37 @@ namespace Azylee.Update.UpdateUtils
     /// </summary>
     public class AppUpdateTool
     {
+        /// <summary>
+        /// 获取新版本
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="version"></param>
+        /// <param name="info"></param>
+        /// <returns>
+        /// -10;//请求版本失败
+        /// -20;//没有更新的版本
+        /// </returns>
+        public int GetNewVersionByString(string s, Version version, out AppUpdateInfo info)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            info = JsonTool.ToObjFromStr<AppUpdateInfo>(s);
+            if (info != null)
+            {
+                Version newVersion = VersionTool.Format(info.Version);
+                if (newVersion != null && newVersion > version)
+                {
+                    stopwatch.Stop();
+                    return (int)stopwatch.Elapsed.TotalSeconds;//成功返回操作时长
+                }
+                else
+                {
+                    return -20;//没有更新的版本
+                }
+            }
+            return -10;//请求版本失败
+        }
         /// <summary>
         /// 获取新版本
         /// </summary>

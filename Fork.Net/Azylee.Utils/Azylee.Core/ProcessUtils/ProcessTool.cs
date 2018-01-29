@@ -83,6 +83,19 @@ namespace Azylee.Core.ProcessUtils
             catch (Exception ex) { }
             return false;
         }
+        public static bool SimpleStart(string file, string args = "")
+        {
+            if (File.Exists(file))
+            {
+                try
+                {
+                    Process.Start(file, args);
+                    return true;
+                }
+                catch { }
+            }
+            return false;
+        }
         public static void Starts(string[] files)
         {
             if (ListTool.HasElements(files))

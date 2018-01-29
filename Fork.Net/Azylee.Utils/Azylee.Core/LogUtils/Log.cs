@@ -15,10 +15,16 @@
 //R.Log.w("this is w 警告");
 //R.Log.e("this is e 错误");
 
+using Azylee.Core.DataUtils.CollectionUtils;
 using Azylee.Core.IOUtils.DirUtils;
 using Azylee.Core.IOUtils.TxtUtils;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Azylee.Core.LogUtils
 {
@@ -43,6 +49,9 @@ namespace Azylee.Core.LogUtils
         public string LogPath = LOG_PATH;
         public LogLevel LogLevel = LogLevel.All;//日志输出等级
 
+        bool IsStart = false;
+        ConcurrentQueue<LogModel> Queue = new ConcurrentQueue<LogModel>();
+
         public Log()
         { }
         public Log(bool isWrite, string logPath = LOG_PATH, LogLevel level = LogLevel.All)
@@ -53,6 +62,36 @@ namespace Azylee.Core.LogUtils
                 IsWriteFile = true;
                 LogLevel = level;
             }
+        }
+        public void Start()
+        {
+            if (!IsStart)
+            {
+                IsStart = true;
+                Task.Factory.StartNew(() =>
+                {
+                    while (IsStart)
+                    {
+                        Thread.Sleep(10 * 1000);
+
+                        if (Queue.Any())
+                        {
+                            List<LogModel> list = new List<LogModel>();
+                            for (int i = 0; i < Queue.Count; i++)
+                            {
+                                LogModel model = null;
+                                if (Queue.TryDequeue(out model)) list.Add(model);
+                            }
+                            if (ListTool.HasElements(list)) WriteFile(list);
+                        }
+                    }
+                });
+            }
+        }
+        void Stop()
+        {
+            if (IsStart)
+                IsStart = false;
         }
         public bool SetWriteFile(bool isWrite, string logPath)
         {
@@ -101,10 +140,10 @@ namespace Azylee.Core.LogUtils
         {
             Console.ForegroundColor = GetColor(type);
             Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
-            if (IsWriteFile) WriteFile(type, message);
+            if (IsWriteFile) Queue.Enqueue(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });
         }
 
-        private void WriteFile(LogType type, string message)
+        private void WriteFile(LogModel log)
         {
             if (IsWriteFile)
             {
@@ -116,7 +155,29 @@ namespace Azylee.Core.LogUtils
                     //创建日志目录
                     DirTool.Create(logPath);
                     //写出日志
-                    TxtTool.Append(file, string.Format(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message));
+                    TxtTool.Append(file, string.Format(LOG_FORMAT, log.CreateTime.ToString(TIME_FORMAT), log.Type.ToString(), log.Message));
+                }
+            }
+        }
+        private void WriteFile(List<LogModel> list)
+        {
+            if (IsWriteFile)
+            {
+                lock (LogFileLock)
+                {
+                    //设置日志目录
+                    string logPath = AppDomain.CurrentDomain.BaseDirectory + LogPath;
+                    string file = string.Format(@"{0}\{1}.txt", logPath, DateTime.Now.ToString("yyyy-MM-dd"));
+                    //创建日志目录
+                    DirTool.Create(logPath);
+                    //整理要输出的内容
+                    List<string> txts = new List<string>();
+                    foreach (var item in list)
+                    {
+                        txts.Add(string.Format(LOG_FORMAT, item.CreateTime.ToString(TIME_FORMAT), item.Type.ToString(), item.Message));
+                    }
+                    //写出日志
+                    TxtTool.Append(file, txts);
                 }
             }
         }

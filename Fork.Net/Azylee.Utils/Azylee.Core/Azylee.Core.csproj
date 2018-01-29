@@ -67,6 +67,7 @@
     <Compile Include="IOUtils\TxtUtils\XmlTool.cs" />
     <Compile Include="LogUtils\Log.cs" />
     <Compile Include="LogUtils\LogLevel.cs" />
+    <Compile Include="LogUtils\LogModel.cs" />
     <Compile Include="LogUtils\LogType.cs" />
     <Compile Include="ProcessUtils\ProcessTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirTool.cs" />
