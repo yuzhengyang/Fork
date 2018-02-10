@@ -72,7 +72,7 @@ namespace Azylee.Core.LogUtils
                 {
                     while (IsStart)
                     {
-                        Thread.Sleep(10 * 1000);
+                        Thread.Sleep(500);
 
                         if (Queue.Any())
                         {

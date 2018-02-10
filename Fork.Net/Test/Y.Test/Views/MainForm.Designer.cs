@@ -37,6 +37,7 @@
             this.TestIrrForm = new System.Windows.Forms.Button();
             this.BTCheckYUtils = new System.Windows.Forms.Button();
             this.TestCrossForm = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ChineseCalendarForm
@@ -129,11 +130,22 @@
             this.TestCrossForm.UseVisualStyleBackColor = true;
             this.TestCrossForm.Click += new System.EventHandler(this.TestCrossForm_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(13, 256);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(261, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "测试ToastForm";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 427);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.TestCrossForm);
             this.Controls.Add(this.BTCheckYUtils);
             this.Controls.Add(this.TestIrrForm);
@@ -162,5 +174,6 @@
         private System.Windows.Forms.Button TestIrrForm;
         private System.Windows.Forms.Button BTCheckYUtils;
         private System.Windows.Forms.Button TestCrossForm;
+        private System.Windows.Forms.Button button1;
     }
 }
