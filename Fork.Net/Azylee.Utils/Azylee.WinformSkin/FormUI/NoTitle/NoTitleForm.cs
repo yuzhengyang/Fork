@@ -147,17 +147,17 @@ namespace Azylee.WinformSkin.FormUI.NoTitle
         }
         #region 界面优化
         /// <summary>
-        /// 避免拖动窗口闪烁
+        /// 避免拖动窗口闪烁，使用会导致Windows自带动画失效
         /// </summary>
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED  
-        //        return cp;
-        //    }
-        //}
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED  
+                return cp;
+            }
+        }
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

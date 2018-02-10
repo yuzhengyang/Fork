@@ -269,6 +269,10 @@
     <Content Include="Images\BackgroundImages\Rainbow.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Azylee.Utils\Azylee.WinformSkin\Azylee.WinformSkin.csproj">
+      <Project>{d280c16f-fde2-4647-bd76-3514f673426d}</Project>
+      <Name>Azylee.WinformSkin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Fork.Net.Tools\Y.Skin\Y.Skin.csproj">
       <Project>{e9a97673-3e27-4a49-90bc-8806411a2f57}</Project>
       <Name>Y.Skin</Name>

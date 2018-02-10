@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIUtils\FormAnimateAPI.cs" />
     <Compile Include="APIUtils\FormStyleAPI.cs" />
     <Compile Include="FormUI\CustomTitle\BigIconForm.cs">
       <SubType>Form</SubType>
@@ -71,6 +72,12 @@
     </Compile>
     <Compile Include="FormUI\SimpleShadow\SimpleShadowForm.Designer.cs">
       <DependentUpon>SimpleShadowForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUI\Toast\ToastForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUI\Toast\ToastForm.Designer.cs">
+      <DependentUpon>ToastForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -110,6 +117,9 @@
     <EmbeddedResource Include="FormUI\SimpleShadow\SimpleShadowForm.resx">
       <DependentUpon>SimpleShadowForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormUI\Toast\ToastForm.resx">
+      <DependentUpon>ToastForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -120,6 +130,11 @@
     <EmbeddedResource Include="UserWidgets\SuperUserControl.resx">
       <DependentUpon>SuperUserControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FormUI\Toast\Images\toast_error.png" />
+    <Content Include="FormUI\Toast\Images\toast_info.png" />
+    <Content Include="FormUI\Toast\Images\toast_warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

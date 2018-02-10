@@ -1,10 +1,4 @@
-﻿using System.Data.Entity;
-using Waka.Model.Album;
-using Waka.Model.Marx;
-using Waka.Model.Support;
-using Waka.Model.Waka;
-
-namespace Y.DB.DAO
+﻿namespace Y.DB.DAO
 {
     class DbTable : SuperDb
     {

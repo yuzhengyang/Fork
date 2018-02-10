@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Oreo.FaultLog.DatabaseEngine;
 using Oreo.FaultLog.Models;
-using Y.Utils.DataUtils.Collections;
 using System.Threading.Tasks;
 using Oreo.FaultLog.Views;
+using Y.Utils.DataUtils.Collections;
 
 namespace Oreo.FaultLog.Partials
 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azylee.WinformSkin.FormUI.Toast;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -68,6 +69,11 @@ namespace Y.Test.Views
         private void TestCrossForm_Click(object sender, EventArgs e)
         {
             R.Forms.GetUnique<TestCrossForm>().Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ToastForm.Display("测试测试", "测试内容，测试内容123,456七八九十！", 'i', 2000);
         }
     }
 }

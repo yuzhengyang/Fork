@@ -402,6 +402,20 @@ namespace Y.Utils.IOUtils.TxtUtils
             int.TryParse(flag, out result);
             return result;
         }
+        public static int GetIntValue(string iniFile, string section, string key, int defaultValue)
+        {
+            string flag = GetStringValue(iniFile, section, key, "null");
+            if (flag == "null")
+            {
+                return defaultValue;
+            }
+            else
+            {
+                int result = 0;
+                int.TryParse(flag, out result);
+                return result;
+            }
+        }
         public static long GetLongValue(string iniFile, string section, string key)
         {
             string flag = GetStringValue(iniFile, section, key, "0");
