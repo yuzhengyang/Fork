@@ -38,6 +38,7 @@ namespace Azylee.Core.LogUtils
     /// </summary>
     public class Log
     {
+        #region 基础属性
         //输出的 Log 格式
         const string LOG_FORMAT = "{0}  {1}  {2}";
         const string TIME_FORMAT = "HH:mm:ss.fff";
@@ -51,6 +52,7 @@ namespace Azylee.Core.LogUtils
 
         bool IsStart = false;
         ConcurrentQueue<LogModel> Queue = new ConcurrentQueue<LogModel>();
+        #endregion
 
         public Log()
         { }
@@ -63,8 +65,9 @@ namespace Azylee.Core.LogUtils
                 LogLevel = level;
             }
         }
-        public void Start()
+        void Start()
         {
+            return;
             if (!IsStart)
             {
                 IsStart = true;
@@ -138,9 +141,15 @@ namespace Azylee.Core.LogUtils
         /// <param name="message">消息</param>
         private void Write(LogType type, string message)
         {
-            Console.ForegroundColor = GetColor(type);
-            Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
-            if (IsWriteFile) Queue.Enqueue(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });
+            try
+            {
+                Console.ForegroundColor = GetColor(type);
+                Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
+                //取消单独线程输出日志文件（单独线程输出日志必然会有延迟）
+                //if (IsWriteFile) Queue.Enqueue(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });
+                if (IsWriteFile) WriteFile(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });
+            }
+            catch { }
         }
 
         private void WriteFile(LogModel log)
