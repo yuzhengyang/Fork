@@ -158,12 +158,12 @@ namespace Azylee.WinformSkin.FormUI.NoTitle
                 return cp;
             }
         }
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            //Graphics g = CreateGraphics();
-            //g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(0, 0, Width, Height));
-        }
+        //protected override void OnPaint(PaintEventArgs e)
+        //{
+        //    base.OnPaint(e);
+        //    //Graphics g = CreateGraphics();
+        //    //g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(0, 0, Width, Height));
+        //}
         #endregion
         #region Invoke UI操作
         /// <summary>

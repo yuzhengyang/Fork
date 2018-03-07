@@ -28,5 +28,23 @@ namespace Azylee.Core.DataUtils.DateTimeUtils
                 return true;
             return false;
         }
+        /// <summary>
+        /// 当月有多少天
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public static int MonthDays(int year, int month)
+        {
+            int days = 1;
+            try
+            {
+                DateTime begin = new DateTime(year, month, 1);
+                DateTime end = begin.AddMonths(1);
+                days = (int)(end - begin).TotalDays;
+            }
+            catch { }
+            return days;
+        }
     }
 }

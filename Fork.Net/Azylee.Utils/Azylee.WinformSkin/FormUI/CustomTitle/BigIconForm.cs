@@ -39,6 +39,21 @@ namespace Azylee.WinformSkin.FormUI.CustomTitle
                 }
             }
         }
+        private bool _DoubleClickMax = true;
+        [Category("Style")]
+        [Description("双击最大化窗口")]
+        [DefaultValue(typeof(bool), "true")]
+        public bool DoubleClickMax
+        {
+            get { return _DoubleClickMax; }
+            set
+            {
+                if (_DoubleClickMax != value)
+                {
+                    _DoubleClickMax = value;
+                }
+            }
+        }
         #endregion
         #region UI界面调整方法
         public void UIMax()
@@ -103,13 +118,16 @@ namespace Azylee.WinformSkin.FormUI.CustomTitle
         }
         private void BigIconFormLBHeadTitle_DoubleClick(object sender, EventArgs e)
         {
-            if (WindowState != FormWindowState.Maximized)
+            if (_DoubleClickMax)
             {
-                MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
-                WindowState = FormWindowState.Maximized;
+                if (WindowState != FormWindowState.Maximized)
+                {
+                    MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+                    WindowState = FormWindowState.Maximized;
+                }
+                else
+                    WindowState = FormWindowState.Normal;
             }
-            else
-                WindowState = FormWindowState.Normal;
         }
         /// <summary>
         /// 关闭

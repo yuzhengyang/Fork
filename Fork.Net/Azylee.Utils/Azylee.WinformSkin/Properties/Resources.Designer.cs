@@ -63,6 +63,36 @@ namespace Azylee.WinformSkin.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap simpleclock_simple_hour_hand_1 {
+            get {
+                object obj = ResourceManager.GetObject("simpleclock_simple_hour_hand_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap simpleclock_simple_minute_hand_1 {
+            get {
+                object obj = ResourceManager.GetObject("simpleclock_simple_minute_hand_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap simpleclock_simple_second_hand_1 {
+            get {
+                object obj = ResourceManager.GetObject("simpleclock_simple_second_hand_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap toast_error {
             get {
                 object obj = ResourceManager.GetObject("toast_error", resourceCulture);

@@ -20,13 +20,12 @@ namespace Y.Test.Views
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            simpleClockControl1.Start();
         }
         private void ChineseCalendarForm_Click(object sender, EventArgs e)
         {
             R.Forms.GetUnique<ChineseCalendarForm>().Show();
         }
-
         private void TestComputerInfoForm_Click(object sender, EventArgs e)
         {
             R.Forms.GetUnique<TestComputerInfoForm>().Show();

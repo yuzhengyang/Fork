@@ -38,6 +38,7 @@
             this.BTCheckYUtils = new System.Windows.Forms.Button();
             this.TestCrossForm = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.simpleClockControl1 = new Azylee.WinformSkin.UserWidgets.ClockWidgets.SimpleClockControl();
             this.SuspendLayout();
             // 
             // ChineseCalendarForm
@@ -140,11 +141,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // simpleClockControl1
+            // 
+            this.simpleClockControl1.BackColor = System.Drawing.Color.GreenYellow;
+            this.simpleClockControl1.HourHandImage = null;
+            this.simpleClockControl1.Location = new System.Drawing.Point(405, 175);
+            this.simpleClockControl1.MinuteHandImage = null;
+            this.simpleClockControl1.Name = "simpleClockControl1";
+            this.simpleClockControl1.SecondHandImage = null;
+            this.simpleClockControl1.Size = new System.Drawing.Size(64, 64);
+            this.simpleClockControl1.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 427);
+            this.Controls.Add(this.simpleClockControl1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.TestCrossForm);
             this.Controls.Add(this.BTCheckYUtils);
@@ -175,5 +188,6 @@
         private System.Windows.Forms.Button BTCheckYUtils;
         private System.Windows.Forms.Button TestCrossForm;
         private System.Windows.Forms.Button button1;
+        private Azylee.WinformSkin.UserWidgets.ClockWidgets.SimpleClockControl simpleClockControl1;
     }
 }
