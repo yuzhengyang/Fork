@@ -6,6 +6,7 @@
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
 using Azylee.Core.DataUtils.CollectionUtils;
+using System;
 using System.Text.RegularExpressions;
 
 namespace Azylee.Core.DataUtils.StringUtils
@@ -80,6 +81,22 @@ namespace Azylee.Core.DataUtils.StringUtils
             {
                 return false;
             }
+        }
+        /// <summary>
+        /// 使用指定字符替换字符串中换行符
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="sign"></param>
+        /// <returns></returns>
+        public static string ReplaceNewLine(string s, string sign = " , ")
+        {
+            try
+            {
+                return s.Replace("\r\n", sign).
+                Replace("\n\r", sign).
+                Replace(Environment.NewLine, sign);
+            }
+            catch { return s; }
         }
     }
 }

@@ -49,6 +49,12 @@
     <Compile Include="ButtonUI\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="ButtonUI\RotateImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ButtonUI\RotateImageButton.Designer.cs">
+      <DependentUpon>RotateImageButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormUI\CustomTitle\BigIconForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ButtonUI\ImageButton.resx">
       <DependentUpon>ImageButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ButtonUI\RotateImageButton.resx">
+      <DependentUpon>RotateImageButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUI\CustomTitle\BigIconForm.resx">
       <DependentUpon>BigIconForm.cs</DependentUpon>

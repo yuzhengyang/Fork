@@ -16,6 +16,7 @@
 //R.Log.e("this is e 错误");
 
 using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.IOUtils.DirUtils;
 using Azylee.Core.IOUtils.TxtUtils;
 using System;
@@ -164,7 +165,12 @@ namespace Azylee.Core.LogUtils
                     //创建日志目录
                     DirTool.Create(logPath);
                     //写出日志
-                    TxtTool.Append(file, string.Format(LOG_FORMAT, log.CreateTime.ToString(TIME_FORMAT), log.Type.ToString(), log.Message));
+                    TxtTool.Append(
+                        file,
+                        string.Format(LOG_FORMAT,
+                            log.CreateTime.ToString(TIME_FORMAT),
+                            log.Type.ToString(),
+                            StringTool.ReplaceNewLine(log.Message)));
                 }
             }
         }

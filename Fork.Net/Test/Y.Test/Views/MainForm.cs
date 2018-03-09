@@ -20,7 +20,10 @@ namespace Y.Test.Views
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            simpleClockControl1.Start();
+            simpleClockControl1.Start(timeShift: 0);
+            simpleClockControl2.Start(timeShift: 4.5);
+            simpleClockControl3.Start(timeShift: -1);
+            simpleClockControl4.Start(timeShift: 10);
         }
         private void ChineseCalendarForm_Click(object sender, EventArgs e)
         {

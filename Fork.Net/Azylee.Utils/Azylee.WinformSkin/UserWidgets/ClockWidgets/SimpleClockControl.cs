@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using Azylee.WinformSkin.Properties;
+using System.Drawing.Imaging;
 
 namespace Azylee.WinformSkin.UserWidgets.ClockWidgets
 {
@@ -40,11 +41,24 @@ namespace Azylee.WinformSkin.UserWidgets.ClockWidgets
             get { return _HourHandImage; }
             set { _HourHandImage = value; }
         }
+
+        private Image _ClockBackImage = null;
+        [Category("时钟样式")]
+        [Description("表盘")]
+        public Image ClockBackImage
+        {
+            get { return _ClockBackImage; }
+            set
+            {
+                _ClockBackImage = value;
+                BackgroundImage = _ClockBackImage;
+            }
+        }
         #endregion
-        Graphics Graph = null;
         Bitmap Bmp = null;
-        Graphics BmpGraph = null;
+        Graphics Graph = null;
         DateTime Time = DateTime.Now;
+        double TimeShift = 0;
         public SimpleClockControl()
         {
             InitializeComponent();
@@ -53,101 +67,108 @@ namespace Azylee.WinformSkin.UserWidgets.ClockWidgets
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.UserPaint, true);
         }
-
         private void SimpleClockControl_Load(object sender, EventArgs e)
         {
         }
-        public void Start()
+
+        #region 对外提供方法
+        /// <summary>
+        /// 启动时钟刷新
+        /// </summary>
+        /// <param name="secondInterval">刷新间隔时间（）</param>
+        /// <param name="timeShift">时间偏移（小时）</param>
+        public void Start(int secondInterval = 1, double timeShift = 0)
         {
-            Graph = CreateGraphics();
-            Graph.SmoothingMode = SmoothingMode.AntiAlias;
-            Bmp = new Bitmap(Width, Height);
-            BmpGraph = Graphics.FromImage(Bmp);
-            BmpGraph.SmoothingMode = SmoothingMode.AntiAlias;
-            TMPainter.Interval = 1 * 1000;
-
-            if (SecondHandImage == null)
-            {
-                TMPainter.Interval = 60 * 1000;
-                //SecondHandImage = Resources.simpleclock_simple_second_hand_1;
-            }
-            if (MinuteHandImage == null)
-            {
-                TMPainter.Interval = 60 * 60 * 1000;
-                MinuteHandImage = Resources.simpleclock_simple_minute_hand_1;
-            }
-            if (HourHandImage == null)
-            {
-                HourHandImage = Resources.simpleclock_simple_hour_hand_1;
-            }
-
+            Init(timeShift);//初始化数据
             Draw();//第一次绘制
-            TMPainter.Enabled = true;
+            TMPainter.Interval = (secondInterval >= 1 ? secondInterval : 1) * 1000;//设置刷新间隔
+            TMPainter.Enabled = true;//启动计时器任务
         }
+        /// <summary>
+        /// 强制重绘控件
+        /// </summary>
         public void ReDraw()
         {
             Draw();
         }
+        #endregion
+
         private void TMPainter_Tick(object sender, EventArgs e)
         {
             Draw();
         }
-
-        private void Draw()
+        private void Init(double timeShift)
         {
             try
             {
-                if (Graph != null && Bmp != null && BmpGraph != null)
-                {
-                    Refresh();//强制重绘控件
-                    Time = DateTime.Now;
-                    BmpGraph.ResetTransform();//恢复默认状态
-                    BmpGraph.FillRectangle(new SolidBrush(BackColor), 0, 0, Width, Height);
-                    if (BackgroundImage != null) BmpGraph.DrawImage(BackgroundImage, 0, 0, Width, Height);
+                Bmp = new Bitmap(Width, Height);
+                Graph = Graphics.FromImage(Bmp);
+                Graph.SmoothingMode = SmoothingMode.AntiAlias;
+                TimeShift = timeShift;
 
-                    //绘制时针
-                    if (HourHandImage != null)
-                    {
-                        BmpGraph.ResetTransform();//恢复默认状态
-                        BmpGraph.TranslateTransform(Width / 2, Height / 2);//设置原点
-                        BmpGraph.RotateTransform(Time.Hour * 30 + Time.Minute * 1 / 2);
-                        BmpGraph.DrawImage(HourHandImage, -(Width / 2), -(Height / 2), Width, Height);
-                    }
-                    //绘制分针
-                    if (MinuteHandImage != null)
-                    {
-                        BmpGraph.ResetTransform();//恢复默认状态
-                        BmpGraph.TranslateTransform(Width / 2, Height / 2);//设置原点
-                        BmpGraph.RotateTransform(Time.Minute * 6);
-                        BmpGraph.DrawImage(MinuteHandImage, -(Width / 2), -(Height / 2), Width, Height);
-                    }
-                    //绘制秒针
-                    if (SecondHandImage != null)
-                    {
-                        BmpGraph.ResetTransform();//恢复默认状态
-                        BmpGraph.TranslateTransform(Width / 2, Height / 2);//设置原点
-                        BmpGraph.RotateTransform(Time.Second * 6);//以水平线为x轴，从垂直上方开始旋转，每次旋转6度。
-                        BmpGraph.DrawImage(SecondHandImage, -(Width / 2), -(Height / 2), Width, Height);
-                    }
-                    OnPaint(new PaintEventArgs(Graph, new Rectangle(0, 0, Width, Height)));
+                if (SecondHandImage == null)
+                {
+                    //TMPainter.Interval = 60 * 1000;
+                    //SecondHandImage = Resources.simpleclock_simple_second_hand_1;
+                }
+                if (MinuteHandImage == null)
+                {
+                    //TMPainter.Interval = 60 * 60 * 1000;
+                    MinuteHandImage = Resources.simpleclock_simple_minute_hand_1;
+                }
+                if (HourHandImage == null)
+                {
+                    HourHandImage = Resources.simpleclock_simple_hour_hand_1;
                 }
             }
             catch { }
         }
-        protected override void OnPaint(PaintEventArgs e)
+        private void Draw()
         {
-            base.OnPaint(e);
-            if (!DesignMode && e != null && e.Graphics != null && Bmp != null)
+            try
             {
-                Graphics g = e.Graphics;
-                g.DrawImage(Bmp, 0, 0, Width, Height);
+                if (Bmp != null && Graph != null)
+                {
+                    Time = DateTime.Now.AddHours(TimeShift);
+                    Graph.ResetTransform();//恢复默认状态
+                    Graph.Clear(Color.Transparent);
+                    Graph.FillRectangle(new SolidBrush(BackColor), 0, 0, Width, Height);
+                    if (ClockBackImage != null) Graph.DrawImage(ClockBackImage, 0, 0, Width, Height);
+
+                    //绘制时针
+                    if (HourHandImage != null)
+                    {
+                        Graph.ResetTransform();//恢复默认状态
+                        Graph.TranslateTransform(Width / 2, Height / 2);//设置原点
+                        Graph.RotateTransform(Time.Hour * 30 + Time.Minute * 1 / 2);
+                        Graph.DrawImage(HourHandImage, -(Width / 2), -(Height / 2), Width, Height);
+                    }
+                    //绘制分针
+                    if (MinuteHandImage != null)
+                    {
+                        Graph.ResetTransform();//恢复默认状态
+                        Graph.TranslateTransform(Width / 2, Height / 2);//设置原点
+                        Graph.RotateTransform(Time.Minute * 6);
+                        Graph.DrawImage(MinuteHandImage, -(Width / 2), -(Height / 2), Width, Height);
+                    }
+                    //绘制秒针
+                    if (SecondHandImage != null)
+                    {
+                        Graph.ResetTransform();//恢复默认状态
+                        Graph.TranslateTransform(Width / 2, Height / 2);//设置原点
+                        Graph.RotateTransform(Time.Second * 6);//以水平线为x轴，从垂直上方开始旋转，每次旋转6度。
+                        Graph.DrawImage(SecondHandImage, -(Width / 2), -(Height / 2), Width, Height);
+                    }
+                    BackgroundImage = Bmp;
+                    Refresh();
+                }
             }
+            catch { }
         }
         ~SimpleClockControl()
         {
             Graph.Dispose();
             Bmp.Dispose();
-            BmpGraph.Dispose();
         }
     }
 }

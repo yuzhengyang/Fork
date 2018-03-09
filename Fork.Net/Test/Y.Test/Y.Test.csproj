@@ -253,6 +253,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\IconGroup\icongroup_01.png" />
+    <Content Include="Images\RoteImgBtn\function_update_icon.png" />
+    <Content Include="Images\RoteImgBtn\function_update_icon_back.png" />
+    <Content Include="Images\RoteImgBtn\function_update_icon_back_down.png" />
+    <Content Include="Images\RoteImgBtn\function_update_icon_fore.png" />
     <Content Include="Images\Temp\temp_01.png" />
     <Content Include="Images\Temp\temp_02.png" />
     <Content Include="Images\Temp\temp_03.png" />

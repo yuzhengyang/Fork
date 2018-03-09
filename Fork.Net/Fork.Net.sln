@@ -75,6 +75,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Update", "Azylee.Uti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Core.Plus", "Azylee.Utils\Azylee.Core.Plus\Azylee.Core.Plus.csproj", "{915AE524-7EFD-4ECC-B731-DE1D1F5558F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.SystemSleep", "Test\Test.SystemSleep\Test.SystemSleep.csproj", "{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -331,6 +333,14 @@ Global
 		{915AE524-7EFD-4ECC-B731-DE1D1F5558F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{915AE524-7EFD-4ECC-B731-DE1D1F5558F0}.Release|x86.ActiveCfg = Release|Any CPU
 		{915AE524-7EFD-4ECC-B731-DE1D1F5558F0}.Release|x86.Build.0 = Release|Any CPU
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}.Debug|x86.Build.0 = Debug|Any CPU
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}.Release|x86.ActiveCfg = Release|Any CPU
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -366,6 +376,7 @@ Global
 		{EF587677-DC59-4C46-B1AB-92904CD3F187} = {C34A95B5-5F83-46E3-868A-56BDDA2D0B87}
 		{76F92BAE-8C9C-42AA-85E8-51F2EA8A0C91} = {C34A95B5-5F83-46E3-868A-56BDDA2D0B87}
 		{915AE524-7EFD-4ECC-B731-DE1D1F5558F0} = {C34A95B5-5F83-46E3-868A-56BDDA2D0B87}
+		{3936BB3B-244D-4448-9B77-3A7CC0CFBE28} = {A89FC45A-A907-4487-8719-114530A62684}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5436696D-5F55-490A-AB40-050B54BE2AB4}
