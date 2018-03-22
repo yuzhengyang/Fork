@@ -43,6 +43,18 @@
   <ItemGroup>
     <Compile Include="APIUtils\FormAnimateAPI.cs" />
     <Compile Include="APIUtils\FormStyleAPI.cs" />
+    <Compile Include="ButtonUI\ImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ButtonUI\ImageButton.Designer.cs">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonUI\RotateImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ButtonUI\RotateImageButton.Designer.cs">
+      <DependentUpon>RotateImageButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormUI\CustomTitle\BigIconForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +98,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="StyleUtils\ColorStyle.cs" />
+    <Compile Include="UserWidgets\ClockWidgets\SimpleClockControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserWidgets\ClockWidgets\SimpleClockControl.Designer.cs">
+      <DependentUpon>SimpleClockControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserWidgets\PageWidgets\PageDataProviderArgs.cs" />
     <Compile Include="UserWidgets\PageWidgets\PageToolBar.cs">
       <SubType>UserControl</SubType>
@@ -102,6 +120,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="ButtonUI\ImageButton.resx">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ButtonUI\RotateImageButton.resx">
+      <DependentUpon>RotateImageButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormUI\CustomTitle\BigIconForm.resx">
       <DependentUpon>BigIconForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +148,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserWidgets\ClockWidgets\SimpleClockControl.resx">
+      <DependentUpon>SimpleClockControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserWidgets\PageWidgets\PageToolBar.resx">
       <DependentUpon>PageToolBar.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +162,9 @@
     <Content Include="FormUI\Toast\Images\toast_error.png" />
     <Content Include="FormUI\Toast\Images\toast_info.png" />
     <Content Include="FormUI\Toast\Images\toast_warning.png" />
+    <Content Include="UserWidgets\ClockWidgets\Images\simpleclock_simple_hour_hand_1.png" />
+    <Content Include="UserWidgets\ClockWidgets\Images\simpleclock_simple_minute_hand_1.png" />
+    <Content Include="UserWidgets\ClockWidgets\Images\simpleclock_simple_second_hand_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

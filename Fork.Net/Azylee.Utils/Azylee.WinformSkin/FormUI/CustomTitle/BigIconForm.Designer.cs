@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.BigIconFormPNHead = new System.Windows.Forms.Panel();
             this.BigIconFormPNHeadTitle = new System.Windows.Forms.Panel();
             this.BigIconFormLBHeadTitle = new System.Windows.Forms.Label();
@@ -38,6 +39,8 @@
             this.BigIconFormPNHeadIcon = new System.Windows.Forms.Panel();
             this.BigIconFormPBHeadIcon = new System.Windows.Forms.PictureBox();
             this.BigIconFormPNContainer = new System.Windows.Forms.Panel();
+            this.TMRefresh = new System.Windows.Forms.Timer(this.components);
+            this.TTMain = new System.Windows.Forms.ToolTip(this.components);
             this.BigIconFormPNHead.SuspendLayout();
             this.BigIconFormPNHeadTitle.SuspendLayout();
             this.BigIconFormPNHeadButton.SuspendLayout();
@@ -104,6 +107,7 @@
             this.BigIconFormBTFormMinBox.Size = new System.Drawing.Size(32, 26);
             this.BigIconFormBTFormMinBox.TabIndex = 2;
             this.BigIconFormBTFormMinBox.Text = "-";
+            this.TTMain.SetToolTip(this.BigIconFormBTFormMinBox, "最小化");
             this.BigIconFormBTFormMinBox.UseVisualStyleBackColor = true;
             this.BigIconFormBTFormMinBox.Click += new System.EventHandler(this.BigIconFormBTFormMinBox_Click);
             // 
@@ -118,6 +122,7 @@
             this.BigIconFormBTFormMaxBox.Size = new System.Drawing.Size(32, 26);
             this.BigIconFormBTFormMaxBox.TabIndex = 1;
             this.BigIconFormBTFormMaxBox.Text = "□";
+            this.TTMain.SetToolTip(this.BigIconFormBTFormMaxBox, "最大化");
             this.BigIconFormBTFormMaxBox.UseVisualStyleBackColor = true;
             this.BigIconFormBTFormMaxBox.Click += new System.EventHandler(this.BigIconFormBTFormMaxBox_Click);
             // 
@@ -132,6 +137,7 @@
             this.BigIconFormBTFormCloseBox.Size = new System.Drawing.Size(32, 26);
             this.BigIconFormBTFormCloseBox.TabIndex = 0;
             this.BigIconFormBTFormCloseBox.Text = "×";
+            this.TTMain.SetToolTip(this.BigIconFormBTFormCloseBox, "关闭");
             this.BigIconFormBTFormCloseBox.UseVisualStyleBackColor = true;
             this.BigIconFormBTFormCloseBox.Click += new System.EventHandler(this.BigIconFormBTFormCloseBox_Click);
             // 
@@ -162,6 +168,11 @@
             this.BigIconFormPNContainer.Name = "BigIconFormPNContainer";
             this.BigIconFormPNContainer.Size = new System.Drawing.Size(971, 461);
             this.BigIconFormPNContainer.TabIndex = 6;
+            // 
+            // TMRefresh
+            // 
+            this.TMRefresh.Interval = 1000;
+            this.TMRefresh.Tick += new System.EventHandler(this.TMRefresh_Tick);
             // 
             // BigIconForm
             // 
@@ -195,5 +206,7 @@
         public System.Windows.Forms.Button BigIconFormBTFormMinBox;
         public System.Windows.Forms.Button BigIconFormBTFormMaxBox;
         public System.Windows.Forms.Button BigIconFormBTFormCloseBox;
+        private System.Windows.Forms.Timer TMRefresh;
+        private System.Windows.Forms.ToolTip TTMain;
     }
 }

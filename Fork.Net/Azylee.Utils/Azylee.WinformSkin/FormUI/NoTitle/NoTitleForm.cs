@@ -153,17 +153,19 @@ namespace Azylee.WinformSkin.FormUI.NoTitle
         {
             get
             {
+                const int WS_MINIMIZEBOX = 0x00020000;  // Winuser.h中定义  
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED  
+                cp.Style = cp.Style | WS_MINIMIZEBOX;   // 允许最小化操作
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED（任务栏点击最大化最小化）
                 return cp;
             }
         }
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            //Graphics g = CreateGraphics();
-            //g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(0, 0, Width, Height));
-        }
+        //protected override void OnPaint(PaintEventArgs e)
+        //{
+        //    base.OnPaint(e);
+        //    //Graphics g = CreateGraphics();
+        //    //g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(0, 0, Width, Height));
+        //}
         #endregion
         #region Invoke UI操作
         /// <summary>

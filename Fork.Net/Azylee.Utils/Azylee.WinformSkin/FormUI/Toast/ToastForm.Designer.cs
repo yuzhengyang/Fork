@@ -35,7 +35,9 @@
             this.TMHide = new System.Windows.Forms.Timer(this.components);
             this.TMHideAnim = new System.Windows.Forms.Timer(this.components);
             this.TMShowAnim = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.PBIcon)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PBIcon
@@ -86,6 +88,17 @@
             this.TMShowAnim.Interval = 10;
             this.TMShowAnim.Tick += new System.EventHandler(this.TMShowAnim_Tick);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.PBIcon);
+            this.panel1.Controls.Add(this.LBTitle);
+            this.panel1.Controls.Add(this.LBText);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(360, 80);
+            this.panel1.TabIndex = 7;
+            // 
             // ToastForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -93,9 +106,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
             this.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
             this.ClientSize = new System.Drawing.Size(360, 80);
-            this.Controls.Add(this.LBText);
-            this.Controls.Add(this.LBTitle);
-            this.Controls.Add(this.PBIcon);
+            this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ToastForm";
@@ -106,8 +117,9 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ToastForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PBIcon)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -119,5 +131,6 @@
         private System.Windows.Forms.Timer TMHide;
         private System.Windows.Forms.Timer TMHideAnim;
         private System.Windows.Forms.Timer TMShowAnim;
+        private System.Windows.Forms.Panel panel1;
     }
 }
