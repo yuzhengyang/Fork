@@ -1,5 +1,6 @@
 ﻿using Azylee.WinformSkin.APIUtils;
 using Azylee.WinformSkin.FormUI.NoTitle;
+using Azylee.WinformSkin.FormUI.Toast;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -91,6 +92,16 @@ namespace Azylee.WinformSkin.FormUI.CustomTitle
         {
             SetBorder();
             BigIconFormPNHead.Height = BigIconFormHeadHeight;
+            TMRefresh.Enabled = true;
+
+            if (WindowState == FormWindowState.Maximized || WindowState == FormWindowState.Normal)
+            {
+                if (Visible && Opacity > 0)
+                {
+                    TMRefreshStart();
+                    //ToastForm.Display("test", $"窗口显示，且为正常大小状态，透明度{Opacity}", 'i', 5000);
+                }
+            }
         }
         /// <summary>
         /// 最小化
@@ -138,8 +149,32 @@ namespace Azylee.WinformSkin.FormUI.CustomTitle
         {
             Close();
         }
+
         #endregion
-
-
+        #region 窗口显示优化
+        /// <summary>
+        /// 重绘窗口计时器，防止win10出现部分区域透明
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TMRefreshStart()
+        {
+            TMRefresh.Interval = 200;
+            TMRefresh.Enabled = true;
+        }
+        private void TMRefresh_Tick(object sender, EventArgs e)
+        {
+            int maxInterval = 200 + 6;
+            if (TMRefresh.Interval > maxInterval)
+            {
+                TMRefresh.Enabled = false;
+            }
+            else
+            {
+                Refresh();
+                TMRefresh.Interval = TMRefresh.Interval + 1;
+            }
+        }
+        #endregion
     }
 }

@@ -41,20 +41,22 @@ namespace Azylee.YeahWeb.HttpUtils
             try
             {
                 Encoding myEncoding = Encoding.GetEncoding(encoding);
-                byte[] byteArray = myEncoding.GetBytes(param); //转化
                 HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(new Uri(url));
                 webReq.Method = "POST";
                 webReq.ContentType = "application/x-www-form-urlencoded";
-                webReq.ContentLength = byteArray.Length;
-                Stream newStream = webReq.GetRequestStream();
-                newStream.Write(byteArray, 0, byteArray.Length);//写入参数
-                newStream.Close();
+                if (!string.IsNullOrWhiteSpace(param))
+                {
+                    byte[] byteArray = myEncoding.GetBytes(param); //转化
+                    webReq.ContentLength = byteArray.Length;
+                    Stream newStream = webReq.GetRequestStream();
+                    newStream.Write(byteArray, 0, byteArray.Length);//写入参数
+                    newStream.Close();
+                }
                 HttpWebResponse response = (HttpWebResponse)webReq.GetResponse();
                 StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.Default);
                 result = sr.ReadToEnd();
                 sr.Close();
                 response.Close();
-                newStream.Close();
             }
             catch (Exception ex)
             { }
