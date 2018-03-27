@@ -35,6 +35,7 @@ namespace Azylee.Core.WindowsUtils.APIUtils
 
         /// <summary>
         /// 唤起进程窗口（搭配 AppUnique.IsUnique() 食用更佳）
+        /// -测试无法唤起隐藏窗口，仅能唤起常规窗口
         /// </summary>
         public static void Raise(Process process, bool all = false)
         {
