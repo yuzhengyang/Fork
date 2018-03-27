@@ -26,7 +26,7 @@ namespace Y.Test
             var list = ComputerInfoTool.RAMModel();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new TestShadow2Form());
         }
     }
 }
