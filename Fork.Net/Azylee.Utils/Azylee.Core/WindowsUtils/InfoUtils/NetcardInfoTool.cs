@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Text;
 
 namespace Azylee.Core.WindowsUtils.InfoUtils
 {
@@ -114,6 +115,30 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             hosts.Add("0.0.0.0");
             hosts.Add("127.0.0.1");
             return hosts;
+        }
+
+        /// <summary>
+        /// 格式化MAC地址（基础款）
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string MACFormat(string s)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(s))
+            {
+                if (s.Length == 12)
+                {
+                    sb.Append(
+                        $"{s.Substring(0, 2)}:" +
+                        $"{s.Substring(2, 2)}:" +
+                        $"{s.Substring(4, 2)}:" +
+                        $"{s.Substring(6, 2)}:" +
+                        $"{s.Substring(8, 2)}:" +
+                        $"{s.Substring(10, 2)}");
+                }
+            }
+            return sb.ToString();
         }
     }
 }

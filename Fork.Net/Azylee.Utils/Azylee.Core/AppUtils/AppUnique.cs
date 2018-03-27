@@ -14,7 +14,7 @@ namespace Azylee.Core.AppUtils
         private Mutex Mutex { get; set; }
 
         /// <summary>
-        /// 判断应用在当前系统实例下是否唯一
+        /// 判断应用在当前系统实例下是否唯一（搭配 ApplicationAPI.Raise() 食用更佳）
         /// </summary>
         /// <param name="appName"></param>
         /// <returns></returns>

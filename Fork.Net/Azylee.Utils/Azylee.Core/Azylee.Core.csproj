@@ -82,6 +82,7 @@
     <Compile Include="Readme.cs" />
     <Compile Include="TaskUtils\TaskSupport.cs" />
     <Compile Include="VersionUtils\VersionTool.cs" />
+    <Compile Include="WindowsUtils\APIUtils\ApplicationAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
