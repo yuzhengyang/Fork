@@ -4,6 +4,8 @@ Fork 工具包是平时在做 C# winform 客户端的时候，收藏整理的一
 
 持续完善更新中……
 
+---
+
 ## Azylee.Utils 工具组
 
 > 目前 Azylee.utils 工具组包含以下部分：
@@ -115,13 +117,28 @@ Fork 工具包是平时在做 C# winform 客户端的时候，收藏整理的一
 ```
 
 #### Azylee.Core.Plus
+——暂无
 
 #### Azylee.Update
+——暂无
 
 #### Azylee.YeahWeb
+——暂无
 
 #### Azylee.WinformMan
+——暂无
 
 #### Azylee.WinformSkin
+——暂无
 
 #### Azylee.BlackBox
+——暂无
+
+---
+
+# 关于作者
+- Email：[inc@live.cn](mailto:inc@live.cn)，[yuzhyn@163.com](mailto:yuzhyn@163.com)
+- 在使用过程中，遇到问题可以给我发邮件，希望能帮助到你，更期待你的建议 ~~~
+
+
+![image](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/WeiXinQRCodeMini.jpg)
