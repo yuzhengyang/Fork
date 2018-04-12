@@ -11,57 +11,41 @@ namespace Azylee.BlackBox.Models
     public class RunningStatus
     {
         /// <summary>
-        /// 主键
+        /// 时间
         /// </summary>
-        public Guid Id { get; set; }
+        public DateTime Time { get; set; }
         /// <summary>
-        /// 开始时间
+        /// 统计时长
         /// </summary>
-        public DateTime BeginTime { get; set; }
-        /// <summary>
-        /// 结束时间
-        /// </summary>
-        public DateTime EndTime { get; set; }
+        public int Long { get; set; }
         /// <summary>
         /// 脱机时长
         /// </summary>
-        public long AfkTime { get; set; }
-        /// <summary>
-        /// 操作使用率
-        /// </summary>
-        public double OperationUtilization { get; set; }
+        public long AFK { get; set; }
         /// <summary>
         /// Cpu使用率
         /// </summary>
-        public double CpuUtilization { get; set; }
+        public double CpuPer { get; set; }
         /// <summary>
         /// 内存容量
         /// </summary>
-        public long RamCapacity { get; set; }
+        public long RamSize { get; set; }
         /// <summary>
-        /// 已用内存
+        /// 可用内存
         /// </summary>
-        public long RamUsed { get; set; }
-        /// <summary>
-        /// 内存使用率
-        /// </summary>
-        public double RamUtilization { get; set; }
+        public long RamFree { get; set; }
         /// <summary>
         /// 系统盘容量
         /// </summary>
-        public long SysDriveCapacity { get; set; }
+        public long SysDriveSize { get; set; }
         /// <summary>
-        /// 已用系统盘容量
+        /// 可用系统盘容量
         /// </summary>
-        public long SysDriveUsed { get; set; }
-        /// <summary>
-        /// 系统盘使用率
-        /// </summary>
-        public double SysDriveUtilization { get; set; }
+        public long SysDriveFree { get; set; }
         /// <summary>
         /// 应用程序Cpu使用率
         /// </summary>
-        public double AppCpuUtilization { get; set; }
+        public double AppCpuPer { get; set; }
         /// <summary>
         /// 应用程序占用内存
         /// </summary>

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppUtils\AppInfoTool.cs" />
     <Compile Include="AppUtils\AppLaunchTool.cs" />
     <Compile Include="AppUtils\AppSettleTool.cs" />
     <Compile Include="AppUtils\AppUnique.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ComputerStatusTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />
     <Compile Include="WindowsUtils\RegisterUtils\RegisterTool.cs" />
     <Compile Include="WindowsUtils\ShortcutUtils\ShortcutTool.cs" />
