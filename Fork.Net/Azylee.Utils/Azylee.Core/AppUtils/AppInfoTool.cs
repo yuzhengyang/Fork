@@ -7,29 +7,22 @@ using System.Text;
 namespace Azylee.Core.AppUtils
 {
     public class AppInfoTool
-    {
+    { 
         /// <summary>
-        /// 读取APP占用CPU
+        /// 读取APP Processor（可读取App的CPU使用率）
         /// </summary>
         /// <returns></returns>
-        public static double CPU()
+        public static PerformanceCounter Processor()
         {
-            double value = 0;
             Process p = null;
             PerformanceCounter processor = null;
             try
             {
                 p = Process.GetCurrentProcess();
                 processor = new PerformanceCounter("Process", "% Processor Time", p.ProcessName);
-                value = processor.NextValue();
             }
             catch { }
-            finally
-            {
-                processor?.Dispose();
-                p?.Dispose();
-            }
-            return value;
+            return processor;
         }
         /// <summary>
         /// 读取APP占用内存

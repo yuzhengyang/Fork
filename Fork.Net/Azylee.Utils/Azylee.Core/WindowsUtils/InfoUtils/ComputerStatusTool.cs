@@ -9,21 +9,18 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
     public class ComputerStatusTool
     {
         /// <summary>
-        /// CPU占用率
+        /// 获取 Processor（可获取CPU使用率）
         /// </summary>
         /// <returns></returns>
-        public static double CpuUtilization()
+        public static PerformanceCounter Processor()
         {
-            double value = 0;
             PerformanceCounter processor = null;
             try
             {
                 processor = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-                value = processor.NextValue();
             }
             catch { }
-            finally { processor?.Dispose(); }
-            return value;
+            return processor;
         }
     }
 }

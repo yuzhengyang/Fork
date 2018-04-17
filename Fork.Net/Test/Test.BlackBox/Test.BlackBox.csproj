@@ -74,10 +74,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.BlackBox\Azylee.BlackBox.csproj">
-      <Project>{6b84ab76-94b9-4dae-b168-a6e216dd54f0}</Project>
-      <Name>Azylee.BlackBox</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Azylee.Utils\Azylee.Core\Azylee.Core.csproj">
       <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
       <Name>Azylee.Core</Name>
