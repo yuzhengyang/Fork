@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppUtils\AppInfoTool.cs" />
     <Compile Include="AppUtils\AppLaunchTool.cs" />
     <Compile Include="AppUtils\AppSettleTool.cs" />
     <Compile Include="AppUtils\AppUnique.cs" />
@@ -57,10 +58,12 @@
     <Compile Include="DataUtils\EncryptUtils\DesTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\MD5Tool.cs" />
     <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />
+    <Compile Include="DataUtils\SerializeUtils\SerializeTool.cs" />
     <Compile Include="DataUtils\StringUtils\StringTool.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressEventArgs.cs" />
+    <Compile Include="IOUtils\BinaryUtils\BinaryFileTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileCodeTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileEncryptTool.cs" />
@@ -72,10 +75,12 @@
     <Compile Include="IOUtils\TxtUtils\IniTool.cs" />
     <Compile Include="IOUtils\TxtUtils\TxtTool.cs" />
     <Compile Include="IOUtils\TxtUtils\XmlTool.cs" />
-    <Compile Include="LogUtils\Log.cs" />
-    <Compile Include="LogUtils\LogLevel.cs" />
-    <Compile Include="LogUtils\LogModel.cs" />
-    <Compile Include="LogUtils\LogType.cs" />
+    <Compile Include="LogUtils\SimpleLogUtils\Log.cs" />
+    <Compile Include="LogUtils\SimpleLogUtils\LogLevel.cs" />
+    <Compile Include="LogUtils\SimpleLogUtils\LogModel.cs" />
+    <Compile Include="LogUtils\SimpleLogUtils\LogType.cs" />
+    <Compile Include="LogUtils\StatusLogUtils\StatusLogModel.cs" />
+    <Compile Include="LogUtils\StatusLogUtils\StatusLog.cs" />
     <Compile Include="ProcessUtils\ProcessTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +92,7 @@
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ComputerStatusTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />
     <Compile Include="WindowsUtils\RegisterUtils\RegisterTool.cs" />
     <Compile Include="WindowsUtils\ShortcutUtils\ShortcutTool.cs" />

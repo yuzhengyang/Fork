@@ -424,5 +424,25 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             catch { }
             return 0;
         }
+        /// <summary>
+        /// 获取系统盘可用容量
+        /// </summary>
+        /// <returns></returns>
+        public static long GetSystemDriveAvailableSize()
+        {
+            long size = 0;
+            try
+            {
+                var osinfo = OsInfo();
+                if (osinfo != null)
+                {
+                    string drive = osinfo.Item2.Substring(0, 1);
+                    DriveInfo Drive = new DriveInfo(drive);
+                    size = Drive.TotalFreeSpace;
+                }
+            }
+            catch { }
+            return size;
+        }
     }
 }
