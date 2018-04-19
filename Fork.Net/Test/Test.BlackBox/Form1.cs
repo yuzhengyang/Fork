@@ -1,4 +1,5 @@
-﻿using Azylee.Core.LogUtils.StatusLogUtils;
+﻿using Azylee.Core.LogUtils.SimpleLogUtils;
+using Azylee.Core.LogUtils.StatusLogUtils;
 using System;
 using System.Windows.Forms;
 
@@ -6,6 +7,7 @@ namespace Test.BlackBox
 {
     public partial class Form1 : Form
     {
+        Log Log = new Log(true);
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +25,15 @@ namespace Test.BlackBox
         {
             bool flag = StatusLog.Instance.Stop();
             textBox1.AppendText(Environment.NewLine + (flag ? "停止成功" : "停止失败"));
+        }
+
+        private void BTWriteLog_Click(object sender, EventArgs e)
+        {
+            Log.e("yoyoyoyoyo");
+            Log.w("yoyoyoyoyo");
+            Log.d("yoyoyoyoyo");
+            Log.i("yoyoyoyoyo");
+            Log.v("yoyoyoyoyo");
         }
     }
 }

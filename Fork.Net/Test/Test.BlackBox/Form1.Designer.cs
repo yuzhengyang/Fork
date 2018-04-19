@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.BTStartBB = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.BTStopBB = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.BTWriteLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BTStartBB
@@ -61,11 +64,22 @@
             this.BTStopBB.UseVisualStyleBackColor = true;
             this.BTStopBB.Click += new System.EventHandler(this.BTStopBB_Click);
             // 
+            // BTWriteLog
+            // 
+            this.BTWriteLog.Location = new System.Drawing.Point(363, 126);
+            this.BTWriteLog.Name = "BTWriteLog";
+            this.BTWriteLog.Size = new System.Drawing.Size(75, 23);
+            this.BTWriteLog.TabIndex = 3;
+            this.BTWriteLog.Text = "写日志";
+            this.BTWriteLog.UseVisualStyleBackColor = true;
+            this.BTWriteLog.Click += new System.EventHandler(this.BTWriteLog_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 365);
+            this.Controls.Add(this.BTWriteLog);
             this.Controls.Add(this.BTStopBB);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.BTStartBB);
@@ -82,6 +96,8 @@
         private System.Windows.Forms.Button BTStartBB;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button BTStopBB;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button BTWriteLog;
     }
 }
 

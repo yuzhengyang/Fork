@@ -43,10 +43,10 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         #endregion
 
         #region 基础属性
-        const string LOG_PATH = "StatusLog";//存储路径
+        const string LOG_PATH = "log";//存储路径
         const int CACHE_DAYS = 30;//缓存天数
 
-        public string LogPath = LOG_PATH;//存储路径
+        public string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;//存储路径
 
         DateTime Time = DateTime.Now;//标记当前时间
         int Interval = 60 * 1000;//监测间隔时间
@@ -57,6 +57,10 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         PerformanceCounter AppProcessor = AppInfoTool.Processor();//程序CPU监控
         #endregion
 
+        public void SetLogPath(string path)
+        {
+            LogPath = path.Trim();
+        }
         public bool Start()
         {
             //如果任务停止运行，则重新创建Token，并释放上次任务
@@ -76,16 +80,13 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                 {
                     try
                     {
-                        //using (Muse db = new Muse())
-                        //{
-                        //    CollectData(db);
+                        WriteConfig();
                         while (!CancelToken.IsCancellationRequested)
                         {
                             Time = DateTime.Now;
                             Thread.Sleep(Interval);
-                            CollectData();
+                            WriteStatus();
                         }
-                        //}
                     }
                     catch { }
                 }, CancelToken.Token);
@@ -105,7 +106,24 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
             }
             catch { return false; }
         }
-        private void CollectData()
+        /// <summary>
+        /// 写出资源配置信息
+        /// </summary>
+        private void WriteConfig()
+        {
+            //记录固定资源信息
+            string path = DirTool.Combine(LogPath, "resource");
+            string file = DirTool.Combine(path, "computer.ini");
+            //创建目录
+            DirTool.Create(path);
+            //写出信息
+            IniTool.WriteValue(file,"system","ram", ComputerInfoTool.TotalPhysicalMemory().ToString());
+            IniTool.WriteValue(file,"system","drive", ComputerInfoTool.GetSystemDriveTotalSize().ToString());
+        }
+        /// <summary>
+        /// 写出运行时状态信息
+        /// </summary>
+        private void WriteStatus()
         {
             try
             {
@@ -115,29 +133,27 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                     Long = Interval,
                     AFK = WindowsAPI.GetLastInputTime(),
                     CpuPer = (int)ComputerProcessor.NextValue(),
-                    RamSize = (long)ComputerInfoTool.TotalPhysicalMemory(),
                     RamFree = (long)ComputerInfoTool.AvailablePhysicalMemory(),
-                    SysDriveSize = ComputerInfoTool.GetSystemDriveTotalSize(),
                     SysDriveFree = ComputerInfoTool.GetSystemDriveAvailableSize(),
                     AppCpuPer = (int)AppProcessor.NextValue(),
                     AppRamUsed = AppInfoTool.RAM(),
                 };
 
-                WriteFile(status);
+                //设置日志目录和日志文件
+                string filePath = DirTool.Combine(LogPath, "status");
+                string file = DirTool.Combine(filePath, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
+                //创建日志目录
+                DirTool.Create(filePath);
+                //写出日志
+                TxtTool.Append(file, status.ToString());
+
                 Cleaner();
             }
-            catch { }
+            catch { } 
         }
-        private void WriteFile(StatusLogModel status)
-        {
-            //设置日志目录
-            string logPath = AppDomain.CurrentDomain.BaseDirectory + LogPath;
-            string file = string.Format(@"{0}\{1}.txt", logPath, DateTime.Now.ToString("yyyy-MM-dd"));
-            //创建日志目录
-            DirTool.Create(logPath);
-            //写出日志
-            TxtTool.Append(file, status.ToString());
-        }
+        /// <summary>
+        /// 清理过多的状态信息文件
+        /// </summary>
         private void Cleaner()
         {
             List<string> files = FileTool.GetFile(AppDomain.CurrentDomain.BaseDirectory + LogPath);

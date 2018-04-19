@@ -18,10 +18,12 @@
 using Azylee.Core.DataUtils.CollectionUtils;
 using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.IOUtils.DirUtils;
+using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.TxtUtils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -43,12 +45,13 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         //输出的 Log 格式
         const string LOG_FORMAT = "{0}  {1}  {2}";
         const string TIME_FORMAT = "HH:mm:ss.fff";
-        const string LOG_PATH = "Log";
+        const string LOG_PATH = "log";
+        const int CACHE_DAYS = 30;//缓存天数
 
         private object LogFileLock = new object();//写日志文件锁
 
         private bool IsWriteFile = false;//是否写日志文件
-        public string LogPath = LOG_PATH;
+        public string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;
         public LogLevel LogLevel = LogLevel.All;//日志输出等级
 
         bool IsStart = false;
@@ -152,18 +155,21 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             }
             catch { }
         }
-
+        /// <summary>
+        /// 写出到日志文件
+        /// </summary>
+        /// <param name="log"></param>
         private void WriteFile(LogModel log)
         {
             if (IsWriteFile)
             {
                 lock (LogFileLock)
                 {
-                    //设置日志目录
-                    string logPath = AppDomain.CurrentDomain.BaseDirectory + LogPath;
-                    string file = string.Format(@"{0}\{1}.txt", logPath, DateTime.Now.ToString("yyyy-MM-dd"));
+                    //设置日志目录和日志文件
+                    string filePath = GetFilePath(log.Type);
+                    string file = DirTool.Combine(filePath, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
                     //创建日志目录
-                    DirTool.Create(logPath);
+                    DirTool.Create(filePath);
                     //写出日志
                     TxtTool.Append(
                         file,
@@ -171,6 +177,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                             log.CreateTime.ToString(TIME_FORMAT),
                             log.Type.ToString(),
                             StringTool.ReplaceNewLine(log.Message)));
+                    Cleaner(log.Type);
                 }
             }
         }
@@ -194,6 +201,48 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                     //写出日志
                     TxtTool.Append(file, txts);
                 }
+            }
+        }
+        /// <summary>
+        /// 根据分类分配目录
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private string GetFilePath(LogType type)
+        {
+            string filePath = LogPath;
+            switch (type)
+            {
+                case LogType.d: filePath = DirTool.Combine(LogPath, "debug"); break;
+                case LogType.i: filePath = DirTool.Combine(LogPath, "information"); break;
+                case LogType.e: filePath = DirTool.Combine(LogPath, "error"); break;
+                case LogType.w: filePath = DirTool.Combine(LogPath, "warning"); break;
+                case LogType.v: filePath = DirTool.Combine(LogPath, "verbose"); break;
+            }
+            return filePath;
+        }
+        /// <summary>
+        /// 清理过多的日志文件
+        /// </summary>
+        private void Cleaner(LogType type)
+        {
+            List<string> files = FileTool.GetFile(GetFilePath(type));
+            if (ListTool.HasElements(files))
+            {
+                files.ForEach(f =>
+                {
+                    try
+                    {
+                        string filename = Path.GetFileNameWithoutExtension(f);
+                        if (filename.Length == 10)
+                        {
+                            DateTime date = DateTime.Parse(filename);
+                            if (date < DateTime.Now.AddDays(-CACHE_DAYS - 1)) FileTool.Delete(f);
+                        }
+                        else { FileTool.Delete(f); }
+                    }
+                    catch { FileTool.Delete(f); }
+                });
             }
         }
 

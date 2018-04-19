@@ -7,7 +7,7 @@ using System.Text;
 namespace Azylee.Core.AppUtils
 {
     public class AppInfoTool
-    { 
+    {
         /// <summary>
         /// 读取APP Processor（可读取App的CPU使用率）
         /// </summary>
@@ -25,7 +25,7 @@ namespace Azylee.Core.AppUtils
             return processor;
         }
         /// <summary>
-        /// 读取APP占用内存
+        /// 读取APP占用内存（单位：KB）
         /// </summary>
         /// <returns></returns>
         public static long RAM()
@@ -35,7 +35,7 @@ namespace Azylee.Core.AppUtils
             try
             {
                 p = Process.GetCurrentProcess();
-                value = p.WorkingSet64;
+                value = p.WorkingSet64 / 1024;
             }
             catch { }
             finally { p?.Dispose(); }
