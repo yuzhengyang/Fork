@@ -16,7 +16,6 @@ Fork 工具包是平时在做 C# winform 客户端的时候，收藏整理的一
 4. Azylee.YeahWeb ： Http 及网络相关工具包
 5. Azylee.WinformMan ： Winform 窗体管理
 6. Azylee.WinformSkin ： Winform 样式和控件
-7. Azylee.BlackBox ： 程序运行状态监控
 
 ### Azylee.Core 模块：
 
@@ -117,21 +116,53 @@ Fork 工具包是平时在做 C# winform 客户端的时候，收藏整理的一
 ```
 
 #### Azylee.Core.Plus
-——暂无
+依赖：Azylee.Core
+
+> - 为其他引用提供扩展
+> - 可能引用其他dll文件
+
+```
+● DataUtils：数据处理
+  ┗ JsonUtils
+    ┣ ConvertJson.cs            // 程序启动器
+    ┗ JsonTool.cs               // 开机启动项
+```
 
 #### Azylee.Update
-——暂无
+依赖：Azylee.Core、Azylee.Core.Plus
+
+> - 为exe程序提供升级方案
+
+```
+● UpdateUtils：数据处理
+  ┣ AppUpdateInfo.cs            // 更新配置模型
+  ┗ AppUpdateTool.cs            // 更新工具
+```
 
 #### Azylee.YeahWeb
-——暂无
+依赖：Azylee.Core、Azylee.Core.Plus
+
+> - 提供网络工具
+
+```
+● BaiDuWebAPI：面向百度开发
+  ┗ IPLocationAPI：IP定位
+    ┣ IPLocationModel.cs        // 位置模型
+    ┣ IPLocationTool.cs         // 获取IP定位
+    ┗ IPLocationWebModel.cs     // API返回位置模型
+  
+● FTPUtils：FTP工具
+  ┗ FTPTool.cs                  // FTP工具
+  
+● HttpUtils：Http工具
+  ┣ HttpTool.cs                 // 常规Http工具
+  ┗ HttpToolPlus.cs             // 增强Http工具（如携带Cookie）
+```
 
 #### Azylee.WinformMan
 ——暂无
 
 #### Azylee.WinformSkin
-——暂无
-
-#### Azylee.BlackBox
 ——暂无
 
 ---
