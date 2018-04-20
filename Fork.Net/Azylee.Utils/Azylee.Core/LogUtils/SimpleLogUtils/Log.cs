@@ -49,13 +49,9 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         const int CACHE_DAYS = 30;//缓存天数
 
         private object LogFileLock = new object();//写日志文件锁
-
         private bool IsWriteFile = false;//是否写日志文件
-        public string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;
+        private string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;
         public LogLevel LogLevel = LogLevel.All;//日志输出等级
-
-        bool IsStart = false;
-        ConcurrentQueue<LogModel> Queue = new ConcurrentQueue<LogModel>();
         #endregion
 
         public Log()
@@ -67,37 +63,6 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                 IsWriteFile = true;
                 LogLevel = level;
             }
-        }
-        void Start()
-        {
-            return;
-            if (!IsStart)
-            {
-                IsStart = true;
-                Task.Factory.StartNew(() =>
-                {
-                    while (IsStart)
-                    {
-                        Thread.Sleep(500);
-
-                        if (Queue.Any())
-                        {
-                            List<LogModel> list = new List<LogModel>();
-                            for (int i = 0; i < Queue.Count; i++)
-                            {
-                                LogModel model = null;
-                                if (Queue.TryDequeue(out model)) list.Add(model);
-                            }
-                            if (ListTool.HasElements(list)) WriteFile(list);
-                        }
-                    }
-                });
-            }
-        }
-        void Stop()
-        {
-            if (IsStart)
-                IsStart = false;
         }
         public bool SetWriteFile(string logPath, bool isWrite = true)
         {
@@ -177,28 +142,6 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                             log.Type.ToString(),
                             StringTool.ReplaceNewLine(log.Message)));
                     Cleaner(log.Type);
-                }
-            }
-        }
-        private void WriteFile(List<LogModel> list)
-        {
-            if (IsWriteFile)
-            {
-                lock (LogFileLock)
-                {
-                    //设置日志目录
-                    string logPath = AppDomain.CurrentDomain.BaseDirectory + LogPath;
-                    string file = string.Format(@"{0}\{1}.txt", logPath, DateTime.Now.ToString("yyyy-MM-dd"));
-                    //创建日志目录
-                    DirTool.Create(logPath);
-                    //整理要输出的内容
-                    List<string> txts = new List<string>();
-                    foreach (var item in list)
-                    {
-                        txts.Add(string.Format(LOG_FORMAT, item.CreateTime.ToString(TIME_FORMAT), item.Type.ToString(), item.Message));
-                    }
-                    //写出日志
-                    TxtTool.Append(file, txts);
                 }
             }
         }

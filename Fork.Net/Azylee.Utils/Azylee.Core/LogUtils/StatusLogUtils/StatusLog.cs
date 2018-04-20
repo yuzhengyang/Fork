@@ -43,10 +43,10 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         #endregion
 
         #region 基础属性
-        const string LOG_PATH = "log";//存储路径
+        const string LOG_PATH = @"log\status";//存储路径
         const int CACHE_DAYS = 30;//缓存天数
 
-        public string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;//存储路径
+        private string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;//存储路径
 
         DateTime Time = DateTime.Now;//标记当前时间
         int Interval = 60 * 1000;//监测间隔时间
@@ -138,12 +138,10 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                     AppCpuPer = (int)AppProcessor.NextValue(),
                     AppRamUsed = AppInfoTool.RAM(),
                 };
-
-                //设置日志目录和日志文件
-                string filePath = DirTool.Combine(LogPath, "status");
-                string file = DirTool.Combine(filePath, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
                 //创建日志目录
-                DirTool.Create(filePath);
+                DirTool.Create(LogPath);
+                //设置日志目录和日志文件
+                string file = DirTool.Combine(LogPath, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
                 //写出日志
                 TxtTool.Append(file, status.ToString());
 
@@ -156,7 +154,7 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         /// </summary>
         private void Cleaner()
         {
-            List<string> files = FileTool.GetFile(AppDomain.CurrentDomain.BaseDirectory + LogPath);
+            List<string> files = FileTool.GetFile(LogPath);
             if (ListTool.HasElements(files))
             {
                 files.ForEach(f =>
