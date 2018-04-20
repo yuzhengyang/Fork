@@ -46,16 +46,15 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         const string LOG_FORMAT = "{0}  {1}  {2}";
         const string TIME_FORMAT = "HH:mm:ss.fff";
         const string LOG_PATH = "log";
-        const int CACHE_DAYS = 30;//缓存天数
 
+        private int CACHE_DAYS = 30;//缓存天数
         private object LogFileLock = new object();//写日志文件锁
         private bool IsWriteFile = false;//是否写日志文件
         private string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;
         public LogLevel LogLevel = LogLevel.All;//日志输出等级
         #endregion
 
-        public Log()
-        { }
+        public Log() { }
         public Log(bool isWrite, LogLevel level = LogLevel.All)
         {
             if (isWrite)
@@ -64,18 +63,18 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                 LogLevel = level;
             }
         }
-        public bool SetWriteFile(string logPath, bool isWrite = true)
-        {
-            if (isWrite && !string.IsNullOrWhiteSpace(logPath))
-            {
-                LogPath = logPath.Trim();
-                IsWriteFile = true;
-                return true;
-            }
-            IsWriteFile = false;
-            return false;
-        }
 
+        public void SetLogPath(string path)
+        {
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                LogPath = DirTool.Combine(path, LOG_PATH);
+            }
+        }
+        public void SetCacheDays(int days)
+        {
+            if (days >= 0) CACHE_DAYS = days;
+        }
         #region Console 开启/关闭 API
         [DllImport("kernel32.dll")]
         public static extern Boolean AllocConsole();

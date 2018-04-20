@@ -11,12 +11,14 @@ namespace Test.BlackBox
         public Form1()
         {
             InitializeComponent();
+            Log.SetCacheDays(0);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
         }
         private void BTStartBB_Click(object sender, EventArgs e)
         {
+            StatusLog.Instance.SetCacheDays(0);
             bool flag = StatusLog.Instance.Start();
             textBox1.AppendText(Environment.NewLine + (flag ? "启动成功" : "启动失败"));
         }

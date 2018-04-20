@@ -43,24 +43,30 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         #endregion
 
         #region 基础属性
-        const string LOG_PATH = @"log\status";//存储路径
-        const int CACHE_DAYS = 30;//缓存天数
+        const string LOG_PATH = @"log";//存储路径
 
+        private int CACHE_DAYS = 30;//缓存天数
         private string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;//存储路径
-
-        DateTime Time = DateTime.Now;//标记当前时间
-        int Interval = 60 * 1000;//监测间隔时间
-
-        Task Listener = null;//监测任务
-        CancellationTokenSource CancelToken = new CancellationTokenSource();//监测取消Token
-        PerformanceCounter ComputerProcessor = ComputerStatusTool.Processor();//电脑CPU监控
-        PerformanceCounter AppProcessor = AppInfoTool.Processor();//程序CPU监控
+        private DateTime Time = DateTime.Now;//标记当前时间
+        private int Interval = 60 * 1000;//监测间隔时间
+        private Task Listener = null;//监测任务
+        private CancellationTokenSource CancelToken = new CancellationTokenSource();//监测取消Token
+        private PerformanceCounter ComputerProcessor = ComputerStatusTool.Processor();//电脑CPU监控
+        private PerformanceCounter AppProcessor = AppInfoTool.Processor();//程序CPU监控
         #endregion
 
         public void SetLogPath(string path)
         {
-            LogPath = path.Trim();
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                LogPath = DirTool.Combine(path, LOG_PATH);
+            }
         }
+        public void SetCacheDays(int days)
+        {
+            if (days >= 0) CACHE_DAYS = days;
+        }
+
         public bool Start()
         {
             //如果任务停止运行，则重新创建Token，并释放上次任务
@@ -117,8 +123,8 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
             //创建目录
             DirTool.Create(path);
             //写出信息
-            IniTool.WriteValue(file,"system","ram", ComputerInfoTool.TotalPhysicalMemory().ToString());
-            IniTool.WriteValue(file,"system","drive", ComputerInfoTool.GetSystemDriveTotalSize().ToString());
+            IniTool.WriteValue(file, "system", "ram", ComputerInfoTool.TotalPhysicalMemory().ToString());
+            IniTool.WriteValue(file, "system", "drive", ComputerInfoTool.GetSystemDriveTotalSize().ToString());
         }
         /// <summary>
         /// 写出运行时状态信息
@@ -138,23 +144,25 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                     AppCpuPer = (int)AppProcessor.NextValue(),
                     AppRamUsed = AppInfoTool.RAM(),
                 };
-                //创建日志目录
-                DirTool.Create(LogPath);
                 //设置日志目录和日志文件
-                string file = DirTool.Combine(LogPath, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
+                string path = DirTool.Combine(LogPath, "status");
+                string file = DirTool.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
+                //创建日志目录
+                DirTool.Create(path);
                 //写出日志
                 TxtTool.Append(file, status.ToString());
 
                 Cleaner();
             }
-            catch { } 
+            catch { }
         }
         /// <summary>
         /// 清理过多的状态信息文件
         /// </summary>
         private void Cleaner()
         {
-            List<string> files = FileTool.GetFile(LogPath);
+            string path = DirTool.Combine(LogPath, "status");
+            List<string> files = FileTool.GetFile(path);
             if (ListTool.HasElements(files))
             {
                 files.ForEach(f =>
