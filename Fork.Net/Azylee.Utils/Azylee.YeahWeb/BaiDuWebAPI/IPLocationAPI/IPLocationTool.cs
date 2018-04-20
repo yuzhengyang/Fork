@@ -14,11 +14,15 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
         public static IPLocationModel GetLocation()
         {
             IPLocationWebModel model = null;
-            CookieCollection cookie = new CookieCollection();
-            string rss1 = HttpToolPlus.Get(URL, ref cookie);//第一次请求以获取Cookie
-            string rss2 = HttpToolPlus.Get(URL, ref cookie);//携带第一次的Cookie获取数据
-            model = JsonConvert.DeserializeObject<IPLocationWebModel>(rss2);
-            return model.ToIPLocationModel();
+            try
+            {
+                CookieCollection cookie = new CookieCollection();
+                string rss1 = HttpToolPlus.Get(URL, ref cookie);//第一次请求以获取Cookie
+                string rss2 = HttpToolPlus.Get(URL, ref cookie);//携带第一次的Cookie获取数据
+                model = JsonConvert.DeserializeObject<IPLocationWebModel>(rss2);
+                return model.ToIPLocationModel();
+            }
+            catch (Exception e) { return null; }
         }
     }
 }
