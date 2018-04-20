@@ -60,11 +60,10 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
 
         public Log()
         { }
-        public Log(bool isWrite, string logPath = LOG_PATH, LogLevel level = LogLevel.All)
+        public Log(bool isWrite, LogLevel level = LogLevel.All)
         {
-            if (isWrite && !string.IsNullOrWhiteSpace(logPath))
+            if (isWrite)
             {
-                LogPath = logPath.Trim();
                 IsWriteFile = true;
                 LogLevel = level;
             }
@@ -100,7 +99,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if (IsStart)
                 IsStart = false;
         }
-        public bool SetWriteFile(bool isWrite, string logPath)
+        public bool SetWriteFile(string logPath, bool isWrite = true)
         {
             if (isWrite && !string.IsNullOrWhiteSpace(logPath))
             {
