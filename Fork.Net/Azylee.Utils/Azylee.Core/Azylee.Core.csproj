@@ -91,6 +91,8 @@
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
+    <Compile Include="WindowsUtils\CMDUtils\CMDNetstatTool.cs" />
+    <Compile Include="WindowsUtils\CMDUtils\CMDProcessTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerStatusTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />

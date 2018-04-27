@@ -62,7 +62,7 @@ namespace Azylee.Core.AppUtils
                     //准备启动
                     if (startfile != null)
                     {
-                        return ProcessTool.SimpleStart(startfile);
+                        return ProcessTool.Start(startfile);
                     }
                 }
             }

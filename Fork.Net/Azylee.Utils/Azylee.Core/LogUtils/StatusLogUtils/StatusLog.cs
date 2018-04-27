@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2018.4.17 - 2018.4.17
+//      date:       2018.4.17 - 2018.4.27
 //      desc:       程序运行状态日志
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -43,7 +43,7 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         #endregion
 
         #region 基础属性
-        const string LOG_PATH = @"log";//存储路径
+        const string LOG_PATH = @"azylee.log";//存储路径
 
         private int CACHE_DAYS = 30;//缓存天数
         private string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;//存储路径
@@ -136,8 +136,8 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                 StatusLogModel status = new StatusLogModel()
                 {
                     Time = Time,
-                    Long = Interval,
-                    AFK = WindowsAPI.GetLastInputTime(),
+                    Long = Interval / 1000,
+                    AFK = WindowsAPI.GetLastInputTime() / 1000,
                     CpuPer = (int)ComputerProcessor.NextValue(),
                     RamFree = (long)ComputerInfoTool.AvailablePhysicalMemory(),
                     SysDriveFree = ComputerInfoTool.GetSystemDriveAvailableSize(),

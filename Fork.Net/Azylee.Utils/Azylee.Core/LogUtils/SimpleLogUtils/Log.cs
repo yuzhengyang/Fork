@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.3.29 - 2017.7.6
+//      date:       2017.3.29 - 2018.4.27
 //      desc:       日志功能
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -45,7 +45,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         //输出的 Log 格式
         const string LOG_FORMAT = "{0}  {1}  {2}";
         const string TIME_FORMAT = "HH:mm:ss.fff";
-        const string LOG_PATH = "log";
+        const string LOG_PATH = "azylee.log";
 
         private int CACHE_DAYS = 30;//缓存天数
         private object LogFileLock = new object();//写日志文件锁

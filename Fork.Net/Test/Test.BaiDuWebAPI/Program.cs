@@ -10,7 +10,9 @@ namespace Test.BaiDuWebAPI
     {
         static void Main(string[] args)
         {
-            var loc = IPLocationTool.GetLocation();
+            var loc1 = IPLocationTool.GetLocation();
+            var loc2 = IPLocationTool.GetLocation();
+            bool cp = loc1.Like(loc2);
             Console.WriteLine("");
         }
     }
