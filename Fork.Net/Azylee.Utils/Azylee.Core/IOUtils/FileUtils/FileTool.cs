@@ -39,13 +39,15 @@ namespace Azylee.Core.IOUtils.FileUtils
         /// <returns></returns>
         public static List<string> GetFile(string path, string pattern = "*")
         {
-            if (Directory.Exists(path))
-                try
+            try
+            {
+                if (Directory.Exists(path))
                 {
                     List<string> result = Directory.EnumerateFiles(path, pattern).ToList();
                     return result;
                 }
-                catch (Exception e) { }
+            }
+            catch (Exception e) { }
             return null;
         }
         ///// <summary>

@@ -22,13 +22,29 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
         /// <summary>
         /// 所在商圈信息
         /// </summary>
-        public string  Business { get; set; }
+        public string Business { get; set; }
         /// <summary>
         /// 结合POI的语义化结果描述
         /// </summary>
         public string SematicDescription { get; set; }
         public Component Component { get; set; }
         public FirstPOI FirstPOI { get; set; }
+        /// <summary>
+        /// 对比两个位置是否相似
+        /// </summary>
+        /// <param name="loc"></param>
+        /// <returns></returns>
+        public bool Like(IPLocationModel loc)
+        {
+            try
+            {
+                if (this != null && loc != null && FirstPOI != null && loc.FirstPOI != null)//模型不为空
+                    if (FirstPOI.Address == loc.FirstPOI.Address)//判断语义化地址相同
+                        return true;//判定为相同地点
+            }
+            catch { }
+            return false;
+        }
     }
     /// <summary>
     /// 地址组成
@@ -49,7 +65,8 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
     /// <summary>
     /// 首选信息点
     /// </summary>
-    public class FirstPOI {
+    public class FirstPOI
+    {
         public string Address { get; set; }
         public string Name { get; set; }
     }

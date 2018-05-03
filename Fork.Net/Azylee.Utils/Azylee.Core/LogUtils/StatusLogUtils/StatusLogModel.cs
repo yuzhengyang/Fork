@@ -13,15 +13,15 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
     public class StatusLogModel
     {
         /// <summary>
-        /// 时间
+        /// 日期时间
         /// </summary>
         public DateTime Time { get; set; }
         /// <summary>
-        /// 统计时长
+        /// 统计时长（单位：秒）
         /// </summary>
         public int Long { get; set; }
         /// <summary>
-        /// 脱机时长
+        /// 脱机时长（单位：秒）
         /// </summary>
         public long AFK { get; set; }
         /// <summary>

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
 {
-    public class IPLocationWebModel
+    class IPLocationWebModel
     {
         /// <summary>
         /// 
@@ -104,7 +104,7 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
             /// <summary>
             /// 
             /// </summary>
-            public int confidence { get; set; }
+            public double confidence { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -199,7 +199,7 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
             /// <summary>
             /// 
             /// </summary>
-            public List<string> poiRegions { get; set; }
+            public List<PoiRegionsItem> poiRegions { get; set; }
             /// <summary>
             /// 中车青岛四方机车车辆股份有限公司西北296米
             /// </summary>
@@ -279,7 +279,6 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
             /// </summary>
             public string distance { get; set; }
         }
-
         public class Point
         {
             /// <summary>
@@ -291,7 +290,6 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
             /// </summary>
             public double y { get; set; }
         }
-
         public class Parent_poi
         {
             /// <summary>
@@ -323,7 +321,6 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
             /// </summary>
             public string uid { get; set; }
         }
-
         public class PoisItem
         {
             /// <summary>
@@ -374,6 +371,25 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
             /// 
             /// </summary>
             public Parent_poi parent_poi { get; set; }
+        }
+        public class PoiRegionsItem
+        {
+            /// <summary>
+            /// 内
+            /// </summary>
+            public string direction_desc { get; set; }
+            /// <summary>
+            /// 中车青岛四方机车车辆股份有限公司
+            /// </summary>
+            public string name { get; set; }
+            /// <summary>
+            /// 公司企业;公司
+            /// </summary>
+            public string tag { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            public string uid { get; set; }
         }
     }
 }

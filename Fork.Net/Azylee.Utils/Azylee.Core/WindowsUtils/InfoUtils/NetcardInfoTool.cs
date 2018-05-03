@@ -118,11 +118,11 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         }
 
         /// <summary>
-        /// 格式化MAC地址（基础款）
+        /// 格式化MAC地址（大写、':' 分割）
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string MACFormat(string s)
+        public static string MACFormat(string s, bool isUpper = true)
         {
             StringBuilder sb = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(s))
@@ -130,15 +130,15 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
                 if (s.Length == 12)
                 {
                     sb.Append(
-                        $"{s.Substring(0, 2)}:" +
-                        $"{s.Substring(2, 2)}:" +
-                        $"{s.Substring(4, 2)}:" +
-                        $"{s.Substring(6, 2)}:" +
-                        $"{s.Substring(8, 2)}:" +
-                        $"{s.Substring(10, 2)}");
+                         $"{s.Substring(0, 2)}:" +
+                         $"{s.Substring(2, 2)}:" +
+                         $"{s.Substring(4, 2)}:" +
+                         $"{s.Substring(6, 2)}:" +
+                         $"{s.Substring(8, 2)}:" +
+                         $"{s.Substring(10, 2)}");
                 }
             }
-            return sb.ToString();
+            return isUpper ? sb.ToString().ToUpper() : sb.ToString().ToLower();
         }
     }
 }
