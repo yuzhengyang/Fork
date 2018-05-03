@@ -1,5 +1,6 @@
 ﻿using Azylee.Core.LogUtils.SimpleLogUtils;
 using Azylee.Core.LogUtils.StatusLogUtils;
+using Azylee.Core.WindowsUtils.InfoUtils;
 using System;
 using System.Windows.Forms;
 
@@ -14,6 +15,7 @@ namespace Test.BlackBox
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            var ram = ComputerInfoTool.RAMModel();
         }
         private void BTStartBB_Click(object sender, EventArgs e)
         {
