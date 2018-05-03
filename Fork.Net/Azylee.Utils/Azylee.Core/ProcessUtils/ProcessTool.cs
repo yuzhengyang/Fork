@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.10.12 - 2018.4.27
+//      date:       2017.10.12 - 2018.5.02
 //      desc:       进程工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -48,9 +48,9 @@ namespace Azylee.Core.ProcessUtils
             return false;
         }
         /// <summary>
-         /// 启动进程（定制启动配置）
-         /// </summary>
-         /// <param name="args"></param>
+        /// 启动进程（定制启动配置）
+        /// </summary>
+        /// <param name="args"></param>
         public static bool StartCustom(string file, string args = "")
         {
             try
@@ -115,6 +115,37 @@ namespace Azylee.Core.ProcessUtils
                         Kill(name);
                 }
             }
+        }
+
+        /// <summary>
+        /// 根据PID获取InstanceName（不要用于性能计数器，#1..实例名会自动改变）
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static string GetInstanceNameById(int id)
+        {
+            try
+            {
+                PerformanceCounterCategory cat = new PerformanceCounterCategory("Process");
+                string[] instances = cat.GetInstanceNames();
+                foreach (string instance in instances)
+                {
+                    try
+                    {
+                        using (PerformanceCounter cnt = new PerformanceCounter("Process", "ID Process", instance, true))
+                        {
+                            int val = (int)cnt.RawValue;
+                            if (val == id)
+                            {
+                                return instance;
+                            }
+                        }
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+            return null;
         }
     }
 }

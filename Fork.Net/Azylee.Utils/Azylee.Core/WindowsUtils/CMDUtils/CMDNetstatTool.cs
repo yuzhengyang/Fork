@@ -17,10 +17,10 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
     public class CMDNetstatTool
     {
         /// <summary>
-        /// 根据端口号查询列表（item1：端口、item2：pid）
+        /// 根据端口号查询列表,过滤pid0（item1：端口、item2：pid）
         /// </summary>
-        /// <param name="port"></param>
-        /// <param name="fuzzy"></param>
+        /// <param name="port">端口号</param>
+        /// <param name="fuzzy">模糊匹配</param>
         /// <returns></returns>
         public static List<Tuple<int, int>> FindByPort(int port, bool fuzzy = true)
         {
@@ -31,11 +31,11 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
                 {
                     if (fuzzy)
                     {
-                        return list.Where(x => x.Item1.ToString().Contains(port.ToString())).ToList();
+                        return list.Where(x => x.Item1.ToString().Contains(port.ToString()) && x.Item2 != 0).ToList();
                     }
                     else
                     {
-                        return list.Where(x => x.Item1 == port).ToList();
+                        return list.Where(x => x.Item1 == port && x.Item2 != 0).ToList();
                     }
                 }
                 catch { }

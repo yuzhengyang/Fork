@@ -36,8 +36,9 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
         /// 开始运行CMD命令
         /// </summary>
         /// <param name="cmd"></param>
-        public static void StartExecute(string cmd)
-        { 
+        /// <param name="output">输出动作</param>
+        public static void StartExecute(string cmd, Action<string> output)
+        {
             StreamReader reader = null;
             Process process = null;
             try
@@ -45,10 +46,12 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
                 process = GetProcess();
                 process.Start();
                 process.StandardInput.WriteLine(cmd);
+                process.StandardInput.WriteLine("exit");
                 reader = process.StandardOutput;
                 do
                 {
                     string line = reader.ReadLine();
+                    output?.Invoke(line);
                 } while (!reader.EndOfStream);
                 process.WaitForExit();
             }

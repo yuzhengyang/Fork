@@ -79,7 +79,7 @@ namespace Test.CmdTool
 
         private void TMStatus_Tick(object sender, EventArgs e)
         {
-            LBStatus.Text = $"comcpu:{(int)ComCpu.NextValue()}, appcpu:{(int)AppCpu.NextValue()}, appram:{AppInfoTool.RAM()/1024}";
+            LBStatus.Text = $"comcpu:{(int)ComCpu.NextValue()}, appcpu:{(int)AppCpu.NextValue()}, appram:{AppInfoTool.RAM() / 1024}";
         }
     }
 }
