@@ -174,7 +174,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ProjectConfigForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "工程配置";
             this.Load += new System.EventHandler(this.ProjectConfigForm_Load);
             this.ResumeLayout(false);

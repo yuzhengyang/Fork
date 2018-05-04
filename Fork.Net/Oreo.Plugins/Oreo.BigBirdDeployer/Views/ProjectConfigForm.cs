@@ -50,7 +50,7 @@ namespace Oreo.BigBirdDeployer.Views
                 Project.JarFile = TBJarFile.Text;
                 Project.Port = int.Parse(TBPort.Text);
                 Project.VersionCache = int.Parse(TBVersionCache.Text);
-                ProjectItem.Init(Project);
+                ProjectItem.SetProject(Project);
                 LBDesc.Text = "保存成功并更新到管理面板";
                 return true;
             }

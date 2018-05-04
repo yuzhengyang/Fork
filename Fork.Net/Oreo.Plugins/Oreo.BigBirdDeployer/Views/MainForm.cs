@@ -21,7 +21,7 @@ namespace Oreo.BigBirdDeployer.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            projectItemPart1.Init(new ProjectModel()
+            projectItemPart1.SetProject(new ProjectModel()
             {
                 Name = "server",
                 Folder = @"F:\2018_5_2\temp\noah_cloud_supply_platform_jar",
@@ -29,7 +29,7 @@ namespace Oreo.BigBirdDeployer.Views
                 Port = 9090,
             });
 
-            projectItemPart2.Init(new ProjectModel()
+            projectItemPart2.SetProject(new ProjectModel()
             {
                 Name = "web",
                 Folder = @"F:\2018_5_2\temp\noah_cloud_supply_platform_web_jar",
