@@ -30,6 +30,7 @@
         {
             this.projectItemPart1 = new Oreo.BigBirdDeployer.Parts.ProjectItemPart();
             this.projectItemPart2 = new Oreo.BigBirdDeployer.Parts.ProjectItemPart();
+            this.projectItemPart3 = new Oreo.BigBirdDeployer.Parts.ProjectItemPart();
             ((System.ComponentModel.ISupportInitialize)(this.BigIconFormPBHeadIcon)).BeginInit();
             this.BigIconFormPNContainer.SuspendLayout();
             this.BigIconFormPNHead.SuspendLayout();
@@ -42,6 +43,7 @@
             // 
             // BigIconFormPNContainer
             // 
+            this.BigIconFormPNContainer.Controls.Add(this.projectItemPart3);
             this.BigIconFormPNContainer.Controls.Add(this.projectItemPart2);
             this.BigIconFormPNContainer.Controls.Add(this.projectItemPart1);
             this.BigIconFormPNContainer.Size = new System.Drawing.Size(775, 445);
@@ -82,6 +84,14 @@
             this.projectItemPart2.Size = new System.Drawing.Size(513, 95);
             this.projectItemPart2.TabIndex = 1;
             // 
+            // projectItemPart3
+            // 
+            this.projectItemPart3.BackColor = System.Drawing.Color.DimGray;
+            this.projectItemPart3.Location = new System.Drawing.Point(154, 295);
+            this.projectItemPart3.Name = "projectItemPart3";
+            this.projectItemPart3.Size = new System.Drawing.Size(513, 95);
+            this.projectItemPart3.TabIndex = 2;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -103,5 +113,6 @@
         #endregion
         private Parts.ProjectItemPart projectItemPart1;
         private Parts.ProjectItemPart projectItemPart2;
+        private Parts.ProjectItemPart projectItemPart3;
     }
 }

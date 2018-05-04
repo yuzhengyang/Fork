@@ -79,6 +79,19 @@ namespace Azylee.Core.AppUtils
             finally { p?.Dispose(); }
             return value;
         }
+        public static long RAM(int id)
+        {
+            long value = 0;
+            Process p = null;
+            try
+            {
+                p = Process.GetProcessById(id);
+                value = p.WorkingSet64 / 1024;
+            }
+            catch { }
+            finally { p?.Dispose(); }
+            return value;
+        }
         public static long RAM(Process p)
         {
             long value = 0;
