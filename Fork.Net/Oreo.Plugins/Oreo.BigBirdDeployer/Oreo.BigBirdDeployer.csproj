@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commons\R.Files.cs" />
     <Compile Include="Commons\R.Paths.cs" />
     <Compile Include="Commons\R.cs" />
     <Compile Include="Models\WorkStatus.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ConsoleCodeTool.cs" />
+    <Compile Include="Utils\JarFileTool.cs" />
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

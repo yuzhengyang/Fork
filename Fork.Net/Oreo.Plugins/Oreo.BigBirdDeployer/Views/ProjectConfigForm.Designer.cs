@@ -139,9 +139,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(27, 214);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 12);
+            this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 12;
-            this.label5.Text = " 版本缓存个数";
+            this.label5.Text = "版本缓存个数";
             // 
             // LBDesc
             // 

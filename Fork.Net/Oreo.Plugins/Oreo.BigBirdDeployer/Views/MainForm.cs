@@ -21,21 +21,11 @@ namespace Oreo.BigBirdDeployer.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            projectItemPart1.SetProject(new ProjectModel()
-            {
-                Name = "server",
-                Folder = @"F:\2018_5_2\temp\noah_cloud_supply_platform_jar",
-                JarFile = "noah-cloud-supply-platform.jar",
-                Port = 9090,
-            });
+        }
 
-            projectItemPart2.SetProject(new ProjectModel()
-            {
-                Name = "web",
-                Folder = @"F:\2018_5_2\temp\noah_cloud_supply_platform_web_jar",
-                JarFile = "noah-cloud-supply-platform-web.jar",
-                Port = 9091,
-            });
+        private void BTSettings_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().ShowDialog();
         }
     }
 }

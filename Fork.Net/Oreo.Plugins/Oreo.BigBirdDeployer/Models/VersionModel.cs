@@ -12,12 +12,8 @@ namespace Oreo.BigBirdDeployer.Models
         /// </summary>
         public int Number { get; set; }
         /// <summary>
-        /// 相对路径
-        /// </summary>
-        public string Path { get; set; }
-        /// <summary>
         /// 创建时间
         /// </summary>
-        public string CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 }

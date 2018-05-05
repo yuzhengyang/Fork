@@ -8,10 +8,6 @@ namespace Oreo.BigBirdDeployer.Models
     public class ProjectModel
     {
         /// <summary>
-        /// Id
-        /// </summary>
-        public Guid Id { get; set; }
-        /// <summary>
         /// 工程名称
         /// </summary>
         public string Name { get; set; }
@@ -30,7 +26,11 @@ namespace Oreo.BigBirdDeployer.Models
         /// <summary>
         /// 最新版本号
         /// </summary>
-        public int LastVersionNumber { get; set; }
+        public int LastVersion { get; set; }
+        /// <summary>
+        /// 当前运行版本号
+        /// </summary>
+        public int CurrentVersion { get; set; }
         /// <summary>
         /// 版本缓存个数（超出删除）
         /// </summary>

@@ -15,6 +15,13 @@ namespace Azylee.WinformSkin.FormUI.Toast
     public partial class ToastForm : NoTitleForm
     {
         private static ToastForm form = new ToastForm();
+        /// <summary>
+        /// 弹出提示框
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="text">内容</param>
+        /// <param name="type">类型：w,e,i</param>
+        /// <param name="time">显示时间：ms</param>
         public static void Display(string title, string text, char type, int time)
         {
             if (form == null || form.IsDisposed)
@@ -51,8 +58,8 @@ namespace Azylee.WinformSkin.FormUI.Toast
         /// </summary>
         /// <param name="title">标题</param>
         /// <param name="text">内容</param>
-        /// <param name="type">类型</param>
-        /// <param name="time">显示时间</param>
+        /// <param name="type">类型：w,e,i</param>
+        /// <param name="time">显示时间：ms</param>
         private void SetContent(string title, string text, char type, int time)
         {
             TimeSpend = 0;//初始化运行时间，每次执行动画++
