@@ -59,7 +59,7 @@ namespace Test.CmdTool
         {
             Task.Factory.StartNew(() =>
             {
-                CMDProcessTool.StartExecute(@"java -jar D:\CoCo\Work\supplyPlatform\out\artifacts\noah_cloud_supply_platform_jar\noah-cloud-supply-platform.jar");
+                //CMDProcessTool.StartExecute(@"java -jar D:\CoCo\Work\supplyPlatform\out\artifacts\noah_cloud_supply_platform_jar\noah-cloud-supply-platform.jar");
             });
         }
 

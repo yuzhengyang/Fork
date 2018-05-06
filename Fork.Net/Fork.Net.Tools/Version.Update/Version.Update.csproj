@@ -70,7 +70,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -87,14 +86,26 @@
   <ItemGroup>
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Azylee.Utils\Azylee.Core.Plus\Azylee.Core.Plus.csproj">
+      <Project>{915ae524-7efd-4ecc-b731-de1d1f5558f0}</Project>
+      <Name>Azylee.Core.Plus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Azylee.Utils\Azylee.Core\Azylee.Core.csproj">
+      <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
+      <Name>Azylee.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Azylee.Utils\Azylee.Update\Azylee.Update.csproj">
+      <Project>{76f92bae-8c9c-42aa-85e8-51f2ea8a0c91}</Project>
+      <Name>Azylee.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Azylee.Utils\Azylee.YeahWeb\Azylee.YeahWeb.csproj">
+      <Project>{ccf7a654-b442-4db1-bb3b-0f8014c3237f}</Project>
+      <Name>Azylee.YeahWeb</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.6\build\dotnet\Fody.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

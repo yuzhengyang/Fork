@@ -1,12 +1,10 @@
-﻿using Azylee.Core.Data.Collections;
-using Azylee.Core.Data.String;
-using Azylee.Core.Diagnostics;
-using Azylee.Core.IO.Dir;
+﻿using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Core.DataUtils.StringUtils;
+using Azylee.Core.IOUtils.DirUtils;
+using Azylee.Core.ProcessUtils;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Azylee.ExeLaunch
 {

@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Core.IOUtils.DirUtils;
+using Azylee.Core.IOUtils.FileUtils;
+using Azylee.Core.Plus.DataUtils.JsonUtils;
+using Azylee.Core.ProcessUtils;
+using Azylee.YeahWeb.FTPUtils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,12 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Version.Update.Commons;
 using Version.Update.Models;
-using Y.Utils.DataUtils.Collections;
-using Y.Utils.DataUtils.JsonUtils;
-using Y.Utils.IOUtils.FileUtils;
-using Y.Utils.IOUtils.PathUtils;
-using Y.Utils.NetUtils.FTPUtils;
-using Y.Utils.WindowsUtils.ProcessUtils;
 
 namespace Version.Update
 {
@@ -295,7 +295,7 @@ namespace Version.Update
                     Thread.Sleep(R.cst.WAIT_TIME);
                     UIPbStatus((int)((double)(percent++) / version.BeginCloseProcess.Count() * 100));
                     if (!string.IsNullOrWhiteSpace(p))
-                        ProcessTool.KillProcess(p);
+                        ProcessTool.Kill(p);
                 }
             }
             Step = 2;
@@ -313,7 +313,7 @@ namespace Version.Update
                     Thread.Sleep(R.cst.WAIT_TIME);
                     UIPbStatus((int)((double)(percent++) / version.EndRunProcess.Count() * 100));
                     if (!string.IsNullOrWhiteSpace(p))
-                        ProcessTool.StartProcess(Path.Combine(R.AppPath, p));
+                        ProcessTool.Start(Path.Combine(R.AppPath, p));
                 }
             }
         }

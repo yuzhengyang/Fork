@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DAO\DbTable.cs" />
     <Compile Include="DAO\IDbContext.cs" />
     <Compile Include="DAO\Muse.cs" />
