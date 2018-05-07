@@ -24,11 +24,15 @@ namespace Azylee.WinformSkin.FormUI.Toast
         /// <param name="time">显示时间：ms</param>
         public static void Display(string title, string text, char type, int time)
         {
-            if (form == null || form.IsDisposed)
-                form = new ToastForm();
+            try
+            {
+                if (form == null || form.IsDisposed)
+                    form = new ToastForm();
 
-            form.SetContent(title, text, type, time);
-            form.Toast();
+                form.SetContent(title, text, type, time);
+                form.Toast();
+            }
+            catch { }
         }
 
         private int TimeSpend = 0;

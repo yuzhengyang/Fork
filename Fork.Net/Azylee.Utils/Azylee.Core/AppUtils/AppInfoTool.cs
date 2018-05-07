@@ -13,6 +13,7 @@ namespace Azylee.Core.AppUtils
         /// 读取APP Processor（可读取App的CPU使用率）
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public static PerformanceCounter Processor()
         {
             Process p = null;

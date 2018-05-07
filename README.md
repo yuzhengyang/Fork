@@ -24,8 +24,9 @@ Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，�
 
 ```
 ● AppUtils：程序辅助工具
+  ┣ AppInfoTool.cs              // 程序信息
   ┣ AppLaunchTool.cs            // 程序启动器
-  ┣ AppSettleTool.cs            // ——
+  ┣ AppSettleTool.cs            // （暂无）
   ┣ AppUnique.cs                // 程序单开验证
   ┣ PermissionTool.cs           // 权限信息
   ┗ StartupTool.cs              // 开机启动项
@@ -50,6 +51,9 @@ Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，�
    
   ┣ GuidUtils：Guid 处理
     ┗ GuidTool.cs               // Guid 格式处理
+    
+  ┣ SerializeUtils：序列化工具
+    ┗ SerializeTool.cs          // 模型序列化
    
   ┣ StringUtils：字符串处理
     ┗ StringTool.cs             // 字符串处理
@@ -63,6 +67,9 @@ Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，�
     ┗ ProgressEventArgs.cs      // 进度委托参数
 
 ● IOUtils：输入输出
+  ┣ BinaryUtils：二进制文件
+    ┗ BinaryFileTool.cs         // 二进制文件读写
+    
   ┣ DirUtils：路径
     ┗ DirTool.cs                // 目录操作
     
@@ -78,17 +85,22 @@ Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，�
     ┗ AppDirTool.cs             // 程序目录操作
     
   ┣ TxtUtils：文本
-    ┣ ConfigTool.cs             // ——
+    ┣ ConfigTool.cs             // （暂无）
     ┣ IniTool.cs                // 操作 ini 配置文件
     ┣ TxtTool.cs                // 操作文本文件
-    ┗ XmlTool.cs                // ——
+    ┗ XmlTool.cs                // （暂无）
 
 ● LogUtils：日志
-  ┣ Log.cs                      // 日志工具
-  ┣ LogLevel.cs                 // 日志分级
-  ┣ LogModel.cs                 // 日志信息模型
-  ┗ LogType.cs                  // 日志分类
+  ┣ SimpleLogUtils
+    ┣ Log.cs                    // 日志工具
+    ┣ LogLevel.cs               // 日志分级
+    ┣ LogModel.cs               // 日志模型
+    ┗ LogType.cs                // 日志分类
   
+  ┣ StatusLogUtils
+    ┣ StatusLog.cs              // 状态日志工具
+    ┗ StatusLogModel.cs         // 状态日志模型
+    
 ● ProcessUtils：进程
   ┗ ProcessTool.cs              // 进程操作
   
@@ -100,12 +112,19 @@ Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，�
   
 ● WindowsUtils：系统
   ┣ APIUtils：API
+    ┣ ApplicationAPI.cs         // 应用程序：可唤起指定进程的窗口
+    ┣ ExplorerAPI.cs            // Explorer：可打开指定文件夹窗口
     ┣ PermissionAPI.cs          // 执行权限
     ┣ SystemSleepAPI.cs         // 系统睡眠
     ┗ WindowsAPI.cs             // 窗口信息
     
+  ┣ CMDUtils：API
+    ┣ CMDNetstatTool.cs         // CMD网络指令包装
+    ┗ CMDProcessTool.cs         // CMD进程启动工具
+    
   ┣ InfoUtils：信息
     ┣ ComputerInfoTool.cs       // 计算机信息
+    ┣ ComputerStatusTool.cs     // 计算机性能计数器
     ┗ NetcardInfoTool.cs        // 网卡信息
     
   ┣ RegisterUtils：注册表
