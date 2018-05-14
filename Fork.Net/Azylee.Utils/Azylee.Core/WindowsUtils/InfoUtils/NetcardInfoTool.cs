@@ -118,6 +118,19 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         }
 
         /// <summary>
+        /// 全小写MAC地址
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string ShortMac(string s)
+        {
+            if (!string.IsNullOrWhiteSpace(s))
+            {
+                return s.Replace("-", "").Replace(":", "").ToLower();
+            }
+            return "";
+        }
+        /// <summary>
         /// 格式化MAC地址（大写、':' 分割）
         /// </summary>
         /// <param name="s"></param>

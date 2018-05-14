@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
@@ -81,6 +82,7 @@
     <Compile Include="LogUtils\SimpleLogUtils\LogType.cs" />
     <Compile Include="LogUtils\StatusLogUtils\StatusLogModel.cs" />
     <Compile Include="LogUtils\StatusLogUtils\StatusLog.cs" />
+    <Compile Include="NetUtils\PingTool.cs" />
     <Compile Include="ProcessUtils\ProcessTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

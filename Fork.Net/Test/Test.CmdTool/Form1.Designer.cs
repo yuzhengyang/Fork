@@ -36,11 +36,12 @@
             this.BTStart = new System.Windows.Forms.Button();
             this.TMStatus = new System.Windows.Forms.Timer(this.components);
             this.LBStatus = new System.Windows.Forms.Label();
+            this.TBJar = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // BTFindPort
             // 
-            this.BTFindPort.Location = new System.Drawing.Point(153, 46);
+            this.BTFindPort.Location = new System.Drawing.Point(133, 10);
             this.BTFindPort.Name = "BTFindPort";
             this.BTFindPort.Size = new System.Drawing.Size(120, 23);
             this.BTFindPort.TabIndex = 0;
@@ -50,22 +51,22 @@
             // 
             // TBPort
             // 
-            this.TBPort.Location = new System.Drawing.Point(36, 46);
+            this.TBPort.Location = new System.Drawing.Point(27, 12);
             this.TBPort.Name = "TBPort";
             this.TBPort.Size = new System.Drawing.Size(100, 21);
             this.TBPort.TabIndex = 1;
             // 
             // TBRs
             // 
-            this.TBRs.Location = new System.Drawing.Point(25, 101);
+            this.TBRs.Location = new System.Drawing.Point(25, 48);
             this.TBRs.Multiline = true;
             this.TBRs.Name = "TBRs";
-            this.TBRs.Size = new System.Drawing.Size(631, 253);
+            this.TBRs.Size = new System.Drawing.Size(631, 306);
             this.TBRs.TabIndex = 2;
             // 
             // BTKillApp
             // 
-            this.BTKillApp.Location = new System.Drawing.Point(323, 46);
+            this.BTKillApp.Location = new System.Drawing.Point(259, 10);
             this.BTKillApp.Name = "BTKillApp";
             this.BTKillApp.Size = new System.Drawing.Size(75, 23);
             this.BTKillApp.TabIndex = 3;
@@ -75,7 +76,7 @@
             // 
             // BTStart
             // 
-            this.BTStart.Location = new System.Drawing.Point(493, 46);
+            this.BTStart.Location = new System.Drawing.Point(581, 10);
             this.BTStart.Name = "BTStart";
             this.BTStart.Size = new System.Drawing.Size(75, 23);
             this.BTStart.TabIndex = 4;
@@ -98,11 +99,19 @@
             this.LBStatus.TabIndex = 5;
             this.LBStatus.Text = "label1";
             // 
+            // TBJar
+            // 
+            this.TBJar.Location = new System.Drawing.Point(341, 10);
+            this.TBJar.Name = "TBJar";
+            this.TBJar.Size = new System.Drawing.Size(234, 21);
+            this.TBJar.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 396);
+            this.Controls.Add(this.TBJar);
             this.Controls.Add(this.LBStatus);
             this.Controls.Add(this.BTStart);
             this.Controls.Add(this.BTKillApp);
@@ -126,6 +135,7 @@
         private System.Windows.Forms.Button BTStart;
         private System.Windows.Forms.Timer TMStatus;
         private System.Windows.Forms.Label LBStatus;
+        private System.Windows.Forms.TextBox TBJar;
     }
 }
 

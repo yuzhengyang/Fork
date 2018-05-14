@@ -11,7 +11,7 @@ namespace Azylee.YeahWeb.HttpUtils
     {
         const string DefaultContentType = "application/x-www-form-urlencoded";
         const string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET4.0C; .NET4.0E)";
-        public static string Get(string url, ref CookieCollection cookie, string contentType = DefaultContentType, bool autoRedirect = false, bool keepAlive = true, string userAgent = DefaultUserAgent)
+        public static string Get(string url, ref CookieCollection cookie, Dictionary<string, string> headers = null, string contentType = DefaultContentType, bool autoRedirect = false, bool keepAlive = true, string userAgent = DefaultUserAgent)
         {
             string html = "";
             Stream stream = null;
@@ -25,6 +25,7 @@ namespace Azylee.YeahWeb.HttpUtils
                 request.KeepAlive = keepAlive;
                 request.UserAgent = DefaultUserAgent;
                 request.CookieContainer = new CookieContainer();
+                SetHeaders(ref request, headers);
                 if (cookie != null) request.CookieContainer.Add(cookie);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
@@ -43,7 +44,7 @@ namespace Azylee.YeahWeb.HttpUtils
             }
             return html;
         }
-        public static string Post(string url, ref CookieCollection cookie, Dictionary<string, string> data = null, string contentType = DefaultContentType, bool autoRedirect = true, bool keepAlive = true, string userAgent = DefaultUserAgent)
+        public static string Post(string url, ref CookieCollection cookie, string data = null, Dictionary<string, string> headers = null, string contentType = DefaultContentType, bool autoRedirect = true, bool keepAlive = true, string userAgent = DefaultUserAgent)
         {
             string html = "";
             Stream stream = null, dataStream = null;
@@ -58,18 +59,12 @@ namespace Azylee.YeahWeb.HttpUtils
                 request.KeepAlive = keepAlive;
                 request.UserAgent = DefaultUserAgent;
                 request.CookieContainer = new CookieContainer();
+                SetHeaders(ref request, headers);
                 if (cookie != null) request.CookieContainer.Add(cookie);
                 //配置参数
                 if (data != null)
                 {
-                    StringBuilder dataString = new StringBuilder();
-                    foreach (var item in data)
-                    {
-                        string param = string.Format("&{0}={1}", item.Key, item.Value);
-                        dataString.Append(param);
-                    }
-
-                    byte[] dataByte = Encoding.UTF8.GetBytes(dataString.ToString().Substring(1));
+                    byte[] dataByte = Encoding.UTF8.GetBytes(data);
                     request.ContentLength = dataByte.Length;
                     dataStream = request.GetRequestStream();
                     dataStream.Write(dataByte, 0, dataByte.Length);
@@ -92,6 +87,18 @@ namespace Azylee.YeahWeb.HttpUtils
                 if (dataStream != null) dataStream.Close();
             }
             return html;
+        }
+
+        private static bool SetHeaders(ref HttpWebRequest request, Dictionary<string, string> headers)
+        {
+            try
+            {
+                if (request != null && headers != null && headers.Count > 0)
+                    foreach (var head in headers)
+                        request.Headers.Add(head.Key, head.Value);
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

@@ -59,7 +59,11 @@ namespace Test.CmdTool
         {
             Task.Factory.StartNew(() =>
             {
-                //CMDProcessTool.StartExecute(@"java -jar D:\CoCo\Work\supplyPlatform\out\artifacts\noah_cloud_supply_platform_jar\noah-cloud-supply-platform.jar");
+                CMDProcessTool.StartExecute(@"java -jar " + TBJar.Text,
+                    new Action<string>((s) =>
+                    {
+                        UIRs(s);
+                    }));
             });
         }
 
@@ -80,6 +84,17 @@ namespace Test.CmdTool
         private void TMStatus_Tick(object sender, EventArgs e)
         {
             LBStatus.Text = $"comcpu:{(int)ComCpu.NextValue()}, appcpu:{(int)AppCpu.NextValue()}, appram:{AppInfoTool.RAM() / 1024}";
+        }
+        private void UIRs(string s)
+        {
+            try
+            {
+                Invoke(new Action(() =>
+                {
+                    TBRs.AppendText(s);
+                }));
+            }
+            catch { }
         }
     }
 }

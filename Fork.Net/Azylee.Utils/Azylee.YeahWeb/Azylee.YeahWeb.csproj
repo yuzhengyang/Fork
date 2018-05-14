@@ -47,6 +47,7 @@
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationWebModel.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationTool.cs" />
     <Compile Include="FTPUtils\FTPTool.cs" />
+    <Compile Include="HttpUtils\HttpMethodType.cs" />
     <Compile Include="HttpUtils\HttpTool.cs" />
     <Compile Include="HttpUtils\HttpToolPlus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
