@@ -82,6 +82,8 @@
     <Compile Include="LogUtils\SimpleLogUtils\LogType.cs" />
     <Compile Include="LogUtils\StatusLogUtils\StatusLogModel.cs" />
     <Compile Include="LogUtils\StatusLogUtils\StatusLog.cs" />
+    <Compile Include="NetUtils\IPFormatter.cs" />
+    <Compile Include="NetUtils\MacFormatter.cs" />
     <Compile Include="NetUtils\PingTool.cs" />
     <Compile Include="ProcessUtils\ProcessTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirTool.cs" />
@@ -101,6 +103,8 @@
     <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />
     <Compile Include="WindowsUtils\RegisterUtils\RegisterTool.cs" />
     <Compile Include="WindowsUtils\ShortcutUtils\ShortcutTool.cs" />
+    <Compile Include="WindowsUtils\SoftInfoUtils\SoftwareInfo.cs" />
+    <Compile Include="WindowsUtils\SoftInfoUtils\SoftwareTool.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

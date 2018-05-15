@@ -47,9 +47,14 @@
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationWebModel.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationTool.cs" />
     <Compile Include="FTPUtils\FTPTool.cs" />
-    <Compile Include="HttpUtils\HttpMethodType.cs" />
+    <Compile Include="HttpUtils\MethodUtils\ExtendUtils\HeaderTool.cs" />
+    <Compile Include="HttpUtils\MethodUtils\GetUtils\GetToolPlus.cs" />
+    <Compile Include="HttpUtils\MethodUtils\PostUtils\PostToolPlus.cs" />
+    <Compile Include="HttpUtils\Models\HttpContentTypes.cs" />
+    <Compile Include="HttpUtils\Models\HttpMethodTypes.cs" />
     <Compile Include="HttpUtils\HttpTool.cs" />
     <Compile Include="HttpUtils\HttpToolPlus.cs" />
+    <Compile Include="HttpUtils\Models\UserAgents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,5 +66,6 @@
       <Name>Azylee.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

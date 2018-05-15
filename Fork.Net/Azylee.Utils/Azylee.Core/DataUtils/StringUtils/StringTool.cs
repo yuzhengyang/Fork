@@ -28,6 +28,18 @@ namespace Azylee.Core.DataUtils.StringUtils
             return false;
         }
         /// <summary>
+        /// 查看字符串包含字符（不区分大小写）
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static bool Contains(string s,string word)
+        {
+            if (s.ToLower().Contains(word.ToLower()))
+                return true;
+            return false;
+        }
+        /// <summary>
         /// 分割字符串
         /// </summary>
         /// <param name="str"></param>
