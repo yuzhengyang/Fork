@@ -59,8 +59,10 @@ namespace Azylee.Core.AppUtils
             //当前时间
             var current = process.TotalProcessorTime;
             //间隔时间内的CPU运行时间除以逻辑CPU数量
-            double value = (current - begin).TotalMilliseconds / interval / Environment.ProcessorCount * 100;
-            if (value < 0 || 100 < value) return 0;
+            var minus = current - begin;
+            double value = minus.TotalMilliseconds / Environment.ProcessorCount / interval * 100;
+            if (value < 0) return 0;
+            if (100 < value) return 100;
             return value;
         }
         /// <summary>

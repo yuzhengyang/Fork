@@ -2,6 +2,7 @@
 using Azylee.Core.LogUtils.StatusLogUtils;
 using Azylee.Core.WindowsUtils.InfoUtils;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Test.BlackBox
@@ -38,6 +39,15 @@ namespace Test.BlackBox
             Log.d("yoyoyoyoyo");
             Log.i("yoyoyoyoyo");
             Log.v("yoyoyoyoyo");
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    string ceshi = "cpu占用";
+                    ceshi = ceshi + ceshi;
+                    int count = ceshi.Length + ceshi.Length;
+                }
+            });
         }
     }
 }

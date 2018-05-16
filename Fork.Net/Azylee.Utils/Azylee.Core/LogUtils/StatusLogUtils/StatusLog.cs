@@ -44,15 +44,16 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
 
         #region 基础属性
         const string LOG_PATH = @"azylee.log";//存储路径
+        const int Interval = 1000;//监测间隔时间
+        const int WriteInterval = 60 * Interval;//写出间隔时间
 
         private int CACHE_DAYS = 30;//缓存天数
         private string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;//存储路径
         private DateTime Time = DateTime.Now;//标记当前时间
-        private int Interval = 60 * 1000;//监测间隔时间
         private Task Listener = null;//监测任务
+        private Process AppProcess = Process.GetCurrentProcess();
         private CancellationTokenSource CancelToken = new CancellationTokenSource();//监测取消Token
         private PerformanceCounter ComputerProcessor = ComputerStatusTool.Processor();//电脑CPU监控
-        private PerformanceCounter AppProcessor = AppInfoTool.Processor();//程序CPU监控
         #endregion
 
         public void SetLogPath(string path)
@@ -87,11 +88,27 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                     try
                     {
                         WriteConfig();
+                        int runtime = 0;//运行时间（毫秒）
+                        long afk = WindowsAPI.GetLastInputTime();//空闲时间缓存
+                        TimeSpan pin = TimeSpan.Zero;//程序运行时间戳
+                        StatusLogModel status = null;//运行状态信息模型
                         while (!CancelToken.IsCancellationRequested)
                         {
-                            Time = DateTime.Now;
-                            Thread.Sleep(Interval);
-                            WriteStatus();
+                            pin = AppProcess.TotalProcessorTime;//程序运行时间戳
+                            runtime += Interval;//增加运行时间
+                            Thread.Sleep(Interval);//等待间隔时间
+
+                            //每秒钟都会执行的操作
+                            CollectStatus(ref status, runtime, afk, pin);//收集数据
+                            afk = WindowsAPI.GetLastInputTime();//空闲时间缓存
+
+                            //每分钟进行汇总输出
+                            if (runtime >= WriteInterval)
+                            {
+                                WriteStatus(status);//写出数据
+                                runtime = 0;//重置运行时间
+                                status = null;//重置数据
+                            }
                         }
                     }
                     catch { }
@@ -127,31 +144,58 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
             IniTool.WriteValue(file, "system", "drive", ComputerInfoTool.GetSystemDriveTotalSize().ToString());
         }
         /// <summary>
-        /// 写出运行时状态信息
+        /// 收集数据
         /// </summary>
-        private void WriteStatus()
+        /// <returns></returns>
+        private bool CollectStatus(ref StatusLogModel status, int runtime, long afk, TimeSpan pin)
         {
             try
             {
-                StatusLogModel status = new StatusLogModel()
-                {
-                    Time = Time,
-                    Long = Interval / 1000,
-                    AFK = WindowsAPI.GetLastInputTime() / 1000,
-                    CpuPer = (int)ComputerProcessor.NextValue(),
-                    RamFree = (long)ComputerInfoTool.AvailablePhysicalMemory(),
-                    SysDriveFree = ComputerInfoTool.GetSystemDriveAvailableSize(),
-                    AppCpuPer = (int)AppProcessor.NextValue(),
-                    AppRamUsed = AppInfoTool.RAM(),
-                };
-                //设置日志目录和日志文件
-                string path = DirTool.Combine(LogPath, "status");
-                string file = DirTool.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
-                //创建日志目录
-                DirTool.Create(path);
-                //写出日志
-                TxtTool.Append(file, status.ToString());
+                int count = runtime / Interval;//收集次数，用来帮助平均值计算
 
+                if (status == null) status = new StatusLogModel() { Time = DateTime.Now };
+                //固定值数据
+                status.Long = runtime;//运行时长
+                //累计值数据
+                long afktemp = WindowsAPI.GetLastInputTime() - afk;
+                if (afktemp > 0) status.AFK = status.AFK + afktemp;
+                //计算平均值数据
+                int cpu = (int)ComputerProcessor.NextValue();//CPU占用
+                long ram = (long)ComputerInfoTool.AvailablePhysicalMemory();//系统可用内存
+                int appcpu = (int)AppInfoTool.CalcCpuRate(AppProcess, pin, Interval);//程序CPU占用
+                long appram = AppInfoTool.RAM();//程序内存占用
+                long sysdisk = ComputerInfoTool.GetSystemDriveAvailableSize();//系统盘可用空间
+
+                status.CpuPer = ((count - 1) * status.CpuPer + cpu) / count;//CPU占用
+                status.RamFree = ((count - 1) * status.RamFree + ram) / count;//系统可用内存
+                status.AppCpuPer = ((count - 1) * status.AppCpuPer + appcpu) / count;//程序CPU占用
+                status.AppRamUsed = ((count - 1) * status.AppRamUsed + appram) / count;//程序内存占用
+                status.SysDriveFree = ((count - 1) * status.SysDriveFree + sysdisk) / count;//系统盘可用空间
+                return true;
+            }
+            catch { return false; }
+        }
+        /// <summary>
+        /// 写出运行时状态信息
+        /// </summary>
+        private void WriteStatus(StatusLogModel status)
+        {
+            try
+            {
+                if (status != null)
+                {
+                    //处理比率
+                    status.Long = status.Long / 1000;
+                    status.AFK = status.AFK / 1000;
+
+                    //设置日志目录和日志文件
+                    string path = DirTool.Combine(LogPath, "status");
+                    string file = DirTool.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
+                    //创建日志目录
+                    DirTool.Create(path);
+                    //写出日志
+                    TxtTool.Append(file, status.ToString());
+                }
                 Cleaner();
             }
             catch { }

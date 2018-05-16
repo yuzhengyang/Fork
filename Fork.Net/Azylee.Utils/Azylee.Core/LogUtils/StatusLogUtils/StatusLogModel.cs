@@ -43,7 +43,7 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         /// <summary>
         /// 应用程序占用内存
         /// </summary>
-        public double AppRamUsed { get; set; }
+        public long AppRamUsed { get; set; }
 
         public override string ToString()
         {
@@ -64,7 +64,7 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                 try { if (elements.Length > 5) model.RamFree = long.Parse(elements[5]); } catch { }
                 try { if (elements.Length > 7) model.SysDriveFree = long.Parse(elements[7]); } catch { }
                 try { if (elements.Length > 8) model.AppCpuPer = int.Parse(elements[8]); } catch { }
-                try { if (elements.Length > 9) model.AppRamUsed = double.Parse(elements[9]); } catch { }
+                try { if (elements.Length > 9) model.AppRamUsed = long.Parse(elements[9]); } catch { }
             }
             return model;
         }
