@@ -61,15 +61,18 @@ namespace Azylee.Core.IOUtils.TxtUtils
         {
             try
             {
-                using (StreamReader sr = new StreamReader(file, Encoding.UTF8))
+                if (File.Exists(file))
                 {
-                    string result = "", line;
-                    while ((line = sr.ReadLine()) != null)
-                        result += line.ToString();
-                    return result;
+                    using (StreamReader sr = new StreamReader(file, Encoding.UTF8))
+                    {
+                        string result = "", line;
+                        while ((line = sr.ReadLine()) != null)
+                            result += line.ToString();
+                        return result;
+                    }
                 }
             }
-            catch (Exception e) { }
+            catch { }
             return null;
         }
         public static List<string> ReadLine(string file)

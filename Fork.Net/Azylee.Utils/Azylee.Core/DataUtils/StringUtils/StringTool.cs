@@ -1,7 +1,7 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.10.12 - 2017.10.12
+//      date:       2017.10.12 - 2018.5.17
 //      desc:       字符串工具类
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -13,6 +13,24 @@ namespace Azylee.Core.DataUtils.StringUtils
 {
     public sealed class StringTool
     {
+        /// <summary>
+        /// 判断字符串 非null、""、空格（Not NullOrWhiteSpace）
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static bool Ok(string s)
+        {
+            return !string.IsNullOrWhiteSpace(s);
+        }
+        /// <summary>
+        /// 判断字符串 非null、""（Not NullOrEmpty）
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static bool Ok2(string s)
+        {
+            return !string.IsNullOrEmpty(s);
+        }
         /// <summary>
         /// 判断字符串为null或为空格
         /// </summary>
@@ -33,7 +51,7 @@ namespace Azylee.Core.DataUtils.StringUtils
         /// <param name="s"></param>
         /// <param name="word"></param>
         /// <returns></returns>
-        public static bool Contains(string s,string word)
+        public static bool Contains(string s, string word)
         {
             if (s.ToLower().Contains(word.ToLower()))
                 return true;
