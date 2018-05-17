@@ -61,7 +61,7 @@
     <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />
     <Compile Include="DataUtils\SerializeUtils\SerializeTool.cs" />
     <Compile Include="DataUtils\StringUtils\StringTool.cs" />
-    <Compile Include="DataUtils\UnitConvertUtils\ByteConvertUtils.cs" />
+    <Compile Include="DataUtils\UnitConvertUtils\ByteConvertTool.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressEventArgs.cs" />
     <Compile Include="IOUtils\BinaryUtils\BinaryFileTool.cs" />
