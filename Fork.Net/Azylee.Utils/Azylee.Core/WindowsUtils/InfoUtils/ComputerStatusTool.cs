@@ -22,5 +22,23 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             catch { }
             return processor;
         }
+
+        public static bool TryGetNextValue(PerformanceCounter p, out float value)
+        {
+            value = 0;
+            try
+            {
+                if (p != null)
+                {
+                    value = p.NextValue();
+                    return true;
+                }
+                return false;//性能计数器为空，返回失败
+            }
+            catch
+            {
+                return false;//异常，返回失败
+            }
+        }
     }
 }
