@@ -21,11 +21,12 @@ namespace Azylee.Core.ProcessUtils
         /// <returns></returns>
         public static bool IsExists(string name)
         {
-            Process[] processes = Process.GetProcessesByName(name);
-            foreach (Process p in processes)
+            try
             {
-                return true;
+                var p = Process.GetProcessesByName(name);
+                if (ListTool.HasElements(p)) return true;
             }
+            catch { }
             return false;
         }
         /// <summary>

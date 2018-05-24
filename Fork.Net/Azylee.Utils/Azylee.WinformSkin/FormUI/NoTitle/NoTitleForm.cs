@@ -168,43 +168,33 @@ namespace Azylee.WinformSkin.FormUI.NoTitle
         //}
         #endregion
         #region Invoke UI操作
-        /// <summary>
-        /// 设置控件是否可用
-        /// </summary>
-        /// <param name="ctrl"></param>
-        /// <param name="enable"></param>
         public void UIEnable(Control ctrl, bool enable = true)
         {
-            try
+            Invoke(new Action(() =>
             {
-                BeginInvoke(new Action(() =>
-                {
-                    ctrl.Enabled = enable;
-                }));
-            }
-            catch (Exception e) { }
+                ctrl.Enabled = enable;
+            }));
         }
         public void UIVisible(Control ctrl, bool enable = true)
         {
-            try
+            Invoke(new Action(() =>
             {
-                BeginInvoke(new Action(() =>
-                {
-                    ctrl.Visible = enable;
-                }));
-            }
-            catch (Exception e) { }
+                ctrl.Visible = enable;
+            }));
+        }
+        public void UILabel(Label label, string s)
+        {
+            Invoke(new Action(() =>
+            {
+                label.Text = s;
+            }));
         }
         public void UIClose()
         {
-            try
+            Invoke(new Action(() =>
             {
-                BeginInvoke(new Action(() =>
-                {
-                    Close();
-                }));
-            }
-            catch (Exception e) { }
+                try { Close(); } catch { }
+            }));
         }
         #endregion
     }

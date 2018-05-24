@@ -90,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readme.cs" />
     <Compile Include="TaskUtils\TaskSupport.cs" />
+    <Compile Include="ThreadUtils\SleepUtils\SleepTool.cs" />
     <Compile Include="VersionUtils\VersionTool.cs" />
     <Compile Include="WindowsUtils\APIUtils\ApplicationAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\ExplorerAPI.cs" />
@@ -101,10 +102,13 @@
     <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerStatusTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\PatchInfoTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\OSInfoTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\OSName.cs" />
     <Compile Include="WindowsUtils\RegisterUtils\RegisterTool.cs" />
     <Compile Include="WindowsUtils\ShortcutUtils\ShortcutTool.cs" />
-    <Compile Include="WindowsUtils\SoftInfoUtils\SoftwareInfo.cs" />
-    <Compile Include="WindowsUtils\SoftInfoUtils\SoftwareTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\SoftwareInfo.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\SoftwareTool.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
