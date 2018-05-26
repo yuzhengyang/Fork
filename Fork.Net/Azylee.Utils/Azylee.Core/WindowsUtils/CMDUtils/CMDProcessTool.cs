@@ -24,7 +24,7 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/c C:\\Windows\\System32\\cmd.exe";
+            startInfo.Arguments = @"/c C:\Windows\System32\cmd.exe ";
             startInfo.RedirectStandardInput = true;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = true;
@@ -36,23 +36,11 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
             return process;
         }
         /// <summary>
-        /// 创建cmd的进程
-        /// </summary>
-        /// <returns></returns>
-        public static Process GetProcessSimple()
-        {
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.CreateNoWindow = true;
-            return p;
-        }
-
-        /// <summary>
         /// 开始运行CMD命令
         /// </summary>
         /// <param name="cmd"></param>
         /// <param name="output">输出动作</param>
-        public static void StartExecute(string cmd, Action<string> output)
+        public static void Execute(string cmd, Action<string> output)
         {
             StreamReader reader = null;
             Process process = null;
@@ -75,32 +63,6 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
             catch { }
         }
         /// <summary>
-        /// 开始运行CMD命令
-        /// </summary>
-        /// <param name="cmd"></param>
-        /// <param name="output">输出动作</param>
-        public static void StartExecuteSimple(string cmd, Action<string> output)
-        {
-            StreamReader reader = null;
-            Process process = null;
-            try
-            {
-                process = GetProcessSimple();
-                process.Start();
-                process.StandardInput.WriteLine(cmd);
-                process.StandardInput.WriteLine("exit");
-                reader = process.StandardOutput;
-                do
-                {
-                    string line = reader.ReadLine();
-                    output?.Invoke(line);
-                } while (!reader.EndOfStream);
-                process.WaitForExit();
-            }
-            catch { }
-        }
-
-        /// <summary>
         /// 一次性运行CMD并读取结果（建议执行返回数据较小的命令）
         /// </summary>
         /// <param name="cmd"></param>
@@ -121,7 +83,7 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
                 do
                 {
                     string line = reader.ReadLine();
-                    result.Add(line.Trim());
+                    if (Str.Ok(line)) result.Add(line.Trim());
                 } while (!reader.EndOfStream);
                 process.WaitForExit();
             }

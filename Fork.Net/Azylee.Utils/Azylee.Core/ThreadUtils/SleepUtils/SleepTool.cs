@@ -10,25 +10,18 @@ namespace Azylee.Core.ThreadUtils.SleepUtils
     public static class SleepTool
     {
         /// <summary>
-        /// 伪精准Sleep（单位：秒）
+        /// Sleep（单位：秒）
         /// </summary>
-        public static void Z(int second)
+        public static void Zs(short s = 1)
         {
-            if (second > 0)
-            {
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-                int ms = second * 900;
-                Thread.Sleep(ms);
-                sw.Stop();
-
-                ms = second * 100;
-                Thread.Sleep(ms);
-            }
-            else
-            {
-                Thread.Sleep(1000);
-            }
+            Thread.Sleep(s * 1000);
+        }
+        /// <summary>
+        /// Sleep（单位：分）
+        /// </summary>
+        public static void Zm(short m = 1)
+        {
+            Thread.Sleep(m * 60 * 1000);
         }
     }
 }

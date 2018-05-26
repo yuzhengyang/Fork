@@ -59,7 +59,7 @@ namespace Test.CmdTool
         {
             Task.Factory.StartNew(() =>
             {
-                CMDProcessTool.StartExecute(@"java -jar " + TBJar.Text,
+                CMDProcessTool.Execute(@"java -jar " + TBJar.Text,
                     new Action<string>((s) =>
                     {
                         UIRs(s);
