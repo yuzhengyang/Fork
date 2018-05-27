@@ -5,6 +5,7 @@
 //      desc:       CMD 工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
+using Azylee.Core.DataUtils.StringUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +25,7 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = @"/c C:\Windows\System32\cmd.exe ";
+            startInfo.Arguments = @"/c C:\Windows\System32\cmd.exe";
             startInfo.RedirectStandardInput = true;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = true;
