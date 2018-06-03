@@ -1,7 +1,9 @@
-﻿//############################################################
-//      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+﻿//************************************************************************
+//      author:     yuzhengyang
+//      date:       2018.3.27 - 2018.6.3
+//      desc:       Des 加密解密工具
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using System;
 using System.Collections.Generic;
 using System.IO;

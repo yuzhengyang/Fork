@@ -49,6 +49,7 @@
     <Compile Include="AppUtils\StartupTool.cs" />
     <Compile Include="DataUtils\CollectionUtils\ArrayTool.cs" />
     <Compile Include="DataUtils\CollectionUtils\ListTool.cs" />
+    <Compile Include="DataUtils\CollectionUtils\Ls.cs" />
     <Compile Include="DataUtils\DateTimeUtils\ChineseHourTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeConvert.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeTool.cs" />

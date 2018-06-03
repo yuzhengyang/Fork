@@ -1,4 +1,10 @@
-﻿using Azylee.Core.DataUtils.CollectionUtils;
+﻿//************************************************************************
+//      author:     yuzhengyang
+//      date:       2018.3.27 - 2018.6.3
+//      desc:       工具描述
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
+using Azylee.Core.DataUtils.CollectionUtils;
 using Azylee.Core.ProcessUtils;
 using Microsoft.Win32;
 using System;
