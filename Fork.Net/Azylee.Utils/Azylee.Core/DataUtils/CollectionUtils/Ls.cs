@@ -6,28 +6,22 @@
 //************************************************************************
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading;
 
-namespace Azylee.Core.ThreadUtils.SleepUtils
+namespace Azylee.Core.DataUtils.CollectionUtils
 {
-    public static class SleepTool
+    public static class Ls
     {
         /// <summary>
-        /// Sleep（单位：秒）
+        /// 列表至少有一个元素
         /// </summary>
-        public static void Zs(short s = 1)
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static bool Ok<T>(IEnumerable<T> list)
         {
-            try { Thread.Sleep(s * 1000); } catch { }
-        }
-        /// <summary>
-        /// Sleep（单位：分）
-        /// </summary>
-        public static void Zm(short m = 1)
-        {
-            try { Thread.Sleep(m * 60 * 1000); } catch { }
+            return ListTool.HasElements(list);
         }
     }
 }

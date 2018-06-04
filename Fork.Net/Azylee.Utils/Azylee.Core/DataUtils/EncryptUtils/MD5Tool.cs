@@ -1,4 +1,10 @@
-﻿using System;
+﻿//************************************************************************
+//      author:     yuzhengyang
+//      date:       2018.3.27 - 2018.6.3
+//      desc:       MD5 工具
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;

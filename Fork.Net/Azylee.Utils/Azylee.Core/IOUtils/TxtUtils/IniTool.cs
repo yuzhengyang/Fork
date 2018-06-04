@@ -1,7 +1,9 @@
-﻿//############################################################
-//      https://github.com/yuzhengyang
-//      author:yuzhengyang
-//############################################################
+﻿//************************************************************************
+//      author:     yuzhengyang
+//      date:       2018.3.27 - 2018.6.3
+//      desc:       工具描述
+//      Copyright (c) yuzhengyang. All rights reserved.
+//************************************************************************
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -11,7 +13,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
     public class IniTool
     {
 
-        #region INI文件操作  
 
         /* 
          * 针对INI文件的API操作方法，其中的节点（Section)、键（KEY）都不区分大小写 
@@ -97,7 +98,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
         #endregion
 
         #region 封装  
-
         /// <summary>  
         /// 读取INI文件中指定INI文件中的所有节点名称(Section)  
         /// </summary>  
@@ -126,7 +126,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
 
             return sections;
         }
-
         /// <summary>  
         /// 获取INI文件中指定节点(Section)中的所有条目(key=value形式)  
         /// </summary>  
@@ -156,7 +155,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
 
             return items;
         }
-
         /// <summary>  
         /// 获取INI文件中指定节点(Section)中的所有条目的Key列表  
         /// </summary>  
@@ -184,42 +182,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
 
             return value;
         }
-
-        /// <summary>  
-        /// 读取INI文件中指定KEY的字符串型值  
-        /// </summary>  
-        /// <param name="iniFile">Ini文件</param>  
-        /// <param name="section">节点名称</param>  
-        /// <param name="key">键名称</param>  
-        /// <param name="defaultValue">如果没此KEY所使用的默认值</param>  
-        /// <returns>读取到的值</returns>  
-        public static string GetStringValue(string iniFile, string section, string key, string defaultValue)
-        {
-            string value = defaultValue;
-            const int SIZE = 1024 * 10;
-
-            if (string.IsNullOrEmpty(section))
-            {
-                throw new ArgumentException("必须指定节点名称", "section");
-            }
-
-            if (string.IsNullOrEmpty(key))
-            {
-                throw new ArgumentException("必须指定键名称(key)", "key");
-            }
-
-            StringBuilder sb = new StringBuilder(SIZE);
-            uint bytesReturned = GetPrivateProfileString(section, key, defaultValue, sb, SIZE, iniFile);
-
-            if (bytesReturned != 0)
-            {
-                value = sb.ToString();
-            }
-            sb = null;
-
-            return value;
-        }
-
         /// <summary>  
         /// 在INI文件中，将指定的键值对写到指定的节点，如果已经存在则替换  
         /// </summary>  
@@ -241,36 +203,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
 
             return WritePrivateProfileSection(section, items, iniFile);
         }
-
-        /// <summary>  
-        /// 在INI文件中，指定节点写入指定的键及值。如果已经存在，则替换。如果没有则创建。  
-        /// </summary>  
-        /// <param name="iniFile">INI文件</param>  
-        /// <param name="section">节点</param>  
-        /// <param name="key">键</param>  
-        /// <param name="value">值</param>  
-        /// <returns>操作是否成功</returns>  
-        public static bool WriteValue(string iniFile, string section, string key, string value)
-        {
-            if (string.IsNullOrEmpty(section))
-            {
-                throw new ArgumentException("必须指定节点名称", "section");
-            }
-
-            if (string.IsNullOrEmpty(key))
-            {
-                throw new ArgumentException("必须指定键名称", "key");
-            }
-
-            if (value == null)
-            {
-                throw new ArgumentException("值不能为null", "value");
-            }
-
-            return WritePrivateProfileString(section, key, value, iniFile);
-
-        }
-
         /// <summary>  
         /// 在INI文件中，删除指定节点中的指定的键。  
         /// </summary>  
@@ -292,7 +224,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
 
             return WritePrivateProfileString(section, key, null, iniFile);
         }
-
         /// <summary>  
         /// 在INI文件中，删除指定的节点。  
         /// </summary>  
@@ -308,7 +239,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
 
             return WritePrivateProfileString(section, null, null, iniFile);
         }
-
         /// <summary>  
         /// 在INI文件中，删除指定节点中的所有内容。  
         /// </summary>  
@@ -324,7 +254,6 @@ namespace Azylee.Core.IOUtils.TxtUtils
 
             return WritePrivateProfileSection(section, string.Empty, iniFile);
         }
-
         /// <summary>
         /// 测试
         /// </summary>
@@ -365,36 +294,89 @@ namespace Azylee.Core.IOUtils.TxtUtils
             EmptySection(file, "toolbar");
 
         }
+        #endregion
 
-        /// <summary>
-        /// 扩展：插入布尔类型数据
-        /// </summary>
-        /// <param name="iniFile"></param>
-        /// <param name="section"></param>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static bool WriteValue(string iniFile, string section, string key, bool value)
+
+        #region 写入方法
+        [Obsolete]
+        /// <summary>  
+        /// 在INI文件中，指定节点写入指定的键及值。如果已经存在，则替换。如果没有则创建。  
+        /// </summary>  
+        /// <param name="iniFile">INI文件</param>  
+        /// <param name="section">节点</param>  
+        /// <param name="key">键</param>  
+        /// <param name="value">值</param>  
+        /// <returns>操作是否成功</returns>  
+        public static bool WriteValue(string iniFile, string section, string key, string value)
         {
-            return WriteValue(iniFile, section, key, value ? "true" : "false");
+            if (string.IsNullOrEmpty(section))
+            {
+                throw new ArgumentException("必须指定节点名称", "section");
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException("必须指定键名称", "key");
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentException("值不能为null", "value");
+            }
+
+            return WritePrivateProfileString(section, key, value, iniFile);
+
         }
-        /// <summary>
-        /// 扩展：读取布尔类型数据
-        /// </summary>
-        /// <param name="iniFile"></param>
-        /// <param name="section"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
+
+        public static bool Set(string iniFile, string section, string key, string value) { return WriteValue(iniFile, section, key, value); }
+        public static bool Set(string iniFile, string section, string key, int value) { return WriteValue(iniFile, section, key, value.ToString()); }
+        public static bool Set(string iniFile, string section, string key, long value) { return WriteValue(iniFile, section, key, value.ToString()); }
+        public static bool Set(string iniFile, string section, string key, bool value) { return WriteValue(iniFile, section, key, value ? "true" : "false"); }
+        #endregion
+
+        #region 读取方法
+        [Obsolete]
+        /// <summary>  
+        /// 读取INI文件中指定KEY的字符串型值  
+        /// </summary>  
+        /// <param name="iniFile">Ini文件</param>  
+        /// <param name="section">节点名称</param>  
+        /// <param name="key">键名称</param>  
+        /// <param name="defaultValue">如果没此KEY所使用的默认值</param>  
+        /// <returns>读取到的值</returns>  
+        public static string GetStringValue(string iniFile, string section, string key, string defaultValue)
+        {
+            string value = defaultValue;
+            const int SIZE = 1024 * 10;
+
+            if (string.IsNullOrEmpty(section))
+            {
+                throw new ArgumentException("必须指定节点名称", "section");
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException("必须指定键名称(key)", "key");
+            }
+
+            StringBuilder sb = new StringBuilder(SIZE);
+            uint bytesReturned = GetPrivateProfileString(section, key, defaultValue, sb, SIZE, iniFile);
+
+            if (bytesReturned != 0)
+            {
+                value = sb.ToString();
+            }
+            sb = null;
+
+            return value;
+        }
+        [Obsolete]
         public static bool GetBoolValue(string iniFile, string section, string key)
         {
             string flag = GetStringValue(iniFile, section, key, "");
             return flag.ToLower() == "true" ? true : false;
         }
-
-        public static bool WriteValue(string iniFile, string section, string key, int value)
-        {
-            return WriteValue(iniFile, section, key, value);
-        }
+        [Obsolete]
         public static int GetIntValue(string iniFile, string section, string key)
         {
             string flag = GetStringValue(iniFile, section, key, "0");
@@ -402,6 +384,7 @@ namespace Azylee.Core.IOUtils.TxtUtils
             int.TryParse(flag, out result);
             return result;
         }
+        [Obsolete]
         public static long GetLongValue(string iniFile, string section, string key)
         {
             string flag = GetStringValue(iniFile, section, key, "0");
@@ -410,8 +393,10 @@ namespace Azylee.Core.IOUtils.TxtUtils
             return result;
         }
 
-        #endregion
-
+        public static string GetString(string iniFile, string section, string key, string defaultValue) { return GetStringValue(iniFile, section, key, defaultValue); }
+        public static bool GetBool(string iniFile, string section, string key) { return GetBoolValue(iniFile, section, key); }
+        public static int GetInt(string iniFile, string section, string key) { return GetIntValue(iniFile, section, key); }
+        public static long GetLong(string iniFile, string section, string key) { return GetLongValue(iniFile, section, key); }
         #endregion
     }
 }
