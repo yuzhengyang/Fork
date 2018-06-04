@@ -87,9 +87,12 @@
     <Compile Include="NetUtils\IPFormatter.cs" />
     <Compile Include="NetUtils\MacFormatter.cs" />
     <Compile Include="NetUtils\PingTool.cs" />
+    <Compile Include="ProcessUtils\ProcessStarter.cs" />
     <Compile Include="ProcessUtils\ProcessTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProxyUtils\SimpleProxyUtils\RunMode.cs" />
+    <Compile Include="ProxyUtils\SimpleProxyUtils\SimpleProxyTool.cs" />
     <Compile Include="Readme.cs" />
     <Compile Include="TaskUtils\TaskSupport.cs" />
     <Compile Include="ThreadUtils\SleepUtils\Sleep.cs" />

@@ -1,17 +1,17 @@
 ﻿//************************************************************************
 //      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2018.4.27 - 2018.4.27
+//      date:       2018.4.27 - 2018.5.30
 //      desc:       CMD 工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
 using Azylee.Core.DataUtils.StringUtils;
+using Azylee.Core.ThreadUtils.SleepUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Azylee.Core.WindowsUtils.CMDUtils
 {
@@ -64,7 +64,7 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
             catch { }
         }
         /// <summary>
-        /// 一次性运行CMD并读取结果（建议执行返回数据较小的命令）
+        /// 运行CMD并读取结果（建议执行返回数据较小的命令）
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>

@@ -14,14 +14,14 @@ namespace Azylee.Core.ThreadUtils.SleepUtils
         /// </summary>
         public static void Zs(short s = 1)
         {
-            Thread.Sleep(s * 1000);
+            try { Thread.Sleep(s * 1000); } catch { }
         }
         /// <summary>
         /// Sleep（单位：分）
         /// </summary>
         public static void Zm(short m = 1)
         {
-            Thread.Sleep(m * 60 * 1000);
+            try { Thread.Sleep(m * 60 * 1000); } catch { }
         }
     }
 }

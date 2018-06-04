@@ -36,8 +36,11 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
                         string _name = item.Name.Trim();
                         string _desc = item.Description.Trim();
                         string _mac = item.GetPhysicalAddress().ToString();
-                        string _ip = item.GetIPProperties().UnicastAddresses.Count >= 2 ?
-                            item.GetIPProperties().UnicastAddresses[1].Address.ToString() : null;
+                        string _ip = item.GetIPProperties().UnicastAddresses.Count >= 1 ?
+                            item.GetIPProperties().UnicastAddresses[0].Address.ToString() : null;
+                        //更新IP为ipv4地址
+                        _ip = item.GetIPProperties().UnicastAddresses.Count >= 2 ?
+                          item.GetIPProperties().UnicastAddresses[1].Address.ToString() : null;
                         string _gateway = item.GetIPProperties().GatewayAddresses.Count >= 1 ?
                             item.GetIPProperties().GatewayAddresses[0].Address.ToString() : null;
                         result.Add(new Tuple<string, string, string, string, string>(_name, _desc, _mac, _ip, _gateway));
