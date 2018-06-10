@@ -282,7 +282,7 @@ namespace Azylee.Core.IOUtils.TxtUtils
             string[] keys = GetAllItemKeys(file, "Menu");
 
             //获取指定KEY的值  
-            string value = GetStringValue(file, "Desktop", "color", null);
+            string value = GetValue(file, "Desktop", "color", null);
 
             //删除指定的KEY  
             DeleteKey(file, "desktop", "color");
@@ -344,7 +344,7 @@ namespace Azylee.Core.IOUtils.TxtUtils
         /// <param name="key">键名称</param>  
         /// <param name="defaultValue">如果没此KEY所使用的默认值</param>  
         /// <returns>读取到的值</returns>  
-        public static string GetStringValue(string iniFile, string section, string key, string defaultValue)
+        public static string GetValue(string iniFile, string section, string key, string defaultValue)
         {
             string value = defaultValue;
             const int SIZE = 1024 * 10;
@@ -370,33 +370,29 @@ namespace Azylee.Core.IOUtils.TxtUtils
 
             return value;
         }
-        [Obsolete]
-        public static bool GetBoolValue(string iniFile, string section, string key)
+        public static string GetString(string iniFile, string section, string key, string defaultValue)
         {
-            string flag = GetStringValue(iniFile, section, key, "");
-            return flag.ToLower() == "true" ? true : false;
+            return GetValue(iniFile, section, key, defaultValue);
         }
-        [Obsolete]
-        public static int GetIntValue(string iniFile, string section, string key)
+        public static bool GetBool(string iniFile, string section, string key, bool defaultValue)
         {
-            string flag = GetStringValue(iniFile, section, key, "0");
-            int result = 0;
-            int.TryParse(flag, out result);
-            return result;
+            string value = GetString(iniFile, section, key, "");
+            if (value.ToLower() == "true") return true;
+            if (value.ToLower() == "false") return false;
+            return defaultValue;
         }
-        [Obsolete]
-        public static long GetLongValue(string iniFile, string section, string key)
+        public static int GetInt(string iniFile, string section, string key, int defaultValue)
         {
-            string flag = GetStringValue(iniFile, section, key, "0");
-            long result = 0;
-            long.TryParse(flag, out result);
-            return result;
+            string value = GetString(iniFile, section, key, defaultValue.ToString());
+            if (int.TryParse(value, out int result)) return result;
+            return defaultValue;
         }
-
-        public static string GetString(string iniFile, string section, string key, string defaultValue) { return GetStringValue(iniFile, section, key, defaultValue); }
-        public static bool GetBool(string iniFile, string section, string key) { return GetBoolValue(iniFile, section, key); }
-        public static int GetInt(string iniFile, string section, string key) { return GetIntValue(iniFile, section, key); }
-        public static long GetLong(string iniFile, string section, string key) { return GetLongValue(iniFile, section, key); }
+        public static long GetLong(string iniFile, string section, string key, long defaultValue)
+        {
+            string value = GetString(iniFile, section, key, defaultValue.ToString());
+            if (long.TryParse(value, out long result)) return result;
+            return defaultValue;
+        }
         #endregion
     }
 }

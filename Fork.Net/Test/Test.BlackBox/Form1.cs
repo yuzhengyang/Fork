@@ -1,6 +1,7 @@
 ﻿using Azylee.Core.LogUtils.SimpleLogUtils;
 using Azylee.Core.LogUtils.StatusLogUtils;
 using Azylee.Core.WindowsUtils.InfoUtils;
+using Azylee.WinformSkin.FormUI.Toast;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,6 +49,19 @@ namespace Test.BlackBox
                     int count = ceshi.Length + ceshi.Length;
                 }
             });
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ToastForm.Display("标题", "内容", ToastForm.ToastType.error, new Action(() =>
+            {
+                new Form2().Show();
+            }), 2);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ToastForm.Display("标题222", "内容222", ToastForm.ToastType.error, null, 10);
         }
     }
 }

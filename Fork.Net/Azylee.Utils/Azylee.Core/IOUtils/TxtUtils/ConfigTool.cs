@@ -23,7 +23,7 @@ namespace Azylee.Core.IOUtils.TxtUtils
             }
             catch { return defaultValue; }
         }
-        public static string Get(string exePath, string key, string defaultValue = "")
+        public static string GetExe(string exePath, string key, string defaultValue = "")
         {
             try
             {
@@ -38,9 +38,9 @@ namespace Azylee.Core.IOUtils.TxtUtils
             if (int.TryParse(s, out int value)) return value;
             return defaultValue;
         }
-        public static int GetInt(string exePath, string key, int defaultValue = 0)
+        public static int GetExeInt(string exePath, string key, int defaultValue = 0)
         {
-            string s = Get(exePath: exePath, key: key);
+            string s = GetExe(exePath: exePath, key: key);
             if (int.TryParse(s, out int value)) return value;
             return defaultValue;
         }
@@ -57,7 +57,7 @@ namespace Azylee.Core.IOUtils.TxtUtils
             }
             catch { return false; }
         }
-        public static bool Set(string exePath, string key, string value)
+        public static bool SetExe(string exePath, string key, string value)
         {
             try
             {

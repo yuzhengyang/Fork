@@ -49,6 +49,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -77,6 +83,10 @@
     <ProjectReference Include="..\..\Azylee.Utils\Azylee.Core\Azylee.Core.csproj">
       <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
       <Name>Azylee.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Azylee.Utils\Azylee.WinformSkin\Azylee.WinformSkin.csproj">
+      <Project>{d280c16f-fde2-4647-bd76-3514f673426d}</Project>
+      <Name>Azylee.WinformSkin</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

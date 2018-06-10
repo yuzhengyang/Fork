@@ -14,22 +14,52 @@ namespace Azylee.WinformSkin.FormUI.Toast
 {
     public partial class ToastForm : NoTitleForm
     {
+        public enum ToastType { warn, error, info }
         private static ToastForm form = new ToastForm();
+        private Action ClickAction = null;
+
         /// <summary>
         /// 弹出提示框
         /// </summary>
         /// <param name="title">标题</param>
         /// <param name="text">内容</param>
         /// <param name="type">类型：w,e,i</param>
-        /// <param name="time">显示时间：ms</param>
-        public static void Display(string title, string text, char type, int time)
+        /// <param name="time">显示时间：毫秒</param>
+        /// <param name="clickAction">点击触发动作反馈</param>
+        public static void Display(string title, string text, char type, int time, Action clickAction = null)
         {
             try
             {
                 if (form == null || form.IsDisposed)
                     form = new ToastForm();
 
-                form.SetContent(title, text, type, time);
+                ToastType tt = ToastType.info;
+                if (type == 'w' || type == 'W') tt = ToastType.warn;
+                if (type == 'e' || type == 'E') tt = ToastType.error;
+
+                form.SetContent(title, text, tt, time);//设置提示框：标题、文本、类型、时间
+                form.ClickAction = clickAction;//设置单击触发事件
+                form.Toast();
+            }
+            catch { }
+        }
+        /// <summary>
+        /// 弹出提示框
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="text">内容</param>
+        /// <param name="type">类型</param>
+        /// <param name="clickAction">点击动作</param>
+        /// <param name="time">显示时间：秒</param>
+        public static void Display(string title, string text, ToastType type = ToastType.info, Action clickAction = null, short time = 5)
+        {
+            try
+            {
+                if (form == null || form.IsDisposed)
+                    form = new ToastForm();
+
+                form.SetContent(title, text, type, time * 1000);//设置提示框：标题、文本、类型、时间
+                form.ClickAction = clickAction;//设置单击触发事件
                 form.Toast();
             }
             catch { }
@@ -56,6 +86,7 @@ namespace Azylee.WinformSkin.FormUI.Toast
             TMShowAnim.Enabled = true;//启动显示动画
             TMHide.Enabled = true;//开始隐藏倒计时
         }
+
         #region 初始化设置
         /// <summary>
         /// 初始化设置，设置要显示的内容
@@ -64,7 +95,7 @@ namespace Azylee.WinformSkin.FormUI.Toast
         /// <param name="text">内容</param>
         /// <param name="type">类型：w,e,i</param>
         /// <param name="time">显示时间：ms</param>
-        private void SetContent(string title, string text, char type, int time)
+        private void SetContent(string title, string text, ToastType type, int time)
         {
             TimeSpend = 0;//初始化运行时间，每次执行动画++
             SetPosition();//设置初始位置
@@ -80,20 +111,19 @@ namespace Azylee.WinformSkin.FormUI.Toast
         /// 设置消息类型
         /// </summary>
         /// <param name="type"></param>
-        private void SetType(char type)
+        private void SetType(ToastType type)
         {
             switch (type)
             {
-                case 'w':
-                case 'W':
+                case ToastType.warn:
                     PBIcon.Image = Resources.toast_warning;
                     break;
-                case 'e':
-                case 'E':
+                case ToastType.error:
                     PBIcon.Image = Resources.toast_error;
                     break;
-                case 'i':
-                case 'I':
+                case ToastType.info:
+                    PBIcon.Image = Resources.toast_info;
+                    break;
                 default:
                     PBIcon.Image = Resources.toast_info;
                     break;
@@ -106,6 +136,30 @@ namespace Azylee.WinformSkin.FormUI.Toast
         {
             Left = Screen.PrimaryScreen.WorkingArea.Width;
             Top = Screen.PrimaryScreen.WorkingArea.Height - Height - 12;
+        }
+        #endregion
+
+        #region 事件动作
+        private void PBIcon_Click(object sender, EventArgs e)
+        {
+            ClickAction?.Invoke();
+            ClickAction = null;
+
+            HideForm();
+        }
+        private void LBTitle_Click(object sender, EventArgs e)
+        {
+            ClickAction?.Invoke();
+            ClickAction = null;
+
+            HideForm();
+        }
+        private void LBText_Click(object sender, EventArgs e)
+        {
+            ClickAction?.Invoke();
+            ClickAction = null;
+
+            HideForm();
         }
         #endregion
 
@@ -134,18 +188,6 @@ namespace Azylee.WinformSkin.FormUI.Toast
             TMHide.Enabled = false;
             TMHideAnim.Enabled = true;//执行隐藏窗口动画
             TMHideAnim.Interval = 10;
-        }
-        private void PBIcon_Click(object sender, EventArgs e)
-        {
-            HideForm();
-        }
-        private void LBTitle_Click(object sender, EventArgs e)
-        {
-            HideForm();
-        }
-        private void LBText_Click(object sender, EventArgs e)
-        {
-            HideForm();
         }
         private void TMHide_Tick(object sender, EventArgs e)
         {
