@@ -81,15 +81,5 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.Core.Plus\Azylee.Core.Plus.csproj">
-      <Project>{915ae524-7efd-4ecc-b731-de1d1f5558f0}</Project>
-      <Name>Azylee.Core.Plus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.YeahWeb\Azylee.YeahWeb.csproj">
-      <Project>{ccf7a654-b442-4db1-bb3b-0f8014c3237f}</Project>
-      <Name>Azylee.YeahWeb</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

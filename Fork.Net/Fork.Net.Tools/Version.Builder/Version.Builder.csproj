@@ -85,24 +85,6 @@
   <ItemGroup>
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.Core.Plus\Azylee.Core.Plus.csproj">
-      <Project>{915ae524-7efd-4ecc-b731-de1d1f5558f0}</Project>
-      <Name>Azylee.Core.Plus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.Core\Azylee.Core.csproj">
-      <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
-      <Name>Azylee.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.Update\Azylee.Update.csproj">
-      <Project>{76f92bae-8c9c-42aa-85e8-51f2ea8a0c91}</Project>
-      <Name>Azylee.Update</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.YeahWeb\Azylee.YeahWeb.csproj">
-      <Project>{ccf7a654-b442-4db1-bb3b-0f8014c3237f}</Project>
-      <Name>Azylee.YeahWeb</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
   </Target>

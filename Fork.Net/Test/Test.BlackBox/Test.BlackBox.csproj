@@ -79,15 +79,5 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.Core\Azylee.Core.csproj">
-      <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
-      <Name>Azylee.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Azylee.Utils\Azylee.WinformSkin\Azylee.WinformSkin.csproj">
-      <Project>{d280c16f-fde2-4647-bd76-3514f673426d}</Project>
-      <Name>Azylee.WinformSkin</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
