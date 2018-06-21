@@ -33,7 +33,9 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +52,7 @@
     <Compile Include="DataUtils\CollectionUtils\ArrayTool.cs" />
     <Compile Include="DataUtils\CollectionUtils\ListTool.cs" />
     <Compile Include="DataUtils\CollectionUtils\Ls.cs" />
+    <Compile Include="DataUtils\CurrencyUtils\RMB.cs" />
     <Compile Include="DataUtils\DateTimeUtils\ChineseHourTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeConvert.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeTool.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="DataUtils\EncryptUtils\AesTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\DesTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\MD5Tool.cs" />
+    <Compile Include="DataUtils\EnumUtils\FlagsEnumTool.cs" />
     <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />
     <Compile Include="DataUtils\SerializeUtils\SerializeTool.cs" />
     <Compile Include="DataUtils\StringUtils\Str.cs" />
@@ -67,13 +71,28 @@
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertTool.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressEventArgs.cs" />
+    <Compile Include="DllUtils\DllInvokeTool.cs" />
+    <Compile Include="DrawingUtils\ColorUtils\ColorStyle.cs" />
     <Compile Include="IOUtils\BinaryUtils\BinaryFileTool.cs" />
+    <Compile Include="IOUtils\FileManUtils\FileWatcher.cs" />
+    <Compile Include="IOUtils\FileManUtils\FileWatcherEventArgs.cs" />
     <Compile Include="IOUtils\FileUtils\FileCodeTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileEncryptTool.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageModel.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileTool.cs" />
+    <Compile Include="IOUtils\ImageUtils\AffineTool.cs" />
+    <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
+    <Compile Include="IOUtils\ImageUtils\CaptchaHelper.cs" />
+    <Compile Include="IOUtils\ImageUtils\ExifHelper.cs" />
+    <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
+    <Compile Include="IOUtils\ImageUtils\ImageHelper.cs" />
+    <Compile Include="IOUtils\ImageUtils\ImageSpliter.cs" />
+    <Compile Include="IOUtils\ImageUtils\ScreenCapture.cs" />
+    <Compile Include="IOUtils\ImageUtils\ThunbnailTool.cs" />
+    <Compile Include="IOUtils\OfficeUtils\WordTool.cs" />
+    <Compile Include="IOUtils\OfficeUtils\WordToolTester.cs" />
     <Compile Include="IOUtils\PathUtils\AppDirTool.cs" />
     <Compile Include="IOUtils\TxtUtils\ConfigTool.cs" />
     <Compile Include="IOUtils\TxtUtils\IniTool.cs" />
@@ -87,7 +106,14 @@
     <Compile Include="LogUtils\StatusLogUtils\StatusLog.cs" />
     <Compile Include="NetUtils\IPFormatter.cs" />
     <Compile Include="NetUtils\MacFormatter.cs" />
+    <Compile Include="NetUtils\NetConnectionInfo.cs" />
+    <Compile Include="NetUtils\NetFlowService.cs" />
+    <Compile Include="NetUtils\NetflowTool.cs" />
+    <Compile Include="NetUtils\NetPacketTool.cs" />
+    <Compile Include="NetUtils\NetProcessInfo.cs" />
+    <Compile Include="NetUtils\NetProcessTool.cs" />
     <Compile Include="NetUtils\PingTool.cs" />
+    <Compile Include="ProcessUtils\ProcessInfoTool.cs" />
     <Compile Include="ProcessUtils\ProcessStarter.cs" />
     <Compile Include="ProcessUtils\ProcessTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirTool.cs" />
@@ -95,6 +121,12 @@
     <Compile Include="ProxyUtils\SimpleProxyUtils\RunMode.cs" />
     <Compile Include="ProxyUtils\SimpleProxyUtils\SimpleProxyTool.cs" />
     <Compile Include="Readme.cs" />
+    <Compile Include="ReflectionUtils\AttributeUtils\AttributeTool.cs" />
+    <Compile Include="ReflectionUtils\AttributeUtils\ControlAttribute.cs" />
+    <Compile Include="ReflectionUtils\AttributeUtils\ControlAttributeEvent.cs" />
+    <Compile Include="ReflectionUtils\AttributeUtils\CustomAttributeHelper.cs" />
+    <Compile Include="ReflectionUtils\ReflectionCoreUtils\DomainTool.cs" />
+    <Compile Include="ReflectionUtils\ReflectionCoreUtils\SimpleReflection.cs" />
     <Compile Include="TaskUtils\TaskSupport.cs" />
     <Compile Include="ThreadUtils\SleepUtils\Sleep.cs" />
     <Compile Include="ThreadUtils\SleepUtils\SleepTool.cs" />
@@ -104,8 +136,11 @@
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
+    <Compile Include="WindowsUtils\APIUtils\WindowsHotKeyAPI.cs" />
+    <Compile Include="WindowsUtils\ClipboardUtils\ClipboardTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDNetstatTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDProcessTool.cs" />
+    <Compile Include="WindowsUtils\HookUtils\UserActivityHook.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerStatusTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />
@@ -116,6 +151,8 @@
     <Compile Include="WindowsUtils\ShortcutUtils\ShortcutTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\SoftwareInfo.cs" />
     <Compile Include="WindowsUtils\InfoUtils\SoftwareTool.cs" />
+    <Compile Include="X\OperatorTest.cs" />
+    <Compile Include="X\TaskSchedulerTool.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

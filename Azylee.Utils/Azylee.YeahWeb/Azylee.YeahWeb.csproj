@@ -46,6 +46,7 @@
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationModel.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationWebModel.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationTool.cs" />
+    <Compile Include="EmailUtils\EmailTool.cs" />
     <Compile Include="FTPUtils\FTPTool.cs" />
     <Compile Include="HttpUtils\MethodUtils\ExtendUtils\HeaderTool.cs" />
     <Compile Include="HttpUtils\MethodUtils\GetUtils\GetToolPlus.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="HttpUtils\HttpToolPlus.cs" />
     <Compile Include="HttpUtils\Models\UserAgents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocketUtils\SocketTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

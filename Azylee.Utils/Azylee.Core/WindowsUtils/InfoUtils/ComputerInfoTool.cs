@@ -444,5 +444,25 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             catch { }
             return size;
         }
+        /// <summary>
+        /// 获取磁盘上次格式化时间
+        /// </summary>
+        /// <param name="dstr"></param>
+        /// <returns></returns>
+        public static DateTime GetLastFormatTime(string dstr)
+        {
+            DateTime result = DateTime.Now;
+            string volInfo = dstr + "System Volume Information";
+            if (Directory.Exists(volInfo))
+            {
+                try
+                {
+                    DirectoryInfo di = new DirectoryInfo(volInfo);
+                    result = di.CreationTime;
+                }
+                catch (Exception e) { }
+            }
+            return result;
+        }
     }
 }
