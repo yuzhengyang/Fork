@@ -321,25 +321,25 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         /// <returns></returns>
         public static List<string> UserNames()
         {
-            int EntriesRead;
-            int TotalEntries;
-            int Resume;
-            IntPtr bufPtr;
             List<string> temp = new List<string>();
-
-            NetUserEnum(null, 0, 2, out bufPtr, -1, out EntriesRead, out TotalEntries, out Resume);
-            if (EntriesRead > 0)
+            try
             {
-                USER_INFO_0[] Users = new USER_INFO_0[EntriesRead];
-                IntPtr iter = bufPtr;
-                for (int i = 0; i < EntriesRead; i++)
+                IntPtr bufPtr;
+                NetUserEnum(null, 0, 2, out bufPtr, -1, out int EntriesRead, out int TotalEntries, out int Resume);
+                if (EntriesRead > 0)
                 {
-                    Users[i] = (USER_INFO_0)Marshal.PtrToStructure(iter, typeof(USER_INFO_0));
-                    iter = (IntPtr)((long)iter + Marshal.SizeOf(typeof(USER_INFO_0)));
-                    temp.Add(Users[i].Username);
+                    USER_INFO_0[] Users = new USER_INFO_0[EntriesRead];
+                    IntPtr iter = bufPtr;
+                    for (int i = 0; i < EntriesRead; i++)
+                    {
+                        Users[i] = (USER_INFO_0)Marshal.PtrToStructure(iter, typeof(USER_INFO_0));
+                        iter = (IntPtr)((long)iter + Marshal.SizeOf(typeof(USER_INFO_0)));
+                        temp.Add(Users[i].Username);
+                    }
+                    NetApiBufferFree(bufPtr);
                 }
-                NetApiBufferFree(bufPtr);
             }
+            catch { }
             return temp;
         }
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
