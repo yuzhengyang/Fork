@@ -6,6 +6,7 @@
 //************************************************************************
 using Azylee.Core.DataUtils.CollectionUtils;
 using Azylee.Core.DataUtils.StringUtils;
+using Azylee.Core.IOUtils.FileUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -201,6 +202,27 @@ namespace Azylee.Core.IOUtils.DirUtils
                 }
             }
             return sb.ToString();
+        }
+        public static long GetPathSize(string path)
+        {
+            long size = 0, _s = 0;
+            try
+            {
+                List<string> files = FileTool.GetAllFile(path);
+                if (ListTool.HasElements(files))
+                {
+                    foreach (var f in files)
+                    {
+                        if (File.Exists(f))
+                        {
+                            _s = FileTool.Size(f);
+                            if (_s >= 0) size += _s;
+                        }
+                    }
+                }
+            }
+            catch { }
+            return size;
         }
     }
 }
