@@ -85,6 +85,7 @@
     <Compile Include="IOUtils\ImageUtils\AffineTool.cs" />
     <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="IOUtils\ImageUtils\CaptchaHelper.cs" />
+    <Compile Include="IOUtils\ImageUtils\ExifTagNames.cs" />
     <Compile Include="IOUtils\ImageUtils\ExifHelper.cs" />
     <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
     <Compile Include="IOUtils\ImageUtils\ImageHelper.cs" />

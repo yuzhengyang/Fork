@@ -159,12 +159,8 @@ namespace Azylee.Core.ProcessUtils
         {
             Task.Factory.StartNew(() =>
             {
-                try
-                {
-                    Sleep.S(second);
-                    process?.Kill();
-                }
-                catch { }
+                Sleep.S(second);
+                try { process?.Kill(); } catch { }
             });
         }
         /// <summary>
