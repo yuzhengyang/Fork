@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9351FC10
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ProcessTool", "Tests\Test.ProcessTool\Test.ProcessTool.csproj", "{5FB93D25-8855-4A80-9E08-131BC728B7F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.YeahWeb", "Tests\Test.YeahWeb\Test.YeahWeb.csproj", "{0213B9D4-1B4A-4BDE-9CE9-228C68A9A522}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{5FB93D25-8855-4A80-9E08-131BC728B7F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FB93D25-8855-4A80-9E08-131BC728B7F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FB93D25-8855-4A80-9E08-131BC728B7F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0213B9D4-1B4A-4BDE-9CE9-228C68A9A522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0213B9D4-1B4A-4BDE-9CE9-228C68A9A522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0213B9D4-1B4A-4BDE-9CE9-228C68A9A522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0213B9D4-1B4A-4BDE-9CE9-228C68A9A522}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{D280C16F-FDE2-4647-BD76-3514F673426D} = {927325CD-24FD-4B85-A982-543D4F58A47C}
 		{CCF7A654-B442-4DB1-BB3B-0F8014C3237F} = {927325CD-24FD-4B85-A982-543D4F58A47C}
 		{5FB93D25-8855-4A80-9E08-131BC728B7F4} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
+		{0213B9D4-1B4A-4BDE-9CE9-228C68A9A522} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A021A3E-4C98-47CD-B4E8-912E12611C2E}
