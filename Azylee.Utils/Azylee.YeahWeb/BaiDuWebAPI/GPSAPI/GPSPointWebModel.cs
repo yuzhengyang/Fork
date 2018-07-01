@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Azylee.YeahWeb.BaiDuWebAPI.GPSAPI
 {
-    public class BaiduGPSPointModel
+    public class GPSPointWebModel
     {
         public int status { get; set; }
-        public IList<Result> result { get; set; }
+        public IList<BaiduGPSPointWebResult> result { get; set; }
     }
-    public class Result
+    public class BaiduGPSPointWebResult
     {
         public double x { get; set; }
         public double y { get; set; }

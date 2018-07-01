@@ -27,7 +27,7 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.GPSAPI
             {
                 string url = $"http://api.map.baidu.com/geoconv/v1/?coords={longitude},{latitude}&from=1&to=5&ak={ak}";
                 string rs = HttpTool.Get(url);
-                BaiduGPSPointModel rsobj = JsonConvert.DeserializeObject<BaiduGPSPointModel>(rs);
+                GPSPointWebModel rsobj = JsonConvert.DeserializeObject<GPSPointWebModel>(rs);
                 if (rsobj != null && ListTool.HasElements(rsobj.result))
                 {
                     x = rsobj.result[0].x;
