@@ -6,7 +6,7 @@ using System;
 using System.Drawing;
 using System.Text;
 
-namespace Azylee.Core.IOUtils.ImageUtils
+namespace Azylee.Core.IOUtils.ExifUtils
 {
     public class ExifHelper : IDisposable
     {
