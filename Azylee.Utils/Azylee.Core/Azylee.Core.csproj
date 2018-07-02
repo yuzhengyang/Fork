@@ -85,11 +85,12 @@
     <Compile Include="IOUtils\ImageUtils\AffineTool.cs" />
     <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
     <Compile Include="IOUtils\ImageUtils\CaptchaHelper.cs" />
-    <Compile Include="IOUtils\ImageUtils\ExifTagNames.cs" />
-    <Compile Include="IOUtils\ImageUtils\ExifHelper.cs" />
+    <Compile Include="IOUtils\ExifUtils\ExifTagNames.cs" />
+    <Compile Include="IOUtils\ExifUtils\ExifHelper.cs" />
     <Compile Include="IOUtils\ImageUtils\IconTool.cs" />
     <Compile Include="IOUtils\ImageUtils\ImageHelper.cs" />
     <Compile Include="IOUtils\ImageUtils\ImageSpliter.cs" />
+    <Compile Include="IOUtils\ImageUtils\RotateImageTool.cs" />
     <Compile Include="IOUtils\ImageUtils\ScreenCapture.cs" />
     <Compile Include="IOUtils\ImageUtils\ThunbnailTool.cs" />
     <Compile Include="IOUtils\OfficeUtils\WordTool.cs" />

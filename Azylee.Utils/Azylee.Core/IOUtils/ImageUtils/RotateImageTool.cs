@@ -10,12 +10,12 @@ namespace Azylee.Core.IOUtils.ImageUtils
     public static class RotateImageTool
     {
         /// <summary>
-        /// 旋转照片
+        /// 旋转照片（根据Exif信息的方向）
         /// </summary>
         /// <param name="originalImagePath"></param>
         /// <param name="saveImagePath"></param>
         /// <returns></returns>
-        public static bool RotateImg(string originalImagePath, string saveImagePath)
+        public static bool Rotate(string originalImagePath, string saveImagePath)
         { 
             Image img = Image.FromFile(originalImagePath);
             var exif = img.PropertyItems;
@@ -67,7 +67,7 @@ namespace Azylee.Core.IOUtils.ImageUtils
         /// <param name="saveImagePath">保存图像的路径</param>
         /// <param name = "angle" > 旋转角度[0, 360](前台给的) </ param >
         /// <returns></returns>
-        public static bool RotateImg(string originalImagePath, string saveImagePath, int angle)
+        public static bool Rotate(string originalImagePath, string saveImagePath, int angle)
         {
             Image originalImage = Image.FromFile(originalImagePath);
             angle = angle % 360;
