@@ -17,7 +17,14 @@ namespace Test.YeahWeb
                 Console.WriteLine($"120.379235583333 - 36.19172925");
                 Console.WriteLine($"{x} - {y}");
             }
-            http://api.map.baidu.com/geocoder/v2/?location=36.1981373852607,120.390842831702&output=json&ak=iAe652kYOgleRHUYQkW1E8MIHEptnMb5
+
+          
+            GPSInfoWebModel model = GPSInfoTool.GetInfo("iAe652kYOgleRHUYQkW1E8MIHEptnMb5", 40.039669, 252.129464);
+            if (model != null)
+            {
+                GPSInfoModel info = model.ToGPSInfoModel();
+                Console.WriteLine(info);
+            }
             Console.ReadLine();
         }
     }

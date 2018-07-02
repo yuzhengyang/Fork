@@ -43,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaiDuWebAPI\GPSAPI\BaiduGPSPointModel.cs" />
+    <Compile Include="BaiDuWebAPI\GPSAPI\GPSInfoModel.cs" />
+    <Compile Include="BaiDuWebAPI\GPSAPI\GPSInfoWebModel.cs" />
+    <Compile Include="BaiDuWebAPI\GPSAPI\GPSPointWebModel.cs" />
     <Compile Include="BaiDuWebAPI\GPSAPI\GPSConverter.cs" />
+    <Compile Include="BaiDuWebAPI\GPSAPI\GPSInfoTool.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationModel.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationWebModel.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationTool.cs" />
