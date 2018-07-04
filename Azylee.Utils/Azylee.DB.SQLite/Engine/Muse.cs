@@ -150,9 +150,9 @@ namespace Azylee.DB.SQLite.Engine
                 {
                     DbQuery<T> query = GetInclude<T>(include);
                     if (query != null)
-                        return query.Any(expression);
+                        return query.AsNoTracking().Any(expression);
                 }
-                return this.Context.Set<T>().Any(expression);
+                return this.Context.Set<T>().AsNoTracking().Any(expression);
             }
             catch (Exception e)
             {
