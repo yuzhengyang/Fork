@@ -464,5 +464,29 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             }
             return result;
         }
+        /// <summary>
+        /// 获取计算机共享文件
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> Share()
+        {
+            List<string> rs = new List<string>();
+            try
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from win32_share");
+                foreach (ManagementObject share in searcher.Get())
+                {
+                    try
+                    {
+                        string name = share["Name"].ToString();
+                        string path = share["Path"].ToString();
+                        rs.Add(name + "->" + path);
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+            return rs;
+        }
     }
 }

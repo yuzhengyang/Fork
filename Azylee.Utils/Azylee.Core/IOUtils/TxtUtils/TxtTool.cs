@@ -93,6 +93,20 @@ namespace Azylee.Core.IOUtils.TxtUtils
             catch (Exception e) { }
             return null;
         }
+        public static void ReadLine(string file, Action<int, string> action)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(file, Encoding.UTF8))
+                {
+                    string line;
+                    int number = 1;
+                    while ((line = sr.ReadLine()) != null)
+                        action.Invoke(number++, line);
+                }
+            }
+            catch (Exception e) { }
+        }
         public static long CountLine(string file, string[] filter)
         {
             long count = 0;

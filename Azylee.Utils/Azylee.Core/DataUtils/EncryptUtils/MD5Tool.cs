@@ -22,10 +22,14 @@ namespace Azylee.Core.DataUtils.EncryptUtils
         public static string Encrypt(string s)
         {
             string result = "";
-            byte[] buffer = Encoding.Default.GetBytes(s);
-            HashAlgorithm algorithm = MD5.Create();
-            byte[] hashBytes = algorithm.ComputeHash(buffer);
-            result = BitConverter.ToString(hashBytes).Replace("-", "");
+            try
+            {
+                byte[] buffer = Encoding.UTF8.GetBytes(s);
+                HashAlgorithm algorithm = MD5.Create();
+                byte[] hashBytes = algorithm.ComputeHash(buffer);
+                result = BitConverter.ToString(hashBytes).Replace("-", "");
+            }
+            catch { }
             return result;
         }
     }

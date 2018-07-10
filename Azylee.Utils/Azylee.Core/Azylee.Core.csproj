@@ -62,6 +62,7 @@
     <Compile Include="DataUtils\DateTimeUtils\WeekDayTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\AesTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\DesTool.cs" />
+    <Compile Include="DataUtils\EncryptUtils\MD5OTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\MD5Tool.cs" />
     <Compile Include="DataUtils\EnumUtils\FlagsEnumTool.cs" />
     <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />

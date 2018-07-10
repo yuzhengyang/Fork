@@ -96,7 +96,7 @@ namespace Azylee.Core.WindowsUtils.RegisterUtils
                 {
                     if (RKey != null)
                     {
-                        return RKey.GetValue(name) != null ? RKey.GetValue(name).ToString() : "";
+                        return RKey.GetValue(name) != null ? RKey.GetValue(name).ToString() : null;
                     }
                 }
             }
