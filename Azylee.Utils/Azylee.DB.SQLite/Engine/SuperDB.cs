@@ -10,7 +10,7 @@ namespace Azylee.DB.SQLite.Engine
     [DbConfigurationType(typeof(BaseConfig))]
     public class SuperDB : DbContext
     {
-        public SuperDB() : base("DefaultConnection")
+        public SuperDB(string connect) : base(connect)
         {
 
         }
