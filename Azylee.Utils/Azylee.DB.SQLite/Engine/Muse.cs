@@ -11,9 +11,9 @@ namespace Azylee.DB.SQLite.Engine
     public class Muse : IDBContext
     {
         public SuperDB Context;
-        public Muse()
+        public Muse(string connect)
         {
-            Context = new SuperDB();
+            Context = new SuperDB(connect);
         }
 
         public int Add<T>(T EntityObj, bool isSave = true) where T : class
