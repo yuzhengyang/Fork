@@ -23,15 +23,15 @@ namespace Azylee.Core.DataUtils.UnitConvertUtils
         public static string Fmt(long size, int digits = 2)
         {
             string rs = "";
-            if (size > 1024 * 1024 * 1024)
+            if (size >= 1024 * 1024 * 1024)
             {
                 rs = Math.Round((double)size / 1024 / 1024 / 1024, digits) + " GB";
             }
-            else if (size > 1024 * 1024)
+            else if (size >= 1024 * 1024)
             {
                 rs = Math.Round((double)size / 1024 / 1024, digits) + " MB";
             }
-            else if (size > 1024)
+            else if (size >= 1024)
             {
                 rs = Math.Round((double)size / 1024, digits) + " KB";
             }
@@ -50,15 +50,15 @@ namespace Azylee.Core.DataUtils.UnitConvertUtils
         public static string Fmt(double size, int digits = 2)
         {
             string rs = "";
-            if (size > 1024 * 1024 * 1024)
+            if (size >= 1024 * 1024 * 1024)
             {
                 rs = Math.Round(size / 1024 / 1024 / 1024, digits) + " GB";
             }
-            else if (size > 1024 * 1024)
+            else if (size >= 1024 * 1024)
             {
                 rs = Math.Round(size / 1024 / 1024, digits) + " MB";
             }
-            else if (size > 1024)
+            else if (size >= 1024)
             {
                 rs = Math.Round(size / 1024, digits) + " KB";
             }

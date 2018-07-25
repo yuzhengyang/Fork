@@ -34,13 +34,17 @@ namespace Azylee.Core.WindowsUtils.APIUtils
         /// <returns></returns>
         public static long GetLastInputTime()
         {
-            LASTINPUTINFO vLastInputInfo = new LASTINPUTINFO();
-            vLastInputInfo.cbSize = Marshal.SizeOf(vLastInputInfo);
-            // 捕获时间  
-            if (!GetLastInputInfo(ref vLastInputInfo))
-                return 0;
-            else
-                return Environment.TickCount - (long)vLastInputInfo.dwTime;
+            long time = 0;
+            try
+            {
+                LASTINPUTINFO vLastInputInfo = new LASTINPUTINFO();
+                vLastInputInfo.cbSize = Marshal.SizeOf(vLastInputInfo);
+                // 捕获时间  
+                if (!GetLastInputInfo(ref vLastInputInfo)) time = 0;
+                else time = Environment.TickCount - (long)vLastInputInfo.dwTime;
+            }
+            catch { }
+            return time > 0 ? time : 0;
         }
         #endregion
 

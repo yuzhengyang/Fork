@@ -45,6 +45,13 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI
             catch { }
             return false;
         }
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(FirstPOI?.Address + ",");
+            sb.Append(SematicDescription ?? "");
+            return sb.ToString();
+        }
     }
     /// <summary>
     /// 地址组成

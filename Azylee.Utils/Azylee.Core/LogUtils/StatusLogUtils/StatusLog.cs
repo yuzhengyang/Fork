@@ -159,7 +159,8 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                 long afktemp = WindowsAPI.GetLastInputTime() - afk;
                 if (afktemp > 0) status.AFK = status.AFK + afktemp;
                 //计算平均值数据
-                int cpu = (int)ComputerProcessor.NextValue();//CPU占用
+                int cpu = 0;
+                try { cpu = (int)ComputerProcessor.NextValue(); } catch { }//CPU占用
                 long ram = (long)ComputerInfoTool.AvailablePhysicalMemory();//系统可用内存
                 int appcpu = (int)AppInfoTool.CalcCpuRate(AppProcess, pin, Interval);//程序CPU占用
                 long appram = AppInfoTool.RAM();//程序内存占用

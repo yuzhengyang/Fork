@@ -20,16 +20,31 @@ namespace Azylee.Core.DataUtils.EncryptUtils
         /// <param name="s">待加密字符串</param>
         /// <returns>加密后的字符串</returns>
         public static string Encrypt(string s)
+        { 
+            if (s != null)
+            {
+                try
+                {
+                    byte[] buffer = Encoding.UTF8.GetBytes(s);
+                    return Encrypt(buffer);
+                }
+                catch { }
+            }
+            return "";
+        }
+        public static string Encrypt(byte[] data)
         {
             string result = "";
-            try
+            if (data != null)
             {
-                byte[] buffer = Encoding.UTF8.GetBytes(s);
-                HashAlgorithm algorithm = MD5.Create();
-                byte[] hashBytes = algorithm.ComputeHash(buffer);
-                result = BitConverter.ToString(hashBytes).Replace("-", "");
+                try
+                {
+                    HashAlgorithm algorithm = MD5.Create();
+                    byte[] hashBytes = algorithm.ComputeHash(data);
+                    result = BitConverter.ToString(hashBytes).Replace("-", "");
+                }
+                catch { }
             }
-            catch { }
             return result;
         }
     }
