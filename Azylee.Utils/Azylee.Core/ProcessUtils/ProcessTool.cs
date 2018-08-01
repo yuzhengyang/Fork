@@ -82,8 +82,12 @@ namespace Azylee.Core.ProcessUtils
                 Process[] processes = Process.GetProcessesByName(name);
                 foreach (Process p in processes)
                 {
-                    p.Kill();
-                    p.Close();
+                    try
+                    {
+                        p.Kill();
+                        p.Close();
+                    }
+                    catch { }
                 }
             }
             catch (Exception e) { }

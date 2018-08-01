@@ -170,31 +170,44 @@ namespace Azylee.WinformSkin.FormUI.NoTitle
         #region Invoke UI操作
         public void UIEnable(Control ctrl, bool enable = true)
         {
-            Invoke(new Action(() =>
+            try
             {
-                ctrl.Enabled = enable;
-            }));
+                Invoke(new Action(() =>
+                {
+                    ctrl.Enabled = enable;
+                }));
+            }
+            catch { }
         }
         public void UIVisible(Control ctrl, bool enable = true)
         {
-            Invoke(new Action(() =>
+            try
             {
-                ctrl.Visible = enable;
-            }));
+                Invoke(new Action(() =>
+                {
+                    ctrl.Visible = enable;
+                }));
+            }
+            catch { }
         }
         public void UILabel(Label label, string s)
         {
-            Invoke(new Action(() =>
+            try
             {
-                label.Text = s;
-            }));
+                Invoke(new Action(() =>
+                {
+                    label.Text = s;
+                }));
+            }
+            catch { }
         }
         public void UIClose()
         {
-            Invoke(new Action(() =>
+            try
             {
-                try { Close(); } catch { }
-            }));
+                Invoke(new Action(() => { try { Close(); } catch { } }));
+            }
+            catch { }
         }
         #endregion
     }

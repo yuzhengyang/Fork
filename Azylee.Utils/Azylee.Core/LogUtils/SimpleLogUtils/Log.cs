@@ -111,6 +111,10 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             {
                 Console.ForegroundColor = GetColor(type);
                 Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
+            }
+            catch { }
+            try
+            {
                 //取消单独线程输出日志文件（单独线程输出日志必然会有延迟）
                 //if (IsWriteFile) Queue.Enqueue(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });
                 if (IsWriteFile) WriteFile(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });

@@ -1,4 +1,4 @@
-# Fork
+﻿# Fork
 
 Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，包括各种常用的工具和方法，窗口控件等。
 
@@ -14,8 +14,7 @@ Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，�
 2. Azylee.Core.Plus ： 带其他引用的扩展方法
 3. Azylee.Update ： 更新工具包
 4. Azylee.YeahWeb ： Http 及网络相关工具包
-5. Azylee.WinformMan ： Winform 窗体管理
-6. Azylee.WinformSkin ： Winform 样式和控件
+5. Azylee.WinformSkin ： Winform 样式和控件
 
 ### Azylee.Core 模块：
 
@@ -178,8 +177,6 @@ Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，�
   ┗ HttpToolPlus.cs             // 增强Http工具（如携带Cookie）
 ```
 
-### Azylee.WinformMan
-——暂无
 
 ### Azylee.WinformSkin
 ——暂无

@@ -376,6 +376,16 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             return Environment.TickCount;
         }
         /// <summary>
+        ///  获取机器开机时间 
+        /// </summary>
+        /// <returns></returns>
+        public static DateTime StartTime()
+        {
+            DateTime time = DateTime.Now;
+            try { time = time.AddMilliseconds(-Environment.TickCount); } catch { }
+            return time;
+        }
+        /// <summary>
         /// 处理器数
         /// </summary>
         /// <returns></returns>
