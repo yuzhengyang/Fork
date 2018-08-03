@@ -11,6 +11,9 @@ using System.Text;
 
 namespace Azylee.Core.DataUtils.CollectionUtils
 {
+    /// <summary>
+    /// ListTool
+    /// </summary>
     public static class Ls
     {
         /// <summary>

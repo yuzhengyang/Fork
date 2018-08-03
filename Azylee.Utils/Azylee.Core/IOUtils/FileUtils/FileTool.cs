@@ -80,7 +80,7 @@ namespace Azylee.Core.IOUtils.FileUtils
             return FileTool.GetAllFile(allpath, patterns);
         }
         /// <summary>
-        /// 获取文件（多个目录）（向下钻取所有目录）
+        /// 获取文件（多个目录）
         /// </summary>
         /// <param name="paths">路径（支持多个路径）</param>
         /// <param name="patterns">通配符（支持多个通配符）</param>

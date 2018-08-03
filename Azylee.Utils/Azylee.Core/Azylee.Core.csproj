@@ -78,11 +78,13 @@
     <Compile Include="DrawingUtils\ColorUtils\ColorStyle.cs" />
     <Compile Include="FormUtils\FormManTool.cs" />
     <Compile Include="IOUtils\BinaryUtils\BinaryFileTool.cs" />
+    <Compile Include="IOUtils\DirUtils\DirFinder.cs" />
     <Compile Include="IOUtils\FileManUtils\FileWatcher.cs" />
     <Compile Include="IOUtils\FileManUtils\FileWatcherEventArgs.cs" />
     <Compile Include="IOUtils\FileUtils\FileCodeTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileCompressTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileEncryptTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FileFinder.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageModel.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileTool.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsHotKeyAPI.cs" />
+    <Compile Include="WindowsUtils\BrowserUtils\BrowserSelector.cs" />
     <Compile Include="WindowsUtils\ClipboardUtils\ClipboardTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDNetstatTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDProcessTool.cs" />
