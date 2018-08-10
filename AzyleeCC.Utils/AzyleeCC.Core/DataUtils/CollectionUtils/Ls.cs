@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Azylee.Core.DataUtils.CollectionUtils
+namespace AzyleeCC.Core.DataUtils.CollectionUtils
 {
     /// <summary>
     /// ListTool
@@ -23,17 +23,6 @@ namespace Azylee.Core.DataUtils.CollectionUtils
         /// <param name="list"></param>
         /// <returns></returns>
         public static bool Ok<T>(IEnumerable<T> list)
-        {
-            return ListTool.HasElements(list);
-        }
-
-        /// <summary>
-        /// 列表至少有一个元素
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        public static bool ok<T>(IEnumerable<T> list)
         {
             return ListTool.HasElements(list);
         }

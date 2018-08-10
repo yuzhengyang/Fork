@@ -9,33 +9,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Azylee.Core.DataUtils.CollectionUtils
+namespace AzyleeCC.Core.DataUtils.StringUtils
 {
-    /// <summary>
-    /// ListTool
-    /// </summary>
-    public static class Ls
+    public static class Str
     {
         /// <summary>
-        /// 列表至少有一个元素
+        /// 判断字符串 非null、""、空格（Not NullOrWhiteSpace）
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
+        /// <param name="s"></param>
         /// <returns></returns>
-        public static bool Ok<T>(IEnumerable<T> list)
+        public static bool Ok(string s)
         {
-            return ListTool.HasElements(list);
+            return StringTool.Ok(s);
         }
-
         /// <summary>
-        /// 列表至少有一个元素
+        /// 判断字符串 非null、""（Not NullOrEmpty）
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
+        /// <param name="s"></param>
         /// <returns></returns>
-        public static bool ok<T>(IEnumerable<T> list)
+        public static bool Ok2(string s)
         {
-            return ListTool.HasElements(list);
+            return StringTool.Ok2(s);
         }
     }
 }
