@@ -97,15 +97,30 @@ namespace Azylee.WinformSkin.FormUI.Toast
         /// <param name="time">显示时间：ms</param>
         private void SetContent(string title, string text, ToastType type, int time)
         {
-            TimeSpend = 0;//初始化运行时间，每次执行动画++
-            SetPosition();//设置初始位置
-            TMShowAnim.Interval = 10;//设置显示动画执行间隔
-
             Text = title;//设置程序标题
             LBTitle.Text = title;//设置显示标题
             LBText.Text = text;//设置内容
             SetType(type);//设置消息类型
             TMHide.Interval = time;//设置显示时长
+
+            Height = 80;
+            try
+            {
+                int byte_len = Encoding.UTF8.GetBytes(LBText.Text).Length;
+                if (byte_len > 105)
+                {
+                    byte_len -= 105;
+                    Height = 100;
+
+                    while ((byte_len = byte_len - 55) > 0) Height += 20;
+                } 
+            }
+            catch { }
+
+            TimeSpend = 0;//初始化运行时间，每次执行动画++
+            SetPosition();//设置初始位置
+            TMShowAnim.Interval = 10;//设置显示动画执行间隔
+            SetBorder();//重置边框（因窗口高度发生变化，刷新边框）
         }
         /// <summary>
         /// 设置消息类型

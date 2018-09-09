@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzyleeCC.Utils", "AzyleeCC.Utils\AzyleeCC.Utils.csproj", "{AFB03E18-A161-4E49-AD1B-83480D9F65DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzyleeCC.Core", "AzyleeCC.Core\AzyleeCC.Core.csproj", "{414D251E-81A3-4404-ABAC-67C25D138A2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFB03E18-A161-4E49-AD1B-83480D9F65DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB03E18-A161-4E49-AD1B-83480D9F65DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB03E18-A161-4E49-AD1B-83480D9F65DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB03E18-A161-4E49-AD1B-83480D9F65DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{414D251E-81A3-4404-ABAC-67C25D138A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{414D251E-81A3-4404-ABAC-67C25D138A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{414D251E-81A3-4404-ABAC-67C25D138A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{414D251E-81A3-4404-ABAC-67C25D138A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E938278-233B-410D-84B0-C02DC6727D53}
+	EndGlobalSection
+EndGlobal

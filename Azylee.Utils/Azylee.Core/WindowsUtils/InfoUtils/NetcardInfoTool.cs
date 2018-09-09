@@ -56,6 +56,26 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             }
         }
         /// <summary>
+        /// 获取网络连接操作状态
+        /// </summary>
+        /// <param name="mac"></param>
+        /// <returns></returns>
+        public static OperationalStatus GetOpStatus(string mac)
+        {
+            try
+            {
+                NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+                foreach (var item in adapters)
+                {
+                    string _mac = item.GetPhysicalAddress().ToString();
+                    if(_mac.ToUpper() == mac.ToUpper())
+                        return item.OperationalStatus;
+                }
+            }
+            catch { }
+            return OperationalStatus.Unknown;
+        }
+        /// <summary>
         /// 获取网卡实例名称
         /// </summary>
         /// <returns></returns>
