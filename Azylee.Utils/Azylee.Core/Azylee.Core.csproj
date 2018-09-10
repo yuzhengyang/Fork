@@ -70,6 +70,7 @@
     <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />
     <Compile Include="DataUtils\SerializeUtils\SerializeTool.cs" />
     <Compile Include="DataUtils\StringUtils\Str.cs" />
+    <Compile Include="DataUtils\StringUtils\StringArrayTool.cs" />
     <Compile Include="DataUtils\StringUtils\StringTool.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertTool.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressDelegate.cs" />
