@@ -145,6 +145,7 @@
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
+    <Compile Include="WindowsUtils\APIUtils\WindowsDrawerAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsHotKeyAPI.cs" />
     <Compile Include="WindowsUtils\BrowserUtils\BrowserSelector.cs" />
     <Compile Include="WindowsUtils\ClipboardUtils\ClipboardTool.cs" />
