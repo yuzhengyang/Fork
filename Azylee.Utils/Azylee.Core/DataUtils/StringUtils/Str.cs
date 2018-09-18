@@ -23,6 +23,19 @@ namespace Azylee.Core.DataUtils.StringUtils
             return StringTool.Ok(s);
         }
         /// <summary>
+        /// 批量判断字符串 非null、""、空格（Not NullOrWhiteSpace）
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static bool Ok(params string[]  list)
+        {
+            foreach (var item in list)
+            {
+                if (!Ok(item)) return false;
+            }
+            return true;
+        }
+        /// <summary>
         /// 判断字符串 非null、""（Not NullOrEmpty）
         /// </summary>
         /// <param name="s"></param>
@@ -30,6 +43,19 @@ namespace Azylee.Core.DataUtils.StringUtils
         public static bool Ok2(string s)
         {
             return StringTool.Ok2(s);
+        }
+        /// <summary>
+        /// 批量判断字符串 非null、""（Not NullOrEmpty）
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static bool Ok2(params string[] list)
+        {
+            foreach (var item in list)
+            {
+                if (!Ok2(item)) return false;
+            }
+            return true;
         }
     }
 }
