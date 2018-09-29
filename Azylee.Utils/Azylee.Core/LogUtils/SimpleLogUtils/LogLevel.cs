@@ -17,6 +17,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         Information = 4,
         Warning = 8,
         Error = 16,
-        All = Verbose | Debug | Information | Warning | Error,
+        Colorful = 32,
+        All = Verbose | Debug | Information | Warning | Error | Colorful,
     }
 }

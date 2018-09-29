@@ -151,6 +151,7 @@
     <Compile Include="WindowsUtils\ClipboardUtils\ClipboardTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDNetstatTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDProcessTool.cs" />
+    <Compile Include="WindowsUtils\ConsoleUtils\Ct.cs" />
     <Compile Include="WindowsUtils\HookUtils\KeyboardHook.cs" />
     <Compile Include="WindowsUtils\HookUtils\KeyboardHookHelper.cs" />
     <Compile Include="WindowsUtils\HookUtils\UserActivityHook.cs" />

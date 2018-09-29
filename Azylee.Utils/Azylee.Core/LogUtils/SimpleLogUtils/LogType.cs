@@ -13,5 +13,6 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         i,//information 一般提示性的消息
         w,//warning 警告
         e,//error 错误信息
+        c,//colorful 炫彩日志
     }
 }

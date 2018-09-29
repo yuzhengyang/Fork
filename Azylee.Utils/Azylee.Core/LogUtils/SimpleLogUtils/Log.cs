@@ -103,13 +103,15 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         /// 写出到控制台
         /// </summary>
         /// <param name="type">类型</param>
-        /// <param name="tag">标记</param>
         /// <param name="message">消息</param>
-        private void Write(LogType type, string message)
+        /// <param name="color">炫彩颜色配置</param>
+        private void Write(LogType type, string message, ConsoleColor color = ConsoleColor.White)
         {
             try
             {
-                Console.ForegroundColor = GetColor(type);
+                if (type == LogType.c) Console.ForegroundColor = color;//使用自定义配色
+                else Console.ForegroundColor = GetColor(type);//使用默认类型配色
+
                 Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
             }
             catch { }
@@ -240,6 +242,17 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         {
             if ((LogLevel & LogLevel.Error) == LogLevel.Error)
                 Write(LogType.e, msg.ToString());
+        }
+        /// <summary>
+        /// 输出 Colorful （炫彩信息）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="color"></param>
+        /// <param name="msg"></param>
+        public void c<T>(ConsoleColor color, T msg)
+        {
+            if ((LogLevel & LogLevel.Colorful) == LogLevel.Colorful)
+                Write(LogType.c, msg.ToString(), color);
         }
         #endregion
     }
