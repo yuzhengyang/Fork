@@ -1,5 +1,9 @@
 # Fork
 
+[![NuGet](https://img.shields.io/nuget/dt/Azylee.Core.svg)](https://www.nuget.org/packages/Azylee.Core) 
+[![Fork](https://img.shields.io/github/forks/yuzhengyang/Fork.svg?style=social&label=Fork)](https://github.com/yuzhengyang/Fork/fork) 
+[![Stars](https://img.shields.io/github/stars/yuzhengyang/Fork.svg?style=social&label=Stars)](https://github.com/yuzhengyang/Fork) 
+
 Fork 是平时在做 C# 项目的时候，收藏整理的一个工具项目，包括各种常用的工具和方法，窗口控件等。
 
 持续完善更新中……
