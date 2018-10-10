@@ -158,6 +158,8 @@
     <Compile Include="WindowsUtils\HookUtils\UserActivityHook.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerStatusTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ComputerType.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\ComputerTypeTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\PatchInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\OSInfoTool.cs" />
