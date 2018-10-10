@@ -287,6 +287,13 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             { return UNKNOW; }
         }
         /// <summary>
+        /// 获取计算机类型（台式机、笔记本……）
+        /// </summary>
+        /// <returns></returns>
+        public static string ComputerType() {
+            return "UNKNOWN";
+        }
+        /// <summary>
         /// 当前用户名
         /// </summary>
         /// <returns></returns>

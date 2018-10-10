@@ -117,6 +117,7 @@ namespace Azylee.Core.AppUtils
             {
                 p = Process.GetCurrentProcess();
                 value = p.WorkingSet64 / 1024;
+                //value = p.PeakWorkingSet64 / 1024;
             }
             catch { }
             finally { p?.Dispose(); }
