@@ -19,6 +19,7 @@ using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.IOUtils.DirUtils;
 using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.TxtUtils;
+using Azylee.Core.WindowsUtils.ConsoleUtils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -143,9 +144,9 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         {
             try
             {
-                Console.ForegroundColor = GetColor(type);
+                Cons.SetColor(GetColor(type), ConsoleColor.Black);
                 Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
-
+                Cons.ResetColor();
                 //取消单独线程输出日志文件（单独线程输出日志必然会有延迟）
                 //if (IsWriteFile) Queue.Enqueue(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });
             }
@@ -165,8 +166,8 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                 //创建日志目录
                 DirTool.Create(filePath);
                 //处理日志信息（换行）
-                string[] loglines = log.Message.Split(new[] { "\r\n", "\n\r", Environment.NewLine }, StringSplitOptions.None);
-                log.Message = String.Join<string>($"{Environment.NewLine}{new string(' ', 18)}└", loglines);
+                //string[] loglines = log.Message.Split(new[] { "\r\n", "\n\r", Environment.NewLine }, StringSplitOptions.None);
+                //log.Message = String.Join<string>($"{Environment.NewLine}{new string(' ', 18)}└", loglines);
                 //写出日志
                 TxtTool.Append(
                     file,

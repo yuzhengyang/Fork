@@ -4,6 +4,7 @@
 //      desc:       注册表操作工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
+using Azylee.Core.DataUtils.StringUtils;
 using Microsoft.Win32;
 using System;
 
@@ -188,6 +189,30 @@ namespace Azylee.Core.WindowsUtils.RegisterUtils
                 }
             }
             return Registry.CurrentUser.CreateSubKey(subkey);
+        }
+
+        /// <summary>
+        /// 判断是否存在项、键、值匹配
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool Exist(string key, string name, string value)
+        {
+            if (Str.Ok(key) && Str.Ok(name))
+            {
+                string val = RegisterTool.GetValue(key, name);
+                if (Str.Ok(value))
+                {
+                    if (Str.Ok(val) && value == val) return true;
+                }
+                else
+                {
+                    if (val != null) return true;
+                }
+            }
+            return false;
         }
     }
 }
