@@ -144,6 +144,8 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         {
             try
             {
+                message = Cons.FormatLine(message); //处理日志信息（换行）
+
                 Cons.SetColor(GetColor(type), ConsoleColor.Black);
                 Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
                 Cons.ResetColor();
@@ -166,8 +168,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                 //创建日志目录
                 DirTool.Create(filePath);
                 //处理日志信息（换行）
-                //string[] loglines = log.Message.Split(new[] { "\r\n", "\n\r", Environment.NewLine }, StringSplitOptions.None);
-                //log.Message = String.Join<string>($"{Environment.NewLine}{new string(' ', 18)}└", loglines);
+                log.Message = Cons.FormatLine(log.Message);
                 //写出日志
                 TxtTool.Append(
                     file,
@@ -278,10 +279,10 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         public void V<T>(T msg)
         {
             if ((ConsoleLogLevel & LogLevel.Verbose) == LogLevel.Verbose)
-                WriteConsole(LogType.v, msg.ToString());
+                WriteConsole(LogType.v, msg?.ToString());
 
             if ((FileLogLevel & LogLevel.Verbose) == LogLevel.Verbose)
-                WriteFile(new LogModel() { Type = LogType.v, Message = msg.ToString(), CreateTime = DateTime.Now });
+                WriteFile(new LogModel() { Type = LogType.v, Message = msg?.ToString(), CreateTime = DateTime.Now });
         }
         /// <summary>
         /// 输出 Debug (调试信息)
@@ -290,10 +291,10 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         public void D<T>(T msg)
         {
             if ((ConsoleLogLevel & LogLevel.Debug) == LogLevel.Debug)
-                WriteConsole(LogType.d, msg.ToString());
+                WriteConsole(LogType.d, msg?.ToString());
 
             if ((FileLogLevel & LogLevel.Debug) == LogLevel.Debug)
-                WriteFile(new LogModel() { Type = LogType.d, Message = msg.ToString(), CreateTime = DateTime.Now });
+                WriteFile(new LogModel() { Type = LogType.d, Message = msg?.ToString(), CreateTime = DateTime.Now });
         }
         /// <summary>
         /// 输出 Information (重要信息)
@@ -302,10 +303,10 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         public void I<T>(T msg)
         {
             if ((ConsoleLogLevel & LogLevel.Information) == LogLevel.Information)
-                WriteConsole(LogType.i, msg.ToString());
+                WriteConsole(LogType.i, msg?.ToString());
 
             if ((FileLogLevel & LogLevel.Information) == LogLevel.Information)
-                WriteFile(new LogModel() { Type = LogType.i, Message = msg.ToString(), CreateTime = DateTime.Now });
+                WriteFile(new LogModel() { Type = LogType.i, Message = msg?.ToString(), CreateTime = DateTime.Now });
         }
         /// <summary>
         /// 输出 Warning (警告信息)
@@ -314,10 +315,10 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         public void W<T>(T msg)
         {
             if ((ConsoleLogLevel & LogLevel.Warning) == LogLevel.Warning)
-                WriteConsole(LogType.w, msg.ToString());
+                WriteConsole(LogType.w, msg?.ToString());
 
             if ((FileLogLevel & LogLevel.Warning) == LogLevel.Warning)
-                WriteFile(new LogModel() { Type = LogType.w, Message = msg.ToString(), CreateTime = DateTime.Now });
+                WriteFile(new LogModel() { Type = LogType.w, Message = msg?.ToString(), CreateTime = DateTime.Now });
         }
         /// <summary>
         /// 输出 Error (错误信息)
@@ -326,10 +327,10 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         public void E<T>(T msg)
         {
             if ((ConsoleLogLevel & LogLevel.Error) == LogLevel.Error)
-                WriteConsole(LogType.e, msg.ToString());
+                WriteConsole(LogType.e, msg?.ToString());
 
             if ((FileLogLevel & LogLevel.Error) == LogLevel.Error)
-                WriteFile(new LogModel() { Type = LogType.e, Message = msg.ToString(), CreateTime = DateTime.Now });
+                WriteFile(new LogModel() { Type = LogType.e, Message = msg?.ToString(), CreateTime = DateTime.Now });
         }
         #endregion
     }

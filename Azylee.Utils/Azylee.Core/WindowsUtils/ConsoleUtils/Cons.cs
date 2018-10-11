@@ -36,12 +36,7 @@ namespace Azylee.Core.WindowsUtils.ConsoleUtils
                 case ConsColorMode.Dark: bodycolor = ConsoleColor.White; bodybgcolor = ConsoleColor.Black; break;
                 case ConsColorMode.Light: bodycolor = ConsoleColor.Black; bodybgcolor = ConsoleColor.White; break;
             }
-            try
-            {
-                //string[] lines = value.Split(new[] { "\r", "\n", "\r\n", "\n\r", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                //value = String.Join<string>($"{Environment.NewLine}{new string(' ', 18)}└", lines);
-            }
-            catch { }
+            value = FormatLine(value);
             #endregion
 
 
@@ -79,6 +74,18 @@ namespace Azylee.Core.WindowsUtils.ConsoleUtils
             try { Console.WriteLine(value); } catch { }
         }
 
+        public static string FormatLine(string value)
+        {
+            string s = value;
+            try
+            {
+                s = s.Replace("\n\r", "\n").Replace("\r\n", "\n").Replace("\r", "\n");
+                string[] lines = s.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                s = String.Join<string>($"{Environment.NewLine}{new string(' ', 18)}L> ", lines);
+            }
+            catch { s = value; }
+            return s;
+        }
         public static void SetColor(ConsoleColor color, ConsoleColor bgcolor)
         {
             try
