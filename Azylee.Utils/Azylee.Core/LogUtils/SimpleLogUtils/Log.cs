@@ -19,6 +19,7 @@ using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.IOUtils.DirUtils;
 using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.TxtUtils;
+using Azylee.Core.WindowsUtils.ConsoleUtils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -48,21 +49,43 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
 
         private int CACHE_DAYS = 30;//缓存天数
         private object LogFileLock = new object();//写日志文件锁
-        private bool IsWriteFile = false;//是否写日志文件
         private string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;
-        public LogLevel LogLevel = LogLevel.All;//日志输出等级
+        private LogLevel ConsoleLogLevel = LogLevel.All;//日志输出到"控制台"等级
+        private LogLevel FileLogLevel = LogLevel.All;//日志输出到"文件"等级
         #endregion
 
-        public Log() { }
-        public Log(bool isWrite, LogLevel level = LogLevel.All)
+        private Log() { }
+        /// <summary>
+        /// 初始化 Log 工具
+        /// </summary>
+        /// <param name="isWrite">已失效，使用WriteLevel代替</param>
+        /// <param name="logLevel"></param>
+        /// <param name="writeLevel"></param>
+        [Obsolete]
+        public Log(bool isWrite, LogLevel logLevel = LogLevel.All, LogLevel writeLevel = LogLevel.All)
         {
             if (isWrite)
             {
-                IsWriteFile = true;
-                LogLevel = level;
+                //IsWriteFile = true;//已禁用，使用文件输出等级控制
+                ConsoleLogLevel = logLevel;
+                FileLogLevel = writeLevel;
             }
         }
+        /// <summary>
+        /// 初始化 Log 工具
+        /// </summary>
+        /// <param name="console">控制台输出级别</param>
+        /// <param name="file">文件输出级别</param>
+        public Log(LogLevel console = LogLevel.All, LogLevel file = LogLevel.All)
+        {
+            ConsoleLogLevel = console;
+            FileLogLevel = file;
+        }
 
+        /// <summary>
+        /// 设置日志路径
+        /// </summary>
+        /// <param name="path"></param>
         public void SetLogPath(string path)
         {
             if (!string.IsNullOrWhiteSpace(path))
@@ -70,13 +93,26 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                 LogPath = DirTool.Combine(path, LOG_PATH);
             }
         }
+        /// <summary>
+        /// 设置日志缓存天数（默认30天）
+        /// </summary>
+        /// <param name="days"></param>
         public void SetCacheDays(int days)
         {
             if (days >= 0) CACHE_DAYS = days;
         }
+
         #region Console 开启/关闭 API
+        /// <summary>
+        /// 启用系统控制台输出
+        /// </summary>
+        /// <returns></returns>
         [DllImport("kernel32.dll")]
         public static extern Boolean AllocConsole();
+        /// <summary>
+        /// 关闭系统控制台
+        /// </summary>
+        /// <returns></returns>
         [DllImport("kernel32.dll")]
         public static extern Boolean FreeConsole();
         #endregion
@@ -103,21 +139,18 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         /// 写出到控制台
         /// </summary>
         /// <param name="type">类型</param>
-        /// <param name="tag">标记</param>
         /// <param name="message">消息</param>
-        private void Write(LogType type, string message)
+        private void WriteConsole(LogType type, string message)
         {
             try
             {
-                Console.ForegroundColor = GetColor(type);
+                message = Cons.FormatLine(message); //处理日志信息（换行）
+
+                Cons.SetColor(GetColor(type), ConsoleColor.Black);
                 Console.WriteLine(LOG_FORMAT, DateTime.Now.ToString(TIME_FORMAT), type.ToString(), message);
-            }
-            catch { }
-            try
-            {
+                Cons.ResetColor();
                 //取消单独线程输出日志文件（单独线程输出日志必然会有延迟）
                 //if (IsWriteFile) Queue.Enqueue(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });
-                if (IsWriteFile) WriteFile(new LogModel() { Type = type, Message = message, CreateTime = DateTime.Now });
             }
             catch { }
         }
@@ -127,26 +160,26 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         /// <param name="log"></param>
         private void WriteFile(LogModel log)
         {
-            if (IsWriteFile)
+            lock (LogFileLock)
             {
-                lock (LogFileLock)
-                {
-                    //设置日志目录和日志文件
-                    string filePath = GetFilePath(log.Type);
-                    string file = DirTool.Combine(filePath, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
-                    //创建日志目录
-                    DirTool.Create(filePath);
-                    //写出日志
-                    TxtTool.Append(
-                        file,
-                        string.Format(LOG_FORMAT,
-                            log.CreateTime.ToString(TIME_FORMAT),
-                            log.Type.ToString(),
-                            StringTool.ReplaceNewLine(log.Message)));
-                    Cleaner(log.Type);
-                }
+                //设置日志目录和日志文件
+                string filePath = GetFilePath(log.Type);
+                string file = DirTool.Combine(filePath, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
+                //创建日志目录
+                DirTool.Create(filePath);
+                //处理日志信息（换行）
+                log.Message = Cons.FormatLine(log.Message);
+                //写出日志
+                TxtTool.Append(
+                    file,
+                    string.Format(LOG_FORMAT,
+                        log.CreateTime.ToString(TIME_FORMAT),
+                        log.Type.ToString(),
+                        log.Message));
+                Cleaner(log.Type);
             }
         }
+
         /// <summary>
         /// 根据分类分配目录
         /// </summary>
@@ -191,55 +224,113 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         }
 
         #region 分类详细输出
+        #region 因大小写命名规范冲突，将次类方法标记为弃用
         /// <summary>
         /// 输出 verbose (啰嗦信息)
         /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="tag">可选：标记</param>
+        /// <param name="msg">消息</param>
+        [Obsolete]
         public void v<T>(T msg)
         {
-            if ((LogLevel & LogLevel.Verbose) == LogLevel.Verbose)
-                Write(LogType.v, msg.ToString());
+            V(msg);
         }
         /// <summary>
         /// 输出 Debug (调试信息)
         /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="tag">可选：标记</param>
+        /// <param name="msg">消息</param>
+        [Obsolete]
         public void d<T>(T msg)
         {
-            if ((LogLevel & LogLevel.Debug) == LogLevel.Debug)
-                Write(LogType.d, msg.ToString());
+            D(msg);
         }
         /// <summary>
         /// 输出 Information (重要信息)
         /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="tag">可选：标记</param>
+        /// <param name="msg">消息</param>
+        [Obsolete]
         public void i<T>(T msg)
         {
-            if ((LogLevel & LogLevel.Information) == LogLevel.Information)
-                Write(LogType.i, msg.ToString());
+            I(msg);
         }
         /// <summary>
         /// 输出 Warning (警告信息)
         /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="tag">可选：标记</param>
+        /// <param name="msg">消息</param>
+        [Obsolete]
         public void w<T>(T msg)
         {
-            if ((LogLevel & LogLevel.Warning) == LogLevel.Warning)
-                Write(LogType.w, msg.ToString());
+            W(msg);
         }
         /// <summary>
         /// 输出 Error (错误信息)
         /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="tag">可选：标记</param>
+        /// <param name="msg">消息</param>
+        [Obsolete]
         public void e<T>(T msg)
         {
-            if ((LogLevel & LogLevel.Error) == LogLevel.Error)
-                Write(LogType.e, msg.ToString());
+            E(msg);
+        }
+        #endregion
+
+        /// <summary>
+        /// 输出 verbose (啰嗦信息)
+        /// </summary>
+        /// <param name="msg">消息</param>
+        public void V<T>(T msg)
+        {
+            if ((ConsoleLogLevel & LogLevel.Verbose) == LogLevel.Verbose)
+                WriteConsole(LogType.v, msg?.ToString());
+
+            if ((FileLogLevel & LogLevel.Verbose) == LogLevel.Verbose)
+                WriteFile(new LogModel() { Type = LogType.v, Message = msg?.ToString(), CreateTime = DateTime.Now });
+        }
+        /// <summary>
+        /// 输出 Debug (调试信息)
+        /// </summary>
+        /// <param name="msg">消息</param>
+        public void D<T>(T msg)
+        {
+            if ((ConsoleLogLevel & LogLevel.Debug) == LogLevel.Debug)
+                WriteConsole(LogType.d, msg?.ToString());
+
+            if ((FileLogLevel & LogLevel.Debug) == LogLevel.Debug)
+                WriteFile(new LogModel() { Type = LogType.d, Message = msg?.ToString(), CreateTime = DateTime.Now });
+        }
+        /// <summary>
+        /// 输出 Information (重要信息)
+        /// </summary>
+        /// <param name="msg">消息</param>
+        public void I<T>(T msg)
+        {
+            if ((ConsoleLogLevel & LogLevel.Information) == LogLevel.Information)
+                WriteConsole(LogType.i, msg?.ToString());
+
+            if ((FileLogLevel & LogLevel.Information) == LogLevel.Information)
+                WriteFile(new LogModel() { Type = LogType.i, Message = msg?.ToString(), CreateTime = DateTime.Now });
+        }
+        /// <summary>
+        /// 输出 Warning (警告信息)
+        /// </summary>
+        /// <param name="msg">消息</param>
+        public void W<T>(T msg)
+        {
+            if ((ConsoleLogLevel & LogLevel.Warning) == LogLevel.Warning)
+                WriteConsole(LogType.w, msg?.ToString());
+
+            if ((FileLogLevel & LogLevel.Warning) == LogLevel.Warning)
+                WriteFile(new LogModel() { Type = LogType.w, Message = msg?.ToString(), CreateTime = DateTime.Now });
+        }
+        /// <summary>
+        /// 输出 Error (错误信息)
+        /// </summary>
+        /// <param name="msg">消息</param>
+        public void E<T>(T msg)
+        {
+            if ((ConsoleLogLevel & LogLevel.Error) == LogLevel.Error)
+                WriteConsole(LogType.e, msg?.ToString());
+
+            if ((FileLogLevel & LogLevel.Error) == LogLevel.Error)
+                WriteFile(new LogModel() { Type = LogType.e, Message = msg?.ToString(), CreateTime = DateTime.Now });
         }
         #endregion
     }

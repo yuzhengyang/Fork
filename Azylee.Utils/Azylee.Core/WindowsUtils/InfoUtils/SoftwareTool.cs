@@ -1,10 +1,4 @@
-﻿//************************************************************************
-//      author:     yuzhengyang
-//      date:       2018.3.27 - 2018.6.3
-//      desc:       工具描述
-//      Copyright (c) yuzhengyang. All rights reserved.
-//************************************************************************
-using Azylee.Core.DataUtils.CollectionUtils;
+﻿using Azylee.Core.DataUtils.CollectionUtils;
 using Azylee.Core.ProcessUtils;
 using Microsoft.Win32;
 using System;
@@ -104,6 +98,19 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         public static bool ExistProcess(string name)
         {
             return ProcessTool.IsExists(name);
+        }
+        /// <summary>
+        /// 存在进程（单字符串 [，/,] 分割）
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public static bool ExistProcess2(string names)
+        {
+            try
+            {
+                return ExistProcess(names.Replace('，', ',').Replace('/', ',').Split(','));
+            }
+            catch { return false; }
         }
         public static bool ExistProcess(string[] names)
         {
