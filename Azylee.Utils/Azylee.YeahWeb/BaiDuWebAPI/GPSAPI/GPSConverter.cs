@@ -1,10 +1,6 @@
 ﻿using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Jsons;
 using Azylee.YeahWeb.HttpUtils;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Azylee.YeahWeb.BaiDuWebAPI.GPSAPI
 {
@@ -27,7 +23,7 @@ namespace Azylee.YeahWeb.BaiDuWebAPI.GPSAPI
             {
                 string url = $"http://api.map.baidu.com/geoconv/v1/?coords={longitude},{latitude}&from=1&to=5&ak={ak}";
                 string rs = HttpTool.Get(url);
-                GPSPointWebModel rsobj = JsonConvert.DeserializeObject<GPSPointWebModel>(rs);
+                GPSPointWebModel rsobj = Json.String2Object<GPSPointWebModel>(rs);
                 if (rsobj != null && ListTool.HasElements(rsobj.result))
                 {
                     x = rsobj.result[0].x;

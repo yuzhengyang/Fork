@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.DB.SQLite", "Azylee.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Toast", "Tests\Test.Toast\Test.Toast.csproj", "{576CFDD2-150A-4D0C-874A-730265537902}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Jsons", "Azylee.Jsons\Azylee.Jsons.csproj", "{DE3AB999-96D3-4A53-A9F2-7409138D0333}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{576CFDD2-150A-4D0C-874A-730265537902}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{576CFDD2-150A-4D0C-874A-730265537902}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{576CFDD2-150A-4D0C-874A-730265537902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3AB999-96D3-4A53-A9F2-7409138D0333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3AB999-96D3-4A53-A9F2-7409138D0333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3AB999-96D3-4A53-A9F2-7409138D0333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3AB999-96D3-4A53-A9F2-7409138D0333}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{0213B9D4-1B4A-4BDE-9CE9-228C68A9A522} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{A77DBB5D-CA37-425C-8FA2-8B0736AE1C4D} = {927325CD-24FD-4B85-A982-543D4F58A47C}
 		{576CFDD2-150A-4D0C-874A-730265537902} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
+		{DE3AB999-96D3-4A53-A9F2-7409138D0333} = {927325CD-24FD-4B85-A982-543D4F58A47C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A021A3E-4C98-47CD-B4E8-912E12611C2E}

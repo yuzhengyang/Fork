@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{915AE524-7EFD-4ECC-B731-DE1D1F5558F0}</ProjectGuid>
+    <ProjectGuid>{DE3AB999-96D3-4A53-A9F2-7409138D0333}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Azylee.Core.Plus</RootNamespace>
-    <AssemblyName>Azylee.Core.Plus</AssemblyName>
+    <RootNamespace>Azylee.Jsons</RootNamespace>
+    <AssemblyName>Azylee.Jsons</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataUtils\JsonUtils\ConvertJson.cs" />
-    <Compile Include="DataUtils\JsonUtils\JsonTool.cs" />
+    <Compile Include="ConvertJson.cs" />
+    <Compile Include="Json.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

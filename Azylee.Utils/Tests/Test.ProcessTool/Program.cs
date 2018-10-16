@@ -24,6 +24,12 @@ namespace Test.ProcessTool
             Cons.Log("测试 Muted 测试\r\n\r\n测试 Muted 测试\r\n\r\n测试 Muted 测试\r\n\r\n测试 Muted 测试", ConsColorMode.Muted);
             log.I("测试 Log V \r\n\r\n 测试 Log V \r\n\r\n 测试 Log V \r\n\r\n");
 
+            Cons.Log("测试 Muted 测试\r\r测试 Muted 测试\r\r测试 Muted 测试\r\r测试 Muted 测试", ConsColorMode.Muted);
+            log.I("测试 Log V \r\r 测试 Log V \r\r 测试 Log V \r\r");
+
+            Cons.Log("测试 Muted 测试\n\n测试 Muted 测试\n\n测试 Muted 测试\n\n测试 Muted 测试", ConsColorMode.Muted);
+            log.I("测试 Log V \n\n 测试 Log V \n\n 测试 Log V \n\n");
+
             Cons.Log("测试 Primary 测试", ConsColorMode.Primary);
             Cons.Log("测试 Secondary 测试", ConsColorMode.Secondary);
             Cons.Log("测试 Success 测试", ConsColorMode.Success);
