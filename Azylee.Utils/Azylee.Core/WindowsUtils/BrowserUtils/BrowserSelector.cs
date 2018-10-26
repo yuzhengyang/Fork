@@ -38,7 +38,7 @@ namespace Azylee.Core.WindowsUtils.BrowserUtils
         }
 
         /// <summary>
-        /// 时期时代浏览器IE
+        /// 石器时代浏览器IE
         /// </summary>
         /// <param name="browser"></param>
         /// <returns></returns>

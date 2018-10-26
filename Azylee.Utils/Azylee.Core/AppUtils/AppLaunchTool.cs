@@ -1,6 +1,7 @@
 ﻿//************************************************************************
+//      https://github.com/yuzhengyang
 //      author:     yuzhengyang
-//      date:       2017.10.12 - 2017.10.12
+//      date:       2017.10.12 - 2018.10.24
 //      desc:       客户端启动器
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
@@ -21,51 +22,19 @@ namespace Azylee.Core.AppUtils
         /// 启动最新版本程序
         /// </summary>
         /// <param name="route">路径：程序版本文件夹路径</param>
-        /// <param name="startfilename">可执行文件名</param>
+        /// <param name="exeFile">可执行文件名</param>
         /// <returns></returns>
-        public static bool StartNewVersion(string route, string startfilename)
+        public static bool StartNewVersion(string route, string exeFile)
         {
-            //判断路径是文件还是文件夹，并统一处理为文件夹
-            string appPath = route;
-            if (FileTool.IsFile(route))
-                appPath = DirTool.GetFilePath(route);
-
-            if (Directory.Exists(appPath))
+            if (GetNewVersion(route, exeFile, out Version version, out string startFile))
             {
-                //获取运行目录下所有文件
-                List<string> paths = DirTool.GetPath(appPath);
-                if (ListTool.HasElements(paths))
-                {
-                    //解析属于版本号的文件
-                    Version version = null;
-                    string startfile = null;
-                    foreach (var path in paths)
-                    {
-                        //只解析文件名带三个点的文件夹
-                        string filename = Path.GetFileName(path);
-                        if (StringTool.SubStringCount(filename, ".") == 3)
-                        {
-                            try
-                            {
-                                Version tempVersion = new Version(filename);
-                                string tempFile = DirTool.Combine(path, startfilename);
-                                if ((version == null || tempVersion > version) && File.Exists(tempFile))
-                                {
-                                    version = tempVersion;
-                                    startfile = tempFile;
-                                }
-                            }
-                            catch { }
-                        }
-                    }
-                    //准备启动
-                    if (startfile != null)
-                    {
-                        return ProcessTool.Start(startfile);
-                    }
-                }
+                return ProcessTool.Start(startFile);
             }
             return false;
+        }
+        public static bool Start(string file)
+        {
+            return ProcessTool.Start(file);
         }
         /// <summary>
         /// 查询是否有最新版本程序可以执行
@@ -111,13 +80,12 @@ namespace Azylee.Core.AppUtils
         /// 获取最新版本号
         /// </summary>
         /// <param name="route">路径：程序版本文件夹路径</param>
-        /// <param name="startfilename">可执行文件名</param>
+        /// <param name="exeFile">可执行文件名</param>
         /// <returns></returns>
-        public static Version GetNewVersion(string route, string startfilename)
+        public static bool GetNewVersion(string route, string exeFile, out Version version, out string startFile)
         {
-            //解析属于版本号的文件
-            Version version = null;
-            string startfile = null;
+            version = null;
+            startFile = "";
 
             //判断路径是文件还是文件夹，并统一处理为文件夹
             string appPath = route;
@@ -129,7 +97,7 @@ namespace Azylee.Core.AppUtils
                 //获取运行目录下所有文件
                 List<string> paths = DirTool.GetPath(appPath);
                 if (ListTool.HasElements(paths))
-                { 
+                {
                     foreach (var path in paths)
                     {
                         //只解析文件名带三个点的文件夹
@@ -139,19 +107,20 @@ namespace Azylee.Core.AppUtils
                             try
                             {
                                 Version tempVersion = new Version(filename);
-                                string tempFile = DirTool.Combine(path, startfilename);
+                                string tempFile = DirTool.Combine(path, exeFile);
                                 if ((version == null || tempVersion > version) && File.Exists(tempFile))
                                 {
                                     version = tempVersion;
-                                    startfile = tempFile;
+                                    startFile = tempFile;
                                 }
                             }
                             catch { }
                         }
-                    } 
+                    }
                 }
             }
-            return version;
+            if (version != null && Str.Ok(startFile)) return true;
+            return false;
         }
     }
 }
