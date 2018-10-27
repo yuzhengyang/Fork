@@ -6,13 +6,11 @@ using Azylee.Core.DataUtils.GuidUtils;
 using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.DelegateUtils.ProcessDelegateUtils;
 using Azylee.Core.IOUtils.DirUtils;
-using Newtonsoft.Json;
+using Azylee.Jsons;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Web;
 
 namespace Azylee.YeahWeb.HttpUtils
 {
@@ -75,7 +73,7 @@ namespace Azylee.YeahWeb.HttpUtils
                     string response = new StreamReader(wr.GetResponseStream(), myEncoding).ReadToEnd();
                     if (!StringTool.IsNullOrWhiteSpace(response))
                     {
-                        T result = JsonConvert.DeserializeObject<T>(response);
+                        T result = Json.String2Object<T>(response);
                         return result;
                     }
                 }
@@ -104,7 +102,7 @@ namespace Azylee.YeahWeb.HttpUtils
                             string txt = sr.ReadToEnd();
                             if (!string.IsNullOrWhiteSpace(txt))
                             {
-                                T result = JsonConvert.DeserializeObject<T>(txt);
+                                T result = Json.String2Object<T>(txt);
                                 return result;
                             }
                         }
@@ -157,7 +155,7 @@ namespace Azylee.YeahWeb.HttpUtils
             }
             else
             {
-                what = JsonConvert.DeserializeObject<T>(txt);
+                what = Json.String2Object<T>(txt);
                 return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
             }
         }
@@ -208,7 +206,7 @@ namespace Azylee.YeahWeb.HttpUtils
             }
             else
             {
-                what = JsonConvert.DeserializeObject<T>(txt);
+                what = Json.String2Object<T>(txt);
                 return (int)Math.Ceiling((DateTime.Now - beginTime).TotalSeconds);//操作成功
             }
         }

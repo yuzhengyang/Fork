@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Azylee.Core.WindowsUtils.ConsoleUtils
@@ -103,5 +104,20 @@ namespace Azylee.Core.WindowsUtils.ConsoleUtils
             }
             catch { }
         }
+
+        #region Console 开启/关闭 API
+        /// <summary>
+        /// 启用系统控制台输出
+        /// </summary>
+        /// <returns></returns>
+        [DllImport("kernel32.dll")]
+        public static extern Boolean AllocConsole();
+        /// <summary>
+        /// 关闭系统控制台
+        /// </summary>
+        /// <returns></returns>
+        [DllImport("kernel32.dll")]
+        public static extern Boolean FreeConsole();
+        #endregion
     }
 }

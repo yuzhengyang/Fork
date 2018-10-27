@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Azylee.YeahWeb.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -63,12 +61,23 @@
     <Compile Include="HttpUtils\Models\UserAgents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocketUtils\SocketTool.cs" />
+    <Compile Include="SocketUtils\TcpUtils\TcpClientDictionary.cs" />
+    <Compile Include="SocketUtils\TcpUtils\TcppClient.cs" />
+    <Compile Include="SocketUtils\TcpUtils\TcpDataConverter.cs" />
+    <Compile Include="SocketUtils\TcpUtils\TcpDataModel.cs" />
+    <Compile Include="SocketUtils\TcpUtils\TcppServer.cs" />
+    <Compile Include="SocketUtils\TcpUtils\TcpDelegate.cs" />
+    <Compile Include="SocketUtils\TcpUtils\TcpStreamHelper.cs" />
     <Compile Include="TencentWebAPI\PictureAI\PictureScener.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Azylee.Core\Azylee.Core.csproj">
       <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
       <Name>Azylee.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azylee.Jsons\Azylee.Jsons.csproj">
+      <Project>{de3ab999-96d3-4a53-a9f2-7409138d0333}</Project>
+      <Name>Azylee.Jsons</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

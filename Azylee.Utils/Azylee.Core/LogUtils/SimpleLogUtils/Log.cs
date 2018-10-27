@@ -56,9 +56,9 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
 
         private Log() { }
         /// <summary>
-        /// 初始化 Log 工具
+        /// 初始化 Log 工具（不建议使用）
         /// </summary>
-        /// <param name="isWrite">已失效，使用WriteLevel代替</param>
+        /// <param name="isWrite">是否写出日志</param>
         /// <param name="logLevel"></param>
         /// <param name="writeLevel"></param>
         [Obsolete]
@@ -69,6 +69,11 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
                 //IsWriteFile = true;//已禁用，使用文件输出等级控制
                 ConsoleLogLevel = logLevel;
                 FileLogLevel = writeLevel;
+            }
+            else
+            {
+                ConsoleLogLevel = logLevel;
+                FileLogLevel = LogLevel.None;
             }
         }
         /// <summary>
