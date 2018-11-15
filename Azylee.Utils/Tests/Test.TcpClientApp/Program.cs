@@ -1,4 +1,5 @@
-﻿using Azylee.Jsons;
+﻿using Azylee.Core.WindowsUtils.CMDUtils;
+using Azylee.Jsons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,10 @@ namespace Test.TcpClientApp
             string __c = Encoding.UTF8.GetString(c);
             byte[] d = Encoding.Unicode.GetBytes("ぬゆまほㅙㅚЪЖ");
             string __d = Encoding.Unicode.GetString(d);
+
+
+            List<int> ports = CMDNetstatTool.GetAvailablePorts(10);
+
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

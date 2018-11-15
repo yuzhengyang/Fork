@@ -54,6 +54,15 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         private LogLevel FileLogLevel = LogLevel.All;//日志输出到"文件"等级
         #endregion
 
+        /// <summary>
+        /// 日志输出回调方法
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="msg">内容</param>
+        public delegate void LogEventDelegate(LogType type, string msg);
+        public LogEventDelegate LogEvent;
+
+
         private Log() { }
         /// <summary>
         /// 初始化 Log 工具（不建议使用）
@@ -81,10 +90,12 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         /// </summary>
         /// <param name="console">控制台输出级别</param>
         /// <param name="file">文件输出级别</param>
-        public Log(LogLevel console = LogLevel.All, LogLevel file = LogLevel.All)
+        /// <param name="action">日志输出回调</param>
+        public Log(LogLevel console = LogLevel.All, LogLevel file = LogLevel.All, LogEventDelegate logEvent = null)
         {
             ConsoleLogLevel = console;
             FileLogLevel = file;
+            if (logEvent != null) LogEvent += logEvent;
         }
 
         /// <summary>
@@ -288,6 +299,8 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
 
             if ((FileLogLevel & LogLevel.Verbose) == LogLevel.Verbose)
                 WriteFile(new LogModel() { Type = LogType.v, Message = msg?.ToString(), CreateTime = DateTime.Now });
+
+            try { LogEvent(LogType.v, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Debug (调试信息)
@@ -300,6 +313,8 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
 
             if ((FileLogLevel & LogLevel.Debug) == LogLevel.Debug)
                 WriteFile(new LogModel() { Type = LogType.d, Message = msg?.ToString(), CreateTime = DateTime.Now });
+
+            try { LogEvent(LogType.d, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Information (重要信息)
@@ -312,6 +327,8 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
 
             if ((FileLogLevel & LogLevel.Information) == LogLevel.Information)
                 WriteFile(new LogModel() { Type = LogType.i, Message = msg?.ToString(), CreateTime = DateTime.Now });
+
+            try { LogEvent(LogType.i, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Warning (警告信息)
@@ -324,6 +341,8 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
 
             if ((FileLogLevel & LogLevel.Warning) == LogLevel.Warning)
                 WriteFile(new LogModel() { Type = LogType.w, Message = msg?.ToString(), CreateTime = DateTime.Now });
+
+            try { LogEvent(LogType.w, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Error (错误信息)
@@ -336,6 +355,8 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
 
             if ((FileLogLevel & LogLevel.Error) == LogLevel.Error)
                 WriteFile(new LogModel() { Type = LogType.e, Message = msg?.ToString(), CreateTime = DateTime.Now });
+
+            try { LogEvent(LogType.e, msg?.ToString()); } catch { }
         }
         #endregion
     }

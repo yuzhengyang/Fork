@@ -83,5 +83,33 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
             }
             return result;
         }
+
+        /// <summary>
+        /// 随机获取可用的端口号
+        /// </summary>
+        /// <param name="count">需要的端口号个数</param>
+        /// <param name="start">起始端口</param>
+        /// <returns></returns>
+        public static List<int> GetAvailablePorts(byte count, int start = 52800)
+        {
+            if (count > 0)
+            {
+                List<int> ports = new List<int>();
+                int startPort = start;
+
+                List<Tuple<int, int>> list = Find(":");
+
+                for (var i = 0; i < count; i++)
+                {
+                    if (!Ls.Ok(list) || !list.Any(x => x.Item1 == startPort))
+                    {
+                        ports.Add(startPort);
+                        startPort++;
+                    }
+                    if (startPort > 65535 || ports.Count() >= count) return ports;
+                }
+            }
+            return null;
+        }
     }
 }

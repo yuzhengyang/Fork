@@ -20,7 +20,7 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
         /// 创建cmd的进程
         /// </summary>
         /// <returns></returns>
-        public static Process GetProcess()
+        public static Process GetProcess(string verb = "RunAs")
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "cmd.exe";
@@ -30,7 +30,7 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
             startInfo.RedirectStandardError = true;
             startInfo.UseShellExecute = false;
             startInfo.CreateNoWindow = true;
-            startInfo.Verb = "RunAs";
+            startInfo.Verb = verb;
             Process process = new Process();
             process.StartInfo = startInfo;
             return process;
