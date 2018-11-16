@@ -78,6 +78,7 @@
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressEventArgs.cs" />
     <Compile Include="DllUtils\DllInvokeTool.cs" />
     <Compile Include="DrawingUtils\ColorUtils\ColorStyle.cs" />
+    <Compile Include="DrawingUtils\ImageUtils\IMG.cs" />
     <Compile Include="FormUtils\FormManTool.cs" />
     <Compile Include="IOUtils\BinaryUtils\BinaryFileTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirFinder.cs" />

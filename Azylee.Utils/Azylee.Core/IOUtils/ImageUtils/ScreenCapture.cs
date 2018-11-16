@@ -58,27 +58,31 @@ namespace Azylee.Core.IOUtils.ImageUtils
         /// <returns></returns>
         public static Bitmap Capture()
         {
-            //创建显示器的DC
-            IntPtr dc1 = CreateDC("DISPLAY", null, null, (IntPtr)null);
-            //由一个指定设备的句柄创建一个新的Graphics对象
-            Graphics g1 = Graphics.FromHdc(dc1);
-            //根据屏幕大小创建一个与之相同大小的Bitmap对象
-            Bitmap ScreenImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, g1);
+            try
+            {
+                //创建显示器的DC
+                IntPtr dc1 = CreateDC("DISPLAY", null, null, (IntPtr)null);
+                //由一个指定设备的句柄创建一个新的Graphics对象
+                Graphics g1 = Graphics.FromHdc(dc1);
+                //根据屏幕大小创建一个与之相同大小的Bitmap对象
+                Bitmap ScreenImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, g1);
 
-            Graphics g2 = Graphics.FromImage(ScreenImage);
-            //获得屏幕的句柄
-            IntPtr dc3 = g1.GetHdc();
-            //获得位图的句柄
-            IntPtr dc2 = g2.GetHdc();
-            //把当前屏幕捕获到位图对象中
-            BitBlt(dc2, 0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, dc3, 0, 0, 13369376);
-            //释放屏幕句柄
-            g1.ReleaseHdc(dc3);
-            //释放位图句柄
-            g2.ReleaseHdc(dc2);
-            g1.Dispose();
-            g2.Dispose();
-            return ScreenImage;
+                Graphics g2 = Graphics.FromImage(ScreenImage);
+                //获得屏幕的句柄
+                IntPtr dc3 = g1.GetHdc();
+                //获得位图的句柄
+                IntPtr dc2 = g2.GetHdc();
+                //把当前屏幕捕获到位图对象中
+                BitBlt(dc2, 0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, dc3, 0, 0, 13369376);
+                //释放屏幕句柄
+                g1.ReleaseHdc(dc3);
+                //释放位图句柄
+                g2.ReleaseHdc(dc2);
+                g1.Dispose();
+                g2.Dispose();
+                return ScreenImage;
+            }
+            catch { return null; }
         }
 
         /// <summary>
