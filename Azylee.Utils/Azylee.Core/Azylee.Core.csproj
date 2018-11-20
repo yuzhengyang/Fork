@@ -100,7 +100,7 @@
     <Compile Include="IOUtils\ImageUtils\ImageHelper.cs" />
     <Compile Include="IOUtils\ImageUtils\ImageSpliter.cs" />
     <Compile Include="IOUtils\ImageUtils\RotateImageTool.cs" />
-    <Compile Include="IOUtils\ImageUtils\ScreenCapture.cs" />
+    <Compile Include="DrawingUtils\ImageUtils\ScreenCapture.cs" />
     <Compile Include="IOUtils\ImageUtils\ThunbnailTool.cs" />
     <Compile Include="IOUtils\OfficeUtils\WordTool.cs" />
     <Compile Include="IOUtils\OfficeUtils\WordToolTester.cs" />

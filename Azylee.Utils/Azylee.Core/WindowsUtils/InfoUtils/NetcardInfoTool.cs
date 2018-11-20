@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Azylee.Core.WindowsUtils.InfoUtils
@@ -53,6 +54,33 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             catch (NetworkInformationException e)
             {
                 return null;
+            }
+        }
+        /// <summary>
+        /// 获取网络连接状态
+        /// </summary>
+        /// <param name="dwFlag"></param>
+        /// <param name="dwReserved"></param>
+        /// <returns></returns>
+        [DllImport("winInet.dll")]
+        private static extern bool InternetGetConnectedState(ref int dwFlag, int dwReserved);
+        /// <summary>
+        /// 获取网络连接状态
+        /// </summary>
+        /// <returns></returns>
+        public static bool LocalConnectionStatus()
+        {
+            int INTERNET_CONNECTION_MODEM = 1;
+            int INTERNET_CONNECTION_LAN = 2;
+
+            int dwFlag = 0;
+            if (InternetGetConnectedState(ref dwFlag, 0))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         /// <summary>

@@ -11,13 +11,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Azylee.Core.IOUtils.ImageUtils
+namespace Azylee.Core.DrawingUtils.ImageUtils
 {
     /// <summary>
     /// 屏幕捕获类
     /// </summary>
     public class ScreenCapture
     {
+        /// <summary>
+        /// Winform 屏幕截图
+        /// </summary>
+        /// <returns></returns>
+        public static Bitmap Capture()
+        {
+            try
+            {
+                //屏幕宽
+                int iWidth = Screen.PrimaryScreen.Bounds.Width;
+                //屏幕高
+                int iHeight = Screen.PrimaryScreen.Bounds.Height;
+                //按照屏幕宽高创建位图
+                Bitmap bitmap = new Bitmap(iWidth, iHeight);
+                //从一个继承自Image类的对象中创建Graphics对象
+                Graphics gc = Graphics.FromImage(bitmap);
+                //抓屏并拷贝到myimage里
+                gc.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(iWidth, iHeight));
+                gc.Dispose();
+                return bitmap;
+            }
+            catch { }
+            return null;
+        }
+
+        #region gdi 屏幕截图
         /// <summary>
         /// 把当前屏幕捕获到位图对象中
         /// </summary>
@@ -43,7 +69,6 @@ namespace Azylee.Core.IOUtils.ImageUtils
         int nYSrc,
         int dwRop
         );
-
         [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
         private static extern IntPtr CreateDC(
         string lpszDriver, // 驱动名称
@@ -51,12 +76,11 @@ namespace Azylee.Core.IOUtils.ImageUtils
         string lpszOutput, // 无用，可以设定位"NULL"
         IntPtr lpInitData // 任意的打印机数据
         );
-
         /// <summary>
         /// 屏幕捕获到位图对象中
         /// </summary>
         /// <returns></returns>
-        public static Bitmap Capture()
+        public static Bitmap CaptureDC()
         {
             try
             {
@@ -84,34 +108,6 @@ namespace Azylee.Core.IOUtils.ImageUtils
             }
             catch { return null; }
         }
-
-        /// <summary>
-        /// 压缩图片
-        /// </summary>
-        /// <param name="originalImage"></param>
-        public static Bitmap MakeThumbnail(Image originalImage, int towidth, int toheight)
-        {
-            int x = 0;
-            int y = 0;
-            int ow = originalImage.Width;
-            int oh = originalImage.Height;
-
-            //新建一个bmp图片
-            Bitmap bitmap = new Bitmap(towidth, toheight);
-            //新建一个画板
-            Graphics g = Graphics.FromImage(bitmap);
-            //设置高质量插值法
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-            //设置低质量,高速度呈现平滑程度
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-            //清空画布并以透明背景色填充
-            g.Clear(System.Drawing.Color.Transparent);
-
-            //在指定位置并且按指定大小绘制原图片的指定部分
-            g.DrawImage(originalImage, new System.Drawing.Rectangle(0, 0, towidth, toheight), new System.Drawing.Rectangle(x, y, ow, oh), System.Drawing.GraphicsUnit.Pixel);
-            return bitmap;
-        }
-
         [StructLayout(LayoutKind.Sequential)]
         struct CURSORINFO
         {
@@ -138,5 +134,6 @@ namespace Azylee.Core.IOUtils.ImageUtils
 
             vCursor.Draw(g, vRectangle);
         }
+        #endregion
     }
 }
