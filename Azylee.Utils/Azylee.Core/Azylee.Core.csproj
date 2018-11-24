@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Azylee.Core.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -142,6 +143,7 @@
     <Compile Include="ThreadUtils\SleepUtils\Sleep.cs" />
     <Compile Include="ThreadUtils\SleepUtils\SleepTool.cs" />
     <Compile Include="VersionUtils\VersionTool.cs" />
+    <Compile Include="WindowsUtils\AdminUtils\AdminTool.cs" />
     <Compile Include="WindowsUtils\APIUtils\ApplicationAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\ExplorerAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />

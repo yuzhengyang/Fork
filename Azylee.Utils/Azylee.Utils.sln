@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.TcpClientApp", "Tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ImageToolTest", "Tests\Test.ImageToolTest\Test.ImageToolTest.csproj", "{E974326B-5950-4421-901A-5BA47FCC1270}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Runrun", "Tests\Test.Runrun\Test.Runrun.csproj", "{37995B05-DB66-499F-B861-FB5451172E58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{E974326B-5950-4421-901A-5BA47FCC1270}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E974326B-5950-4421-901A-5BA47FCC1270}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E974326B-5950-4421-901A-5BA47FCC1270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37995B05-DB66-499F-B861-FB5451172E58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37995B05-DB66-499F-B861-FB5451172E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37995B05-DB66-499F-B861-FB5451172E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37995B05-DB66-499F-B861-FB5451172E58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +121,7 @@ Global
 		{BF8291F5-3737-49EA-872B-07068D8AD4F0} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{B251E246-9F9C-4AEC-9748-FBCFAD2381E1} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{E974326B-5950-4421-901A-5BA47FCC1270} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
+		{37995B05-DB66-499F-B861-FB5451172E58} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A021A3E-4C98-47CD-B4E8-912E12611C2E}

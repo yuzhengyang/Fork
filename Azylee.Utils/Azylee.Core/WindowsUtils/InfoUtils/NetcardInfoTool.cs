@@ -70,18 +70,16 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         /// <returns></returns>
         public static bool LocalConnectionStatus()
         {
-            int INTERNET_CONNECTION_MODEM = 1;
-            int INTERNET_CONNECTION_LAN = 2;
+            try
+            {
+                int INTERNET_CONNECTION_MODEM = 1;
+                int INTERNET_CONNECTION_LAN = 2;
 
-            int dwFlag = 0;
-            if (InternetGetConnectedState(ref dwFlag, 0))
-            {
-                return true;
+                int dwFlag = 0;
+                if (InternetGetConnectedState(ref dwFlag, 0)) return true;
             }
-            else
-            {
-                return false;
-            }
+            catch { }
+            return false;
         }
         /// <summary>
         /// 获取网络连接操作状态
