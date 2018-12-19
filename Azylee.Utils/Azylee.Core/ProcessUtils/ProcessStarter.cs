@@ -33,10 +33,16 @@ namespace Azylee.Core.ProcessUtils
             startInfo.UseShellExecute = false;
             startInfo.CreateNoWindow = true;
             startInfo.Verb = "RunAs";
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             Process process = new Process();
             process.StartInfo = startInfo;
             return process;
         }
+        /// <summary>
+        /// 带权限运行的密码保密文本转换
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private static SecureString ConvertToSecureString(this string password)
         {
             if (password == null)
