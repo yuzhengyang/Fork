@@ -124,6 +124,7 @@
     <Compile Include="NetUtils\NetPacketTool.cs" />
     <Compile Include="NetUtils\NetProcessInfo.cs" />
     <Compile Include="NetUtils\NetProcessTool.cs" />
+    <Compile Include="NetUtils\NetworkAdapterTool.cs" />
     <Compile Include="NetUtils\PingTool.cs" />
     <Compile Include="ProcessUtils\ProcessInfoTool.cs" />
     <Compile Include="ProcessUtils\ProcessStarter.cs" />

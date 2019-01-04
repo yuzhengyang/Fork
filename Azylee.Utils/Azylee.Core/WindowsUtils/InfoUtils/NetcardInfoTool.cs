@@ -5,9 +5,11 @@
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
 using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Core.DataUtils.StringUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -18,6 +20,29 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
 {
     public class NetCardInfoTool
     {
+        public static List<NetworkInterface> NetworkInterfaces = new List<NetworkInterface>();
+        public static List<NetworkInterface> GetNetworkInterfaces()
+        {
+            try
+            {
+                NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+                if (Ls.Ok(adapters))
+                {
+                    foreach (var item in adapters)
+                    {
+                        try
+                        {
+                            if (NetworkInterfaces.Any(x => x.Id == item.Id)) { }
+                            else { NetworkInterfaces.Add(item); }
+                        }
+                        catch { }
+                    }
+                }
+            }
+            catch { }
+            return NetworkInterfaces;
+        }
+
         /// <summary>
         /// 获取网卡信息
         /// 【名称、描述、物理地址（Mac）、Ip地址、网关地址】
@@ -28,7 +53,7 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
             try
             {
                 List<Tuple<string, string, string, string, string>> result = new List<Tuple<string, string, string, string, string>>();
-                NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+                List<NetworkInterface> adapters = GetNetworkInterfaces();
                 foreach (var item in adapters)
                 {
                     if (item.NetworkInterfaceType == NetworkInterfaceType.Ethernet || item.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
@@ -47,6 +72,46 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
                         string _gateway = item.GetIPProperties().GatewayAddresses.Count >= 1 ?
                             item.GetIPProperties().GatewayAddresses[0].Address.ToString() : null;
                         result.Add(new Tuple<string, string, string, string, string>(_name, _desc, _mac, _ip, _gateway));
+                    }
+                }
+                return result;
+            }
+            catch (NetworkInformationException e)
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// 获取网卡信息
+        /// 【id,名称、描述、物理地址（Mac）、Ip地址、网关地址】
+        /// </summary>
+        /// <returns></returns>
+        public static List<Tuple<string, string, string, string, string, Guid>> GetNetworkCardInfoId()
+        {
+            try
+            {
+                List<Tuple<string, string, string, string, string, Guid>> result = new List<Tuple<string, string, string, string, string, Guid>>();
+                List<NetworkInterface> adapters = GetNetworkInterfaces();
+                foreach (var item in adapters)
+                {
+                    if (item.NetworkInterfaceType == NetworkInterfaceType.Ethernet || item.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
+                    {
+                        string _name = item.Name.Trim();
+                        string _desc = item.Description.Trim();
+                        string _mac = item.GetPhysicalAddress().ToString();
+                        Guid _id = Guid.NewGuid();//随机一个ID（Empty可能导致重复性错误）
+                        Guid.TryParse(item.Id, out _id);
+                        //测试获取数据
+                        var x = item.GetIPProperties().UnicastAddresses;
+                        string _ip = item.GetIPProperties().UnicastAddresses.Count >= 1 ?
+                            item.GetIPProperties().UnicastAddresses[0].Address.ToString() : null;
+                        //更新IP为ipv4地址
+                        if (item.GetIPProperties().UnicastAddresses.Count > 0)
+                            _ip = item.GetIPProperties().UnicastAddresses[item.GetIPProperties().
+                                UnicastAddresses.Count - 1].Address.ToString();
+                        string _gateway = item.GetIPProperties().GatewayAddresses.Count >= 1 ?
+                            item.GetIPProperties().GatewayAddresses[0].Address.ToString() : null;
+                        result.Add(new Tuple<string, string, string, string, string, Guid>(_name, _desc, _mac, _ip, _gateway, _id));
                     }
                 }
                 return result;
@@ -94,7 +159,7 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
                 foreach (var item in adapters)
                 {
                     string _mac = item.GetPhysicalAddress().ToString();
-                    if(_mac.ToUpper() == mac.ToUpper())
+                    if (_mac.ToUpper() == mac.ToUpper())
                         return item.OperationalStatus;
                 }
             }
@@ -175,11 +240,12 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         /// <returns></returns>
         public static string ShortMac(string s)
         {
-            if (!string.IsNullOrWhiteSpace(s))
+            try
             {
-                return s.Replace("-", "").Replace(":", "").ToLower();
+                if (Str.Ok(s)) return s.Replace(" ", "").Replace("-", "").Replace(":", "").ToLower();
             }
-            return "";
+            catch { }
+            return s;
         }
         /// <summary>
         /// 格式化MAC地址（大写、':' 分割）
