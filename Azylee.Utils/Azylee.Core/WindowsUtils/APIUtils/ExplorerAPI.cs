@@ -35,7 +35,14 @@ namespace Azylee.Core.WindowsUtils.APIUtils
             catch { }
             return false;
         }
-
+        /// <summary>
+        /// 打开并定位到文件
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void OpenFile(string filePath)
+        {
+            ExplorerFile(filePath);
+        }
         /// <summary>
         /// 打开路径并定位文件...
         /// 对于@"h:\Bleacher Report - Hardaway with the safe call ??.mp4"
@@ -53,26 +60,30 @@ namespace Azylee.Core.WindowsUtils.APIUtils
 
         public static void ExplorerFile(string filePath)
         {
-            if (!File.Exists(filePath) && !Directory.Exists(filePath))
-                return;
-
-            if (Directory.Exists(filePath))
-                Process.Start(@"explorer.exe", "/select,\"" + filePath + "\"");
-            else
+            try
             {
-                IntPtr pidlList = ILCreateFromPathW(filePath);
-                if (pidlList != IntPtr.Zero)
+                if (!File.Exists(filePath) && !Directory.Exists(filePath))
+                    return;
+
+                if (Directory.Exists(filePath))
+                    Process.Start(@"explorer.exe", "/select,\"" + filePath + "\"");
+                else
                 {
-                    try
+                    IntPtr pidlList = ILCreateFromPathW(filePath);
+                    if (pidlList != IntPtr.Zero)
                     {
-                        Marshal.ThrowExceptionForHR(SHOpenFolderAndSelectItems(pidlList, 0, IntPtr.Zero, 0));
-                    }
-                    finally
-                    {
-                        ILFree(pidlList);
+                        try
+                        {
+                            Marshal.ThrowExceptionForHR(SHOpenFolderAndSelectItems(pidlList, 0, IntPtr.Zero, 0));
+                        }
+                        finally
+                        {
+                            ILFree(pidlList);
+                        }
                     }
                 }
             }
+            catch { }
         }
     }
 }
