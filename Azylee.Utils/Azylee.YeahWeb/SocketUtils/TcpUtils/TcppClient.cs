@@ -77,30 +77,32 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         /// 发送数据
         /// </summary>
         /// <param name="model">数据模型</param>
-        public void Write(TcpDataModel model)
+        public bool Write(TcpDataModel model)
         {
+            bool flag = false;
             if (this.Client != null && this.Client.Connected)
             {
-                bool flag = TcpStreamHelper.Write(Client, model);
+                flag = TcpStreamHelper.Write(Client, model);
             }
+            return flag;
         }
         /// <summary>
         /// 发送数据
         /// </summary>
         /// <param name="type">类型</param>
         /// <param name="data">数据</param>
-        public void Write(int type, byte[] data)
+        public bool Write(int type, byte[] data)
         {
-            Write(new TcpDataModel() { Type = type, Data = data });
+            return Write(new TcpDataModel() { Type = type, Data = data });
         }
         /// <summary>
         /// 发送数据
         /// </summary>
         /// <param name="type">类型</param>
         /// <param name="s">字符串</param>
-        public void Write(int type, string s)
+        public bool Write(int type, string s)
         {
-            Write(new TcpDataModel() { Type = type, Data = Json.Object2Byte(s) });
+            return Write(new TcpDataModel() { Type = type, Data = Json.Object2Byte(s) });
         }
         /// <summary>
         /// 接受数据
