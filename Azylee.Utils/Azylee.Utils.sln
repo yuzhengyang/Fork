@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Ext.NetworkX", "Azyl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.WifiManTest", "Tests\Test.WifiManTest\Test.WifiManTest.csproj", "{A5702F35-A589-4F03-9468-72BD4A6B57A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.SysServiceApp", "Tests\Test.SysServiceApp\Test.SysServiceApp.csproj", "{CFDD901D-004E-4336-B949-46B7128180C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{A5702F35-A589-4F03-9468-72BD4A6B57A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5702F35-A589-4F03-9468-72BD4A6B57A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5702F35-A589-4F03-9468-72BD4A6B57A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFDD901D-004E-4336-B949-46B7128180C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFDD901D-004E-4336-B949-46B7128180C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFDD901D-004E-4336-B949-46B7128180C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFDD901D-004E-4336-B949-46B7128180C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +151,7 @@ Global
 		{0497D55F-332B-40CC-A8C6-8D3AF98FEBAD} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{A320E11D-D771-4BBD-913F-DD0E87090943} = {618CFF8A-0137-4E15-BC07-4E172B7FC5DA}
 		{A5702F35-A589-4F03-9468-72BD4A6B57A9} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
+		{CFDD901D-004E-4336-B949-46B7128180C6} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A021A3E-4C98-47CD-B4E8-912E12611C2E}

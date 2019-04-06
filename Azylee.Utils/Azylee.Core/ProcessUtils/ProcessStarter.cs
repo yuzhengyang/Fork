@@ -43,20 +43,25 @@ namespace Azylee.Core.ProcessUtils
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        private static SecureString ConvertToSecureString(this string password)
+        public static SecureString ConvertToSecureString(this string password)
         {
-            if (password == null)
-                throw new ArgumentNullException("password");
-
-            unsafe
+            try
             {
-                fixed (char* passwordChars = password)
+                if (password != null)
                 {
-                    var securePassword = new SecureString(passwordChars, password.Length);
-                    securePassword.MakeReadOnly();
-                    return securePassword;
+                    unsafe
+                    {
+                        fixed (char* passwordChars = password)
+                        {
+                            var securePassword = new SecureString(passwordChars, password.Length);
+                            securePassword.MakeReadOnly();
+                            return securePassword;
+                        }
+                    }
                 }
             }
+            catch { }
+            return null;
         }
         /// <summary>
         /// 开始运行
