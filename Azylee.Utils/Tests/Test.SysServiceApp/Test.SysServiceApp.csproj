@@ -78,6 +78,10 @@
       <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
       <Name>Azylee.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Azylee.WinformSkin\Azylee.WinformSkin.csproj">
+      <Project>{D280C16F-FDE2-4647-BD76-3514F673426D}</Project>
+      <Name>Azylee.WinformSkin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

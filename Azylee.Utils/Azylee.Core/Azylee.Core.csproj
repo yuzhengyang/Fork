@@ -119,6 +119,7 @@
     <Compile Include="ModelUtils\ResultModels\ResultData.cs" />
     <Compile Include="NetUtils\IPFormatter.cs" />
     <Compile Include="NetUtils\MacFormatter.cs" />
+    <Compile Include="NetUtils\NetAddressUtils\DNSTool.cs" />
     <Compile Include="NetUtils\NetConnectionInfo.cs" />
     <Compile Include="NetUtils\NetFlowService.cs" />
     <Compile Include="NetUtils\NetflowTool.cs" />
