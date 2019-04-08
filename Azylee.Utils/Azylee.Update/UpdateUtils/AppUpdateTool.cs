@@ -10,8 +10,8 @@ using Azylee.Core.DelegateUtils.ProcessDelegateUtils;
 using Azylee.Core.IOUtils.DirUtils;
 using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.PathUtils;
-using Azylee.Core.Plus.DataUtils.JsonUtils;
 using Azylee.Core.VersionUtils;
+using Azylee.Jsons;
 using Azylee.YeahWeb.FTPUtils;
 using Azylee.YeahWeb.HttpUtils;
 using System;
@@ -41,7 +41,7 @@ namespace Azylee.Update.UpdateUtils
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            info = JsonTool.ToObjFromStr<AppUpdateInfo>(s);
+            info = Json.String2Object<AppUpdateInfo>(s);
             if (info != null)
             {
                 Version newVersion = VersionTool.Format(info.Version);

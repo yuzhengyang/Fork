@@ -50,6 +50,10 @@
       <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
       <Name>Azylee.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Azylee.Jsons\Azylee.Jsons.csproj">
+      <Project>{de3ab999-96d3-4a53-a9f2-7409138d0333}</Project>
+      <Name>Azylee.Jsons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Azylee.YeahWeb\Azylee.YeahWeb.csproj">
       <Project>{ccf7a654-b442-4db1-bb3b-0f8014c3237f}</Project>
       <Name>Azylee.YeahWeb</Name>
