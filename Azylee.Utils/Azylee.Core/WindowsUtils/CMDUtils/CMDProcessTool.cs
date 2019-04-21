@@ -1,11 +1,13 @@
 ﻿//************************************************************************
 //      author:     yuzhengyang
-//      date:       2018.4.27 - 2018.5.30
+//      date:       2018.4.27 - 2019.4.7
 //      desc:       CMD 工具
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
 using Azylee.Core.DataUtils.StringUtils;
+using Azylee.Core.ProcessUtils;
 using Azylee.Core.ThreadUtils.SleepUtils;
+using Azylee.Core.WindowsUtils.AdminUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,9 +22,16 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
         /// 创建cmd的进程
         /// </summary>
         /// <returns></returns>
-        public static Process GetProcess(string verb = "RunAs")
+        public static Process GetProcess(string verb = "RunAs", WindowsAccountModel account = null)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
+            if (account != null && account.Check())
+            {
+                if (Str.Ok(account.Domain)) startInfo.Domain = account.Domain;
+                if (Str.Ok(account.UserName)) startInfo.UserName = account.UserName;
+                if (Str.Ok(account.Password)) startInfo.Password = ProcessStarter.ConvertToSecureString(account.Password);
+            }
+
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = @"/c C:\Windows\System32\cmd.exe";
             startInfo.RedirectStandardInput = true;
@@ -40,13 +49,13 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
         /// </summary>
         /// <param name="cmd"></param>
         /// <param name="output">输出动作</param>
-        public static void Execute(string cmd, Action<string> output)
+        public static void Execute(string cmd, Action<string> output, WindowsAccountModel account = null)
         {
             StreamReader reader = null;
             Process process = null;
             try
             {
-                process = GetProcess();
+                process = GetProcess(account: account);
                 process.Start();
                 process.StandardInput.AutoFlush = true;
                 process.StandardInput.WriteLine(cmd);
@@ -67,14 +76,14 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>
-        public static List<string> Execute(string cmd)
+        public static List<string> Execute(string cmd, WindowsAccountModel account = null)
         {
             List<string> result = null;
             StreamReader reader = null;
             Process process = null;
             try
             {
-                process = GetProcess();
+                process = GetProcess(account: account);
                 process.Start();
                 process.StandardInput.WriteLine(cmd);
                 process.StandardInput.WriteLine("exit");

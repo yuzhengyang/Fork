@@ -60,8 +60,10 @@
     <Compile Include="DataUtils\DateTimeUtils\DateTimeConvert.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTool.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\TimeDiff.cs" />
     <Compile Include="DataUtils\DateTimeUtils\TimerTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\TimeStampTool.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\TimeTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\UnixTimeTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\WeekDayTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\AesTool.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="ModelUtils\ResultModels\ResultData.cs" />
     <Compile Include="NetUtils\IPFormatter.cs" />
     <Compile Include="NetUtils\MacFormatter.cs" />
+    <Compile Include="NetUtils\NetAddressUtils\DNSTool.cs" />
     <Compile Include="NetUtils\NetConnectionInfo.cs" />
     <Compile Include="NetUtils\NetFlowService.cs" />
     <Compile Include="NetUtils\NetflowTool.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="ThreadUtils\SleepUtils\SleepTool.cs" />
     <Compile Include="VersionUtils\VersionTool.cs" />
     <Compile Include="WindowsUtils\AdminUtils\AdminTool.cs" />
+    <Compile Include="WindowsUtils\AdminUtils\WindowsAccountModel.cs" />
     <Compile Include="WindowsUtils\APIUtils\ApplicationAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\ExplorerAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
@@ -160,6 +164,7 @@
     <Compile Include="WindowsUtils\ClipboardUtils\ClipboardTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDNetstatTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDProcessTool.cs" />
+    <Compile Include="WindowsUtils\CMDUtils\CMDServiceTool.cs" />
     <Compile Include="WindowsUtils\ConsoleUtils\Cons.cs" />
     <Compile Include="WindowsUtils\ConsoleUtils\ConsColorMode.cs" />
     <Compile Include="WindowsUtils\HookUtils\KeyboardHook.cs" />
@@ -169,6 +174,7 @@
     <Compile Include="WindowsUtils\InfoUtils\ComputerStatusTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerType.cs" />
     <Compile Include="WindowsUtils\InfoUtils\ComputerTypeTool.cs" />
+    <Compile Include="WindowsUtils\InfoUtils\DriveTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\NetcardInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\PatchInfoTool.cs" />
     <Compile Include="WindowsUtils\InfoUtils\OSInfoTool.cs" />

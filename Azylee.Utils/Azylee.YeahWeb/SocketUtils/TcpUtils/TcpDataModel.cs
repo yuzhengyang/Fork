@@ -22,7 +22,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         /// </summary>
         public byte[] Data { get; set; }
         /// <summary>
-        /// 转换为 byte 数组
+        /// 将当前模型转换为 byte 数组
         /// </summary>
         /// <returns></returns>
         public byte[] ToByte()

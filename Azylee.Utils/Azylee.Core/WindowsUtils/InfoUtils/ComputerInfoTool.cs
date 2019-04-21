@@ -420,19 +420,7 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         /// <returns></returns>
         public static long GetSystemDriveTotalSize()
         {
-            try
-            {
-                DriveInfo Drive = new DriveInfo("C");//系统盘驱动器
-                var osinfo = OsInfo();
-                if (osinfo != null)
-                {
-                    string drive = osinfo.Item2.Substring(0, 1);
-                    Drive = new DriveInfo(drive);
-                }
-                return Drive.TotalSize / 1024;
-            }
-            catch { }
-            return 0;
+            return DriveTool.GetSystemDriveTotalSize();
         }
         /// <summary>
         /// 获取系统盘可用容量（单位：KB）
@@ -440,19 +428,7 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         /// <returns></returns>
         public static long GetSystemDriveAvailableSize()
         {
-            long size = 0;
-            try
-            {
-                var osinfo = OsInfo();
-                if (osinfo != null)
-                {
-                    string drive = osinfo.Item2.Substring(0, 1);
-                    DriveInfo Drive = new DriveInfo(drive);
-                    size = Drive.TotalFreeSpace / 1024;
-                }
-            }
-            catch { }
-            return size;
+            return DriveTool.GetSystemDriveAvailableSize();
         }
         /// <summary>
         /// 获取磁盘上次格式化时间

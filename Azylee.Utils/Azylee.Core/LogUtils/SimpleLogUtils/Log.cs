@@ -45,7 +45,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         //输出的 Log 格式
         const string LOG_FORMAT = "{0}  {1}  {2}";
         const string TIME_FORMAT = "HH:mm:ss.fff";
-        const string LOG_PATH = "azylee.log";
+        const string LOG_PATH = @"azylee.log\log";
 
         private int CACHE_DAYS = 30;//缓存天数
         private object LogFileLock = new object();//写日志文件锁
@@ -179,7 +179,8 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             lock (LogFileLock)
             {
                 //设置日志目录和日志文件
-                string filePath = GetFilePath(log.Type);
+                string filePath = LogPath;
+                //string filePath = GetFilePath(log.Type);//根据分类分配目录
                 string file = DirTool.Combine(filePath, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
                 //创建日志目录
                 DirTool.Create(filePath);
@@ -201,25 +202,26 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private string GetFilePath(LogType type)
-        {
-            string filePath = LogPath;
-            switch (type)
-            {
-                case LogType.d: filePath = DirTool.Combine(LogPath, "debug"); break;
-                case LogType.i: filePath = DirTool.Combine(LogPath, "information"); break;
-                case LogType.e: filePath = DirTool.Combine(LogPath, "error"); break;
-                case LogType.w: filePath = DirTool.Combine(LogPath, "warning"); break;
-                case LogType.v: filePath = DirTool.Combine(LogPath, "verbose"); break;
-            }
-            return filePath;
-        }
+        //private string GetFilePath(LogType type)
+        //{
+        //    string filePath = LogPath;
+        //    switch (type)
+        //    {
+        //        case LogType.d: filePath = DirTool.Combine(LogPath, "debug"); break;
+        //        case LogType.i: filePath = DirTool.Combine(LogPath, "information"); break;
+        //        case LogType.e: filePath = DirTool.Combine(LogPath, "error"); break;
+        //        case LogType.w: filePath = DirTool.Combine(LogPath, "warning"); break;
+        //        case LogType.v: filePath = DirTool.Combine(LogPath, "verbose"); break;
+        //    }
+        //    return filePath;
+        //}
         /// <summary>
         /// 清理过多的日志文件
         /// </summary>
         private void Cleaner(LogType type)
         {
-            List<string> files = FileTool.GetFile(GetFilePath(type));
+            List<string> files = FileTool.GetFile(LogPath);
+            //List<string> files = FileTool.GetFile(GetFilePath(type));//根据分类分配目录
             if (ListTool.HasElements(files))
             {
                 files.ForEach(f =>
@@ -300,7 +302,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Verbose) == LogLevel.Verbose)
                 WriteFile(new LogModel() { Type = LogType.v, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.v, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.v, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Debug (调试信息)
@@ -314,7 +316,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Debug) == LogLevel.Debug)
                 WriteFile(new LogModel() { Type = LogType.d, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.d, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.d, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Information (重要信息)
@@ -328,7 +330,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Information) == LogLevel.Information)
                 WriteFile(new LogModel() { Type = LogType.i, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.i, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.i, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Warning (警告信息)
@@ -342,7 +344,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Warning) == LogLevel.Warning)
                 WriteFile(new LogModel() { Type = LogType.w, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.w, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.w, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Error (错误信息)
@@ -356,7 +358,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Error) == LogLevel.Error)
                 WriteFile(new LogModel() { Type = LogType.e, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.e, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.e, msg?.ToString()); } catch { }
         }
         #endregion
     }
