@@ -62,6 +62,7 @@
     <Compile Include="DataUtils\DateTimeUtils\DateTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\TimerTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\TimeStampTool.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\TimeTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\UnixTimeTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\WeekDayTool.cs" />
     <Compile Include="DataUtils\EncryptUtils\AesTool.cs" />
