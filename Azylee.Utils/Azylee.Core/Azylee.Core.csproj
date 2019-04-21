@@ -60,6 +60,7 @@
     <Compile Include="DataUtils\DateTimeUtils\DateTimeConvert.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTool.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\TimeDiff.cs" />
     <Compile Include="DataUtils\DateTimeUtils\TimerTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\TimeStampTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\TimeTool.cs" />
