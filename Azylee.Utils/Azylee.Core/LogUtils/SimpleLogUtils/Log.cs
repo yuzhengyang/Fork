@@ -302,7 +302,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Verbose) == LogLevel.Verbose)
                 WriteFile(new LogModel() { Type = LogType.v, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.v, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.v, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Debug (调试信息)
@@ -316,7 +316,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Debug) == LogLevel.Debug)
                 WriteFile(new LogModel() { Type = LogType.d, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.d, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.d, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Information (重要信息)
@@ -330,7 +330,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Information) == LogLevel.Information)
                 WriteFile(new LogModel() { Type = LogType.i, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.i, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.i, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Warning (警告信息)
@@ -344,7 +344,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Warning) == LogLevel.Warning)
                 WriteFile(new LogModel() { Type = LogType.w, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.w, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.w, msg?.ToString()); } catch { }
         }
         /// <summary>
         /// 输出 Error (错误信息)
@@ -358,7 +358,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             if ((FileLogLevel & LogLevel.Error) == LogLevel.Error)
                 WriteFile(new LogModel() { Type = LogType.e, Message = msg?.ToString(), CreateTime = DateTime.Now });
 
-            try { LogEvent(LogType.e, msg?.ToString()); } catch { }
+            try { LogEvent?.Invoke(LogType.e, msg?.ToString()); } catch { }
         }
         #endregion
     }
