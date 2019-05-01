@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaiDuWebAPI\dwz\DwzRequestModel.cs" />
+    <Compile Include="BaiDuWebAPI\dwz\DwzResponseModel.cs" />
+    <Compile Include="BaiDuWebAPI\dwz\DwzTool.cs" />
     <Compile Include="BaiDuWebAPI\GPSAPI\GPSInfoModel.cs" />
     <Compile Include="BaiDuWebAPI\GPSAPI\GPSInfoWebModel.cs" />
     <Compile Include="BaiDuWebAPI\GPSAPI\GPSPointWebModel.cs" />
