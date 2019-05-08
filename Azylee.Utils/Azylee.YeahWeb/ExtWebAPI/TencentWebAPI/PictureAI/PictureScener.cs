@@ -1,7 +1,7 @@
 ﻿using Azylee.YeahWeb.HttpUtils;
 using System.Text;
 
-namespace Azylee.YeahWeb.TencentWebAPI.PictureAI
+namespace Azylee.YeahWeb.ExtWebAPI.TencentWebAPI.PictureAI
 {
     public class PictureScener
     {

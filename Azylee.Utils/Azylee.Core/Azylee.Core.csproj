@@ -157,8 +157,10 @@
     <Compile Include="WindowsUtils\APIUtils\ExplorerAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
+    <Compile Include="WindowsUtils\APIUtils\WallpaperUtils\WallpaperTool.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />
-    <Compile Include="WindowsUtils\APIUtils\WindowsDrawerAPI.cs" />
+    <Compile Include="WindowsUtils\APIUtils\WinDrawUtils\WinDrawAPI.cs" />
+    <Compile Include="WindowsUtils\APIUtils\WinDrawUtils\WinDrawTool.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsHotKeyAPI.cs" />
     <Compile Include="WindowsUtils\BrowserUtils\BrowserSelector.cs" />
     <Compile Include="WindowsUtils\ClipboardUtils\ClipboardTool.cs" />

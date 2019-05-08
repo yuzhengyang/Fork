@@ -1,14 +1,12 @@
 ﻿//DrawBehindDesktopIcons
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Azylee.Core.WindowsUtils.APIUtils
+namespace Azylee.Core.WindowsUtils.APIUtils.WinDrawUtils
 {
-    public class WindowsDrawerAPI
+    public class WindowsDrawAPI
     {
         public const int SM_CXSCREEN = 0;
 

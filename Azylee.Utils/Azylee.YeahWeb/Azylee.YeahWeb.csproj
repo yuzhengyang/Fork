@@ -50,6 +50,8 @@
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationWebModel.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationTool.cs" />
     <Compile Include="EmailUtils\EmailTool.cs" />
+    <Compile Include="ExtWebAPI\BingWebAPI\WallpaperUtils\WallpaperModel.cs" />
+    <Compile Include="ExtWebAPI\BingWebAPI\WallpaperUtils\WallpaperTool.cs" />
     <Compile Include="FTPUtils\FTPTool.cs" />
     <Compile Include="HttpUtils\MethodUtils\ExtendUtils\HeaderTool.cs" />
     <Compile Include="HttpUtils\MethodUtils\GetUtils\GetToolPlus.cs" />
@@ -68,7 +70,7 @@
     <Compile Include="SocketUtils\TcpUtils\TcppServer.cs" />
     <Compile Include="SocketUtils\TcpUtils\TcpDelegate.cs" />
     <Compile Include="SocketUtils\TcpUtils\TcpStreamHelper.cs" />
-    <Compile Include="TencentWebAPI\PictureAI\PictureScener.cs" />
+    <Compile Include="ExtWebAPI\TencentWebAPI\PictureAI\PictureScener.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Azylee.Core\Azylee.Core.csproj">
@@ -83,5 +85,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
