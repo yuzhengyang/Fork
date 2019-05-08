@@ -1,5 +1,7 @@
 ﻿using Azylee.Core.DataUtils.DateTimeUtils;
 using Azylee.Core.IOUtils.ImageUtils;
+using Azylee.Jsons;
+using Azylee.YeahWeb.BaiDuWebAPI.dwz;
 using Azylee.YeahWeb.BaiDuWebAPI.GPSAPI;
 using Azylee.YeahWeb.TencentWebAPI.PictureAI;
 using System;
@@ -14,16 +16,18 @@ namespace Test.YeahWeb
     {
         static void Main(string[] args)
         {
-            PictureScener.GetInfo(1107006764,(int)TimeStampTool.Get(), "fa577ce340859f9fe",);
+            var rs = DwzTool.Create("", "http://www.baidu.com");
+            Console.WriteLine(Json.Object2String(rs));
+            //PictureScener.GetInfo(1107006764,(int)TimeStampTool.Get(), "",);
 
-            //if (GPSConverter.DeviceGPSToBaiduGPS("iAe652kYOgleRHUYQkW1E8MIHEptnMb5", 120.379235583333, 36.19172925, out double x, out double y))
+            //if (GPSConverter.DeviceGPSToBaiduGPS("", 120.379235583333, 36.19172925, out double x, out double y))
             //{
             //    Console.WriteLine($"120.379235583333 - 36.19172925");
             //    Console.WriteLine($"{x} - {y}");
             //}
 
-          
-            //GPSInfoWebModel model = GPSInfoTool.GetInfo("iAe652kYOgleRHUYQkW1E8MIHEptnMb5", 40.039669, 252.129464);
+
+            //GPSInfoWebModel model = GPSInfoTool.GetInfo("", 40.039669, 252.129464);
             //if (model != null)
             //{
             //    GPSInfoModel info = model.ToGPSInfoModel();
