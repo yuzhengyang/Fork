@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Azylee.Core.DataUtils.StringUtils;
+using System;
 using System.Drawing;
+using System.IO;
 
 namespace Azylee.Core.WindowsUtils.APIUtils.WinDrawUtils
 {
@@ -8,6 +10,24 @@ namespace Azylee.Core.WindowsUtils.APIUtils.WinDrawUtils
     /// </summary>
     public static class WindowsDrawTool
     {
+        /// <summary>
+        /// 将图片绘制到桌面上
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public static void Paint(string file, int x, int y, int width, int height)
+        {
+            try
+            {
+                Image image = null;
+                if (Str.Ok(file) && File.Exists(file)) image = Image.FromFile(file);
+                if (image != null) Paint(image, x, y, width, height);
+            }
+            catch { }
+        }
         /// <summary>
         /// 将图片绘制到桌面上
         /// </summary>
