@@ -69,6 +69,17 @@ namespace Azylee.Jsons
                 try { return JsonConvert.DeserializeObject<T>(json); } catch (Exception e) { }
             }
             return default(T);
+        }/// <summary>
+         /// 模型 存储到文件
+         /// </summary>
+         /// <typeparam name="T"></typeparam>
+         /// <param name="file"></param>
+         /// <returns></returns>
+        public static bool Object2File<T>(string file, T t)
+        {
+            string s = Object2String(t);
+            bool rs = TxtTool.Create(file, s);
+            return rs;
         }
         /// <summary>
         /// 对象 转 字节（JSON中转）

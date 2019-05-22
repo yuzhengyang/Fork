@@ -1,4 +1,5 @@
-﻿using Azylee.Jsons;
+﻿using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Jsons;
 using Azylee.YeahWeb.HttpUtils;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,25 @@ namespace Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils
         public static WallpaperModel GetYesterday()
         {
             return GetSomeday(1);
+        }
+        public static List<ImagesItem> GetLast10Days()
+        {
+            List<ImagesItem> result = new List<ImagesItem>();
+            for (var i = 0; i < 10; i++)
+            {
+                WallpaperModel model = GetSomeday(i);
+                if (model != null && Ls.Ok(model.images))
+                {
+                    foreach (var img in model.images)
+                    {
+                        if (!result.Any(x => x.hsh == img.hsh))
+                        {
+                            result.Add(img);
+                        }
+                    }
+                }
+            }
+            return result;
         }
         /// <summary>
         /// 获取某一天的壁纸（每天8张）

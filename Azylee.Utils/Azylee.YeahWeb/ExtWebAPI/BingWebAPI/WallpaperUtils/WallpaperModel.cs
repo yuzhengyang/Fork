@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azylee.Core.DataUtils.StringUtils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,6 +79,11 @@ namespace Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils
         /// 
         /// </summary>
         public List<string> hs { get; set; }
+        public string GetImageUrl()
+        {
+            if (Str.Ok(url)) return "https://cn.bing.com" + url;
+            return "";
+        }
     }
 
     public class Tooltips
