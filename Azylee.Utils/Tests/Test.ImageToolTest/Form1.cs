@@ -1,5 +1,9 @@
-﻿using Azylee.Core.DrawingUtils.ImageUtils;
+﻿using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Core.DataUtils.GuidUtils;
+using Azylee.Core.DrawingUtils.ImageUtils;
+using Azylee.Core.IOUtils.DirUtils;
 using Azylee.Core.WindowsUtils.APIUtils.WallpaperUtils;
+using Azylee.YeahWeb.HttpUtils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,9 +25,22 @@ namespace Test.ImageToolTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetLast10Days();
+
+           List<string> file_list = new List<string>();
             var md = Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetToday();
             var md2 = Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetYesterday();
 
+            if (md != null && Ls.Ok(md.images))
+            {
+                foreach (var item in md.images)
+                {
+                    string image_url = item.GetImageUrl();
+                    string file_path = DirTool.Combine(@"F:\imgs", item.hsh + ".jpg");
+                    bool down_result = HttpTool.Download(image_url, file_path);
+                    if (down_result) file_list.Add(file_path);
+                }
+            }
             //string a = WallpaperTool.Get();
 
             //bool b = WallpaperTool.Set(@"C:\Users\yuzhengyang\Pictures\\cc.jpg");
