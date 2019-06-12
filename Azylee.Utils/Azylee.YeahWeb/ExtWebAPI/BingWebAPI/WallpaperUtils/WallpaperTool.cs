@@ -41,7 +41,7 @@ namespace Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils
             List<ImagesItem> result = new List<ImagesItem>();
             for (var i = 0; i < 10; i++)
             {
-                WallpaperModel model = GetSomeday(i);
+                WallpaperWebModel model = GetSomeday(i);
                 if (model != null && Ls.Ok(model.images))
                 {
                     foreach (var img in model.images)

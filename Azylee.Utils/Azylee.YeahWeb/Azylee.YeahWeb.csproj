@@ -53,7 +53,6 @@
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationWebModel.cs" />
     <Compile Include="BaiDuWebAPI\IPLocationAPI\IPLocationTool.cs" />
     <Compile Include="EmailUtils\EmailTool.cs" />
-    <Compile Include="ExtWebAPI\BingWebAPI\WallpaperUtils\WallpaperModel.cs" />
     <Compile Include="ExtWebAPI\BingWebAPI\WallpaperUtils\WallpaperWebModel.cs" />
     <Compile Include="ExtWebAPI\BingWebAPI\WallpaperUtils\WallpaperTool.cs" />
     <Compile Include="FTPUtils\FTPTool.cs" />

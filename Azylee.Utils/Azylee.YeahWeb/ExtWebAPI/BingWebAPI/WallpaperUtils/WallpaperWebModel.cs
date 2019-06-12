@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils
 {
-    public class WallpaperModel
+    public class WallpaperWebModel
     {
         /// <summary>
         /// 
