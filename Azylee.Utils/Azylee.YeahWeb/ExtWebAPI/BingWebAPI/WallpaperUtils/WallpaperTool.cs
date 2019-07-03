@@ -24,7 +24,7 @@ namespace Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils
         /// 获取今天的壁纸
         /// </summary>
         /// <returns></returns>
-        public static WallpaperModel GetToday()
+        public static WallpaperWebModel GetToday()
         {
             return GetSomeday(0);
         }
@@ -32,7 +32,7 @@ namespace Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils
         /// 获取昨天的壁纸
         /// </summary>
         /// <returns></returns>
-        public static WallpaperModel GetYesterday()
+        public static WallpaperWebModel GetYesterday()
         {
             return GetSomeday(1);
         }
@@ -41,7 +41,7 @@ namespace Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils
             List<ImagesItem> result = new List<ImagesItem>();
             for (var i = 0; i < 10; i++)
             {
-                WallpaperModel model = GetSomeday(i);
+                WallpaperWebModel model = GetSomeday(i);
                 if (model != null && Ls.Ok(model.images))
                 {
                     foreach (var img in model.images)
@@ -60,13 +60,13 @@ namespace Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils
         /// </summary>
         /// <param name="day"></param>
         /// <returns></returns>
-        public static WallpaperModel GetSomeday(int day)
+        public static WallpaperWebModel GetSomeday(int day)
         {
-            WallpaperModel model = null;
+            WallpaperWebModel model = null;
             try
             {
                 string rs = HttpTool.Get(string.Format(URL, day));
-                model = Json.String2Object<WallpaperModel>(rs);
+                model = Json.String2Object<WallpaperWebModel>(rs);
                 return model;
             }
             catch (Exception e) { return null; }
