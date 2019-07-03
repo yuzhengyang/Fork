@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace Azylee.Core.WindowsUtils.CMDUtils
 {
+    /// <summary>
+    /// CMD进程启动工具
+    /// </summary>
     public class CMDProcessTool
     {
         /// <summary>
@@ -51,8 +54,9 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
         /// <param name="output">输出动作</param>
         public static void Execute(string cmd, Action<string> output, WindowsAccountModel account = null)
         {
-            StreamReader reader = null;
             Process process = null;
+            StreamReader outReader = null;
+            StreamReader errReader = null;
             try
             {
                 process = GetProcess(account: account);
@@ -60,12 +64,13 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
                 process.StandardInput.AutoFlush = true;
                 process.StandardInput.WriteLine(cmd);
                 process.StandardInput.WriteLine("exit");
-                reader = process.StandardOutput;
-                do
-                {
-                    string line = reader.ReadLine();
-                    output?.Invoke(line);
-                } while (!reader.EndOfStream);
+
+                outReader = process.StandardOutput;
+                errReader = process.StandardError;
+
+                ReaderAction(outReader, output);
+                ReaderAction(errReader, output);
+
                 process.WaitForExit();
                 process.Close();
             }
@@ -104,6 +109,22 @@ namespace Azylee.Core.WindowsUtils.CMDUtils
                 process?.Dispose();
             }
             return result;
+        }
+        private static void ReaderAction(StreamReader reader, Action<string> output)
+        {
+            try
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    do
+                    {
+                        string line = reader.ReadLine();
+                        output?.Invoke(line);
+                    } while (!reader.EndOfStream);
+                    string s = "reader process is end";
+                });
+            }
+            catch { }
         }
     }
 }
