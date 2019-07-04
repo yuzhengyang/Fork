@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azylee.Core.DataUtils.CollectionUtils;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -129,7 +130,7 @@ namespace Azylee.Core.NetUtils
         [DllImport("iphlpapi.dll", SetLastError = true)]
         static extern uint GetExtendedUdpTable(IntPtr pUdpTable, ref int dwOutBufLen, bool sort, int ipVersion, UDP_TABLE_CLASS tblClass, uint reserved = 0u);
 
-        public static TcpRow[] GetTcpConnection()
+        private static TcpRow[] GetTcpConnections()
         {
             TcpRow[] array = null;
             int ipVersion = 2;
@@ -162,7 +163,7 @@ namespace Azylee.Core.NetUtils
             }
             return array;
         }
-        public static UdpRow[] GetUdpConnection()
+        private static UdpRow[] GetUdpConnections()
         {
             UdpRow[] array = null;
             int ipVersion = 2;
@@ -195,5 +196,50 @@ namespace Azylee.Core.NetUtils
             }
             return array;
         }
+
+        /// <summary>
+        /// 获取本机所有TCP连接
+        /// </summary>
+        /// <returns></returns>
+        public static TcpRow[] GetTcps()
+        {
+            return GetTcpConnections();
+        }
+        /// <summary>
+        /// 获取本机所有UDP连接
+        /// </summary>
+        /// <returns></returns>
+        public static UdpRow[] GetUdps()
+        {
+            return GetUdpConnections();
+        }
+
+        #region 便捷方法
+        /// <summary>
+        /// 根据端口号获取进程ID
+        /// </summary>
+        /// <param name="port"></param>
+        /// <returns></returns>
+        public static int GetPidByPort(int port)
+        {
+            try
+            {
+                TcpRow[] list = GetTcps();
+                if (Ls.Ok(list))
+                    foreach (var item in list)
+                        if (item.LocalPort == port) return item.ProcessId;
+            }
+            catch { }
+            try
+            {
+                UdpRow[] list = GetUdps();
+                if (Ls.Ok(list))
+                    foreach (var item in list)
+                        if (item.LocalPort == port) return item.ProcessId;
+            }
+            catch { }
+            return -1;
+        }
+        #endregion
     }
 }

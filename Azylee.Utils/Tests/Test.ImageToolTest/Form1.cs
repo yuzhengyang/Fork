@@ -2,17 +2,22 @@
 using Azylee.Core.DataUtils.GuidUtils;
 using Azylee.Core.DrawingUtils.ImageUtils;
 using Azylee.Core.IOUtils.DirUtils;
+using Azylee.Core.NetUtils;
 using Azylee.Core.WindowsUtils.APIUtils.WallpaperUtils;
+using Azylee.Core.WindowsUtils.CMDUtils;
 using Azylee.YeahWeb.HttpUtils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows.Forms;
+using static Azylee.Core.NetUtils.NetProcessTool;
 
 namespace Test.ImageToolTest
 {
@@ -25,29 +30,55 @@ namespace Test.ImageToolTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetLast10Days();
+            var p = Process.GetProcessById(9090);
 
-           List<string> file_list = new List<string>();
-            var md = Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetToday();
-            var md2 = Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetYesterday();
-
-            if (md != null && Ls.Ok(md.images))
+            DateTime f1clock = DateTime.Now;
+            List<TcpConnectionInformation> f1 = null;
+            for (int i = 0; i < 10; i++)
             {
-                foreach (var item in md.images)
-                {
-                    string image_url = item.GetImageUrl();
-                    string file_path = DirTool.Combine(@"F:\imgs", item.hsh + ".jpg");
-                    bool down_result = HttpTool.Download(image_url, file_path);
-                    if (down_result) file_list.Add(file_path);
-                }
+                f1 = Fun1();
             }
-            //string a = WallpaperTool.Get();
+            Console.WriteLine("fun1,time: " + (DateTime.Now - f1clock).TotalMilliseconds);
 
-            //bool b = WallpaperTool.Set(@"C:\Users\yuzhengyang\Pictures\\cc.jpg");
 
-            //Bitmap b1 = new Bitmap(@"F:\图片压缩测试\未标题-1.jpg");
-            //byte[] b1_byte = IMG.Compression(b1, 30);
-            //File.WriteAllBytes(@"F:\图片压缩测试\未标题-1（Compression）.jpg", b1_byte);
+            DateTime f2clock = DateTime.Now;
+            List<Tuple<int, int>> f2 = null;
+            for (int i = 0; i < 10; i++)
+            {
+                f2 = Fun2();
+            }
+            Console.WriteLine("fun2,time: " + (DateTime.Now - f2clock).TotalMilliseconds);
+
+            DateTime f3clock = DateTime.Now;
+            TcpRow[] f3 = null;
+            for (int i = 0; i < 10; i++)
+            {
+                f3 = Fun3();
+            }
+            Console.WriteLine("fun3,time: " + (DateTime.Now - f3clock).TotalMilliseconds);
+
+        }
+
+        private List<TcpConnectionInformation> Fun1()
+        {
+            List<TcpConnectionInformation> list = new List<TcpConnectionInformation>();
+            IPGlobalProperties properties = IPGlobalProperties.GetIPGlobalProperties();
+            TcpConnectionInformation[] connections = properties.GetActiveTcpConnections();
+            foreach (TcpConnectionInformation t in connections)
+            {
+                list.Add(t);
+            }
+            return list;
+        }
+        private List<Tuple<int, int>> Fun2()
+        {
+            List<Tuple<int, int>> list = CMDNetstatTool.Find(".");
+            return list;
+        }
+        private TcpRow[] Fun3()
+        {
+            TcpRow[] list = NetProcessTool.GetTcps();
+            return list;
         }
     }
 }

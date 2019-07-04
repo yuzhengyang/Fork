@@ -32,4 +32,8 @@ using System.Runtime.InteropServices;
 // 可以指定所有值，也可以使用以下所示的 "*" 预置版本号和修订号
 //通过使用 "*"，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.9")]
+[assembly: AssemblyVersion("1.0.1.0")]
+//v*.*.*.*（年月日）//+添加 -删减 @优化 #修复
+
+// v 1.0.1.0（2019年7月4日）
+// + 添加通过本地网络端口获取进程ID方法

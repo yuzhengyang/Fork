@@ -220,8 +220,8 @@ namespace Azylee.Core.NetUtils
         /// </summary>
         void GetConnection()
         {
-            TcpConnection = NetProcessTool.GetTcpConnection();
-            UdpConnection = NetProcessTool.GetUdpConnection();
+            TcpConnection = NetProcessTool.GetTcps();
+            UdpConnection = NetProcessTool.GetUdps();
         }
         #endregion
         #region 设置程序流量及连接数统计列表
