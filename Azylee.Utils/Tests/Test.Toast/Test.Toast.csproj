@@ -79,6 +79,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Azylee.Core\Azylee.Core.csproj">
+      <Project>{88DC61FA-95F0-41B7-9D7D-AB0F3CBD169C}</Project>
+      <Name>Azylee.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Azylee.WinformSkin\Azylee.WinformSkin.csproj">
       <Project>{d280c16f-fde2-4647-bd76-3514f673426d}</Project>
       <Name>Azylee.WinformSkin</Name>

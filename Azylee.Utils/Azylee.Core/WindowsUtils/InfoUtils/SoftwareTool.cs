@@ -60,11 +60,13 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
 
                             string name = SubKey.GetValue("DisplayName", "").ToString();
                             string pub = SubKey.GetValue("Publisher", "").ToString();
+                            string installlocation = SubKey.GetValue("InstallLocation", "").ToString();
                             string version = SubKey.GetValue("DisplayVersion", "").ToString();
                             string datestr = SubKey.GetValue("InstallDate", "").ToString();
                             string sizestr = SubKey.GetValue("EstimatedSize", "").ToString();
                             string helpurl = SubKey.GetValue("HelpLink", "").ToString();
                             string abouturl = SubKey.GetValue("URLInfoAbout", "").ToString();
+                            string uninstallstring = SubKey.GetValue("UninstallString", "").ToString();
                             DateTime date = DateTime.Parse("2001-10-25");//设置初始值为WindowsXP发布日期
                             DateTime.TryParseExact(datestr, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
                             if (date.Year < 2001) date = DateTime.Parse("2001-10-25");
@@ -75,11 +77,13 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
                             {
                                 Name = name,
                                 Publisher = pub,
+                                InstallLocation = installlocation,
                                 Version = version,
                                 InstallDate = date,
                                 EstimatedSize = size,
                                 HelpLink = helpurl,
                                 URLInfoAbout = abouturl,
+                                UninstallString = uninstallstring,
                             });
                         }
                         SubKey?.Close();

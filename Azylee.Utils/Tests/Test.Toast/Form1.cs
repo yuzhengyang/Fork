@@ -1,4 +1,5 @@
-﻿using Azylee.WinformSkin.FormUI.Toast;
+﻿using Azylee.Core.WindowsUtils.InfoUtils;
+using Azylee.WinformSkin.FormUI.Toast;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,11 @@ namespace Test.Toast
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            var x = SoftwareTool.GetControlList();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,11 +54,6 @@ namespace Test.Toast
                  + str + str + str + str + str + str + str + str + str + str
                  + str + str + str + str + str + str + str + str + str + str;
             ToastForm.Display("中车四方终端准入系统提示", str, ToastType.info, null, 10);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-      
         }
 
         private void button6_Click(object sender, EventArgs e)

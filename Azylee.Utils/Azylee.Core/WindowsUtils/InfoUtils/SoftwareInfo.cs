@@ -23,6 +23,10 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         /// </summary>
         public string Publisher { get; set; }
         /// <summary>
+        /// 安装后路径
+        /// </summary>
+        public string InstallLocation { get; set; }
+        /// <summary>
         /// 帮助链接
         /// </summary>
         public string HelpLink { get; set; }
@@ -30,6 +34,10 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
         /// 介绍链接
         /// </summary>
         public string URLInfoAbout { get; set; }
+        /// <summary>
+        /// 卸载字符串
+        /// </summary>
+        public string UninstallString { get; set; }
         /// <summary>
         /// 空间占用
         /// </summary>
