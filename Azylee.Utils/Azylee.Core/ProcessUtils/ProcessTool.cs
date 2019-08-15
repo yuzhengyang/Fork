@@ -38,15 +38,12 @@ namespace Azylee.Core.ProcessUtils
         /// <returns></returns>
         public static bool Start(string file, string args = "")
         {
-            if (File.Exists(file))
+            try
             {
-                try
-                {
-                    Process.Start(file, args);
-                    return true;
-                }
-                catch { }
+                Process.Start(file, args);
+                return true;
             }
+            catch { }
             return false;
         }
         /// <summary>
@@ -57,16 +54,13 @@ namespace Azylee.Core.ProcessUtils
         {
             try
             {
-                if (File.Exists(file))
-                {
-                    Process p = new Process();
-                    p.StartInfo.FileName = file;
-                    p.StartInfo.Arguments = args;
-                    p.StartInfo.UseShellExecute = true;
-                    p.Start();
-                    p.WaitForInputIdle(3000);
-                    return true;
-                }
+                Process p = new Process();
+                p.StartInfo.FileName = file;
+                p.StartInfo.Arguments = args;
+                p.StartInfo.UseShellExecute = true;
+                p.Start();
+                p.WaitForInputIdle(3000);
+                return true;
             }
             catch (Exception ex) { }
             return false;
