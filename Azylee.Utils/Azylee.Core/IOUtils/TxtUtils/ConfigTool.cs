@@ -12,8 +12,17 @@ using System.Text;
 
 namespace Azylee.Core.IOUtils.TxtUtils
 {
+    /// <summary>
+    /// .NET 读取配置工具
+    /// </summary>
     public class ConfigTool
     {
+        /// <summary>
+        /// 获取配置值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public static string Get(string key, string defaultValue = "")
         {
             try
@@ -22,6 +31,31 @@ namespace Azylee.Core.IOUtils.TxtUtils
                 return config.AppSettings.Settings[key]?.Value ?? defaultValue;
             }
             catch { return defaultValue; }
+        }
+        /// <summary>
+        /// 获取配置值（bool）
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static bool GetBool(string key, bool defaultValue = false)
+        {
+            string value = Get(key, "");
+            if (Str.Ok(value))
+            {
+                value = value.ToLower();
+                switch (value)
+                {
+                    case "1":
+                    case "ok":
+                    case "yes":
+                    case "true":
+                    case "enable":
+                    case "access": return true;
+                    default: return false;
+                }
+            }
+            return defaultValue;
         }
         public static string GetExe(string exePath, string key, string defaultValue = "")
         {
