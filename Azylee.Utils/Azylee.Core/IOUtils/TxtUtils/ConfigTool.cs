@@ -4,6 +4,7 @@
 //      desc:       工具描述
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
+using Azylee.Core.DataUtils.StringUtils;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -57,6 +58,13 @@ namespace Azylee.Core.IOUtils.TxtUtils
             }
             return defaultValue;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="exePath"></param>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public static string GetExe(string exePath, string key, string defaultValue = "")
         {
             try
