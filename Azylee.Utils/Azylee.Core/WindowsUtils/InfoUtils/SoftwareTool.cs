@@ -58,15 +58,15 @@ namespace Azylee.Core.WindowsUtils.InfoUtils
                         if (SubKey != null)
                         {
 
-                            string name = SubKey.GetValue("DisplayName", "").ToString();
-                            string pub = SubKey.GetValue("Publisher", "").ToString();
-                            string installlocation = SubKey.GetValue("InstallLocation", "").ToString();
-                            string version = SubKey.GetValue("DisplayVersion", "").ToString();
-                            string datestr = SubKey.GetValue("InstallDate", "").ToString();
-                            string sizestr = SubKey.GetValue("EstimatedSize", "").ToString();
-                            string helpurl = SubKey.GetValue("HelpLink", "").ToString();
-                            string abouturl = SubKey.GetValue("URLInfoAbout", "").ToString();
-                            string uninstallstring = SubKey.GetValue("UninstallString", "").ToString();
+                            string name = SubKey.GetValue("DisplayName", "").ToString().Trim();
+                            string pub = SubKey.GetValue("Publisher", "").ToString().Trim();
+                            string installlocation = SubKey.GetValue("InstallLocation", "").ToString().Trim();
+                            string version = SubKey.GetValue("DisplayVersion", "").ToString().Trim();
+                            string datestr = SubKey.GetValue("InstallDate", "").ToString().Trim();
+                            string sizestr = SubKey.GetValue("EstimatedSize", "").ToString().Trim();
+                            string helpurl = SubKey.GetValue("HelpLink", "").ToString().Trim();
+                            string abouturl = SubKey.GetValue("URLInfoAbout", "").ToString().Trim();
+                            string uninstallstring = SubKey.GetValue("UninstallString", "").ToString().Trim();
                             DateTime date = DateTime.Parse("2001-10-25");//设置初始值为WindowsXP发布日期
                             DateTime.TryParseExact(datestr, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
                             if (date.Year < 2001) date = DateTime.Parse("2001-10-25");
