@@ -1,14 +1,7 @@
-﻿using Azylee.Core.DataUtils.DateTimeUtils;
-using Azylee.Core.IOUtils.ImageUtils;
+﻿using Azylee.Core.LogUtils.SimpleLogUtils;
 using Azylee.Jsons;
 using Azylee.YeahWeb.BaiDuWebAPI.dwz;
-using Azylee.YeahWeb.BaiDuWebAPI.GPSAPI;
-using Azylee.YeahWeb.TencentWebAPI.PictureAI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test.YeahWeb
 {
@@ -16,6 +9,18 @@ namespace Test.YeahWeb
     {
         static void Main(string[] args)
         {
+            Log log = new Log(true,LogLevel.All,LogLevel.All);
+
+
+
+
+
+
+
+
+
+
+
             var rs = DwzTool.Create("", "http://www.baidu.com");
             Console.WriteLine(Json.Object2String(rs));
             //PictureScener.GetInfo(1107006764,(int)TimeStampTool.Get(), "",);

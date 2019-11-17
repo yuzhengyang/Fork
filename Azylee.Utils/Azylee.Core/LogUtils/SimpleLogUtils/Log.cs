@@ -70,7 +70,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         /// <param name="isWrite">是否写出日志</param>
         /// <param name="logLevel"></param>
         /// <param name="writeLevel"></param>
-        [Obsolete]
+        [Obsolete("请使用建议的初始化方法",true)]
         public Log(bool isWrite, LogLevel logLevel = LogLevel.All, LogLevel writeLevel = LogLevel.All)
         {
             if (isWrite)
@@ -86,7 +86,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
             }
         }
         /// <summary>
-        /// 初始化 Log 工具
+        /// 初始化 Log 工具（建议）
         /// </summary>
         /// <param name="console">控制台输出级别</param>
         /// <param name="file">文件输出级别</param>
