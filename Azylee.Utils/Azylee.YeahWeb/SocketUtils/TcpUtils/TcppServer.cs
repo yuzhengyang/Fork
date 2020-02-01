@@ -20,28 +20,25 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         private List<byte> ReceiveByte = new List<byte>();
         private int _Port = 52801;
         TcpListener Listener = null;
-        TcpDelegate.ReceiveMessage ReceiveMessage;
-        TcpDelegate.OnConnect OnConnect;
-        TcpDelegate.OnDisconnect OnDisconnect;
-        List<TcpClientDictionary> Clients = new List<TcpClientDictionary>();
+        Action<TcpClientInfo> OnConnectAction = null;
+        Action<TcpClientInfo> OnDisconnectAction = null;
+        Action<TcpClientInfo, TcpDataModel> OnReceiveAction = null;
+        public TcpClientManager TcpClientManager = new TcpClientManager();
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="port">端口号</param>
-        /// <param name="receive">接收消息</param>
-        /// <param name="connect">连接动作</param>
-        /// <param name="disconnect">断开动作</param>
-        public TcppServer(int port,
-            TcpDelegate.ReceiveMessage receive,
-              TcpDelegate.OnConnect connect,
-               TcpDelegate.OnDisconnect disconnect)
+        /// <param name="onConnect">连接动作</param>
+        /// <param name="onDisconnect">断开动作</param>
+        /// <param name="onReceive">接收消息</param>
+        public TcppServer(int port, Action<TcpClientInfo> onConnect, Action<TcpClientInfo> onDisconnect, Action<TcpClientInfo, TcpDataModel> onReceive)
         {
             _Port = port;
 
-            ReceiveMessage += receive;
-            OnConnect += connect;
-            OnDisconnect += disconnect;
+            OnConnectAction = onConnect;
+            OnDisconnectAction = onDisconnect;
+            OnReceiveAction = onReceive;
         }
 
         #region 启动和停止服务
@@ -59,12 +56,11 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         /// </summary>
         public void Stop()
         {
-            foreach (var client in Clients)
+            foreach (var client in TcpClientManager.GetAll())
             {
                 client?.Client?.Close();
             }
-            Clients.Clear();
-            this.Listener?.Stop();
+            Listener?.Stop();
         }
         #endregion
 
@@ -76,11 +72,12 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         /// <param name="model">数据模型</param>
         public void Write(string host, TcpDataModel model)
         {
-            var dictionary = Clients_Get(host);
+            var dictionary = TcpClientManager.GetInfoByHost(host);
             if (dictionary != null && dictionary.Client != null)
             {
                 if (dictionary.Client.Connected)
                 {
+                    TcpClientManager.UpdateUploadFlowCount(host, model.Data.Length);
                     bool flag = TcpStreamHelper.Write(dictionary.Client, model);
                 }
             }
@@ -114,7 +111,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                 TcpClient client = lstn.EndAcceptTcpClient(state);
                 string host = client.Client.RemoteEndPoint.ToString();
 
-                Clients_Add_Update(host, client);
+                TcpClientManager.AddOrUpdate(host, client);
                 ConnectTask(host, client);
 
                 lstn.BeginAcceptTcpClient(new AsyncCallback(acceptCallback), lstn);
@@ -123,6 +120,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         }
         private void ConnectTask(string host, TcpClient client)
         {
+            TcpClientInfo clientInfo = TcpClientManager.GetInfoByHost(host);
             DateTime HeartbeatTime = DateTime.Now;
 
             //发送心跳
@@ -142,7 +140,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
             //接收消息
             Task.Factory.StartNew(() =>
             {
-                OnConnect?.Invoke(host);//委托：已连接
+                OnConnectAction?.Invoke(clientInfo);//委托：已连接
                 while (client.Connected)
                 {
                     try
@@ -157,7 +155,8 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                             }
                             else
                             {
-                                ReceiveMessage(host, model);//委托：接收消息
+                                TcpClientManager.UpdateDownloadFlowCount(host, model.Data.Length);
+                                OnReceiveAction(clientInfo, model);//委托：接收消息
                             }
                         }
                     }
@@ -165,66 +164,9 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                     //Sleep.S(1);
                 }
                 client.Close();
-                Clients_Del(host);
-                OnDisconnect?.Invoke(host);//委托：断开连接
+                TcpClientManager.RemoveByHost(host);
+                OnDisconnectAction?.Invoke(clientInfo);//委托：断开连接
             });
-        }
-        #endregion
-
-        #region 连接的客户端列表维护
-        /// <summary>
-        /// 获取连接的客户端
-        /// </summary>
-        /// <returns></returns>
-        private TcpClientDictionary Clients_Get(string host)
-        {
-            TcpClientDictionary client = null;
-            try
-            {
-                client = Clients.FirstOrDefault(x => x.Host == host);
-            }
-            catch { }
-            return client;
-        }
-        /// <summary>
-        /// 添加或更新到客户端列表
-        /// </summary>
-        private void Clients_Add_Update(string host, TcpClient client)
-        {
-            try
-            {
-                var item = Clients.FirstOrDefault(x => x.Host == host);
-                if (item == null)
-                {
-                    Clients.Add(new TcpClientDictionary() { Host = host, Client = client });
-                }
-                else
-                {
-                    item.Client = client;
-                }
-            }
-            catch { }
-        }
-        /// <summary>
-        /// 从客户端列表中删除
-        /// </summary>
-        private int Clients_Del(string host)
-        {
-            int count = 0;
-            try
-            {
-                count = Clients.RemoveAll(x => x.Host == host);
-            }
-            catch { }
-            return count;
-        }
-        /// <summary>
-        /// 当前连接客户端总数
-        /// </summary>
-        /// <returns></returns>
-        public int ClientsCount()
-        {
-            return Clients.Count();
         }
         #endregion
     }

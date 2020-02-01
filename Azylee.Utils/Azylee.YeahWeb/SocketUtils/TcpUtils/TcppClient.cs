@@ -18,28 +18,26 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         private TcpClient Client = null;
         private NetworkStream networkStream = null;
 
-        TcpDelegate.ReceiveMessage ReceiveMessage;
-        TcpDelegate.OnConnect OnConnect;
-        TcpDelegate.OnDisconnect OnDisconnect;
-
-        //public TcpDataConverter.Message ReceiveMessage;
+        Action OnConnectAction = null;
+        Action OnDisconnectAction = null;
+        Action<TcpDataModel> OnReceiveAction = null;
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="ip"></param>
         /// <param name="port"></param>
-        public TcppClient(string ip, int port,
-            TcpDelegate.ReceiveMessage receive,
-              TcpDelegate.OnConnect connect,
-               TcpDelegate.OnDisconnect disconnect)
+        /// <param name="onConnect">连接动作</param>
+        /// <param name="onDisconnect">断开动作</param>
+        /// <param name="onReceive">接收消息</param>
+        public TcppClient(string ip, int port, Action onConnect, Action onDisconnect, Action<TcpDataModel> onReceive)
         {
             this._IP = ip;
             this._Port = port;
 
-            ReceiveMessage += receive;
-            OnConnect += connect;
-            OnDisconnect += disconnect;
+            OnConnectAction = onConnect;
+            OnDisconnectAction = onDisconnect;
+            OnReceiveAction = onReceive;
         }
 
         #region 连接和关闭连接
@@ -114,16 +112,18 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                 this.Client = (TcpClient)state.AsyncState;
                 this.Client.EndConnect(state);
 
-                string host = this.Client.Client.RemoteEndPoint.ToString();
-                ConnectTask(host, this.Client);
+                // c# 系统检测到在一个调用中尝试使用指针参数时的无效指针地址 怎么解决
+                // 用管理身份运行cmd，执行 netsh winsock reset 重启问题解决
+                //string host = this.Client.Client.RemoteEndPoint.ToString();
+                ConnectTask(Client);
             }
-            catch { }
+            catch (Exception ex) { }
         }
-        private void ConnectTask(string host, TcpClient client)
+        private void ConnectTask(TcpClient client)
         {
             Task.Factory.StartNew(() =>
             {
-                OnConnect?.Invoke(host);//委托：已连接
+                OnConnectAction?.Invoke();//委托：已连接
                 while (client.Connected)
                 {
                     try
@@ -138,7 +138,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                             }
                             else
                             {
-                                ReceiveMessage(host, model);//委托：接收消息
+                                OnReceiveAction?.Invoke(model);//委托：接收消息
                             }
                         }
                     }
@@ -146,7 +146,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                     //Sleep.S(1);
                 }
                 client.Close();
-                OnDisconnect?.Invoke(host);//委托：断开连接
+                OnDisconnectAction?.Invoke();//委托：断开连接
             });
             //lstn.BeginAcceptTcpClient(new AsyncCallback(acceptCallback), lstn);
         }

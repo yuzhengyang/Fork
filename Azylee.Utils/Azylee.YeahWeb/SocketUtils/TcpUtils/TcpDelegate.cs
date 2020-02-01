@@ -8,6 +8,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
     /// <summary>
     /// Tcp 工具 委托声明
     /// </summary>
+    [Obsolete]
     public class TcpDelegate
     {
         /// <summary>
