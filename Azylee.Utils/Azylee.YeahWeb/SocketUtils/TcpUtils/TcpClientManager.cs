@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Azylee.YeahWeb.SocketUtils.TcpUtils
 {
+    /// <summary>
+    /// 客户端信息管理器
+    /// </summary>
     public class TcpClientManager
     {
         private int HostNumber { get; set; }
@@ -129,6 +132,36 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                     if (TcpClientList[i].Host == host)
                     {
                         TcpClientList[i].ConnectKey = s;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public bool UpdateUserEmail(string host, string s)
+        {
+            if (IsExistByHost(host))
+            {
+                for (var i = 0; i < TcpClientList.Count; i++)
+                {
+                    if (TcpClientList[i].Host == host)
+                    {
+                        TcpClientList[i].UserEmail = s;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public bool UpdateUserName(string host, string s)
+        {
+            if (IsExistByHost(host))
+            {
+                for (var i = 0; i < TcpClientList.Count; i++)
+                {
+                    if (TcpClientList[i].Host == host)
+                    {
+                        TcpClientList[i].UserName = s;
                         return true;
                     }
                 }

@@ -2,13 +2,16 @@
 //      https://github.com/yuzhengyang
 //      author:yuzhengyang
 //############################################################
+using Azylee.Core.WindowsUtils.APIUtils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace Azylee.Core.DrawingUtils.ImageUtils
@@ -26,16 +29,14 @@ namespace Azylee.Core.DrawingUtils.ImageUtils
         {
             try
             {
-                //屏幕宽
-                int iWidth = Screen.PrimaryScreen.Bounds.Width;
-                //屏幕高
-                int iHeight = Screen.PrimaryScreen.Bounds.Height;
+                //获取屏幕分辨率
+                Size size = ScreenAPI.DESKTOP;
                 //按照屏幕宽高创建位图
-                Bitmap bitmap = new Bitmap(iWidth, iHeight);
+                Bitmap bitmap = new Bitmap(size.Width, size.Height);
                 //从一个继承自Image类的对象中创建Graphics对象
                 Graphics gc = Graphics.FromImage(bitmap);
                 //抓屏并拷贝到myimage里
-                gc.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(iWidth, iHeight));
+                gc.CopyFromScreen(new Point(0, 0), new Point(0, 0), size);
                 gc.Dispose();
                 return bitmap;
             }

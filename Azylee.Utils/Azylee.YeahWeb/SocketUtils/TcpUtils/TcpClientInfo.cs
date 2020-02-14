@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Azylee.YeahWeb.SocketUtils.TcpUtils
 {
+    /// <summary>
+    /// 客户端信息
+    /// </summary>
     public class TcpClientInfo
     {
         /// <summary>
@@ -27,7 +30,15 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         /// <summary>
         /// 连接密钥
         /// </summary>
-        public string  ConnectKey { get; set; }
+        public string ConnectKey { get; set; }
+        /// <summary>
+        /// 用户邮箱
+        /// </summary>
+        public string UserEmail { get; set; }
+        /// <summary>
+        /// 用户名称
+        /// </summary>
+        public string UserName { get; set; }
         /// <summary>
         /// 上行流量总计
         /// </summary>

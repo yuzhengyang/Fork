@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -157,6 +158,7 @@
     <Compile Include="WindowsUtils\APIUtils\ApplicationAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\ExplorerAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\PermissionAPI.cs" />
+    <Compile Include="WindowsUtils\APIUtils\ScreenAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\SystemSleepAPI.cs" />
     <Compile Include="WindowsUtils\APIUtils\WallpaperUtils\WallpaperTool.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsAPI.cs" />

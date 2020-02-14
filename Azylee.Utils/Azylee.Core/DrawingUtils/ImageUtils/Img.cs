@@ -53,7 +53,7 @@ namespace Azylee.Core.DrawingUtils.ImageUtils
         /// <param name="quality">0-100</param>
         /// <param name="format"></param>
         /// <returns></returns>
-        public static byte[] Compression(Bitmap bitmap, int quality)
+        public static byte[] CompressionToByte(Image image, int quality)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace Azylee.Core.DrawingUtils.ImageUtils
                     myEncoderParameters.Param[0] = myEncoderParameter;
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        bitmap.Save(ms, CodecInfo, myEncoderParameters);
+                        image.Save(ms, CodecInfo, myEncoderParameters);
                         myEncoderParameters.Dispose();
                         myEncoderParameter.Dispose();
                         return ms.ToArray();

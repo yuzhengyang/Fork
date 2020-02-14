@@ -72,7 +72,6 @@
     <Compile Include="SocketUtils\TcpUtils\TcpDataConverter.cs" />
     <Compile Include="SocketUtils\TcpUtils\TcpDataModel.cs" />
     <Compile Include="SocketUtils\TcpUtils\TcppServer.cs" />
-    <Compile Include="SocketUtils\TcpUtils\TcpDelegate.cs" />
     <Compile Include="SocketUtils\TcpUtils\TcpStreamHelper.cs" />
     <Compile Include="ExtWebAPI\TencentWebAPI\PictureAI\PictureScener.cs" />
   </ItemGroup>
