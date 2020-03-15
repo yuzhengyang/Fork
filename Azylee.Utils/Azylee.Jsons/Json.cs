@@ -108,7 +108,7 @@ namespace Azylee.Jsons
                 string s = Encoding.UTF8.GetString(b);
                 return JsonConvert.DeserializeObject<T>(s);
             }
-            catch { return default(T); }
+            catch(Exception ex) { return default(T); }
         }
     }
 }

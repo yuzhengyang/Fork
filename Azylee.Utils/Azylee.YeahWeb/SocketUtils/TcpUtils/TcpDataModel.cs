@@ -22,6 +22,39 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         /// </summary>
         public byte[] Data { get; set; }
         /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public TcpDataModel() { }
+        /// <summary>
+        /// 构造函数（仅指令）
+        /// </summary>
+        /// <param name="type"></param>
+        public TcpDataModel(int type)
+        {
+            this.Type = type;
+        }
+        /// <summary>
+        /// 构造函数（默认）
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="data"></param>
+        public TcpDataModel(int type, byte[] data)
+        {
+            this.Type = type;
+            this.Data = data;
+        }
+        /// <summary>
+        /// 构造函数（自动转换）
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="data"></param>
+        public TcpDataModel(int type, object data)
+        {
+            this.Type = type;
+            this.Data = Json.Object2Byte(data);
+        }
+
+        /// <summary>
         /// 将当前模型转换为 byte 数组
         /// </summary>
         /// <returns></returns>
@@ -56,9 +89,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
 
                 byte[] data_byte = bytes.Skip(8).Take(length).ToArray();
 
-                model = new TcpDataModel();
-                model.Type = type;
-                model.Data = data_byte;
+                model = new TcpDataModel(type, data_byte);
             }
             catch { }
             return model;

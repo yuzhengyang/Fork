@@ -101,9 +101,14 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                 var item = TcpClientList.FirstOrDefault(x => x.Host == host);
                 if (item == null)
                 {
+                    string ip = "";
+                    int ipFlagIndex = host.IndexOf(":");
+                    if (ipFlagIndex > 0) ip = host.Substring(0, ipFlagIndex);
+
                     var model = new TcpClientInfo()
                     {
                         Number = HostNumber,
+                        IP = ip,
                         Host = host,
                         Client = client,
                         IsConnect = true,
@@ -123,6 +128,12 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         #endregion
 
         #region 更新项
+        /// <summary>
+        /// 更新 ConnectKey 连接秘钥
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public bool UpdateConnectKey(string host, string s)
         {
             if (IsExistByHost(host))
@@ -138,6 +149,12 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
             }
             return false;
         }
+        /// <summary>
+        /// 更新 UserEmail 用户邮箱
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public bool UpdateUserEmail(string host, string s)
         {
             if (IsExistByHost(host))
@@ -153,6 +170,75 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
             }
             return false;
         }
+        /// <summary>
+        /// 更新 AccessCode 权限编码
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool UpdateAccessCode(string host, string s)
+        {
+            if (IsExistByHost(host))
+            {
+                for (var i = 0; i < TcpClientList.Count; i++)
+                {
+                    if (TcpClientList[i].Host == host)
+                    {
+                        TcpClientList[i].AccessCode = s;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 更新 MachineID 主机ID
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool UpdateMachineID(string host, string s)
+        {
+            if (IsExistByHost(host))
+            {
+                for (var i = 0; i < TcpClientList.Count; i++)
+                {
+                    if (TcpClientList[i].Host == host)
+                    {
+                        TcpClientList[i].MachineID = s;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 更新 MachineName 主机名称
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool UpdateMachineName(string host, string s)
+        {
+            if (IsExistByHost(host))
+            {
+                for (var i = 0; i < TcpClientList.Count; i++)
+                {
+                    if (TcpClientList[i].Host == host)
+                    {
+                        TcpClientList[i].MachineName = s;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 更新 UserName 用户名
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public bool UpdateUserName(string host, string s)
         {
             if (IsExistByHost(host))
@@ -168,6 +254,33 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
             }
             return false;
         }
+        /// <summary>
+        /// 更新 AppCode 应用程序编码
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool UpdateAppCode(string host, string s)
+        {
+            if (IsExistByHost(host))
+            {
+                for (var i = 0; i < TcpClientList.Count; i++)
+                {
+                    if (TcpClientList[i].Host == host)
+                    {
+                        TcpClientList[i].AppCode = s;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 更新上行流量
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="flow"></param>
+        /// <returns></returns>
         public bool UpdateUploadFlowCount(string host, long flow)
         {
             if (IsExistByHost(host))
@@ -184,6 +297,12 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
             }
             return false;
         }
+        /// <summary>
+        /// 更新下行流量
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="flow"></param>
+        /// <returns></returns>
         public bool UpdateDownloadFlowCount(string host, long flow)
         {
             if (IsExistByHost(host))
@@ -194,6 +313,26 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                     {
                         TcpClientList[i].DownloadFlowCount += flow;
                         TcpClientList[i].LastDownloadTime = DateTime.Now;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 更新心跳时间
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        public bool UpdateHeartbeatTime(string host)
+        {
+            if (IsExistByHost(host))
+            {
+                for (var i = 0; i < TcpClientList.Count; i++)
+                {
+                    if (TcpClientList[i].Host == host)
+                    {
+                        TcpClientList[i].HeartbeatTime = DateTime.Now;
                         return true;
                     }
                 }
