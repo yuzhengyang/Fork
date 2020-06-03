@@ -55,6 +55,8 @@
     <Compile Include="EmailUtils\EmailTool.cs" />
     <Compile Include="ExtWebAPI\BingWebAPI\WallpaperUtils\WallpaperWebModel.cs" />
     <Compile Include="ExtWebAPI\BingWebAPI\WallpaperUtils\WallpaperTool.cs" />
+    <Compile Include="ExtWebAPI\IPAddressAPI\PublicIPAddressTool.cs" />
+    <Compile Include="ExtWebAPI\IPAddressAPI\PublicIPAddressModel.cs" />
     <Compile Include="FTPUtils\FTPTool.cs" />
     <Compile Include="HttpUtils\MethodUtils\ExtendUtils\HeaderTool.cs" />
     <Compile Include="HttpUtils\MethodUtils\GetUtils\GetToolPlus.cs" />
@@ -72,7 +74,6 @@
     <Compile Include="SocketUtils\TcpUtils\TcpDataConverter.cs" />
     <Compile Include="SocketUtils\TcpUtils\TcpDataModel.cs" />
     <Compile Include="SocketUtils\TcpUtils\TcppServer.cs" />
-    <Compile Include="SocketUtils\TcpUtils\TcpDelegate.cs" />
     <Compile Include="SocketUtils\TcpUtils\TcpStreamHelper.cs" />
     <Compile Include="ExtWebAPI\TencentWebAPI\PictureAI\PictureScener.cs" />
   </ItemGroup>

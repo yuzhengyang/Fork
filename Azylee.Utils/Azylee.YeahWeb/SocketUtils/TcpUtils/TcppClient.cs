@@ -1,7 +1,9 @@
-﻿using Azylee.Core.ThreadUtils.SleepUtils;
+﻿using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Core.ThreadUtils.SleepUtils;
 using Azylee.Core.WindowsUtils.ConsoleUtils;
 using Azylee.Jsons;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -21,6 +23,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         Action OnConnectAction = null;
         Action OnDisconnectAction = null;
         Action<TcpDataModel> OnReceiveAction = null;
+        ConcurrentQueue<Tuple<int, Action<TcpDataModel>>> SyncFunction = new ConcurrentQueue<Tuple<int, Action<TcpDataModel>>>();
 
         /// <summary>
         /// 构造函数
@@ -72,35 +75,27 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
 
         #region 连接后的读写操作
         /// <summary>
-        /// 发送数据
+        /// 发送数据（action禁止使用阻塞操作，必须新建task线程操作）
         /// </summary>
         /// <param name="model">数据模型</param>
-        public bool Write(TcpDataModel model)
+        /// <param name="actionType">事件驱动处理类型</param>
+        /// <param name="action">事件驱动处理方法</param>
+        public bool Write(TcpDataModel model, int? actionType = 0, Action<TcpDataModel> action = null)
         {
             bool flag = false;
-            if (this.Client != null && this.Client.Connected)
+            if (Client != null && Client.Connected)
             {
                 flag = TcpStreamHelper.Write(Client, model);
             }
+            if (flag)
+            {
+                if (actionType != null && action != null)
+                {
+                    int type = actionType.GetValueOrDefault();
+                    SyncFunction.Enqueue(new Tuple<int, Action<TcpDataModel>>(type, action));
+                }
+            }
             return flag;
-        }
-        /// <summary>
-        /// 发送数据
-        /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="data">数据</param>
-        public bool Write(int type, byte[] data)
-        {
-            return Write(new TcpDataModel() { Type = type, Data = data });
-        }
-        /// <summary>
-        /// 发送数据
-        /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="s">字符串</param>
-        public bool Write(int type, string s)
-        {
-            return Write(new TcpDataModel() { Type = type, Data = Json.Object2Byte(s) });
         }
         /// <summary>
         /// 接受数据
@@ -134,11 +129,25 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                             if (model.Type == int.MaxValue)
                             {
                                 //返回心跳
-                                Write(new TcpDataModel() { Type = int.MaxValue });
+                                Write(new TcpDataModel(int.MaxValue));
                             }
                             else
                             {
-                                OnReceiveAction?.Invoke(model);//委托：接收消息
+                                //优先调用默认接收消息方法Action
+                                OnReceiveAction?.Invoke(model);
+
+                                //调用同步处理委托方法
+                                if (Ls.Ok(SyncFunction))
+                                {
+                                    for (var i = 0; i < SyncFunction.Count; i++)
+                                    {
+                                        bool flag = SyncFunction.TryDequeue(out Tuple<int, Action<TcpDataModel>> fun);
+                                        if (flag)
+                                        {
+                                            Task.Factory.StartNew(() => { fun.Item2?.Invoke(model); });
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

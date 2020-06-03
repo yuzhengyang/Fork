@@ -70,7 +70,7 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         /// </summary>
         /// <param name="host">主机地址</param>
         /// <param name="model">数据模型</param>
-        public void Write(string host, TcpDataModel model)
+        public bool Write(string host, TcpDataModel model)
         {
             var dictionary = TcpClientManager.GetInfoByHost(host);
             if (dictionary != null && dictionary.Client != null)
@@ -79,28 +79,10 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                 {
                     TcpClientManager.UpdateUploadFlowCount(host, model.Data.Length);
                     bool flag = TcpStreamHelper.Write(dictionary.Client, model);
+                    return flag;
                 }
             }
-        }
-        /// <summary>
-        /// 发送数据
-        /// </summary>
-        /// <param name="host">主机地址</param>
-        /// <param name="type">类型</param>
-        /// <param name="data">数据</param>
-        public void Write(string host, int type, byte[] data)
-        {
-            Write(host, new TcpDataModel() { Type = type, Data = data });
-        }
-        /// <summary>
-        /// 发送数据
-        /// </summary>
-        /// <param name="host">主机地址</param>
-        /// <param name="type">类型</param>
-        /// <param name="s">字符串</param>
-        public void Write(string host, int type, string s)
-        {
-            Write(host, new TcpDataModel() { Type = type, Data = Json.Object2Byte(s) });
+            return false;
         }
 
         private void acceptCallback(IAsyncResult state)
@@ -121,14 +103,13 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
         private void ConnectTask(string host, TcpClient client)
         {
             TcpClientInfo clientInfo = TcpClientManager.GetInfoByHost(host);
-            DateTime HeartbeatTime = DateTime.Now;
 
             //发送心跳
             Task.Factory.StartNew(() =>
             {
                 while (client.Connected)
                 {
-                    TcpDataModel model = new TcpDataModel() { Type = int.MaxValue };
+                    TcpDataModel model = new TcpDataModel(int.MaxValue);
                     TcpStreamHelper.Write(client, model);
 
                     Sleep.S(5);
@@ -150,8 +131,8 @@ namespace Azylee.YeahWeb.SocketUtils.TcpUtils
                         {
                             if (model.Type == int.MaxValue)
                             {
-                                //过滤心跳
-                                HeartbeatTime = DateTime.Now;
+                                //过滤心跳，并记录心跳时间
+                                TcpClientManager.UpdateHeartbeatTime(host);
                             }
                             else
                             {

@@ -97,7 +97,7 @@ namespace Azylee.Core.IOUtils.TxtUtils
                 ConfigurationManager.RefreshSection("appSettings");//重新加载新的配置文件
                 return true;
             }
-            catch { return false; }
+            catch (Exception ex) { return false; }
         }
         public static bool SetExe(string exePath, string key, string value)
         {
