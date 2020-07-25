@@ -166,6 +166,7 @@
     <Compile Include="WindowsUtils\APIUtils\WinDrawUtils\WinDrawTool.cs" />
     <Compile Include="WindowsUtils\APIUtils\WindowsHotKeyAPI.cs" />
     <Compile Include="WindowsUtils\BrowserUtils\BrowserSelector.cs" />
+    <Compile Include="WindowsUtils\BrowserUtils\BrowserTool.cs" />
     <Compile Include="WindowsUtils\ClipboardUtils\ClipboardTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDNetstatTool.cs" />
     <Compile Include="WindowsUtils\CMDUtils\CMDProcessTool.cs" />
