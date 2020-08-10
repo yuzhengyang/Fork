@@ -58,6 +58,7 @@
     <Compile Include="DataUtils\CompressionUtils\Compression.cs" />
     <Compile Include="DataUtils\CurrencyUtils\RMB.cs" />
     <Compile Include="DataUtils\DateTimeUtils\ChineseHourTool.cs" />
+    <Compile Include="DataUtils\DateTimeUtils\DateTimeFormatter.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeConvert.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTool.cs" />
