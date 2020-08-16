@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Utils", "Azylee.Utils\Azylee.Utils.csproj", "{2D67AEF9-0238-49A5-A8C1-BE147A11C194}"
 EndProject
@@ -46,6 +46,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.WifiManTest", "Tests\Test.WifiManTest\Test.WifiManTest.csproj", "{A5702F35-A589-4F03-9468-72BD4A6B57A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.SysServiceApp", "Tests\Test.SysServiceApp\Test.SysServiceApp.csproj", "{CFDD901D-004E-4336-B949-46B7128180C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Ges", "Tests\Test.Ges\Test.Ges.csproj", "{1F6EB599-4A0B-423D-AE00-D42D9286F25C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +131,10 @@ Global
 		{CFDD901D-004E-4336-B949-46B7128180C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFDD901D-004E-4336-B949-46B7128180C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFDD901D-004E-4336-B949-46B7128180C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F6EB599-4A0B-423D-AE00-D42D9286F25C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F6EB599-4A0B-423D-AE00-D42D9286F25C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F6EB599-4A0B-423D-AE00-D42D9286F25C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F6EB599-4A0B-423D-AE00-D42D9286F25C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{A320E11D-D771-4BBD-913F-DD0E87090943} = {618CFF8A-0137-4E15-BC07-4E172B7FC5DA}
 		{A5702F35-A589-4F03-9468-72BD4A6B57A9} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{CFDD901D-004E-4336-B949-46B7128180C6} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
+		{1F6EB599-4A0B-423D-AE00-D42D9286F25C} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A021A3E-4C98-47CD-B4E8-912E12611C2E}
