@@ -50,5 +50,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Azylee.Core\Azylee.Core.csproj">
+      <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
+      <Name>Azylee.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Azylee.Jsons\Azylee.Jsons.csproj">
+      <Project>{de3ab999-96d3-4a53-a9f2-7409138d0333}</Project>
+      <Name>Azylee.Jsons</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

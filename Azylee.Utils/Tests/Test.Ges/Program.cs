@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azylee.Jsons.JsonConfigUtils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,14 @@ namespace Test.Ges
     {
         static void Main(string[] args)
         {
-            Assist<User> assist = new Assist<User>();
+            //Assist<User> assist = new Assist<User>();
 
-            Console.Read();
+            //Console.Read();
+
+            JsonConfig<User> jsonConfig = new JsonConfig<User>(@"D:\tmp\test\AppConfig.json");
+            jsonConfig.Get().Age = 1;
+            jsonConfig.Save();
+
         }
     }
 }
