@@ -19,6 +19,10 @@ namespace Azylee.Jsons.JsonConfigUtils
         private string FilePathBackup { get; set; }
 
         private JsonConfig() { }
+        /// <summary>
+        /// 构造配置管理器
+        /// </summary>
+        /// <param name="filepath">配置文件路径</param>
         public JsonConfig(string filepath)
         {
             this.FilePath = filepath;
@@ -44,14 +48,22 @@ namespace Azylee.Jsons.JsonConfigUtils
             }
             Save();
         }
-
+        /// <summary>
+        /// 获取配置信息
+        /// </summary>
+        /// <returns></returns>
         public T Get()
         {
             return this.Config;
         }
+        /// <summary>
+        /// 保存配置信息
+        /// </summary>
+        /// <returns></returns>
         public bool Save()
         {
             string s = Json.Object2String(this.Config);
+            s = JsonFormat.Format(s);
             bool result = TxtTool.Create(this.FilePath, s);
             if (TxtTool.Create(this.FilePathBackup, s))
             {
