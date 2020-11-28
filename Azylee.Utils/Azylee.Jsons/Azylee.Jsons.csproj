@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ConvertJson.cs" />
     <Compile Include="Json.cs" />
+    <Compile Include="JsonConfigUtils\IJsonConfigModel.cs" />
     <Compile Include="JsonConfigUtils\JsonConfig.cs" />
     <Compile Include="JsonFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

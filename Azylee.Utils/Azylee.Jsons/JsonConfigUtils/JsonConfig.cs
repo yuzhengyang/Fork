@@ -12,7 +12,7 @@ namespace Azylee.Jsons.JsonConfigUtils
     /// Json 配置管理器
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class JsonConfig<T> where T : new()
+    public class JsonConfig<T> where T : IJsonConfigModel, new()
     {
         private T Config { get; set; }
         private string FilePath { get; set; }
@@ -46,6 +46,8 @@ namespace Azylee.Jsons.JsonConfigUtils
             {
                 this.Config = new T();
             }
+            // 重置配置项
+            this.Config.Reset();
             Save();
         }
         /// <summary>
