@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppUtils\AppConfigUtils\AppConfig.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\IAppConfigItemModel.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigRegionModel.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\IAppConfigModel.cs" />
     <Compile Include="AppUtils\AppInfoTool.cs" />
     <Compile Include="AppUtils\AppLaunchTool.cs" />
     <Compile Include="AppUtils\AppSettleTool.cs" />

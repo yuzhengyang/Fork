@@ -1,4 +1,6 @@
-﻿using Azylee.Core.IOUtils.FileUtils;
+﻿using Azylee.Core.AppUtils.AppConfigUtils;
+using Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels;
+using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.TxtUtils;
 using System;
 using System.Collections.Generic;
@@ -6,28 +8,36 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Azylee.Jsons.JsonConfigUtils
+namespace Azylee.Jsons.JsonAppConfigUtils
 {
     /// <summary>
     /// Json 配置管理器
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class JsonConfig<T> where T : IJsonConfigModel, new()
+    public class JsonAppConfig<T> : AppConfig<T> where T : IAppConfigModel, new()
     {
-        private T Config { get; set; }
-        private string FilePath { get; set; }
-        private string FilePathBackup { get; set; }
+        private string FilePath;
+        private string FilePathBackup;
 
-        private JsonConfig() { }
+        private JsonAppConfig() { }
         /// <summary>
         /// 构造配置管理器
         /// </summary>
         /// <param name="filepath">配置文件路径</param>
-        public JsonConfig(string filepath)
+        public JsonAppConfig(string filepath)
         {
             this.FilePath = filepath;
             this.FilePathBackup = filepath + ".backup";
 
+            // 配置初始化
+            OnCreate();
+            // 重置配置项
+            this.Config.ForceSet();
+            // 保存配置
+            DoSave();
+        }
+        public override bool OnCreate()
+        {
             // 读取默认配置文件
             if (File.Exists(this.FilePath))
             {
@@ -46,23 +56,18 @@ namespace Azylee.Jsons.JsonConfigUtils
             {
                 this.Config = new T();
             }
-            // 重置配置项
-            this.Config.Reset();
-            Save();
+            return true;
         }
-        /// <summary>
-        /// 获取配置信息
-        /// </summary>
-        /// <returns></returns>
-        public T Get()
+
+        public override bool OnDestroy()
         {
-            return this.Config;
+            return DoSave();
         }
         /// <summary>
         /// 保存配置信息
         /// </summary>
-        /// <returns></returns>
-        public bool Save()
+        /// <returns></returns> 
+        public override bool DoSave()
         {
             string s = Json.Object2String(this.Config);
             s = JsonFormat.Format(s);
