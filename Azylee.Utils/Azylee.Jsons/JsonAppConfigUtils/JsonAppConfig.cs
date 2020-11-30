@@ -71,12 +71,18 @@ namespace Azylee.Jsons.JsonAppConfigUtils
         {
             string s = Json.Object2String(this.Config);
             s = JsonFormat.Format(s);
-            bool result = TxtTool.Create(this.FilePath, s);
-            if (TxtTool.Create(this.FilePathBackup, s))
+
+            TxtTool.Create(this.FilePath, s);
+            bool result = TxtTool.Create(this.FilePathBackup, s);
+
+            if (result)
             {
-                if (FileTool.Copy(this.FilePathBackup, this.FilePath, true))
+                if (Json.File2Object<T>(this.FilePathBackup) != null)
                 {
-                    FileTool.Delete(this.FilePathBackup);
+                    if (FileTool.Copy(this.FilePathBackup, this.FilePath, true))
+                    {
+                        FileTool.Delete(this.FilePathBackup);
+                    }
                 }
             }
             return result;

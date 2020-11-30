@@ -31,6 +31,17 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             }
             if (!repeat) { this.Items.Add(item); }
         }
+        public T GetItem(string name)
+        {
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if (Items[i].GetUniqueName() == name)
+                {
+                    return Items[i];
+                }
+            }
+            return default(T);
+        }
         public void OrderByNumber()
         {
             Items = Items.OrderBy(x => x.GetOrderNumber()).ToList();
