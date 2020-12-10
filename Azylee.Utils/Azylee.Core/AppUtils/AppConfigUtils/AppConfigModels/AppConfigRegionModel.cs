@@ -31,6 +31,17 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             }
             if (!repeat) { this.Items.Add(item); }
         }
+        public void RemoveItem(string name)
+        {
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if (Items[i].GetUniqueName() == name)
+                {
+                    Items.RemoveAt(i);
+                    break;
+                }
+            }
+        }
         public T GetItem(string name)
         {
             for (int i = 0; i < Items.Count; i++)
@@ -44,7 +55,7 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         }
         public void OrderByNumber()
         {
-            Items = Items.OrderBy(x => x.GetOrderNumber()).ToList();
+            Items = Items.OrderBy(x => x.GetOrderNumber()).ThenBy(x => x.GetUniqueName()).ToList();
         }
         public List<string> GetNames()
         {
