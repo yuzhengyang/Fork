@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -74,6 +75,7 @@ namespace Azylee.WinformSkin.FormUI.Toast
         }
         private void ToastForm_Load(object sender, EventArgs e)
         {
+            FormHideAPI.HideTabAltMenu(this.Handle);
             SetPosition();//设置初始位置为右下角，开始栏上方12px
             ShowInTaskbar = false;//不在任务栏显示
             TopMost = true;//显示到最上层窗体
@@ -113,7 +115,7 @@ namespace Azylee.WinformSkin.FormUI.Toast
                     Height = 100;
 
                     while ((byte_len = byte_len - 55) > 0) Height += 20;
-                } 
+                }
             }
             catch { }
 
@@ -223,5 +225,21 @@ namespace Azylee.WinformSkin.FormUI.Toast
             }
         }
         #endregion
-    }
+
+        #region 在系统Win+Tab中隐藏窗口
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        const int WS_EX_APPWINDOW = 0x00040000;
+        //        const int WS_EX_TOOLWINDOW = 0x00000080;
+
+        //        CreateParams result = base.CreateParams;
+        //        result.ExStyle = result.ExStyle & (~WS_EX_APPWINDOW);
+        //        result.ExStyle = result.ExStyle | WS_EX_TOOLWINDOW;
+        //        return result;
+        //    }
+        //} 
+        #endregion
+    } 
 }

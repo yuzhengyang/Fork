@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIUtils\FormAnimateAPI.cs" />
+    <Compile Include="APIUtils\FormHideAPI.cs" />
     <Compile Include="APIUtils\FormStyleAPI.cs" />
     <Compile Include="ButtonUI\ImageButton.cs">
       <SubType>Component</SubType>
