@@ -44,7 +44,6 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         #region 基础属性
         const string LOG_PATH = @"azylee.log";//存储路径
         const int Interval = 1000;//监测间隔时间
-        const int WriteInterval = 60 * Interval;//写出间隔时间
 
         private int CACHE_DAYS = 30;//缓存天数
         private string LogPath = AppDomain.CurrentDomain.BaseDirectory + LOG_PATH;//存储路径
@@ -84,30 +83,33 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
             {
                 Listener = Task.Factory.StartNew(() =>
                 {
+                    try { WriteConfig(); } catch { }
                     try
                     {
-                        WriteConfig();
-                        int runtime = 0;//运行时间（毫秒）
                         long afk = WindowsAPI.GetLastInputTime();//空闲时间缓存
                         TimeSpan pin = TimeSpan.Zero;//程序运行时间戳
                         StatusLogModel status = null;//运行状态信息模型
+                        DateTime recCycTime = DateTime.Now;
+                        int count = 1;
                         while (!CancelToken.IsCancellationRequested)
                         {
                             pin = AppProcess.TotalProcessorTime;//程序运行时间戳
-                            runtime += Interval;//增加运行时间
                             Thread.Sleep(Interval);//等待间隔时间
 
                             //每秒钟都会执行的操作
-                            CollectStatus(ref status, runtime, afk, pin);//收集数据
-                            afk = WindowsAPI.GetLastInputTime();//空闲时间缓存
+                            DateTime now = DateTime.Now;
+                            int time = (int)(now - recCycTime).TotalMilliseconds;
+                            CollectStatus(ref status, count, time, ref afk, pin);//收集数据
 
-                            //每分钟进行汇总输出
-                            if (runtime >= WriteInterval)
+                            if (!(recCycTime.Year == now.Year && recCycTime.Month == now.Month && recCycTime.Day == now.Day && recCycTime.Hour == now.Hour && recCycTime.Minute == now.Minute))
                             {
-                                WriteStatus(status);//写出数据
-                                runtime = 0;//重置运行时间
+                                WriteStatus(status);//写出数据                    
+                                count = 1;//重置运行时间
                                 status = null;//重置数据
+                                recCycTime = DateTime.Now;
                             }
+
+                            count++;
                         }
                     }
                     catch { }
@@ -146,18 +148,19 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
         /// 收集数据
         /// </summary>
         /// <returns></returns>
-        private bool CollectStatus(ref StatusLogModel status, int runtime, long afk, TimeSpan pin)
+        private bool CollectStatus(ref StatusLogModel status, int count, int runtime, ref long afk, TimeSpan pin)
         {
             try
             {
-                int count = runtime / Interval;//收集次数，用来帮助平均值计算
-
                 if (status == null) status = new StatusLogModel() { Time = DateTime.Now };
                 //固定值数据
                 status.Long = runtime;//运行时长
                 //累计值数据
-                long afktemp = WindowsAPI.GetLastInputTime() - afk;
+                long nowAfk = WindowsAPI.GetLastInputTime();
+                long afktemp = nowAfk - afk;
                 if (afktemp > 0) status.AFK = status.AFK + afktemp;
+                Console.WriteLine($"nowAfk: {nowAfk}, afk: {afk}, afktemp: {afktemp}, statusAFK: {status.AFK}");
+                afk = nowAfk;
                 //计算平均值数据
                 int cpu = 0;
                 try { cpu = (int)ComputerProcessor.NextValue(); } catch { }//CPU占用
@@ -187,6 +190,7 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                     //处理比率
                     status.Long = status.Long / 1000;
                     status.AFK = status.AFK / 1000;
+                    if (status.AFK > status.Long) status.AFK = status.Long;
 
                     //设置日志目录和日志文件
                     string path = DirTool.Combine(LogPath, "status");

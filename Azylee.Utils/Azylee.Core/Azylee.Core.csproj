@@ -119,6 +119,8 @@
     <Compile Include="IOUtils\TxtUtils\IniTool.cs" />
     <Compile Include="IOUtils\TxtUtils\TxtTool.cs" />
     <Compile Include="IOUtils\TxtUtils\XmlTool.cs" />
+    <Compile Include="LogUtils\FormActiveLogUtils\FormActiveLog.cs" />
+    <Compile Include="LogUtils\FormActiveLogUtils\FormActiveLogModel.cs" />
     <Compile Include="LogUtils\SimpleLogUtils\Log.cs" />
     <Compile Include="LogUtils\SimpleLogUtils\LogLevel.cs" />
     <Compile Include="LogUtils\SimpleLogUtils\LogModel.cs" />

@@ -57,7 +57,7 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                 $"{RamFree}|{SysDriveFree}|{AppCpuPer}|{AppRamUsed}";
             return s;
         }
-        public StatusLogModel FromString(string s)
+        public static StatusLogModel FromString(string s)
         {
             StatusLogModel model = new StatusLogModel();
             string[] elements = s.Split('|');
