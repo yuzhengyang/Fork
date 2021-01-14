@@ -159,7 +159,7 @@ namespace Azylee.Core.LogUtils.StatusLogUtils
                 long nowAfk = WindowsAPI.GetLastInputTime();
                 long afktemp = nowAfk - afk;
                 if (afktemp > 0) status.AFK = status.AFK + afktemp;
-                Console.WriteLine($"nowAfk: {nowAfk}, afk: {afk}, afktemp: {afktemp}, statusAFK: {status.AFK}");
+                //Console.WriteLine($"nowAfk: {nowAfk}, afk: {afk}, afktemp: {afktemp}, statusAFK: {status.AFK}");
                 afk = nowAfk;
                 //计算平均值数据
                 int cpu = 0;
