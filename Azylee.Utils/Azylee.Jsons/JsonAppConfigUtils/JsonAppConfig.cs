@@ -1,4 +1,5 @@
 ﻿using Azylee.Core.AppUtils.AppConfigUtils;
+using Azylee.Core.AppUtils.AppConfigUtils.AppConfigInterfaces;
 using Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels;
 using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.TxtUtils;
@@ -12,6 +13,12 @@ namespace Azylee.Jsons.JsonAppConfigUtils
 {
     /// <summary>
     /// Json 配置管理器
+    /// 
+    /// 如何使用：
+    /// 1. 根据自己需求，创建配置类，实现IAppConfigModel接口
+    /// 2. 使用配置管理器，new出创建的配置类
+    /// 3. 通过配置管理器，管理配置信息即可
+    /// PS. 建议直接使用静态变量创建
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class JsonAppConfig<T> : AppConfig<T> where T : IAppConfigModel, new()

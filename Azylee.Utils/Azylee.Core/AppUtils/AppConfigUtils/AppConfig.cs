@@ -1,4 +1,5 @@
-﻿using Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels;
+﻿using Azylee.Core.AppUtils.AppConfigUtils.AppConfigInterfaces;
+using Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,10 @@ namespace Azylee.Core.AppUtils.AppConfigUtils
 {
     /// <summary>
     /// AppConfig 配置管理器
+    /// 
+    /// 如何使用：
+    /// 1. JSON工具中，已实现了基于JSO格式的配置管理器（即转换为JSON保存为文件）
+    /// 2. 如果需要实现其他方式的配置管理，如：二进制文件、ini文件、数据库，可继承并实现对应方法
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class AppConfig<T> where T : IAppConfigModel, new()

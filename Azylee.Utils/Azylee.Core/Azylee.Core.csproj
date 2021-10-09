@@ -47,9 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUtils\AppConfigUtils\AppConfig.cs" />
-    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\IAppConfigItemModel.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigInterfaces\IAppConfigItemModel.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigDbItem.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigFileItem.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigItem.cs" />
     <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigRegionModel.cs" />
-    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\IAppConfigModel.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigInterfaces\IAppConfigModel.cs" />
     <Compile Include="AppUtils\AppInfoTool.cs" />
     <Compile Include="AppUtils\AppLaunchTool.cs" />
     <Compile Include="AppUtils\AppSettleTool.cs" />
@@ -84,6 +87,9 @@
     <Compile Include="DataUtils\StringUtils\StringExtension.cs" />
     <Compile Include="DataUtils\StringUtils\StringTool.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertTool.cs" />
+    <Compile Include="DbUtils\DbModels\DatabaseType.cs" />
+    <Compile Include="DbUtils\DbInterface\IDatabaseHelper.cs" />
+    <Compile Include="DbUtils\DbSqls\DbSqlTool.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressEventArgs.cs" />
     <Compile Include="DllUtils\DllInvokeTool.cs" />

@@ -1,4 +1,5 @@
-﻿using Azylee.Core.DataUtils.CollectionUtils;
+﻿using Azylee.Core.AppUtils.AppConfigUtils.AppConfigInterfaces;
+using Azylee.Core.DataUtils.CollectionUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,10 @@ using System.Text;
 
 namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
 {
+    /// <summary>
+    /// 配置块模型
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class AppConfigRegionModel<T> where T : IAppConfigItemModel
     {
         public List<T> Items { get; set; }

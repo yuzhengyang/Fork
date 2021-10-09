@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
+namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigInterfaces
 {
     /// <summary>
     /// AppConfig 配置管理器 指定模型接口
