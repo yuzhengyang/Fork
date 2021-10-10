@@ -4,7 +4,7 @@
 [![Fork](https://img.shields.io/github/forks/yuzhengyang/Fork.svg?style=social&label=Fork)](https://github.com/yuzhengyang/Fork/fork) 
 [![Stars](https://img.shields.io/github/stars/yuzhengyang/Fork.svg?style=social&label=Stars)](https://github.com/yuzhengyang/Fork) 
 
-Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具库项目，实际产品稳定运行，规模约2W+。
+Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具库项目。
 
 
 
