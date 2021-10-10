@@ -4,9 +4,15 @@
 [![Fork](https://img.shields.io/github/forks/yuzhengyang/Fork.svg?style=social&label=Fork)](https://github.com/yuzhengyang/Fork/fork) 
 [![Stars](https://img.shields.io/github/stars/yuzhengyang/Fork.svg?style=social&label=Stars)](https://github.com/yuzhengyang/Fork) 
 
-Fork 是平时做 C# 软件的时候，整合各种轮子的一个工具项目，包括并不仅限于：各种常用数据处理方法，文件读写 加密 搜索，系统信息 API 操作，Winform窗口控件等等。
+Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具库项目，实际产品稳定运行，规模约2W+。
+
+
+
+内容包括并不仅限于：各种常用数据处理方法，文件读写 加密 搜索，系统信息 API 操作，Winform窗口控件等等。
 
 更多功能，不定期更新……
+
+
 
 已添加到 Nuget 的库，可直接在 VS 中搜索安装。
 
@@ -273,7 +279,7 @@ Fork 是平时做 C# 软件的时候，整合各种轮子的一个工具项目�
     ┗ ShortcutTool.cs           // 操作快捷方式
 ```
 
-### Azylee.Json
+### Azylee.Json 模块：
 依赖：Azylee.Core
 
 > - 完善的 Json 扩展处理方法
@@ -286,7 +292,7 @@ Fork 是平时做 C# 软件的时候，整合各种轮子的一个工具项目�
   ┗ JsonFormat.cs               // Json 显示格式化
 ```
 
-### Azylee.Update
+### Azylee.Update 模块：
 依赖：Azylee.Core、Azylee.Json、Azylee.YeahWeb
 
 > - 为exe程序提供升级支持
@@ -297,7 +303,7 @@ Fork 是平时做 C# 软件的时候，整合各种轮子的一个工具项目�
   ┗ AppUpdateTool.cs            // 更新工具
 ```
 
-### Azylee.YeahWeb
+### Azylee.YeahWeb 模块：
 依赖：Azylee.Core、Azylee.Json
 
 > - 提供网络工具
@@ -354,14 +360,19 @@ Fork 是平时做 C# 软件的时候，整合各种轮子的一个工具项目�
   ┗ SocketTool.cs               // Socket工具
 ```
 
-### Azylee.WinformSkin
-——暂无
+### Azylee.WinformSkin 模块：
+——暂无介绍
 
 ---
 
 # 关于作者
-- Email：[yuzhyn@outlook.com](mailto:yuzhyn@outlook.com)，[yuzhyn@163.com](mailto:yuzhyn@163.com)
+- Email：[yuzhyn@163.com](mailto:yuzhyn@163.com)
 - 在使用过程中，遇到问题可以给我发邮件，希望能帮助到你，更期待你的建议 ~~~
 
 
-![image](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/WeiXinQRCodeMini.jpg)
+
+# 赞助
+
+如果对您有所帮助，您可以赞赏支持哟
+
+# ![image](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/WeiXinQRCodeMini.jpg)
