@@ -1,6 +1,7 @@
 ﻿using Azylee.Core.AppUtils.AppConfigUtils;
 using Azylee.Core.AppUtils.AppConfigUtils.AppConfigInterfaces;
 using Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels;
+using Azylee.Core.DataUtils.DateTimeUtils;
 using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.TxtUtils;
 using System;
@@ -61,6 +62,10 @@ namespace Azylee.Jsons.JsonAppConfigUtils
 
             if (this.Config == null)
             {
+                // 配置读取为空，有可能是配置内容发生结构性改变，JSON解析失败
+                // 所以，此处对原配置文件先进行备份，防止内容丢失
+                FileTool.Copy(this.FilePath, this.FilePath + ".backup" + "." + DateTimeFormatter.Compact(DateTime.Now), true);
+
                 this.Config = new T();
             }
             return true;
