@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 
 namespace Azylee.YeahWeb.EmailUtils
 {
+    /// <summary>
+    /// 邮件工具类
+    /// 使用限制：测试发送25端口正常，如不使用25端口，可能达不到预计结果
+    /// </summary>
     public class EmailTool 
     {
         private MailMessage mMailMessage;   //主要处理发送邮件的内容（如：收发人地址、标题、主体、图片等等）
