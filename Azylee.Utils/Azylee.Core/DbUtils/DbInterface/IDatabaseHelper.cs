@@ -32,6 +32,14 @@ namespace Azylee.Core.DbUtils.DbInterface
         /// <param name="sql"></param>
         /// <returns></returns>
         DataTable Select(string sql);
+
+        /// <summary>
+        /// 普通查询（异常时抛出异常，不能内部处理掉）
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        DataTable SelectWithException(string sql);
+        
         /// <summary>
         /// 查询所有数据库名称
         /// </summary>
@@ -41,8 +49,8 @@ namespace Azylee.Core.DbUtils.DbInterface
         /// <summary>
         /// 执行文件
         /// </summary>
-        /// <param name="SqlFile"></param>
-        /// <param name="action"></param>
+        /// <param name="SqlFile">执行文件路径</param>
+        /// <param name="action">执行后动作（执行语句，是否成功，影响行数，异常提示信息）</param>
         /// <returns></returns>
         Tuple<bool, int, string> ExecuteFile(string SqlFile, Action<string, bool, int, string> action);
     }
