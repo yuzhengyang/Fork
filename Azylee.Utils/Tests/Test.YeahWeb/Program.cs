@@ -1,6 +1,7 @@
 ﻿using Azylee.Core.LogUtils.SimpleLogUtils;
 using Azylee.Jsons;
 using Azylee.YeahWeb.BaiDuWebAPI.dwz;
+using Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI;
 using System;
 
 namespace Test.YeahWeb
@@ -9,20 +10,26 @@ namespace Test.YeahWeb
     {
         static void Main(string[] args)
         {
-            Log log = new Log(true,LogLevel.All,LogLevel.All);
+            //Log log = new Log(true,LogLevel.All,LogLevel.All);
 
 
 
 
 
+            var s = IPLocationTool.GetLocation();
+            if (s != null)
+            {
+
+            }
 
 
 
 
 
+            //var rs = DwzTool.Create("", "http://www.baidu.com");
+            //Console.WriteLine(Json.Object2String(rs));
 
-            var rs = DwzTool.Create("", "http://www.baidu.com");
-            Console.WriteLine(Json.Object2String(rs));
+
             //PictureScener.GetInfo(1107006764,(int)TimeStampTool.Get(), "",);
 
             //if (GPSConverter.DeviceGPSToBaiduGPS("", 120.379235583333, 36.19172925, out double x, out double y))
