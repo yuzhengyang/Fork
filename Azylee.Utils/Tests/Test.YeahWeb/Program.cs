@@ -2,6 +2,8 @@
 using Azylee.Jsons;
 using Azylee.YeahWeb.BaiDuWebAPI.dwz;
 using Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI;
+using Azylee.YeahWeb.ExtWebAPI.IPAddressAPI;
+using Azylee.YeahWeb.ExtWebAPI.IPCNAPI;
 using System;
 
 namespace Test.YeahWeb
@@ -17,6 +19,8 @@ namespace Test.YeahWeb
 
 
             var s = IPLocationTool.GetLocation();
+           var st =  PublicIPAddressTool.GetPublicIP();
+            var sss = IPCNTool.Get();
             if (s != null)
             {
 
