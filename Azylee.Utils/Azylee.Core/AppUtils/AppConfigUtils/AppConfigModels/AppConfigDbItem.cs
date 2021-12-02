@@ -1,4 +1,5 @@
 ﻿using Azylee.Core.AppUtils.AppConfigUtils.AppConfigInterfaces;
+using Azylee.Core.DataUtils.EncryptUtils;
 using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.DbUtils;
 using Azylee.Core.DbUtils.DbModels;
@@ -14,6 +15,8 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
     /// </summary>
     public class AppConfigDbItem : IAppConfigItemModel
     {
+        private string PASSWORD_ENC_SIGN = "ENC:::";
+        private string PASSWORD_ENC_PWD = "app.db.pwd.20211202";
         /// <summary>
         /// 序号
         /// </summary>
@@ -38,6 +41,28 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// 登录用户密码
         /// </summary>
         public string Password { get; set; }
+        public void SetPasswordEnc(string value)
+        {
+            if (Str.Ok(value) && !value.StartsWith(PASSWORD_ENC_SIGN))
+            {
+                Password = PASSWORD_ENC_SIGN + AesTool.Encrypt(value, PASSWORD_ENC_PWD);
+            }
+            else
+            {
+                Password = value ?? "";
+            }
+        }
+        public string GetPasswordEnc()
+        {
+            if (Str.Ok(Password) && Password.StartsWith(PASSWORD_ENC_SIGN))
+            {
+                return AesTool.Decrypt(Password.Substring(PASSWORD_ENC_SIGN.Length), PASSWORD_ENC_PWD);
+            }
+            else
+            {
+                return Password;
+            }
+        }
         /// <summary>
         /// 数据库类型
         /// </summary>
@@ -75,7 +100,7 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             Server = server;
             Port = port;
             UserId = userid;
-            Password = password;
+            SetPasswordEnc(password);
             Database = database;
             Desc = desc;
         }
@@ -104,13 +129,13 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             {
                 case DatabaseType.PostgreSQL:
                     {
-                        return $"Server = {Server}; Port = {(Str.Ok(Port) ? Port : "3306")}; User Id = {UserId}; Password = {Password}; Database = {database}; {ExtConnectString}";
+                        return $"Server = {Server}; Port = {(Str.Ok(Port) ? Port : "3306")}; User Id = {UserId}; Password = {GetPasswordEnc()}; Database = {database}; {ExtConnectString}";
                     }
 
                 case DatabaseType.Mysql:
                 default:
                     {
-                        return $"server = {Server}; port = {(Str.Ok(Port) ? Port : "3306")}; userid = {UserId}; password = {Password}; database = {database}; persistsecurityinfo = True; {ExtConnectString}";
+                        return $"server = {Server}; port = {(Str.Ok(Port) ? Port : "3306")}; userid = {UserId}; password = {GetPasswordEnc()}; database = {database}; persistsecurityinfo = True; {ExtConnectString}";
                     }
             }
         }
