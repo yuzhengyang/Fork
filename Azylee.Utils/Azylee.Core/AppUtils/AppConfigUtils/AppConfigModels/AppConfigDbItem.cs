@@ -91,8 +91,9 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// <param name="userid"></param>
         /// <param name="password"></param>
         /// <param name="database"></param>
+        /// <param name="extConnectString"></param>
         /// <param name="desc"></param>
-        public AppConfigDbItem(int number, string type, string name, string server, string port, string userid, string password, string database, string desc)
+        public AppConfigDbItem(int number, string type, string name, string server, string port, string userid, string password, string database, string extConnectString, string desc)
         {
             Number = number;
             Type = type;
@@ -102,6 +103,7 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             UserId = userid;
             SetPasswordEnc(password);
             Database = database;
+            ExtConnectString = extConnectString;
             Desc = desc;
         }
 
