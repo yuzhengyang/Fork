@@ -143,22 +143,22 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         }
 
         /// <summary>
-        /// 表空间查询连接字符串
+        /// 表空间配置库
         /// </summary>
         /// <returns></returns>
-        public string SchemaConnectionString()
+        public string SchemaDatabase()
         {
             switch (DbType())
             {
                 case DatabaseType.PostgreSQL:
                     {
-                        return ConnectionString("");
+                        return "";
                     }
 
                 case DatabaseType.Mysql:
                 default:
                     {
-                        return ConnectionString("information_schema"); ;
+                        return "information_schema";
                     }
             }
         }
