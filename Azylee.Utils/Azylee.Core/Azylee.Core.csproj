@@ -59,6 +59,7 @@
     <Compile Include="AppUtils\AppSettleTool.cs" />
     <Compile Include="AppUtils\AppUnique.cs" />
     <Compile Include="AppUtils\PermissionTool.cs" />
+    <Compile Include="AppUtils\AppPluginUtils\AppPluginModel.cs" />
     <Compile Include="AppUtils\StartupTool.cs" />
     <Compile Include="DataUtils\CollectionUtils\ArrayTool.cs" />
     <Compile Include="DataUtils\CollectionUtils\ListTool.cs" />
