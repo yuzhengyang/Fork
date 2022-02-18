@@ -98,6 +98,8 @@
     <Compile Include="DrawingUtils\ColorUtils\ColorStyle.cs" />
     <Compile Include="DrawingUtils\ImageUtils\IMG.cs" />
     <Compile Include="FormUtils\FormManTool.cs" />
+    <Compile Include="FormUtils\FormModuleUtils\FormModuleManTool.cs" />
+    <Compile Include="FormUtils\FormModuleUtils\IModuleForm.cs" />
     <Compile Include="IOUtils\BinaryUtils\BinaryFileTool.cs" />
     <Compile Include="IOUtils\DirUtils\DirFinder.cs" />
     <Compile Include="IOUtils\FileManUtils\FileWatcher.cs" />
@@ -208,7 +210,11 @@
     <Compile Include="X\OperatorTest.cs" />
     <Compile Include="X\TaskSchedulerTool.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="FormUtils\FormModuleUtils\IModuleForm.resx">
+      <DependentUpon>IModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">
       <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>

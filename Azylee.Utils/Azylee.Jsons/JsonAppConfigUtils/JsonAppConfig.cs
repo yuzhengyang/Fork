@@ -24,18 +24,29 @@ namespace Azylee.Jsons.JsonAppConfigUtils
     /// <typeparam name="T"></typeparam>
     public class JsonAppConfig<T> : AppConfig<T> where T : IAppConfigModel, new()
     {
+        private bool IsReadonly = false;
+
         private string FilePath;
         private string FilePathBackup;
+        private string FilePathReadonly;
 
         private JsonAppConfig() { }
         /// <summary>
         /// 构造配置管理器
         /// </summary>
         /// <param name="filepath">配置文件路径</param>
-        public JsonAppConfig(string filepath)
+        /// <param name="isReadonly">是否只读</param>
+        public JsonAppConfig(string filepath, bool isReadonly = false)
         {
             this.FilePath = filepath;
             this.FilePathBackup = filepath + ".backup";
+            this.FilePathReadonly = filepath + ".readonly";
+
+            if (isReadonly)
+            {
+                this.IsReadonly = isReadonly;
+                this.FilePath = FilePathReadonly;
+            }
 
             // 配置初始化
             OnCreate();
@@ -81,6 +92,9 @@ namespace Azylee.Jsons.JsonAppConfigUtils
         /// <returns></returns> 
         public override bool DoSave()
         {
+            // 如果是只读模式，则直接返回保存失败
+            if (this.IsReadonly) return false;
+
             string s = Json.Object2String(this.Config);
             s = JsonFormat.Format(s);
 
@@ -93,6 +107,7 @@ namespace Azylee.Jsons.JsonAppConfigUtils
                 {
                     if (FileTool.Copy(this.FilePathBackup, this.FilePath, true))
                     {
+                        FileTool.Copy(this.FilePath, this.FilePathReadonly, true);
                         FileTool.Delete(this.FilePathBackup);
                     }
                 }
