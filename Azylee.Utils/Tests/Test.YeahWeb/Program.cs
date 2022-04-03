@@ -1,10 +1,12 @@
-﻿using Azylee.Core.LogUtils.SimpleLogUtils;
+﻿using Azylee.Core.DataUtils.StringUtils;
+using Azylee.Core.LogUtils.SimpleLogUtils;
 using Azylee.Jsons;
 using Azylee.YeahWeb.BaiDuWebAPI.dwz;
 using Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI;
 using Azylee.YeahWeb.ExtWebAPI.IPAddressAPI;
 using Azylee.YeahWeb.ExtWebAPI.IPCNAPI;
 using System;
+using System.Collections.Generic;
 
 namespace Test.YeahWeb
 {
@@ -14,17 +16,22 @@ namespace Test.YeahWeb
         {
             //Log log = new Log(true,LogLevel.All,LogLevel.All);
 
-
-
-
-
-            var s = IPLocationTool.GetLocation();
-           var st =  PublicIPAddressTool.GetPublicIP();
-            var sss = IPCNTool.Get();
-            if (s != null)
+            string s = "org_plu_share[0-500]";
+            List<string> list = StringGenerator.CreateByNumberSection(s);
+            foreach (var item in list)
             {
-
+                Console.Write(item);
+                Console.Write("\t");
             }
+
+
+            // var s = IPLocationTool.GetLocation();
+            //var st =  PublicIPAddressTool.GetPublicIP();
+            // var sss = IPCNTool.Get();
+            // if (s != null)
+            // {
+
+            // }
 
 
 

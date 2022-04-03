@@ -14,6 +14,7 @@ namespace Azylee.Core.DataUtils.StringUtils
         {
             string s = "Hello Extension Methods";
             int i = s.WordCount();
+            s.Ok();
         }
         /// <summary>
         /// 判断字符串 非null、""、空格（Not NullOrWhiteSpace）
