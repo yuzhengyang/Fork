@@ -6,15 +6,11 @@
 
 Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具库项目。
 
-
-
 内容包括并不仅限于：各种常用数据处理方法，文件读写 加密 搜索，系统信息 API 操作，Winform窗口控件等等。
 
-更多功能，不定期更新……
+更多功能，不定期更新~
 
-
-
-已添加到 Nuget 的库，可直接在 VS 中搜索安装。
+已添加到 Nuget 的库，可直接在 VS 中搜索安装，更多更新可使用仓库代码~
 
 | # | 模块     | DLL        | Nuget                                                  | 支持 .NET 版本|
 |---|---------|------------|---------------------------------------------------------|---------------|
@@ -23,8 +19,22 @@ Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具�
 | 2 | 网络库 | Azylee.YeahWeb | -                                               | 4.0          |
 
 
+# 关于作者
+- Email：[yuzhyn@163.com](mailto:yuzhyn@163.com)
+- 在使用过程中，遇到问题可以发邮件，希望能帮助到你，更期待你的建议 ~~~
+
+# 赞助
+如果对您有所帮助，您可以赞赏支持哟 
+
+![扫码领红包](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/01b.jpg)
+
+
+
+![赞助一下](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/00b.jpg)
 
 ---
+
+# 详细介绍
 
 ## Azylee.Utils 工具组
 
@@ -365,14 +375,4 @@ Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具�
 
 ---
 
-# 关于作者
-- Email：[yuzhyn@163.com](mailto:yuzhyn@163.com)
-- 在使用过程中，遇到问题可以给我发邮件，希望能帮助到你，更期待你的建议 ~~~
-
-
-
-# 赞助
-
-如果对您有所帮助，您可以赞赏支持哟
-
-# ![image](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/WeiXinQRCodeMini.jpg)
+以上
