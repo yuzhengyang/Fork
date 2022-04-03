@@ -24,11 +24,7 @@ Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具�
 - 在使用过程中，遇到问题可以发邮件，希望能帮助到你，更期待你的建议 ~~~
 
 # 赞助
-如果对您有所帮助，您可以赞赏支持哟 
-
-![扫码领红包](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/01b.jpg)
-
-
+如果对您有所帮助，您可以赞赏支持一下哟~
 
 ![赞助一下](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/00b.jpg)
 
