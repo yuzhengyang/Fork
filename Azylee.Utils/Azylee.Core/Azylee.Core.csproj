@@ -84,6 +84,7 @@
     <Compile Include="DataUtils\EnumUtils\FlagsEnumTool.cs" />
     <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />
     <Compile Include="DataUtils\SerializeUtils\SerializeTool.cs" />
+    <Compile Include="DataUtils\StringUtils\NameFormat.cs" />
     <Compile Include="DataUtils\StringUtils\Str.cs" />
     <Compile Include="DataUtils\StringUtils\StringArrayTool.cs" />
     <Compile Include="DataUtils\StringUtils\StringExtension.cs" />
