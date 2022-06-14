@@ -28,19 +28,24 @@ namespace Azylee.Core.DataUtils.EncryptUtils
         /// <returns></returns>
         public static string Encrypt(string str, string key)
         {
-            key = FmtPassword(key);
-            byte[] keyArray = Encoding.UTF8.GetBytes(key);
-            byte[] toEncryptArray = Encoding.UTF8.GetBytes(str);
+            try
+            {
+                key = FmtPassword(key);
+                byte[] keyArray = Encoding.UTF8.GetBytes(key);
+                byte[] toEncryptArray = Encoding.UTF8.GetBytes(str);
 
-            RijndaelManaged rDel = new RijndaelManaged();
-            rDel.Key = keyArray;
-            rDel.Mode = CipherMode.ECB;
-            rDel.Padding = PaddingMode.PKCS7;
+                RijndaelManaged rDel = new RijndaelManaged();
+                rDel.Key = keyArray;
+                rDel.Mode = CipherMode.ECB;
+                rDel.Padding = PaddingMode.PKCS7;
 
-            ICryptoTransform cTransform = rDel.CreateEncryptor();
-            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+                ICryptoTransform cTransform = rDel.CreateEncryptor();
+                byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
 
-            return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+                return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+            }
+            catch { }
+            return str;
         }
         /// <summary>
         /// 加密
@@ -50,18 +55,23 @@ namespace Azylee.Core.DataUtils.EncryptUtils
         /// <returns></returns>
         public static byte[] Encrypt(byte[] array, string key)
         {
-            key = FmtPassword(key);
-            byte[] keyArray = Encoding.UTF8.GetBytes(key);
+            try
+            {
+                key = FmtPassword(key);
+                byte[] keyArray = Encoding.UTF8.GetBytes(key);
 
-            RijndaelManaged rDel = new RijndaelManaged();
-            rDel.Key = keyArray;
-            rDel.Mode = CipherMode.ECB;
-            rDel.Padding = PaddingMode.PKCS7;
+                RijndaelManaged rDel = new RijndaelManaged();
+                rDel.Key = keyArray;
+                rDel.Mode = CipherMode.ECB;
+                rDel.Padding = PaddingMode.PKCS7;
 
-            ICryptoTransform cTransform = rDel.CreateEncryptor();
-            byte[] resultArray = cTransform.TransformFinalBlock(array, 0, array.Length);
+                ICryptoTransform cTransform = rDel.CreateEncryptor();
+                byte[] resultArray = cTransform.TransformFinalBlock(array, 0, array.Length);
 
-            return resultArray;
+                return resultArray;
+            }
+            catch { }
+            return array;
         }
         /// <summary>
         /// 解密
@@ -71,19 +81,24 @@ namespace Azylee.Core.DataUtils.EncryptUtils
         /// <returns></returns>
         public static string Decrypt(string str, string key)
         {
-            key = FmtPassword(key);
-            byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
-            byte[] toEncryptArray = Convert.FromBase64String(str);
+            try
+            {
+                key = FmtPassword(key);
+                byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
+                byte[] toEncryptArray = Convert.FromBase64String(str);
 
-            RijndaelManaged rDel = new RijndaelManaged();
-            rDel.Key = keyArray;
-            rDel.Mode = CipherMode.ECB;
-            rDel.Padding = PaddingMode.PKCS7;
+                RijndaelManaged rDel = new RijndaelManaged();
+                rDel.Key = keyArray;
+                rDel.Mode = CipherMode.ECB;
+                rDel.Padding = PaddingMode.PKCS7;
 
-            ICryptoTransform cTransform = rDel.CreateDecryptor();
-            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+                ICryptoTransform cTransform = rDel.CreateDecryptor();
+                byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
 
-            return UTF8Encoding.UTF8.GetString(resultArray);
+                return UTF8Encoding.UTF8.GetString(resultArray);
+            }
+            catch { }
+            return str;
         }
         /// <summary>
         /// 解密
@@ -93,18 +108,23 @@ namespace Azylee.Core.DataUtils.EncryptUtils
         /// <returns></returns>
         public static byte[] Decrypt(byte[] array, string key)
         {
-            key = FmtPassword(key);
-            byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
+            try
+            {
+                key = FmtPassword(key);
+                byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
 
-            RijndaelManaged rDel = new RijndaelManaged();
-            rDel.Key = keyArray;
-            rDel.Mode = CipherMode.ECB;
-            rDel.Padding = PaddingMode.PKCS7;
+                RijndaelManaged rDel = new RijndaelManaged();
+                rDel.Key = keyArray;
+                rDel.Mode = CipherMode.ECB;
+                rDel.Padding = PaddingMode.PKCS7;
 
-            ICryptoTransform cTransform = rDel.CreateDecryptor();
-            byte[] resultArray = cTransform.TransformFinalBlock(array, 0, array.Length);
+                ICryptoTransform cTransform = rDel.CreateDecryptor();
+                byte[] resultArray = cTransform.TransformFinalBlock(array, 0, array.Length);
 
-            return resultArray;
+                return resultArray;
+            }
+            catch { }
+            return array;
         }
         /// <summary>
         /// 格式化密码
