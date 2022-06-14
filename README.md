@@ -23,11 +23,6 @@ Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具�
 - Email：[yuzhyn@163.com](mailto:yuzhyn@163.com)
 - 在使用过程中，遇到问题可以发邮件，希望能帮助到你，更期待你的建议 ~~~
 
-# 赞助
-如果对您有所帮助，您可以赞赏支持一下哟~
-
-![赞助一下](https://raw.githubusercontent.com/yuzhengyang/Fork/master/Documents/QRCode/00b.jpg)
-
 ---
 
 # 详细介绍
@@ -371,4 +366,9 @@ Fork 是平时做 C# 软件的时候，封装整合各种轮子的一个工具�
 
 ---
 
-以上
+# .其他.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=yuzhengyang/Fork&type=Date)](https://star-history.com/#yuzhengyang/Fork&Date)
+
