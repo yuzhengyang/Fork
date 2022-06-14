@@ -39,12 +39,18 @@ namespace Azylee.Core.DbUtils.DbInterface
         /// <param name="sql"></param>
         /// <returns></returns>
         DataTable SelectWithException(string sql);
-        
+
         /// <summary>
         /// 查询所有数据库名称
         /// </summary>
         /// <returns></returns>
         DataTable SchemaList();
+
+        /// <summary>
+        /// 查询表字段信息列表
+        /// </summary>
+        /// <returns></returns>
+        DataTable ColumnList(string database, string schema,string table);
 
         /// <summary>
         /// 执行文件
