@@ -72,6 +72,14 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// </summary>
         public string Database { get; set; }
         /// <summary>
+        /// SQL执行超时时间
+        /// </summary>
+        public int CommandTimeout { get; set; }
+        /// <summary>
+        /// 系统保留扩展链接字符
+        /// </summary>
+        public string JoinConnectString { get; set; }
+        /// <summary>
         /// 扩展连接字符串
         /// </summary>
         public string ExtConnectString { get; set; }
@@ -93,7 +101,8 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// <param name="database"></param>
         /// <param name="extConnectString"></param>
         /// <param name="desc"></param>
-        public AppConfigDbItem(int number, string type, string name, string server, string port, string userid, string password, string database, string extConnectString, string desc)
+        /// <param name="commandTimeout"></param>
+        public AppConfigDbItem(int number, string type, string name, string server, string port, string userid, string password, string database, string extConnectString, string desc, int commandTimeout)
         {
             Number = number;
             Type = type;
@@ -105,6 +114,7 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             Database = database;
             ExtConnectString = extConnectString;
             Desc = desc;
+            CommandTimeout = commandTimeout;
         }
 
         public DatabaseType DbType()
@@ -131,13 +141,13 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             {
                 case DatabaseType.PostgreSQL:
                     {
-                        return $"Server = {Server}; Port = {(Str.Ok(Port) ? Port : "3306")}; User Id = {UserId}; Password = {GetPasswordEnc()}; Database = {database}; {ExtConnectString}";
+                        return $"Server = {Server}; Port = {(Str.Ok(Port) ? Port : "3306")}; User Id = {UserId}; Password = {GetPasswordEnc()}; Database = {database}; {JoinConnectString} {ExtConnectString}";
                     }
 
                 case DatabaseType.Mysql:
                 default:
                     {
-                        return $"server = {Server}; port = {(Str.Ok(Port) ? Port : "3306")}; userid = {UserId}; password = {GetPasswordEnc()}; database = {database}; persistsecurityinfo = True; {ExtConnectString}";
+                        return $"server = {Server}; port = {(Str.Ok(Port) ? Port : "3306")}; userid = {UserId}; password = {GetPasswordEnc()}; database = {database}; persistsecurityinfo = True; {JoinConnectString} {ExtConnectString}";
                     }
             }
         }

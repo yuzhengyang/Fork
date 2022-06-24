@@ -1,4 +1,5 @@
 ﻿using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Core.DataUtils.StringUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +78,8 @@ namespace Azylee.Core.WindowsUtils.ConsoleUtils
 
         public static string FormatLine(string value)
         {
+            if (!Str.Ok(value)) return "";
+
             string s = value;
             try
             {
