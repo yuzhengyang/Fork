@@ -7,6 +7,11 @@ namespace Azylee.Core.DataUtils.StringUtils
 {
     public class NameFormat
     {
+        /// <summary>
+        /// 转换为驼峰命名
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static string ToCamelCase(string s)
         {
             string result = "";
@@ -42,6 +47,11 @@ namespace Azylee.Core.DataUtils.StringUtils
             }
             return result;
         }
+        /// <summary>
+        /// 转换为驼峰命名（首字母大写）
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static string ToUpCamelCase(string s)
         {
             string result = "";
@@ -71,6 +81,11 @@ namespace Azylee.Core.DataUtils.StringUtils
             }
             return result;
         }
+        /// <summary>
+        /// 转换为下划线命名
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static string ToUnderline(string s)
         {
             string result = "";
