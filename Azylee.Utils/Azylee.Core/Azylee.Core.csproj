@@ -112,6 +112,7 @@
     <Compile Include="IOUtils\FileUtils\FileFinder.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageModel.cs" />
     <Compile Include="IOUtils\FileUtils\FilePackageTool.cs" />
+    <Compile Include="IOUtils\FileUtils\FileTimeTool.cs" />
     <Compile Include="IOUtils\FileUtils\FileTool.cs" />
     <Compile Include="IOUtils\ImageUtils\AffineTool.cs" />
     <Compile Include="IOUtils\ImageUtils\BarCodeToHTML.cs" />
