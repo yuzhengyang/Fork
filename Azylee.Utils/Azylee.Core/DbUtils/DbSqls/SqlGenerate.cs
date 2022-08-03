@@ -18,12 +18,14 @@ namespace Azylee.Core.DbUtils.DbSqls
         /// </summary>
         /// <param name="tableName">表名</param>
         /// <param name="table">数据表</param>
-        /// <param name="insertSql">插入语句，默认：INSERT INTO，可自定义为：INSERT IGNORE INTO</param>
         /// <param name="splitLine">按VALUES分割行</param>
         /// <param name="spaceLine">每行间隔空行</param>
+        /// <param name="insertSql">插入语句，默认：INSERT INTO，可自定义为：INSERT IGNORE INTO</param>
         /// <returns></returns>
-        public static List<string> Insert(string tableName, DataTable table, string insertSql = "INSERT INTO", bool splitLine = false, bool spaceLine = false)
+        public static List<string> Insert(string tableName, DataTable table, bool splitLine = false, bool spaceLine = false, string insertSql = "INSERT INTO")
         {
+            if (!StringTool.Ok(insertSql)) insertSql = "INSERT INTO";
+
             List<string> list = new List<string>();
             if (DataTableTool.Ok(table))
             {
