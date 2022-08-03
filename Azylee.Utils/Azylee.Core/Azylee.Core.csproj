@@ -66,6 +66,8 @@
     <Compile Include="DataUtils\CollectionUtils\Ls.cs" />
     <Compile Include="DataUtils\CompressionUtils\Compression.cs" />
     <Compile Include="DataUtils\CurrencyUtils\RMB.cs" />
+    <Compile Include="DataUtils\DataTableUtils\DataRowTool.cs" />
+    <Compile Include="DataUtils\DataTableUtils\DataTableTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\ChineseHourTool.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeFormatter.cs" />
     <Compile Include="DataUtils\DateTimeUtils\DateTimeConvert.cs" />
@@ -88,12 +90,14 @@
     <Compile Include="DataUtils\StringUtils\Str.cs" />
     <Compile Include="DataUtils\StringUtils\StringArrayTool.cs" />
     <Compile Include="DataUtils\StringUtils\StringExtension.cs" />
+    <Compile Include="DataUtils\StringUtils\StringFinder.cs" />
     <Compile Include="DataUtils\StringUtils\StringGenerator.cs" />
     <Compile Include="DataUtils\StringUtils\StringTool.cs" />
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertTool.cs" />
     <Compile Include="DbUtils\DbModels\DatabaseType.cs" />
     <Compile Include="DbUtils\DbInterface\IDatabaseHelper.cs" />
     <Compile Include="DbUtils\DbSqls\DbSqlTool.cs" />
+    <Compile Include="DbUtils\DbSqls\SqlGenerate.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressDelegate.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressEventArgs.cs" />
     <Compile Include="DllUtils\DllInvokeTool.cs" />
