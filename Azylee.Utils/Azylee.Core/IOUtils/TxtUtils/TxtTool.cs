@@ -15,12 +15,12 @@ namespace Azylee.Core.IOUtils.TxtUtils
 {
     public class TxtTool
     {
-        public static bool Append(string file, List<string> txt)
+        public static bool Append(string file, List<string> txt, bool append = true)
         {
             try
             {
                 DirTool.Create(Path.GetDirectoryName(file));
-                using (StreamWriter sw = new StreamWriter(file, true))
+                using (StreamWriter sw = new StreamWriter(file, append))
                 {
                     if (!ListTool.IsNullOrEmpty(txt))
                         foreach (var t in txt)
@@ -31,12 +31,12 @@ namespace Azylee.Core.IOUtils.TxtUtils
             catch (Exception e) { }
             return false;
         }
-        public static bool Append(string file, string txt)
+        public static bool Append(string file, string txt, bool append = true)
         {
             try
             {
                 DirTool.Create(Path.GetDirectoryName(file));
-                using (StreamWriter sw = new StreamWriter(file, true))
+                using (StreamWriter sw = new StreamWriter(file, append))
                 {
                     sw.WriteLine(txt);
                 }
@@ -107,7 +107,7 @@ namespace Azylee.Core.IOUtils.TxtUtils
             }
             catch (Exception e) { }
         }
-        public static void ReadLine(string file,Encoding encoding, Action<int, string> action)
+        public static void ReadLine(string file, Encoding encoding, Action<int, string> action)
         {
             try
             {
