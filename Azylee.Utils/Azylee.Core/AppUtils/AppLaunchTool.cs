@@ -122,5 +122,43 @@ namespace Azylee.Core.AppUtils
             if (version != null && Str.Ok(startFile)) return true;
             return false;
         }
+
+        public static List<Version> GetAllVersion(string route, string exeFile)
+        {
+            List<Version> versions = new List<Version>();
+
+            //判断路径是文件还是文件夹，并统一处理为文件夹
+            string appPath = route;
+            if (FileTool.IsFile(route))
+                appPath = DirTool.GetFilePath(route);
+
+            if (Directory.Exists(appPath))
+            {
+                //获取运行目录下所有文件
+                List<string> paths = DirTool.GetPath(appPath);
+                if (ListTool.HasElements(paths))
+                {
+                    foreach (var path in paths)
+                    {
+                        //只解析文件名带三个点的文件夹
+                        string filename = Path.GetFileName(path);
+                        if (StringTool.SubStringCount(filename, ".") == 3)
+                        {
+                            try
+                            {
+                                Version version = new Version(filename);
+                                string tempFile = DirTool.Combine(path, exeFile);
+                                if (version != null && File.Exists(tempFile))
+                                {
+                                    versions.Add(version);
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                }
+            }
+            return versions;
+        }
     }
 }
