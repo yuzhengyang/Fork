@@ -124,6 +124,8 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
                 case "pg":
                 case "postgresql": return DatabaseType.PostgreSQL;
 
+                case "ddm": return DatabaseType.DDM;
+
                 case "mysql":
                 default:
                     return DatabaseType.Mysql;
@@ -142,6 +144,11 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
                 case DatabaseType.PostgreSQL:
                     {
                         return $"Server = {Server}; Port = {(Str.Ok(Port) ? Port : "3306")}; User Id = {UserId}; Password = {GetPasswordEnc()}; Database = {database}; {JoinConnectString} {ExtConnectString}";
+                    }
+
+                case DatabaseType.DDM:
+                    {
+                        return $"server = {Server}; port = {(Str.Ok(Port) ? Port : "3306")}; userid = {UserId}; password = {GetPasswordEnc()}; database = {database}; persistsecurityinfo = True; {JoinConnectString} {ExtConnectString}";
                     }
 
                 case DatabaseType.Mysql:
@@ -164,7 +171,10 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
                     {
                         return "";
                     }
-
+                case DatabaseType.DDM:
+                    {
+                        return "";
+                    }
                 case DatabaseType.Mysql:
                 default:
                     {
@@ -181,6 +191,7 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             switch (DbType())
             {
                 case DatabaseType.PostgreSQL:
+                case DatabaseType.DDM:
                 case DatabaseType.Mysql:
                 default:
                     {
@@ -199,6 +210,8 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             {
                 case DatabaseType.PostgreSQL:
                     return "SELECT datname AS schema_name FROM pg_database";
+
+                case DatabaseType.DDM: return "SHOW DATABASES";
 
                 case DatabaseType.Mysql:
                 default:

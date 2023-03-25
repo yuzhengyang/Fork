@@ -8,6 +8,7 @@ namespace Azylee.Core.DbUtils.DbModels
     public enum DatabaseType
     {
         Mysql,
-        PostgreSQL
+        PostgreSQL,
+        DDM
     }
 }

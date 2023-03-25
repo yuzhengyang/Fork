@@ -11,14 +11,14 @@ namespace Azylee.Core.IOUtils.FileUtils
     /// <summary>
     /// 获取文件特征码（MD5，SHA1）
     /// </summary>
-    public class FileCodeTool
+    public static class FileCodeTool
     {
         /// <summary>
         /// 计算文件的 MD5 值
         /// </summary>
         /// <param name="fileName">要计算 MD5 值的文件名和路径</param>
         /// <returns>MD5 值16进制字符串</returns>
-        public string GetMD5(string fileName)
+        public static string GetMD5(string fileName)
         {
             return HashFile(fileName, "md5");
         }
@@ -28,7 +28,7 @@ namespace Azylee.Core.IOUtils.FileUtils
         /// </summary>
         /// <param name="fileName">要计算 sha1 值的文件名和路径</param>
         /// <returns>sha1 值16进制字符串</returns>
-        public string GetSHA1(string fileName)
+        public static string GetSHA1(string fileName)
         {
             return HashFile(fileName, "sha1");
         }
@@ -39,7 +39,7 @@ namespace Azylee.Core.IOUtils.FileUtils
         /// <param name="fileName">要计算哈希值的文件名和路径</param>
         /// <param name="algName">算法:sha1,md5</param>
         /// <returns>哈希值16进制字符串</returns>
-        private string HashFile(string fileName, string algName)
+        private static string HashFile(string fileName, string algName)
         {
             if (!System.IO.File.Exists(fileName))
                 return string.Empty;
@@ -56,7 +56,7 @@ namespace Azylee.Core.IOUtils.FileUtils
         /// <param name="stream">要计算哈希值的 Stream</param>
         /// <param name="algName">算法:sha1,md5</param>
         /// <returns>哈希值字节数组</returns>
-        private byte[] HashData(System.IO.Stream stream, string algName)
+        private static byte[] HashData(System.IO.Stream stream, string algName)
         {
             System.Security.Cryptography.HashAlgorithm algorithm;
             if (algName == null)
@@ -81,7 +81,7 @@ namespace Azylee.Core.IOUtils.FileUtils
         /// <summary>
         /// 字节数组转换为16进制表示的字符串
         /// </summary>
-        private string ByteArrayToHexString(byte[] buf)
+        private static string ByteArrayToHexString(byte[] buf)
         {
             return BitConverter.ToString(buf).Replace("-", "");
         }

@@ -105,5 +105,24 @@ namespace Azylee.Core.DataUtils.StringUtils
             }
             return result;
         }
+
+        public static string Format(string s, NameType nameType)
+        {
+            switch (nameType)
+            {
+                case NameType.CAMEL:
+                    return ToCamelCase(s);
+
+                case NameType.UPPER_CAMEL:
+                    return ToUpCamelCase(s);
+
+                case NameType.UNDER_LINE:
+                    return ToUnderline(s);
+
+                case NameType.NONE:
+                default:
+                    return s;
+            }
+        }
     }
 }

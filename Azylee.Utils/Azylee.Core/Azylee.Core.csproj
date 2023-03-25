@@ -87,6 +87,7 @@
     <Compile Include="DataUtils\GuidUtils\GuidTool.cs" />
     <Compile Include="DataUtils\SerializeUtils\SerializeTool.cs" />
     <Compile Include="DataUtils\StringUtils\NameFormat.cs" />
+    <Compile Include="DataUtils\StringUtils\NameType.cs" />
     <Compile Include="DataUtils\StringUtils\Str.cs" />
     <Compile Include="DataUtils\StringUtils\StringArrayTool.cs" />
     <Compile Include="DataUtils\StringUtils\StringExtension.cs" />
@@ -96,6 +97,8 @@
     <Compile Include="DataUtils\UnitConvertUtils\ByteConvertTool.cs" />
     <Compile Include="DbUtils\DbModels\DatabaseType.cs" />
     <Compile Include="DbUtils\DbInterface\IDatabaseHelper.cs" />
+    <Compile Include="DbUtils\DbModels\DbmColumn.cs" />
+    <Compile Include="DbUtils\DbModels\DbmTable.cs" />
     <Compile Include="DbUtils\DbSqls\DbSqlTool.cs" />
     <Compile Include="DbUtils\DbSqls\SqlGenerate.cs" />
     <Compile Include="DelegateUtils\ProcessDelegateUtils\ProgressDelegate.cs" />

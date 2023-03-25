@@ -59,5 +59,31 @@ namespace Azylee.Core.DbUtils.DbInterface
         /// <param name="action">执行后动作（执行语句，是否成功，影响行数，异常提示信息）</param>
         /// <returns></returns>
         Tuple<bool, int, string> ExecuteFile(string SqlFile, Action<string, bool, int, string> action);
+        /// <summary>
+        /// 执行文件SQL（一段SQL脚本）
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        Tuple<bool, int, string> ExecuteFileSql(string sql);
+        /// <summary>
+        /// 执行SQL（返回影响行数）
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        int ExecuteNonQuery(string sql);
+        /// <summary>
+        /// 查询表清单
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        List<DbmTable> QueryTables(string key = "");
+        /// <summary>
+        /// 查询表字段列表
+        /// </summary>
+        /// <param name="database"></param>
+        /// <param name="schema"></param>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        List<DbmColumn> QueryColumns(string database, string schema, string table);
     }
 }
