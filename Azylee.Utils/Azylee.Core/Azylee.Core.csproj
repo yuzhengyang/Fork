@@ -106,6 +106,8 @@
     <Compile Include="DllUtils\DllInvokeTool.cs" />
     <Compile Include="DrawingUtils\ColorUtils\ColorStyle.cs" />
     <Compile Include="DrawingUtils\ImageUtils\IMG.cs" />
+    <Compile Include="ExtensionUtils\StringBuilderExtension.cs" />
+    <Compile Include="ExtensionUtils\DictionaryExtension.cs" />
     <Compile Include="FormUtils\FormManTool.cs" />
     <Compile Include="FormUtils\FormModuleUtils\FormModuleManTool.cs" />
     <Compile Include="FormUtils\FormModuleUtils\IModuleForm.cs" />

@@ -21,13 +21,15 @@ namespace Azylee.Core.WindowsUtils.BrowserUtils
         {
             browser = "";
 
+            string edge_86 = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
             string chrome = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
             string chrome_86 = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
             string chrome_app = @"C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chrome.exe";
             string firefox = @"C:\Program Files\Mozilla Firefox\firefox.exe";
             string firefox_86 = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
 
-            if (File.Exists(chrome)) browser = chrome;
+            if (File.Exists(edge_86)) browser = edge_86;
+            else if (File.Exists(chrome)) browser = chrome;
             else if (File.Exists(chrome_86)) browser = chrome_86;
             else if (File.Exists(chrome_app)) browser = chrome_app;
             else if (File.Exists(firefox)) browser = firefox;

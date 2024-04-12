@@ -29,5 +29,10 @@ namespace Test.Runrun
             MessageBox.Show($"确认管理员密码为：{ AdminTool.CheckPasswords(pwdlist)}");
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

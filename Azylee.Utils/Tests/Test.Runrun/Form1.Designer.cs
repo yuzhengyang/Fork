@@ -36,9 +36,10 @@
             // 
             // BTRun
             // 
-            this.BTRun.Location = new System.Drawing.Point(197, 11);
+            this.BTRun.Location = new System.Drawing.Point(263, 14);
+            this.BTRun.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BTRun.Name = "BTRun";
-            this.BTRun.Size = new System.Drawing.Size(75, 23);
+            this.BTRun.Size = new System.Drawing.Size(100, 29);
             this.BTRun.TabIndex = 0;
             this.BTRun.Text = "运行";
             this.BTRun.UseVisualStyleBackColor = true;
@@ -46,37 +47,42 @@
             // 
             // TBUsername
             // 
-            this.TBUsername.Location = new System.Drawing.Point(13, 13);
+            this.TBUsername.Location = new System.Drawing.Point(17, 16);
+            this.TBUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TBUsername.Name = "TBUsername";
-            this.TBUsername.Size = new System.Drawing.Size(100, 21);
+            this.TBUsername.Size = new System.Drawing.Size(132, 25);
             this.TBUsername.TabIndex = 1;
             // 
             // TBPassword
             // 
-            this.TBPassword.Location = new System.Drawing.Point(13, 40);
+            this.TBPassword.Location = new System.Drawing.Point(17, 50);
+            this.TBPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TBPassword.Name = "TBPassword";
-            this.TBPassword.Size = new System.Drawing.Size(100, 21);
+            this.TBPassword.Size = new System.Drawing.Size(132, 25);
             this.TBPassword.TabIndex = 2;
             // 
             // TBApp
             // 
-            this.TBApp.Location = new System.Drawing.Point(12, 136);
+            this.TBApp.Location = new System.Drawing.Point(16, 170);
+            this.TBApp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TBApp.Multiline = true;
             this.TBApp.Name = "TBApp";
-            this.TBApp.Size = new System.Drawing.Size(260, 100);
+            this.TBApp.Size = new System.Drawing.Size(345, 124);
             this.TBApp.TabIndex = 3;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(379, 326);
             this.Controls.Add(this.TBApp);
             this.Controls.Add(this.TBPassword);
             this.Controls.Add(this.TBUsername);
             this.Controls.Add(this.BTRun);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

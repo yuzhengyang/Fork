@@ -9,6 +9,7 @@ namespace Azylee.Core.DbUtils.DbModels
     {
         Mysql,
         PostgreSQL,
-        DDM
+        DDM,
+        StarRocks
     }
 }

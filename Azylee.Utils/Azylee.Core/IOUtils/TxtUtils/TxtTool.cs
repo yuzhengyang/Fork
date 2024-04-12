@@ -5,6 +5,7 @@
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
 using Azylee.Core.DataUtils.CollectionUtils;
+using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.IOUtils.DirUtils;
 using System;
 using System.Collections.Generic;
@@ -77,11 +78,45 @@ namespace Azylee.Core.IOUtils.TxtUtils
             catch { }
             return null;
         }
+        public static string Read(string file, Encoding encoding)
+        {
+            try
+            {
+                if (File.Exists(file))
+                {
+                    using (StreamReader sr = new StreamReader(file, encoding))
+                    {
+                        string result = "", line;
+                        while ((line = sr.ReadLine()) != null)
+                            result += line.ToString();
+                        return result;
+                    }
+                }
+            }
+            catch { }
+            return null;
+        }
         public static List<string> ReadLine(string file)
         {
             try
             {
                 using (StreamReader sr = new StreamReader(file, Encoding.UTF8))
+                {
+                    List<string> result = new List<string>();
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                        result.Add(line.ToString());
+                    return result;
+                }
+            }
+            catch (Exception e) { }
+            return null;
+        }
+        public static List<string> ReadLine(string file, Encoding encoding)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(file, encoding))
                 {
                     List<string> result = new List<string>();
                     string line;
@@ -145,6 +180,72 @@ namespace Azylee.Core.IOUtils.TxtUtils
             }
             catch (Exception e) { }
             return count;
+        }
+
+        /// <summary>
+        /// 替换执行文件文本块
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="begString"></param>
+        /// <param name="endString"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static bool ReplaceBlock(string file, string begString, string endString, List<string> content)
+        {
+            if (Str.Ok(file) && File.Exists(file))
+            {
+                List<string> result = new List<string>();
+                int begIndex = 0, endIndex = 0;
+
+                // 找到标记位置
+                List<string> txt = TxtTool.ReadLine(file);
+                if (Ls.Ok(txt))
+                {
+                    for (int i = 0; i < txt.Count; i++)
+                    {
+                        // 找到要替换内容的开始行和结束行
+                        if (txt[i].StartsWith(begString)) begIndex = i;
+                        if (txt[i].StartsWith(endString)) endIndex = i;
+                    }
+                }
+                else
+                {
+                    txt = new List<string>();
+                }
+                // 整理输出内容
+                if (begIndex < endIndex)
+                {
+                    List<string> upPart = txt.GetRange(0, begIndex + 1);
+                    List<string> downPart = txt.GetRange(endIndex, txt.Count - endIndex);
+
+                    result.AddRange(upPart);
+                    result.AddRange(content);
+                    result.AddRange(downPart);
+                }
+                else
+                {
+                    result.AddRange(txt);
+                    result.Add("");
+                    result.Add(begString);
+                    result.AddRange(content);
+                    result.Add(endString);
+                }
+                // 写出文件
+                try
+                {
+                    var utf8WithoutBom = new UTF8Encoding(false);
+                    using (StreamWriter sw = new StreamWriter(file, false, utf8WithoutBom))
+                    {
+                        foreach (var line in result)
+                        {
+                            sw.WriteLine(line);
+                        }
+                    }
+                    return true;
+                }
+                catch (Exception ex) { }
+            }
+            return false;
         }
     }
 }

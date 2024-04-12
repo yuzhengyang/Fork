@@ -126,6 +126,8 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
 
                 case "ddm": return DatabaseType.DDM;
 
+                case "starrocks": return DatabaseType.StarRocks;
+
                 case "mysql":
                 default:
                     return DatabaseType.Mysql;
@@ -149,6 +151,11 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
                 case DatabaseType.DDM:
                     {
                         return $"server = {Server}; port = {(Str.Ok(Port) ? Port : "3306")}; userid = {UserId}; password = {GetPasswordEnc()}; database = {database}; persistsecurityinfo = True; {JoinConnectString} {ExtConnectString}";
+                    }
+
+                case DatabaseType.StarRocks:
+                    {
+                        return $"server = {Server}; port = {(Str.Ok(Port) ? Port : "9030")}; userid = {UserId}; password = {GetPasswordEnc()}; database = {database}; persistsecurityinfo = True; {JoinConnectString} {ExtConnectString}";
                     }
 
                 case DatabaseType.Mysql:

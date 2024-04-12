@@ -50,15 +50,17 @@ namespace Azylee.Core.DbUtils.DbInterface
         /// 查询表字段信息列表
         /// </summary>
         /// <returns></returns>
-        DataTable ColumnList(string database, string schema,string table);
+        DataTable ColumnList(string database, string schema, string table);
 
         /// <summary>
         /// 执行文件
         /// </summary>
         /// <param name="SqlFile">执行文件路径</param>
+        /// <param name="runParams">执行文件参数控制</param>
+        /// <param name="repParams">替换参数</param>
         /// <param name="action">执行后动作（执行语句，是否成功，影响行数，异常提示信息）</param>
         /// <returns></returns>
-        Tuple<bool, int, string> ExecuteFile(string SqlFile, Action<string, bool, int, string> action);
+        Tuple<bool, int, string> ExecuteFile(string SqlFile, Dictionary<string, string> runParams, Dictionary<string, string> repParams, Action<string, bool, int, string> action);
         /// <summary>
         /// 执行文件SQL（一段SQL脚本）
         /// </summary>
