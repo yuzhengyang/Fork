@@ -10,9 +10,9 @@ namespace Azylee.YeahWeb.HttpUtils
 {
     public class HttpToolPlus
     {
-        public static string Get(string url, ref CookieCollection cookie, Dictionary<string, string> headers = null, string contentType = HttpContentTypes.ApplicationXWwwFormUrlEncoded, bool autoRedirect = false, bool keepAlive = true, string userAgent = UserAgents.Mozilla4)
+        public static string Get(string url, ref CookieCollection cookie, Encoding encoding= null, Dictionary<string, string> headers = null, string contentType = HttpContentTypes.ApplicationXWwwFormUrlEncoded, bool autoRedirect = false, bool keepAlive = true, string userAgent = UserAgents.Mozilla4)
         {
-            return GetToolPlus.Get(url, ref cookie, headers = null, contentType, autoRedirect, keepAlive, userAgent);
+            return GetToolPlus.Get(url, ref cookie, encoding, headers, contentType, autoRedirect, keepAlive, userAgent);
         }
         public static string Post(string url, ref CookieCollection cookie, Dictionary<string, string> data = null, Encoding encoding = null, Dictionary<string, string> headers = null, string contentType = HttpContentTypes.ApplicationXWwwFormUrlEncoded, bool autoRedirect = true, bool keepAlive = true, string userAgent = UserAgents.Mozilla4)
         {

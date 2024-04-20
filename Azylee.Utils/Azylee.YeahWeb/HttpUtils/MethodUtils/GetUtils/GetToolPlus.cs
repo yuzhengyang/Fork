@@ -11,7 +11,7 @@ namespace Azylee.YeahWeb.HttpUtils.MethodUtils.GetUtils
 {
     internal static class GetToolPlus
     {
-        internal static string Get(string url, ref CookieCollection cookie, Dictionary<string, string> headers = null, string contentType = HttpContentTypes.ApplicationXWwwFormUrlEncoded, bool autoRedirect = false, bool keepAlive = true, string userAgent = UserAgents.Mozilla4)
+        internal static string Get(string url, ref CookieCollection cookie, Encoding encoding, Dictionary<string, string> headers = null, string contentType = HttpContentTypes.ApplicationXWwwFormUrlEncoded, bool autoRedirect = false, bool keepAlive = true, string userAgent = UserAgents.Mozilla4)
         {
             string html = "";
             Stream stream = null;
@@ -31,7 +31,7 @@ namespace Azylee.YeahWeb.HttpUtils.MethodUtils.GetUtils
                 response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
                 cookie = response.Cookies;
                 stream = response.GetResponseStream();
-                reader = new StreamReader(stream, Encoding.Default);
+                reader = new StreamReader(stream, encoding == null ? Encoding.Default : encoding);
                 html = reader.ReadToEnd();
             }
             catch

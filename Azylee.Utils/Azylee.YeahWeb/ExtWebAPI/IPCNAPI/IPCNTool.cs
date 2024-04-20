@@ -22,7 +22,7 @@ namespace Azylee.YeahWeb.ExtWebAPI.IPCNAPI
             try
             {
                 CookieCollection cookie = new CookieCollection();
-                string rss1 = HttpToolPlus.Get(URL, ref cookie);
+                string rss1 = HttpToolPlus.Get(URL, ref cookie, Encoding.UTF8);
                 Dictionary<string, string> model = Json.String2Object<Dictionary<string, string>>(rss1);
 
                 string ip = "", address = "";

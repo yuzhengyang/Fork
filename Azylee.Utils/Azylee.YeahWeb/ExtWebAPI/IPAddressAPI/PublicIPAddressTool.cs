@@ -14,6 +14,8 @@ namespace Azylee.YeahWeb.ExtWebAPI.IPAddressAPI
     public class PublicIPAddressTool
     {
         const string URL = "http://pv.sohu.com/cityjson?ie=utf-8";
+        const string URL_IP = "https://www.ipplus360.com/getIP";
+        const string URL_LOC = "https://www.ipplus360.com/getLocation";
 
         /// <summary>
         /// 获取公网IP地址API
@@ -41,6 +43,22 @@ namespace Azylee.YeahWeb.ExtWebAPI.IPAddressAPI
                 }
             }
             return null;
+        }
+
+        public static string GetIp()
+        {
+            string ip = "";
+            try
+            {
+                Dictionary<string, string> keyValuePairs = HttpTool.Get<Dictionary<string, string>>(URL_IP);
+            }catch(Exception ex) { }
+            return ip;
+        }
+
+        public static string GetLocation()
+        {
+            string location = "";
+            return location;
         }
     }
 }

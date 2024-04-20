@@ -14,48 +14,10 @@ namespace Test.YeahWeb
     {
         static void Main(string[] args)
         {
-            //Log log = new Log(true,LogLevel.All,LogLevel.All);
+            var result = IPCNTool.Get();
 
-            string s = "org_plu_share[0-500]";
-            List<string> list = StringGenerator.CreateByNumberSection(s);
-            foreach (var item in list)
-            {
-                Console.Write(item);
-                Console.Write("\t");
-            }
+            var rs2 = IPLocationTool.GetLocation();
 
-
-            // var s = IPLocationTool.GetLocation();
-            //var st =  PublicIPAddressTool.GetPublicIP();
-            // var sss = IPCNTool.Get();
-            // if (s != null)
-            // {
-
-            // }
-
-
-
-
-
-            //var rs = DwzTool.Create("", "http://www.baidu.com");
-            //Console.WriteLine(Json.Object2String(rs));
-
-
-            //PictureScener.GetInfo(1107006764,(int)TimeStampTool.Get(), "",);
-
-            //if (GPSConverter.DeviceGPSToBaiduGPS("", 120.379235583333, 36.19172925, out double x, out double y))
-            //{
-            //    Console.WriteLine($"120.379235583333 - 36.19172925");
-            //    Console.WriteLine($"{x} - {y}");
-            //}
-
-
-            //GPSInfoWebModel model = GPSInfoTool.GetInfo("", 40.039669, 252.129464);
-            //if (model != null)
-            //{
-            //    GPSInfoModel info = model.ToGPSInfoModel();
-            //    Console.WriteLine(info);
-            //}
             Console.ReadLine();
         }
     }
