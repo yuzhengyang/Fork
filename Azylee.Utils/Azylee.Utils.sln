@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30330.147
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Utils", "Azylee.Utils\Azylee.Utils.csproj", "{2D67AEF9-0238-49A5-A8C1-BE147A11C194}"
 EndProject
@@ -48,6 +48,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.SysServiceApp", "Tests\Test.SysServiceApp\Test.SysServiceApp.csproj", "{CFDD901D-004E-4336-B949-46B7128180C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Ges", "Tests\Test.Ges\Test.Ges.csproj", "{1F6EB599-4A0B-423D-AE00-D42D9286F25C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolkits", "Toolkits", "{9840D177-6D2B-42DC-9790-5AE88A9309B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Launch", "Azylee.Launch\Azylee.Launch.csproj", "{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +139,10 @@ Global
 		{1F6EB599-4A0B-423D-AE00-D42D9286F25C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F6EB599-4A0B-423D-AE00-D42D9286F25C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F6EB599-4A0B-423D-AE00-D42D9286F25C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,6 +167,7 @@ Global
 		{A5702F35-A589-4F03-9468-72BD4A6B57A9} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{CFDD901D-004E-4336-B949-46B7128180C6} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{1F6EB599-4A0B-423D-AE00-D42D9286F25C} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
+		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73} = {9840D177-6D2B-42DC-9790-5AE88A9309B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A021A3E-4C98-47CD-B4E8-912E12611C2E}
