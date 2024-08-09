@@ -1,9 +1,11 @@
 ﻿using Azylee.Core.AppUtils;
 using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.IOUtils.DirUtils;
+using Azylee.Core.IOUtils.FileUtils;
 using Azylee.Core.IOUtils.TxtUtils;
 using Azylee.Core.ProcessUtils;
 using Azylee.Core.ThreadUtils.SleepUtils;
+using Azylee.Core.VersionUtils;
 using Azylee.Core.WindowsUtils.CMDUtils;
 using System;
 using System.Collections.Generic;
@@ -31,7 +33,6 @@ namespace Azylee.Launch
             string appName = IniTool.GetString(bootstrap, "app", "name", "");
             string appFile = IniTool.GetString(bootstrap, "app", "file", "");
             string appType = IniTool.GetString(bootstrap, "app", "type", "");
-            string currentVersion = IniTool.GetString(bootstrap, "version", "current", "");
             string readyVersion = IniTool.GetString(bootstrap, "version", "ready", "");
 
             //程序单开验证
@@ -44,8 +45,24 @@ namespace Azylee.Launch
                 // 执行最新准备好的版本
                 if (StringTool.Ok(readyVersion))
                 {
+                    // 优先读取准备就绪的版本号
                     string runAppFile = DirTool.Combine(app, readyVersion, appFile);
-                    if (Str.Ok(readyVersion) && File.Exists(runAppFile))
+
+                    // 如果没有准备就绪的版本号程序，则获取文件夹中最大的版本号文件夹
+                    if (!File.Exists(runAppFile))
+                    {
+                        if (AppLaunchTool.GetNewVersion(app, appFile, out Version version, out string startFile))
+                        {
+                            readyVersion = version.ToString();
+                            runAppFile = startFile;
+                        }
+                    }
+
+                    // 写入当前启动程序的版本号信息
+                    IniTool.Set(bootstrap, "version", "current", readyVersion);
+
+                    // 根据配置的类型，启动程序
+                    if (File.Exists(runAppFile))
                     {
                         switch (appType)
                         {
