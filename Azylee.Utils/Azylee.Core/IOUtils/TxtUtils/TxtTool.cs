@@ -46,12 +46,13 @@ namespace Azylee.Core.IOUtils.TxtUtils
             catch (Exception e) { }
             return false;
         }
-        public static bool Create(string file, string txt)
+        public static bool Create(string file, string txt, string encoding="utf-8")
         {
             try
             {
+                Encoding enc = Encoding.GetEncoding(encoding);
                 DirTool.Create(Path.GetDirectoryName(file));
-                using (StreamWriter sw = new StreamWriter(file, false, Encoding.UTF8))
+                using (StreamWriter sw = new StreamWriter(file, false, enc))
                 {
                     sw.WriteLine(txt);
                 }
