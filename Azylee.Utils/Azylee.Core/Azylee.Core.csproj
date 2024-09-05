@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AppUtils\AppConfigUtils\AppConfig.cs" />
     <Compile Include="AppUtils\AppConfigUtils\AppConfigInterfaces\IAppConfigItemModel.cs" />
+    <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigSshItem.cs" />
     <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigDbItem.cs" />
     <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigEmailItem.cs" />
     <Compile Include="AppUtils\AppConfigUtils\AppConfigModels\AppConfigFileItem.cs" />
