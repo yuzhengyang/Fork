@@ -41,6 +41,21 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// 登录用户密码
         /// </summary>
         public string Password { get; set; }
+
+        /// <summary>
+        /// 获取数字格式的端口号
+        /// </summary>
+        /// <returns></returns>
+        public int GetPort()
+        {
+            if (int.TryParse(Port, out int pt)) return pt;
+            return 22;
+        }
+
+        /// <summary>
+        /// 设置密码并加密存储
+        /// </summary>
+        /// <param name="value"></param>
         public void SetPasswordEnc(string value)
         {
             if (Str.Ok(value) && !value.StartsWith(PASSWORD_ENC_SIGN))
@@ -52,6 +67,10 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
                 Password = value ?? "";
             }
         }
+        /// <summary>
+        /// 获取真实密码
+        /// </summary>
+        /// <returns></returns>
         public string GetPasswordEnc()
         {
             if (Str.Ok(Password) && Password.StartsWith(PASSWORD_ENC_SIGN))
