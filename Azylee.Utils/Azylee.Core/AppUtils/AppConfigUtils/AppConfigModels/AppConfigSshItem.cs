@@ -41,6 +41,18 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// 登录用户密码
         /// </summary>
         public string Password { get; set; }
+        /// <summary>
+        /// 高权限用户
+        /// </summary>
+        public string SuUsername { get; set; }
+        /// <summary>
+        /// 高权限用户密码
+        /// </summary>
+        public string SuPassword { get; set; }
+        /// <summary>
+        /// 登陆后自动AutoSu
+        /// </summary>
+        public bool AutoSu { get; set; }
 
         /// <summary>
         /// 获取数字格式的端口号
@@ -82,6 +94,36 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
                 return Password;
             }
         }
+        /// <summary>
+        /// 设置密码并加密存储
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetSuPasswordEnc(string value)
+        {
+            if (Str.Ok(value) && !value.StartsWith(PASSWORD_ENC_SIGN))
+            {
+                SuPassword = PASSWORD_ENC_SIGN + AesTool.Encrypt(value, PASSWORD_ENC_PWD);
+            }
+            else
+            {
+                SuPassword = value ?? "";
+            }
+        }
+        /// <summary>
+        /// 获取真实密码
+        /// </summary>
+        /// <returns></returns>
+        public string GetSuPasswordEnc()
+        {
+            if (Str.Ok(SuPassword) && SuPassword.StartsWith(PASSWORD_ENC_SIGN))
+            {
+                return AesTool.Decrypt(SuPassword.Substring(PASSWORD_ENC_SIGN.Length), PASSWORD_ENC_PWD);
+            }
+            else
+            {
+                return SuPassword;
+            }
+        }
 
         /// <summary>
         /// 全参数构造函数
@@ -92,7 +134,10 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// <param name="port"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        public AppConfigSshItem(int number, string name, string server, string port, string username, string password)
+        /// <param name="autuSu"></param>
+        /// <param name="suusername"></param>
+        /// <param name="supassword"></param>
+        public AppConfigSshItem(int number, string name, string server, string port, string username, string password, bool autoSu = false, string suusername = "", string supassword = "")
         {
             Number = number;
             Name = name;
@@ -100,6 +145,9 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             Port = port;
             Username = username;
             SetPasswordEnc(password);
+            AutoSu = autoSu;
+            SuUsername = suusername;
+            SetSuPasswordEnc(supassword);
         }
 
         /// <summary>
