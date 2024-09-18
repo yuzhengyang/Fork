@@ -1,4 +1,5 @@
 ﻿using Azylee.Core.AppUtils.AppConfigUtils.AppConfigInterfaces;
+using Azylee.Core.DataUtils.CollectionUtils;
 using Azylee.Core.DataUtils.EncryptUtils;
 using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.DbUtils;
@@ -84,6 +85,10 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// </summary>
         public string ExtConnectString { get; set; }
         /// <summary>
+        /// 自定义替换参数
+        /// </summary>
+        public List<string> CustRepList { get; set; }
+        /// <summary>
         /// 描述信息
         /// </summary>
         public string Desc { get; set; }
@@ -102,7 +107,7 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
         /// <param name="extConnectString"></param>
         /// <param name="desc"></param>
         /// <param name="commandTimeout"></param>
-        public AppConfigDbItem(int number, string type, string name, string server, string port, string userid, string password, string database, string extConnectString, string desc, int commandTimeout)
+        public AppConfigDbItem(int number, string type, string name, string server, string port, string userid, string password, string database, string extConnectString, List<string> custRep, string desc, int commandTimeout)
         {
             Number = number;
             Type = type;
@@ -113,8 +118,35 @@ namespace Azylee.Core.AppUtils.AppConfigUtils.AppConfigModels
             SetPasswordEnc(password);
             Database = database;
             ExtConnectString = extConnectString;
+            CustRepList = custRep;
             Desc = desc;
             CommandTimeout = commandTimeout;
+        }
+
+        /// <summary>
+        /// 获取用户自定义替换参数的对照信息
+        /// 示例：{{$HI.CUSREP=>USER.ACCOUNT1}} 1
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> GetCustRepParams()
+        {
+            if (!Ls.ok(CustRepList)) return null;
+            Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
+            foreach (var item in CustRepList)
+            {
+                string begSign = "{{$HI.CUSREP=>";
+                string endSign = "}}";
+                int endPos = item.IndexOf(endSign);
+                if (item.StartsWith(begSign) && endPos > -1)
+                {
+                    string key = item.Substring(0, endPos);
+                    if (key.Ok()) key = key + endSign;
+                    string val = item.Substring(endPos + endSign.Length);
+                    if (val.Ok()) val = val.Trim();
+                    keyValuePairs[key] = val;
+                }
+            }
+            return keyValuePairs;
         }
 
         public DatabaseType DbType()

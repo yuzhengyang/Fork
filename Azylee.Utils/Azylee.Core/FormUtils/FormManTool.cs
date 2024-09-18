@@ -38,7 +38,7 @@ namespace Azylee.Core.FormUtils
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T GetUnique<T>() where T : Form, new()
+        public T GetUnique<T>(string title = "") where T : Form, new()
         {
             if (UniqueForms.ContainsKey(typeof(T)))
             {
@@ -63,9 +63,25 @@ namespace Azylee.Core.FormUtils
             // 未能返回正确的窗体，则创建新窗体（使用默认new方法）
             T form = new T();
             if (BackColor != null) form.BackColor = (Color)BackColor;
+            form.Text = title + form.Text;
             if (AddUnique(form)) return form;
             return null;
         }
+
+        /// <summary>
+        /// 显示窗口并激活
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="title"></param>
+        /// <param name="icon"></param>
+        public void ShowAndActivate<T>(string title = "", Icon icon = null) where T : Form, new()
+        {
+            GetUnique<T>(title);
+            if (icon != null) GetUnique<T>(title).Icon = icon;
+            GetUnique<T>().Show();
+            GetUnique<T>().Activate();
+        }
+
         private bool AddUnique<T>(T value) where T : Form, new()
         {
             if (!UniqueForms.ContainsKey(typeof(T)))
