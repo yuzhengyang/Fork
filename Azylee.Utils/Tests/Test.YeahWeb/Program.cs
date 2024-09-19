@@ -15,6 +15,27 @@ namespace Test.YeahWeb
     {
         static void Main(string[] args)
         {
+            testKeyValParser();
+
+        }
+
+        public static void testKeyValParser()
+        {
+            string s = "/* {{$HI.CMDST=>WAIT_BEFORE...10}} 执行脚本之前，先等待10秒钟 */\r\n/* {{$HI.CMDST=>WAIT_AFTER...10}} 执行脚本后，等待10秒钟 */";
+            string val1 = StringKeyValParser.GetValue(s, "{{$HI.CMDST=>WAIT_BEFORE", "...", "}}", "0");
+            string val2 = StringKeyValParser.GetValue(s, "{{$HI.CMDST=>WAIT_AFTER", "...", "}}", "0");
+            Console.WriteLine(val1);
+            Console.WriteLine(val2);
+        }
+
+        public static void testIp()
+        {
+            //var result = IPCNTool.Get();
+            //var rs2 = IPLocationTool.GetLocation();
+            //Console.ReadLine();
+        }
+        public static void testCusRep()
+        {
             List<string> CustRepList = new List<string>();
             CustRepList.Add("{{$HI.SYSREP=>USER.ACCOUNT1}}1");
             CustRepList.Add("{{$HI.SYSREP=>USER.ACCOUNT2}}  2");
@@ -34,11 +55,6 @@ namespace Test.YeahWeb
                 }
             }
             Console.WriteLine(keyValuePairs);
-            //var result = IPCNTool.Get();
-
-            //var rs2 = IPLocationTool.GetLocation();
-
-            //Console.ReadLine();
         }
     }
 }
