@@ -15,8 +15,14 @@ namespace Test.YeahWeb
     {
         static void Main(string[] args)
         {
-            testKeyValParser();
+            testUrlCombine();
 
+            Console.ReadLine();
+        }
+
+        public static void testUrlCombine()
+        {
+            Console.WriteLine(UrlTool.Combine("http://www.baidu.com/", "/s/", "/key"));
         }
 
         public static void testKeyValParser()

@@ -38,11 +38,15 @@ namespace Azylee.WinformSkin.FormUI.Toast
                 if (type == 'w' || type == 'W') tt = ToastType.warn;
                 if (type == 'e' || type == 'E') tt = ToastType.error;
 
-                form.SetContent(title, text, tt, time);//设置提示框：标题、文本、类型、时间
-                form.ClickAction = clickAction;//设置单击触发事件
+                form.SetContent(title, text, tt, time); //设置提示框：标题、文本、类型、时间
+                form.ClickAction = clickAction; //设置单击触发事件
                 form.Toast();
             }
-            catch { }
+            catch
+            {
+                try { form?.Close(); } catch { }
+                try { form?.Dispose(); } catch { }
+            }
         }
         /// <summary>
         /// 弹出提示框
@@ -63,7 +67,11 @@ namespace Azylee.WinformSkin.FormUI.Toast
                 form.ClickAction = clickAction;//设置单击触发事件
                 form.Toast();
             }
-            catch { }
+            catch
+            {
+                try { form?.Close(); } catch { }
+                try { form?.Dispose(); } catch { }
+            }
         }
 
         private int TimeSpend = 0;
@@ -241,5 +249,5 @@ namespace Azylee.WinformSkin.FormUI.Toast
         //    }
         //} 
         #endregion
-    } 
+    }
 }

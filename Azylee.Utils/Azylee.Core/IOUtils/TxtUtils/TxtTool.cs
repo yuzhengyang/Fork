@@ -46,7 +46,7 @@ namespace Azylee.Core.IOUtils.TxtUtils
             catch (Exception e) { }
             return false;
         }
-        public static bool Create(string file, string txt, string encoding="utf-8")
+        public static bool Create(string file, string txt, string encoding = "utf-8")
         {
             try
             {
@@ -55,6 +55,23 @@ namespace Azylee.Core.IOUtils.TxtUtils
                 using (StreamWriter sw = new StreamWriter(file, false, enc))
                 {
                     sw.WriteLine(txt);
+                }
+                return true;
+            }
+            catch (Exception e) { }
+            return false;
+        }
+        public static bool Create(string file, List<string> txt, string encoding = "utf-8")
+        {
+            try
+            {
+                Encoding enc = Encoding.GetEncoding(encoding);
+                DirTool.Create(Path.GetDirectoryName(file));
+                using (StreamWriter sw = new StreamWriter(file, false, enc))
+                {
+                    if (!ListTool.IsNullOrEmpty(txt))
+                        foreach (var t in txt)
+                            sw.WriteLine(t);
                 }
                 return true;
             }
