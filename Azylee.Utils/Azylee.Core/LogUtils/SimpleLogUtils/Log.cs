@@ -70,7 +70,7 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         /// <param name="isWrite">是否写出日志</param>
         /// <param name="logLevel"></param>
         /// <param name="writeLevel"></param>
-        [Obsolete("请使用建议的初始化方法",true)]
+        [Obsolete("请使用建议的初始化方法", true)]
         public Log(bool isWrite, LogLevel logLevel = LogLevel.All, LogLevel writeLevel = LogLevel.All)
         {
             if (isWrite)
@@ -91,11 +91,12 @@ namespace Azylee.Core.LogUtils.SimpleLogUtils
         /// <param name="console">控制台输出级别</param>
         /// <param name="file">文件输出级别</param>
         /// <param name="action">日志输出回调</param>
-        public Log(LogLevel console = LogLevel.All, LogLevel file = LogLevel.All, LogEventDelegate logEvent = null)
+        public Log(LogLevel console = LogLevel.All, LogLevel file = LogLevel.All, LogEventDelegate logEvent = null, string path = "")
         {
             ConsoleLogLevel = console;
             FileLogLevel = file;
             if (logEvent != null) LogEvent += logEvent;
+            if (path.Ok()) SetLogPath(path);
         }
 
         /// <summary>
