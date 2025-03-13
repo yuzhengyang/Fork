@@ -13,6 +13,10 @@ namespace Azylee.Core.ExtensionUtils
     {
         public static StringBuilder replace(this StringBuilder stringBuilder, Dictionary<string, string> pms)
         {
+            return Replace(stringBuilder, pms);
+        }
+        public static StringBuilder Replace(this StringBuilder stringBuilder, Dictionary<string, string> pms)
+        {
             if (pms != null)
             {
                 foreach (var key in pms.Keys)

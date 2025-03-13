@@ -61,9 +61,10 @@ namespace Azylee.Core.FormUtils
             }
 
             // 未能返回正确的窗体，则创建新窗体（使用默认new方法）
+            // 正常的窗口名称应该是 窗口名称 - 应用名称，这样避免文字太长遮挡了
             T form = new T();
             if (BackColor != null) form.BackColor = (Color)BackColor;
-            form.Text = title + form.Text;
+            form.Text = form.Text + title;
             if (AddUnique(form)) return form;
             return null;
         }
