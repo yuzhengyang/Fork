@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Azylee.Jsons</name>
+    </assembly>
+    <members>
+        <member name="M:Azylee.Jsons.ConvertJson.String2Json(System.String)">
+            <summary>
+            过滤特殊字符
+            </summary>
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.StringFormat(System.String,System.Type)">
+            <summary>
+            格式化字符型、日期型、布尔型
+            </summary>
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ListToJson``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            List转换成Json
+            </summary>
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ListToJson``1(System.Collections.Generic.IList{``0},System.String)">
+            <summary>
+            List转换成Json 
+            </summary>
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ToJson(System.Object)">
+            <summary> 
+            对象转换为Json 
+            </summary> 
+            <param name="jsonObject">对象</param> 
+            <returns>Json字符串</returns> 
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ToJson(System.Collections.IEnumerable)">
+            <summary> 
+            对象集合转换Json 
+            </summary> 
+            <param name="array">集合对象</param> 
+            <returns>Json字符串</returns> 
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ToArrayString(System.Collections.IEnumerable)">
+            <summary> 
+            普通集合转换Json 
+            </summary> 
+            <param name="array">集合对象</param> 
+            <returns>Json字符串</returns> 
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ToJson(System.Data.DataSet)">
+            <summary> 
+            DataSet转换为Json 
+            </summary> 
+            <param name="dataSet">DataSet对象</param> 
+            <returns>Json字符串</returns> 
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ToJson(System.Data.DataTable)">
+            <summary> 
+            Datatable转换为Json 
+            </summary> 
+            <param name="table">Datatable对象</param> 
+            <returns>Json字符串</returns> 
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ToJson(System.Data.DataTable,System.String)">
+            <summary>
+            DataTable转换为Json 
+            </summary>
+        </member>
+        <member name="M:Azylee.Jsons.ConvertJson.ToJson(System.Data.Common.DbDataReader)">
+            <summary> 
+            DataReader转换为Json 
+            </summary> 
+            <param name="dataReader">DataReader对象</param> 
+            <returns>Json字符串</returns> 
+        </member>
+        <member name="T:Azylee.Jsons.Json">
+            <summary>
+            Json 工具
+            </summary>
+        </member>
+        <member name="M:Azylee.Jsons.Json.Object2String(System.Object)">
+            <summary>
+            对象 转 字符串
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.Jsons.Json.String2Object(System.String)">
+            <summary>
+            字符串 转 对象
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.Jsons.Json.String2Object``1(System.String)">
+            <summary>
+            字符串 转 模型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.Jsons.Json.File2Object``1(System.String)">
+            <summary>
+            读取文件文本 转 模型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.Jsons.Json.Object2File``1(System.String,``0)">
+            <summary>
+            模型 存储到文件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.Jsons.Json.Object2Byte(System.Object)">
+            <summary>
+            对象 转 字节（JSON中转）
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.Jsons.Json.Byte2Object``1(System.Byte[])">
+            <summary>
+            字节 转 模型（JSON中转）
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Azylee.Jsons.JsonAppConfigUtils.JsonAppConfig`1">
+            <summary>
+            Json 配置管理器
+            
+            如何使用：
+            1. 根据自己需求，创建配置类，实现IAppConfigModel接口
+            2. 使用配置管理器，new出创建的配置类
+            3. 通过配置管理器，管理配置信息即可
+            PS. 建议直接使用静态变量创建
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Azylee.Jsons.JsonAppConfigUtils.JsonAppConfig`1.#ctor(System.String,System.Boolean)">
+            <summary>
+            构造配置管理器
+            </summary>
+            <param name="filepath">配置文件路径</param>
+            <param name="isReadonly">是否只读</param>
+        </member>
+        <member name="M:Azylee.Jsons.JsonAppConfigUtils.JsonAppConfig`1.DoSave">
+            <summary>
+            保存配置信息
+            </summary>
+            <returns></returns> 
+        </member>
+    </members>
+</doc>

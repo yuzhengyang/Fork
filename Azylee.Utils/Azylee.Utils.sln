@@ -53,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolkits", "Toolkits", "{98
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Launch", "Azylee.Launch\Azylee.Launch.csproj", "{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azylee.Aio", "Azylee.Aio\Azylee.Aio.csproj", "{BFF7DAC2-5D8E-4941-8FC5-A2292F0AF677}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,10 @@ Global
 		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF7DAC2-5D8E-4941-8FC5-A2292F0AF677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF7DAC2-5D8E-4941-8FC5-A2292F0AF677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF7DAC2-5D8E-4941-8FC5-A2292F0AF677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF7DAC2-5D8E-4941-8FC5-A2292F0AF677}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -168,6 +174,7 @@ Global
 		{CFDD901D-004E-4336-B949-46B7128180C6} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{1F6EB599-4A0B-423D-AE00-D42D9286F25C} = {9351FC10-E8D0-41BB-A813-0B5B3EA90605}
 		{EFA44541-CCFB-4FBA-95F3-CC865AC40B73} = {9840D177-6D2B-42DC-9790-5AE88A9309B2}
+		{BFF7DAC2-5D8E-4941-8FC5-A2292F0AF677} = {927325CD-24FD-4B85-A982-543D4F58A47C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A021A3E-4C98-47CD-B4E8-912E12611C2E}

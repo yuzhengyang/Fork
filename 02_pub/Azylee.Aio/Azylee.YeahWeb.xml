@@ -1,0 +1,1021 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Azylee.YeahWeb</name>
+    </assembly>
+    <members>
+        <member name="T:Azylee.YeahWeb.BaiDuWebAPI.dwz.DwzRequestModel">
+            <summary>
+            短网址请求模型
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.dwz.DwzRequestModel.url">
+            <summary>
+            长网址
+            </summary>
+        </member>
+        <member name="T:Azylee.YeahWeb.BaiDuWebAPI.dwz.DwzResponseModel">
+            <summary>
+            短网址响应结果模型
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.dwz.DwzResponseModel.Code">
+            <summary>
+            0：正常返回短网址，
+            -1：短网址生成失败，
+            -2：长网址不合法，
+            -3：长网址存在安全隐患，
+            -4：长网址插入数据库失败，
+            -5：长网址在黑名单中，不允许注册
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.dwz.DwzResponseModel.ShortUrl">
+            <summary>
+            短网址
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.dwz.DwzResponseModel.LongUrl">
+            <summary>
+            长网址（原网址）
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.dwz.DwzResponseModel.ErrMsg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.BaiDuWebAPI.dwz.DwzTool.Create(System.String,System.String)">
+            <summary>
+            短网址生成接口
+            </summary>
+            <param name="token">由数字和字母组成的32位字符</param>
+            <param name="url">长网址</param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.BaiDuWebAPI.GPSAPI.GPSConverter.DeviceGPSToBaiduGPS(System.String,System.Double,System.Double,System.Double@,System.Double@)">
+            <summary>
+            设备GPS定位转换为BaiduGPS信息
+            </summary>
+            <param name="ak"></param>
+            <param name="longitude">经度（东经西经，纵向）</param>
+            <param name="latitude">纬度（北纬南纬，横向）</param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationModel.Longitude">
+            <summary>
+            经度（东经西经，纵向）
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationModel.Latitude">
+            <summary>
+            纬度（北纬南纬，横向）
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationModel.FormattedAddress">
+            <summary>
+            结构化地址信息
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationModel.Business">
+            <summary>
+            所在商圈信息
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationModel.SematicDescription">
+            <summary>
+            结合POI的语义化结果描述
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationModel.Like(Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationModel)">
+            <summary>
+            对比两个位置是否相似
+            </summary>
+            <param name="loc"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.Component">
+            <summary>
+            地址组成
+            </summary>
+        </member>
+        <member name="T:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.FirstPOI">
+            <summary>
+            首选信息点
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.ipLoc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.rgc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IpLoc.content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IpLoc.result">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IpLoc.status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IpLoc.message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IpLoc.code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IpLoc.time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Content.location">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Content.locid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Content.radius">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Content.confidence">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Content.ip_type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Content.point">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IPResult.error">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IPResult.loc_time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IPLocation.lat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IPLocation.lng">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IPPoint.x">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.IPPoint.y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Rgc.status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Rgc.result">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Rgc.code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Rgc.message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Rgc.time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.location">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.formatted_address">
+            <summary>
+            山东省青岛市城阳区
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.business">
+            <summary>
+            棘洪滩
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.addressComponent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.pois">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.roads">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.poiRegions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.sematic_description">
+            <summary>
+            中车青岛四方机车车辆股份有限公司西北296米
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Result.cityCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Location.lng">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Location.lat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.country">
+            <summary>
+            中国
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.country_code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.country_code_iso">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.country_code_iso2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.province">
+            <summary>
+            山东省
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.city">
+            <summary>
+            青岛市
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.city_level">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.district">
+            <summary>
+            城阳区
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.town">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.adcode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.street">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.street_number">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.direction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.AddressComponent.distance">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Point.x">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Point.y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Parent_poi.name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Parent_poi.tag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Parent_poi.addr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Parent_poi.point">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Parent_poi.direction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Parent_poi.distance">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.Parent_poi.uid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.addr">
+            <summary>
+            山东省青岛市城阳区棘洪滩街道锦宏东路88号
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.cp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.direction">
+            <summary>
+            西北
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.distance">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.name">
+            <summary>
+            中车青岛四方机车车辆股份有限公司
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.poiType">
+            <summary>
+            公司企业
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.point">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.tag">
+            <summary>
+            公司企业;公司
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.tel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.uid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.zip">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoisItem.parent_poi">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoiRegionsItem.direction_desc">
+            <summary>
+            内
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoiRegionsItem.name">
+            <summary>
+            中车青岛四方机车车辆股份有限公司
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoiRegionsItem.tag">
+            <summary>
+            公司企业;公司
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.BaiDuWebAPI.IPLocationAPI.IPLocationWebModel.PoiRegionsItem.uid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Azylee.YeahWeb.EmailUtils.EmailTool">
+            <summary>
+            邮件工具类
+            使用限制：测试发送25端口正常，如不使用25端口，可能达不到预计结果
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.EmailUtils.EmailTool.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String[],System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="fromMail">发件人地址</param>
+            <param name="toMail">收件人地址（多个电子邮件地址之间必须用逗号字符（“,”）分隔）</param>
+            <param name="subject">邮件标题</param>
+            <param name="emailBody">邮件内容（可以以html格式进行设计）</param>
+            <param name="username">发件箱的用户名（即@符号前面的字符串，例如：hello@163.com，用户名为：hello）</param>
+            <param name="password">发件人邮箱密码</param>
+            <param name="attachments">邮件附件</param>
+            <param name="sslEnable">对邮件内容进行socket层加密传输，false表示不加密</param>
+            <param name="pwdCheckEnable">对发件人邮箱进行密码验证，false表示不对发件人邮箱进行密码验证</param>
+            <param name="port">发送邮件所用的端口号（htmp协议默认为25）</param>
+        </member>
+        <member name="M:Azylee.YeahWeb.EmailUtils.EmailTool.SendEmail(System.String,System.String,System.String)">
+            <summary>
+            发送邮件 [hiwaka@163.com]
+            </summary>
+            <param name="title">邮件标题</param>
+            <param name="report">邮件内容（html格式）</param>
+            <param name="address">目标地址</param>
+            <returns></returns>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperWebModel.images">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperWebModel.tooltips">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.startdate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.fullstartdate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.enddate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.urlbase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.copyright">
+            <summary>
+            黄昏时佩吉海湾的灯塔，加拿大新斯科舍省 (© Darwin Wiggett/Offset)
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.copyrightlink">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.quiz">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.wp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.hsh">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.drk">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.top">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.bot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.ImagesItem.hs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.Tooltips.loading">
+            <summary>
+            正在加载...
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.Tooltips.previous">
+            <summary>
+            上一个图像
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.Tooltips.next">
+            <summary>
+            下一个图像
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.Tooltips.walle">
+            <summary>
+            此图片不能下载用作壁纸。
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.Tooltips.walls">
+            <summary>
+            下载今日美图。仅限用作桌面壁纸。
+            </summary>
+        </member>
+        <member name="T:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool">
+            <summary>
+            Bing壁纸工具类
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetToday">
+            <summary>
+            获取今天的壁纸
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetYesterday">
+            <summary>
+            获取昨天的壁纸
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.ExtWebAPI.BingWebAPI.WallpaperUtils.WallpaperTool.GetSomeday(System.Int32)">
+            <summary>
+            获取某一天的壁纸（每天8张）
+            </summary>
+            <param name="day"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Azylee.YeahWeb.ExtWebAPI.IPAddressAPI.PublicIPAddressTool">
+            <summary>
+            公网IP地址API
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.ExtWebAPI.IPAddressAPI.PublicIPAddressTool.GetPublicIP">
+            <summary>
+            获取公网IP地址API
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.ExtWebAPI.IPCNAPI.IPCNTool.Get">
+            <summary>
+            获取IP地址信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Azylee.YeahWeb.FTPUtils.FtpTool">
+            <summary>
+            FTP 帮助类
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.HttpUtils.HttpTool.Get``1(System.String,``0@,System.String)">
+            <summary>
+            Http Get（返回值：>=0正常，-100编码异常，-200创建web请求异常，-300网络异常，-400返回内容为空）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="url"></param>
+            <param name="what"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.HttpUtils.HttpTool.Download(System.String,System.String,Azylee.Core.DelegateUtils.ProcessDelegateUtils.ProgressDelegate.ProgressHandler,System.Object)">
+            <summary>
+            http下载文件
+            </summary>
+            <param name="url">下载文件地址</param>
+            <param name="file">文件存放地址，包含文件名</param>
+            <param name="progress">回调进度</param>
+            <returns></returns>
+        </member>
+        <member name="T:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo">
+            <summary>
+            客户端信息
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.Number">
+            <summary>
+            唯一编号（每次登录都不一样）
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.AppCode">
+            <summary>
+            客户端应用程序编码（应用程序区分）
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.ConnectKey">
+            <summary>
+            连接密钥
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.IP">
+            <summary>
+            客户端远程终结点IP
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.Host">
+            <summary>
+            客户端远程终结点（IP:Port）
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.ConnectTime">
+            <summary>
+            连接时间
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.IsConnect">
+            <summary>
+            是否连接
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.AccessCode">
+            <summary>
+            权限编码（可扩展权限管理功能）
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.UserEmail">
+            <summary>
+            用户邮箱
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.MachineID">
+            <summary>
+            主机ID
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.MachineName">
+            <summary>
+            主机名称
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.UploadFlowCount">
+            <summary>
+            上行流量总计
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.LastUploadTime">
+            <summary>
+            最后发送数据时间
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.DownloadFlowCount">
+            <summary>
+            下行流量总计
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.LastDownloadTime">
+            <summary>
+            最后接受数据时间
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.HeartbeatTime">
+            <summary>
+            心跳通信时间
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo.Client">
+            <summary>
+            客户端对象
+            </summary>
+        </member>
+        <member name="T:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager">
+            <summary>
+            客户端信息管理器
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.#ctor">
+            <summary>
+            构造方法（初始化标号起始标记6位，初始化客户端列表）
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.CountClient">
+            <summary>
+            当前连接客户端总数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.AddOrUpdate(System.String,System.Net.Sockets.TcpClient)">
+            <summary>
+            添加或更新到客户端列表
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateConnectKey(System.String,System.String)">
+            <summary>
+            更新 ConnectKey 连接秘钥
+            </summary>
+            <param name="host"></param>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateUserEmail(System.String,System.String)">
+            <summary>
+            更新 UserEmail 用户邮箱
+            </summary>
+            <param name="host"></param>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateAccessCode(System.String,System.String)">
+            <summary>
+            更新 AccessCode 权限编码
+            </summary>
+            <param name="host"></param>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateMachineID(System.String,System.String)">
+            <summary>
+            更新 MachineID 主机ID
+            </summary>
+            <param name="host"></param>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateMachineName(System.String,System.String)">
+            <summary>
+            更新 MachineName 主机名称
+            </summary>
+            <param name="host"></param>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateUserName(System.String,System.String)">
+            <summary>
+            更新 UserName 用户名
+            </summary>
+            <param name="host"></param>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateAppCode(System.String,System.String)">
+            <summary>
+            更新 AppCode 应用程序编码
+            </summary>
+            <param name="host"></param>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateUploadFlowCount(System.String,System.Int64)">
+            <summary>
+            更新上行流量
+            </summary>
+            <param name="host"></param>
+            <param name="flow"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateDownloadFlowCount(System.String,System.Int64)">
+            <summary>
+            更新下行流量
+            </summary>
+            <param name="host"></param>
+            <param name="flow"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientManager.UpdateHeartbeatTime(System.String)">
+            <summary>
+            更新心跳时间
+            </summary>
+            <param name="host"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppClient.#ctor(System.String,System.Int32,System.Action,System.Action,System.Action{Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="ip"></param>
+            <param name="port"></param>
+            <param name="onConnect">连接动作</param>
+            <param name="onDisconnect">断开动作</param>
+            <param name="onReceive">接收消息</param>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppClient.Connect">
+            <summary>
+            连接到TcpServer（重连）
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppClient.Disconnect">
+            <summary>
+            关闭连接
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppClient.Write(Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel,System.Nullable{System.Int32},System.Action{Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel})">
+            <summary>
+            发送数据（action禁止使用阻塞操作，必须新建task线程操作）
+            </summary>
+            <param name="model">数据模型</param>
+            <param name="actionType">事件驱动处理类型</param>
+            <param name="action">事件驱动处理方法</param>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppClient.acceptCallback(System.IAsyncResult)">
+            <summary>
+            接受数据
+            </summary>
+        </member>
+        <member name="T:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel">
+            <summary>
+            Tcp 传输数据模型
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel.#ctor">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel.#ctor(System.Int32)">
+            <summary>
+            构造函数（仅指令）
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel.#ctor(System.Int32,System.Byte[])">
+            <summary>
+            构造函数（默认）
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel.#ctor(System.Int32,System.Object)">
+            <summary>
+            构造函数（自动转换）
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel.ToByte">
+            <summary>
+            将当前模型转换为 byte 数组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel.ToModel(System.Byte[])">
+            <summary>
+            转换为模型
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppServer">
+            <summary>
+            Tcp 服务工具
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppServer.#ctor(System.Int32,System.Action{Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo},System.Action{Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo},System.Action{Azylee.YeahWeb.SocketUtils.TcpUtils.TcpClientInfo,Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="port">端口号</param>
+            <param name="onConnect">连接动作</param>
+            <param name="onDisconnect">断开动作</param>
+            <param name="onReceive">接收消息</param>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppServer.Start">
+            <summary>
+            启动服务
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppServer.Stop">
+            <summary>
+            停止服务
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcppServer.Write(System.String,Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel)">
+            <summary>
+            发送数据
+            </summary>
+            <param name="host">主机地址</param>
+            <param name="model">数据模型</param>
+        </member>
+        <member name="T:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpStreamHelper">
+            <summary>
+            Tcp 流数据处理辅助类
+            </summary>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpStreamHelper.Write(System.Net.Sockets.TcpClient,Azylee.YeahWeb.SocketUtils.TcpUtils.TcpDataModel)">
+            <summary>
+            流 写入
+            </summary>
+            <param name="stream"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azylee.YeahWeb.SocketUtils.TcpUtils.TcpStreamHelper.Read(System.Net.Sockets.TcpClient)">
+            <summary>
+            流 读取
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

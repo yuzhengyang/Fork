@@ -6,6 +6,7 @@
 //      Copyright (c) yuzhengyang. All rights reserved.
 //************************************************************************
 using Azylee.Core.DataUtils.GuidUtils;
+using Azylee.Core.DataUtils.StringUtils;
 using Azylee.Core.DelegateUtils.ProcessDelegateUtils;
 using Azylee.Core.IOUtils.DirUtils;
 using Azylee.Core.IOUtils.FileUtils;
@@ -102,6 +103,7 @@ namespace Azylee.Update.UpdateUtils
         /// -10000;//没有新版本
         /// -20000;//文件下载失败
         /// -30000;//文件释放失败
+        /// -40000;//文件校验失败
         /// </returns>
         public int Update(AppUpdateInfo info, string tempPath, Dictionary<string, string> dictionary,
             ProgressDelegate.ProgressHandler downProgress = null, object downSender = null,
@@ -117,6 +119,15 @@ namespace Azylee.Update.UpdateUtils
                 string downfile = Download(file, info, downProgress, downSender);
                 if (!string.IsNullOrWhiteSpace(downfile) && File.Exists(downfile))
                 {
+                    // 如果本地文件获取md5成功，更新文件md5编码也存在
+                    // 则检查文件md5，防止文件被篡改，如果被篡改，则
+                    string fileMd5 = "";
+                    try { fileMd5 = FileTool.GetMD5(downfile); } catch { }
+                    if (fileMd5.Ok() && info.Md5.Ok())
+                    {
+                        if (fileMd5 != info.Md5) return -40000;//文件校验失败
+                    }
+
                     //格式化释放文件目录（相对路径转换为绝对路径）
                     string releasepath = AppDirTool.Get(info.ReleasePath, dictionary);
                     //释放文件，释放完成后删除临时文件

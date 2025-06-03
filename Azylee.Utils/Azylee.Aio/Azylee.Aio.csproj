@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BFF7DAC2-5D8E-4941-8FC5-A2292F0AF677}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Azylee.Aio</RootNamespace>
+    <AssemblyName>Azylee.Aio</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aio.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Azylee.Core\Azylee.Core.csproj">
+      <Project>{88dc61fa-95f0-41b7-9d7d-ab0f3cbd169c}</Project>
+      <Name>Azylee.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azylee.Jsons\Azylee.Jsons.csproj">
+      <Project>{de3ab999-96d3-4a53-a9f2-7409138d0333}</Project>
+      <Name>Azylee.Jsons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azylee.Update\Azylee.Update.csproj">
+      <Project>{76f92bae-8c9c-42aa-85e8-51f2ea8a0c91}</Project>
+      <Name>Azylee.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azylee.WinformSkin\Azylee.WinformSkin.csproj">
+      <Project>{d280c16f-fde2-4647-bd76-3514f673426d}</Project>
+      <Name>Azylee.WinformSkin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azylee.YeahWeb\Azylee.YeahWeb.csproj">
+      <Project>{ccf7a654-b442-4db1-bb3b-0f8014c3237f}</Project>
+      <Name>Azylee.YeahWeb</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

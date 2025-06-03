@@ -164,6 +164,7 @@
     <Compile Include="NetUtils\NetProcessTool.cs" />
     <Compile Include="NetUtils\NetworkAdapterTool.cs" />
     <Compile Include="NetUtils\PingTool.cs" />
+    <Compile Include="NetUtils\RestServerUtils\RestApiService.cs" />
     <Compile Include="NetUtils\WifiManUtils\Wlan.cs" />
     <Compile Include="NetUtils\WifiManUtils\WlanClient.cs" />
     <Compile Include="NetUtils\WifiManUtils\WlanTool.cs" />
